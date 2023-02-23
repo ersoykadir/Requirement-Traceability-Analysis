@@ -1,0 +1,43 @@
+name: Generic Template
+description: It can be used for any issue since it contains the general requirements
+assignees: ['']
+labels: [status-new]
+body:
+  - type: markdown
+    attributes:
+      value: |
+          This template will be used for creating issues.
+          
+          ---
+          
+          Before opening an issue, please be sure that no one opened the same issue to avoid duplicates.     
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: "Please describe the issue and the need and the aim for it."
+    validations:
+      required: true
+  - type: textarea
+    id: step-details
+    attributes:
+      value: | 
+              Steps that will be performed:
+              - [ ] ...
+              - [ ] ...
+              - [ ] ...
+      label: Step Details
+      description: "This is an optional field."
+  - type: textarea
+    id: final-actions
+    attributes:
+      label: Final Actions
+      description: "Describe the final actions that will be taken after the task of the issue is done and issue is ready to close."
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline of the Issue
+      description: "Please provide a deadline for the issue."
+      placeholder: "19.03.2022 - Saturday - 23:59"
+    validations:
+      required: true
