@@ -119,8 +119,8 @@ commits = []
 # Acquires data from the github graphql api, given a graphql query.
 def get_data_from_api(body):
     url = 'https://api.github.com/graphql'
-    username = 'ersoykadir'
-    token = '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'
+    username = ''
+    token = ''
     r = requests.post(url = url, json = {"query":body}, auth=(username, token))
     data = r.json()
     return data
