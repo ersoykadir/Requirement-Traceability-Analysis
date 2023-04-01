@@ -8,9 +8,25 @@ import json
 from string import Template
 import datetime
 import os
+from keyword_extractors.extractor_rake import extract_rake
+from keyword_extractors.extractor_yake import extract_yake
+from dotenv import load_dotenv
+import re
+load_dotenv()
+
+username = os.getenv('GITHUB_USERNAME')
+token = os.getenv('GITHUB_TOKEN')
+print(username, token)
 
 repo_owner = 'bounswe'
-repo_name = 'bounswe2022group2'
+repo_name = 'bounswe2022group3'
+
+requirements_file_name = 'group3_requirements.txt'
+requirement_data_fname = 'requirement_data.json'
+issue_data_fname = 'issue_data.json'
+pr_data_fname = 'pr_data.json'
+commit_data_fname = 'commit_data.json'
+
 
 ISSUE_queryTemplate = Template("""{
     repository(owner:"$owner", name:"$name") {
@@ -45,7 +61,7 @@ ISSUE_queryTemplate = Template("""{
 }""")
 PR_queryTemplate = Template("""{
     repository(owner:"$owner", name:"$name") {
-        pullRequests(first:100,states:MERGED, after:$cursor) {
+        pullRequests(first:100, after:$cursor) {
             nodes{
                 url
                 title
@@ -118,9 +134,8 @@ commits = []
 
 # Acquires data from the github graphql api, given a graphql query.
 def get_data_from_api(body):
+    global username, token
     url = 'https://api.github.com/graphql'
-    username = ''
-    token = ''
     r = requests.post(url = url, json = {"query":body}, auth=(username, token))
     data = r.json()
     return data
@@ -167,7 +182,7 @@ def get_all_issues():
         hasNextPage, endCursor = get_issue_page(query)
     
     # Write the issues to a json file
-    f = open('issue_data.json', 'w')
+    f = open(issue_data_fname, 'w')
     dump = {'issues': issues}
     f.write(json.dumps(dump, indent=4))
     f.close()
@@ -187,7 +202,7 @@ def get_all_prs():
         hasNextPage, endCursor = get_pr_page(query)
 
     # Write the pull requests to a json file
-    f = open('pr_data.json', 'w')
+    f = open(pr_data_fname, 'w')
     dump = {'pullRequests': pullRequests}
     f.write(json.dumps(dump, indent=4))
     f.close()
@@ -207,7 +222,7 @@ def get_all_commits():
         hasNextPage, endCursor = get_commit_page(query)
 
     # Write the commits to a json file
-    f = open('commit_data.json', 'w')
+    f = open(commit_data_fname, 'w')
     dump = {'commits': commits}
     f.write(json.dumps(dump, indent=4))
     f.close()
@@ -242,28 +257,45 @@ def commit_parser(related_commits):
     return commit_ids, commit_nodes
 
 def requirement_parser():
-    f = open('reqs.md', 'r', encoding='utf-8', errors='ignore')
+
+    f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
     data = f.readlines()
     f.close()
-    reqs = {}
+
+    requirement_nodes = {} # Dictionary of requirement nodes
+    requirements = [] # List of requirement dictionaries, to be written to a json file
+
     for line in data:
         req = line.split(' ', 1)
         req_number = req[0]
         req_description = req[1]
-        print(req_number, req_description)
-        reqs[req_number] = Requirement('requirement', req_number, req_description)
-    return reqs
+        requirement_nodes[req_number] = Requirement('requirement', req_number, req_description)
+        req_dict = {
+            'number': req_number,
+            'description': req_description
+        }
+        requirements.append(req_dict)
+    
+    # Write the requirements to a json file
+    f = open(requirement_data_fname, 'w')
+    dump = {'requirements': requirements}
+    f.write(json.dumps(dump, indent=4))
+    f.close()
+    return requirement_nodes
 
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the issue/pr number.
 def build_issue_nodes():
     # Get all issues from the github api and write them to a json file.
-    if not os.path.isfile('issue_data.json'): # Comment this out if the json file has broken data.
+
+    if not os.path.isfile(issue_data_fname): # Comment this out if the json file has broken data.
         get_all_issues()
-    f = open('issue_data.json', 'r')
+    f = open(issue_data_fname, 'r')
     data = json.loads(f.read())
     f.close()
     issue_nodes = {}
     for issue in data['issues']:
+        if issue['number'] < 309:
+            continue
         node = Issue('issue', issue['number'], issue['title'], issue['body'], issue['comments'], issue['state'], issue['createdAt'], issue['closedAt'], issue['url'], issue['milestone'])
         issue_nodes[node.number] = node
     return issue_nodes
@@ -271,9 +303,9 @@ def build_issue_nodes():
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the issue/pr number.
 def build_pr_nodes():
     # Get all issues from the github api and write them to a json file.
-    if not os.path.isfile('pr_data.json'):# Comment this out if the json file has broken data.
+    if not os.path.isfile(pr_data_fname):# Comment this out if the json file has broken data.
         get_all_prs() 
-    f = open('pr_data.json', 'r')
+    f = open(pr_data_fname, 'r')
     data = json.loads(f.read())
     f.close()
     pr_nodes = {}
@@ -290,9 +322,9 @@ def build_pr_nodes():
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the commit id.
 def build_commit_nodes():
     # Get all issues from the github api and write them to a json file.
-    if not os.path.isfile('commit_data.json'):# Comment this out if the json file has broken data.
+    if not os.path.isfile(commit_data_fname):# Comment this out if the json file has broken data.
         get_all_commits() 
-    f = open('commit_data.json', 'r')
+    f = open(commit_data_fname, 'r')
     data = json.loads(f.read())
     f.close()
     commit_nodes = {}
@@ -307,7 +339,7 @@ class Node:
         self.node_type = node_type
         self.node_id = node_id
         self.traces = [] # List of nodes that this node traces to.	
-
+        self.text = '' # Textual description of the node.
         # Metrics
         self.number_of_connected_nodes = 0
         self.number_of_connected_commits = 0
@@ -327,7 +359,7 @@ class Node:
 
 class Issue(Node):
     def __init__(self, node_type, number, title, body, comments, state, created, closed, url, milestone):
-        super().__init__(node_type, number, url)
+        super().__init__(node_type, number)
         self.number = number
         self.url = url
         self.title = title
@@ -337,6 +369,10 @@ class Issue(Node):
         self.state = state
         self.time_to_finish = time_to_finish(created, closed)
         self.milestone = milestone
+        self.text = self.title + ' ' + self.body
+        # add the comments to the text
+        for comment in self.comments:
+            self.text += ' ' + comment
 
 class PullRequest(Issue):
     def __init__(self, node_type, number, title, body, comments, state, created, closed, url, milestone, related_commits):
@@ -352,11 +388,17 @@ class Commit(Node):
         self.message = message
         tempDate = committedDate.replace('T', ' ').replace('Z', '')
         self.committedDate = datetime.datetime.strptime(tempDate, '%Y-%m-%d %H:%M:%S')
+        self.text = self.message
 
 class Requirement(Node):
     def __init__(self, node_type, id, description):
         super().__init__(node_type, id)
         self.description = description
+        self.text = self.description
+        try:
+            self.keywords = extract_yake(self.text)
+        except Exception as e:
+            print(str(e))
 
 # Class representing the graph of software artifacts.
 class Graph:
@@ -369,9 +411,72 @@ class Graph:
 
     def __str__(self):
         return f"Graph with {len(self.nodes)} nodes."
+
+# Utility function to search for a keyword in a string.
+def findWholeWord(w):
+    return re.compile(r'\b{0}\b'.format(w), flags=re.IGNORECASE).search
+
+# Search the graph for the keyword list and return the nodes that have matching keywords.
+def search_keyword(keyword_list, node_id, graph):
+    # Avoid the source node.
+    found_nodes = {keyword: set() for keyword in keyword_list}
+    for keyword in keyword_list:
+        for node in graph.issue_nodes.values():
+            try:
+                match = findWholeWord(keyword)(node.text)
+            except Exception as e:
+                print(str(e))
+                print(node.text)
+                print(keyword)
+                break
+            if match != None and node.node_id != node_id:
+                found_nodes[keyword].add(node)
     
+    # We have a dictionary of keywords and the nodes that contain the keyword.
+    # We will clean the keywords that has a lot of false positives.
+    for keyword in found_nodes.keys():
+        if len(found_nodes[keyword]) > 10:
+            cleaned_nodes = set()
+            for node in found_nodes[keyword]: # Traverse each node
+                # if the node does not contain other keywords, then it is a false positive.
+                count = 0
+                for key in found_nodes.keys():# other keywords
+                    if key != keyword and key in node.text:
+                        count += 1
+                if len(found_nodes[keyword]) > 20 and count >= 2:
+                    cleaned_nodes.add(node)
+                elif count >= 1:
+                    cleaned_nodes.add(node)
+            found_nodes[keyword] = cleaned_nodes
+    
+    # Print the frequency of each keyword.
+    # key_freq = {keyword: len(found_nodes[keyword]) for keyword in found_nodes.keys()}
+    # print(key_freq)
+
+    # Merge all the nodes that contain the keywords.
+    result = set()
+    for keyword in found_nodes.keys():
+        for node in found_nodes[keyword]:
+            result.add(node)
+    return result
+
+# Give each requirement to rake.py, acquiring list of keywords
+# For each keyword, search the graph for the keyword and return the nodes that contain the keyword.
+def req_to_issue(graph):
+    for req in graph.requirement_nodes.values():
+        found_nodes = search_keyword(req.keywords, req.node_id, graph)
+        for node in found_nodes:
+            req.traces.append(node)
+
 graph = Graph()
-for i in graph.issue_nodes:
-    title = graph.issue_nodes[i].title
-    print(title)
 print(len(graph.issue_nodes))
+
+req_to_issue(graph)
+
+f = open('req_to_issue.txt', 'w', encoding='utf-8')
+for req in graph.requirement_nodes.values():
+    for node in req.traces:
+        f.write(f"{req.node_id} {req.keywords}\n")
+        f.write(f"{node.node_id} {node.title}\n")
+        f.write(f"------------------------------------------------------------\n")
+f.close()
