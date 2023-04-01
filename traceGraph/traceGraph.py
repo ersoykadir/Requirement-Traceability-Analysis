@@ -241,6 +241,19 @@ def commit_parser(related_commits):
         commit_ids.append(cm['oid'])
     return commit_ids, commit_nodes
 
+def requirement_parser():
+    f = open('reqs.md', 'r', encoding='utf-8', errors='ignore')
+    data = f.readlines()
+    f.close()
+    reqs = {}
+    for line in data:
+        req = line.split(' ', 1)
+        req_number = req[0]
+        req_description = req[1]
+        print(req_number, req_description)
+        reqs[req_number] = Requirement('requirement', req_number, req_description)
+    return reqs
+
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the issue/pr number.
 def build_issue_nodes():
     # Get all issues from the github api and write them to a json file.
@@ -290,10 +303,9 @@ def build_commit_nodes():
 
 # Class representing graph nodes. Each node represents a software artifact (issue, pull request, requirement, commit).
 class Node:
-    def __init__(self, node_type, node_id, url):
+    def __init__(self, node_type, node_id):
         self.node_type = node_type
         self.node_id = node_id
-        self.url = url
         self.traces = [] # List of nodes that this node traces to.	
 
         # Metrics
@@ -317,6 +329,7 @@ class Issue(Node):
     def __init__(self, node_type, number, title, body, comments, state, created, closed, url, milestone):
         super().__init__(node_type, number, url)
         self.number = number
+        self.url = url
         self.title = title
         self.body = body
         self.comments = comment_parser(comments)
@@ -334,10 +347,16 @@ class Commit(Node):
     def __init__(self, node_type, id, message, committedDate, url):
         # TODO: Maybe add more info about the commit, like the files changed, additions, deletions, etc.
         # File change patches are not available in the graphQL API, so we need to use the GitHub API to get them, if necessary
-        super().__init__(node_type, id, url)
+        super().__init__(node_type, id)
+        self.url = url
         self.message = message
         tempDate = committedDate.replace('T', ' ').replace('Z', '')
         self.committedDate = datetime.datetime.strptime(tempDate, '%Y-%m-%d %H:%M:%S')
+
+class Requirement(Node):
+    def __init__(self, node_type, id, description):
+        super().__init__(node_type, id)
+        self.description = description
 
 # Class representing the graph of software artifacts.
 class Graph:
@@ -346,12 +365,12 @@ class Graph:
         self.issue_nodes = build_issue_nodes()
         self.pr_nodes, self.commit_nodes = build_pr_nodes()
         self. commit_nodes = self.commit_nodes | build_commit_nodes()
+        self.requirement_nodes = requirement_parser()
 
     def __str__(self):
         return f"Graph with {len(self.nodes)} nodes."
     
 graph = Graph()
-
 for i in graph.issue_nodes:
     title = graph.issue_nodes[i].title
     print(title)
