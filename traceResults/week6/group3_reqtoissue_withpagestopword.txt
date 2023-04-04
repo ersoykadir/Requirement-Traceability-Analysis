@@ -1,0 +1,2603 @@
+1.1.1.1. Users shall be able to register using a valid and unique email address, a username, and a password as defined in the security section.
+
+{'register': 17, 'address': 2, 'username': 2, 'section': 13, 'valid and unique': 2, 'unique email': 2, 'password as defined': 2, 'email address': 2, 'security section': 2, 'unique email address': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+287 [Frontend]: Registration/Login/Confirmation email pages
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+415 [Frontend] NoteTaking
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.1.1.1.1. Users who are registered by providing their emails shall confirm their accounts via the link sent in the confirmation email.
+
+{'registered': 11, 'providing': 6, 'confirm': 8, 'accounts': 6, 'link': 18, 'providing their emails': 3, 'emails shall confirm': 3, 'confirmation email': 7, 'registered by providing': 3, 'confirm their accounts': 3}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+344 [mobile] - Adding Deep Links
+346 Milestone 2 objectives
+375 [Mobile] Creating Markdown Editor Widget
+415 [Frontend] NoteTaking
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.1.1.2. Users shall be able to register using their Google account.
+
+{'register': 17, 'google': 5, 'account': 10, 'google account': 4}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+357 Research: Geolocation
+437 Milestone 2 Group Report
+465 [Mobile] Account deletion
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.1.2.1. Users shall be able to log into their account using their email and password combination.
+
+{'log': 7, 'account': 10, 'email': 16, 'password': 11, 'combination': 2, 'email and password': 2, 'password combination': 2}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+316 Mobile - Backend Connection
+322 Milestone 1 Group Report
+339 [Mobile] Login and Registration Pages
+346 Milestone 2 objectives
+351 [Backend] User Schema update
+352 Backend API specifications for M2
+437 Milestone 2 Group Report
+450 [Backend]: Activities Schema 
+465 [Mobile] Account deletion
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.1.2.2. Users shall be able to log into their account using their Google account (if they have previously completed 1.1.1.2.).
+
+{'log': 7, 'google': 5, 'previously': 6, 'account': 10, 'completed': 17, 'google account': 4, 'previously completed': 3}
+258 Requirements review
+259 Mockup and Diagram Reviews
+266 Organizing Wiki homepage
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+357 Research: Geolocation
+381 Add param validation to get functions in API
+437 Milestone 2 Group Report
+450 [Backend]: Activities Schema 
+465 [Mobile] Account deletion
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.1.2.3. If a user enters their password wrong three times while logging in their password will be invalidated. They will receive a warning email containing a link to reset their password.
+
+{'enters': 4, 'wrong': 4, 'times': 3, 'reset their password': 3, 'invalidated': 2, 'password': 11, 'enters their password': 3, 'password wrong': 3, 'wrong three times': 3, 'times while logging': 3}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+443 Organising the wiki page
+------------------------------------------------------------
+1.1.2.4. Users shall be able to reset their password via email verification.
+
+{'reset': 5, 'password': 11, 'email': 16, 'verification': 3, 'reset their password': 3, 'password via email': 3, 'email verification': 3}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+339 [Mobile] Login and Registration Pages
+346 Milestone 2 objectives
+351 [Backend] User Schema update
+352 Backend API specifications for M2
+366 [Backend] Resend Confirmation mail
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.1.3.1 Users shall be able to log out of their account.
+
+{'log': 7, 'account': 10}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+437 Milestone 2 Group Report
+450 [Backend]: Activities Schema 
+465 [Mobile] Account deletion
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.2.2. Users shall be able to use the features of their profile page. (described in 2.1.2.)
+
+{'features': 12, 'profile': 30}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+411 [Frontend] : Profie page improvements
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.1. Users shall be able to block other users. (described in 3.3.6)
+
+{'block': 2}
+269 Updating Requirements
+451 [Frontend] Implementing Follow User and Block User Features
+------------------------------------------------------------
+1.3.1.1 Blocked users shall not be able to view the blocking user’s profile, join to their learning spaces, and comment on discussion posts they have created.
+
+{'view': 19, 'blocked': 2, 'profile': 30, 'join': 6, 'spaces': 21, 'created': 31, 'view the blocking': 2, 'comment on discussion': 2, 'discussion posts': 2, 'learning spaces': 6}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+276 Tracking Weekly Efforts - Week #2 and Week #3
+301 Creating Course and Enrollment schemas
+303 Create Course and Enrollment related functions according to API specifications by front
+304 Document Individual Reports for Customer Milestone 1
+313 [Frontend]: Profile Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+334 Tracking Weekly Efforts - Week #4
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+348 Tracking Weekly Efforts - Week #5
+350 Tracking Weekly Efforts - Week #6
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+363 [Mobile] Problem In Profile Page
+369 Tracking Weekly Efforts - Week #7
+383 Redesign home page and my spaces pages
+389 Backend - File Upload
+396 [Backend] Profile Page
+397 [Backend] Note Schema and Endpoint
+401 [Frontend]: Annotation
+408 Event creation terminology in the requirements
+411 [Frontend] : Profie page improvements
+414 Tracing Weekly Efforts - Week #8
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+418 [Frontend] Event creation
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+440 Tracing Weekly Efforts - Week #9
+444 Tracing Weekly Efforts - Week #10
+445 Tracing Weekly Efforts - Week #11
+446 Tracing Weekly Efforts - Week #12
+451 [Frontend] Implementing Follow User and Block User Features
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+460 [Frontend]: Sharing and saving notes
+464 [Frontend] Backend connection recommended spaces
+465 [Mobile] Account deletion
+466 [Mobile] Interests in registration
+467 [Frontend] Backend connection popular spaces
+476 [Backend] Finalized Space Ratings
+479 [Frontend] Activities Page for Frontend
+481 [Mobile] - Edit Profile Page
+482 [Mobile] Allowing users to see other user's profiles
+484 [Mobile] - Recommending Spaces
+493 Tracing Weekly Efforts - Week #13
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.3. Users shall be able to use the discussion channel of the learning spaces they joined in. (described in 2.2.)
+
+{'discussion': 31, 'channel': 8, 'learning': 24, 'spaces': 21, 'joined': 7, 'discussion channel': 4, 'learning spaces': 6, 'spaces they joined': 2}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+454 [Mobile] Reaching Discussions through the resource page
+464 [Frontend] Backend connection recommended spaces
+467 [Frontend] Backend connection popular spaces
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.3.1. Users shall be able to open a discussion post to ask questions.
+
+{'open': 14, 'discussion': 31, 'post': 11, 'questions': 5, 'open a discussion': 2, 'discussion post': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+394 Resource pages backend connection
+416 [Frontend ] Discussion
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.3.2. Users shall be able to make a comment to an existing discussion post.
+
+{'make': 19, 'comment': 18, 'existing': 7, 'discussion': 31, 'post': 11, 'make a comment': 4, 'existing discussion': 3, 'discussion post': 4, 'existing discussion post': 3}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+311 [Frontend]: Create first version of discussion
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+370 [Backend] Implementation of Discussion endpoint
+391 Mobile - Discussion Page
+416 [Frontend ] Discussion
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+1.3.4. Users shall be able to use note taking features.
+
+{'note': 26, 'taking': 10, 'features': 12, 'note taking': 9, 'taking features': 2, 'note taking features': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.4.1. Users shall be able to create notes.
+
+{'create': 46, 'notes': 49, 'create notes': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+299 Learning Flutter
+304 Document Individual Reports for Customer Milestone 1
+312 [Frontend]: Create first version of notes
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+397 [Backend] Note Schema and Endpoint
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+460 [Frontend]: Sharing and saving notes
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.4.2. Users shall be able to save notes in their profile page.
+
+{'save': 4, 'notes': 49, 'profile': 30, 'save notes': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+313 [Frontend]: Profile Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+460 [Frontend]: Sharing and saving notes
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.4.3. Users shall be able to view their saved notes on their profile page.
+
+{'view': 19, 'saved': 2, 'notes': 49, 'profile': 30, 'view their saved': 1, 'saved notes': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+265 Week 1 meeting notes
+269 Updating Requirements
+271 Week 2 - 16.10.2022 Meeting Notes
+272 Meeting Notes (17.10. 2022)  Front End Team
+278 Meeting Notes Documentation - Mobile Team 19.10.22
+279 Meeting Notes Documentation - Backend Team
+280 Organizing Wiki Side Bar and Main Page 
+289 [Frontend]: course summary page
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+299 Learning Flutter
+300 Catching up with Flutter
+304 Document Individual Reports for Customer Milestone 1
+312 [Frontend]: Create first version of notes
+313 [Frontend]: Profile Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+330 Update Requirements for Milestone 1
+331 Meeting notes for 30.10.2022
+339 [Mobile] Login and Registration Pages
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+347 Meeting notes for 08.11.2022
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+358 Group Meeting Week 6 - 13.11.2022
+363 [Mobile] Problem In Profile Page
+375 [Mobile] Creating Markdown Editor Widget
+389 Backend - File Upload
+396 [Backend] Profile Page
+397 [Backend] Note Schema and Endpoint
+404 [Mobile] Annotation
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+442 Meeting notes for 18.12.2022
+443 Organising the wiki page
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+460 [Frontend]: Sharing and saving notes
+464 [Frontend] Backend connection recommended spaces
+465 [Mobile] Account deletion
+466 [Mobile] Interests in registration
+467 [Frontend] Backend connection popular spaces
+469 Mobile - Note Sharing
+471 [Mobile] Adding Note To A Resource
+479 [Frontend] Activities Page for Frontend
+481 [Mobile] - Edit Profile Page
+482 [Mobile] Allowing users to see other user's profiles
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.4.3.1. Users should be able to sort notes according to date.
+
+{'sort': 3, 'notes': 49, 'date': 6, 'sort notes': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+278 Meeting Notes Documentation - Mobile Team 19.10.22
+280 Organizing Wiki Side Bar and Main Page 
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+330 Update Requirements for Milestone 1
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+358 Group Meeting Week 6 - 13.11.2022
+404 [Mobile] Annotation
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.4.3.2. Users should be able to filter notes by learning space name.
+
+{'filter': 2, 'notes': 49, 'learning': 24, 'space': 28, 'filter notes': 2, 'notes by learning': 0, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+300 Catching up with Flutter
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+397 [Backend] Note Schema and Endpoint
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+439 [Frontend] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+464 [Frontend] Backend connection recommended spaces
+467 [Frontend] Backend connection popular spaces
+469 Mobile - Note Sharing
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.4.4. Users shall be able to delete or edit their notes.
+
+{'delete': 14, 'edit': 16, 'notes': 49, 'delete or edit': 1, 'edit their notes': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+1.3.4.5. Users shall be able to connect, annotate and tag notes.
+
+{'tag': 8, 'connect': 16, 'annotate': 5, 'notes': 49, 'annotate and tag': 5, 'tag notes': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+404 [Mobile] Annotation
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+464 [Frontend] Backend connection recommended spaces
+466 [Mobile] Interests in registration
+467 [Frontend] Backend connection popular spaces
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.4.6. Users shall be able to share their notes with other users.
+
+{'share': 8, 'notes': 49, 'share their notes': 3}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+415 [Frontend] NoteTaking
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+460 [Frontend]: Sharing and saving notes
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.5. Users shall be able to use the search engine (described in 2.5.)
+
+{'search': 13, 'engine': 3, 'search engine': 3}
+269 Updating Requirements
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.6. Users shall be able to use the annotation features. (described in 2.6.)
+
+{'annotation': 12, 'features': 12, 'annotation features': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+411 [Frontend] : Profie page improvements
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.6.1. User shall select a portion of the text to annotate.
+
+{'select': 3, 'portion': 2, 'text': 9, 'annotate': 5, 'select a portion': 2, 'text to annotate': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+404 [Mobile] Annotation
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.6.2. User should be able to turn on and off annotation visibility.
+
+{'turn': 2, 'annotation': 12, 'visibility': 3, 'annotation visibility': 2}
+258 Requirements review
+269 Updating Requirements
+346 Milestone 2 objectives
+481 [Mobile] - Edit Profile Page
+------------------------------------------------------------
+1.3.7. Users shall be able to join to any learning space they want to.
+
+{'join': 6, 'learning': 24, 'space': 28, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+1.3.8. Users shall be able to open a learning space in any subject and they don't need to provide any document regarding their experience on the topic.
+
+{'open': 14, 'learning': 24, 'space': 28, 'subject': 3, 'provide': 17, 'document': 21, 'topic': 20, 'open a learning': 0, 'learning space': 16, 'provide any document': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+279 Meeting Notes Documentation - Backend Team
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+299 Learning Flutter
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+357 Research: Geolocation
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+394 Resource pages backend connection
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+450 [Backend]: Activities Schema 
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+469 Mobile - Note Sharing
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.8.1. Lecturers shall be able to create polls, allowed to be filled by the students joined in their learning space. The anonymity and/or the obligation of the poll shall be decided by the lecturer and declared to the students.
+
+{'create': 46, 'filled': 2, 'joined': 7, 'learning': 24, 'allowed': 4, 'space': 28, 'students': 1, 'create polls': 1, 'students joined': 0, 'learning space': 16}
+258 Requirements review
+270 Backend Api Specifications
+299 Learning Flutter
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+357 Research: Geolocation
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+391 Mobile - Discussion Page
+394 Resource pages backend connection
+397 [Backend] Note Schema and Endpoint
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+439 [Frontend] User Interface / User Experience
+450 [Backend]: Activities Schema 
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.8.5. Users shall be able to create topics and resources for their learning space and any other learning space as well.
+
+{'create': 46, 'topics': 13, 'resources': 26, 'learning': 24, 'space': 28, 'create topics': 0, 'topics and resources': 1, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+299 Learning Flutter
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+356 [Frontend]: discussion table
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+391 Mobile - Discussion Page
+394 Resource pages backend connection
+397 [Backend] Note Schema and Endpoint
+401 [Frontend]: Annotation
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+450 [Backend]: Activities Schema 
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.8.6. Users shall be able to delete topics and resources under their learning space.
+
+{'delete': 14, 'topics': 13, 'resources': 26, 'learning': 24, 'space': 28, 'delete topics': 1, 'topics and resources': 1, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+299 Learning Flutter
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+394 Resource pages backend connection
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+425 [Mobile] Delete Resource
+430 Mobile - Note Taking
+435 [Mobile] Delete Topic
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.8.7. Users shall be able to delete topics and resources they created for any learning space.
+
+{'delete': 14, 'topics': 13, 'resources': 26, 'created': 31, 'learning': 24, 'space': 28, 'delete topics': 1, 'topics and resources': 1, 'resources they created': 0, 'learning space': 16}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+299 Learning Flutter
+301 Creating Course and Enrollment schemas
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+394 Resource pages backend connection
+401 [Frontend]: Annotation
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+425 [Mobile] Delete Resource
+430 Mobile - Note Taking
+435 [Mobile] Delete Topic
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.9. Users shall be able to delete their accounts.
+
+{'delete': 14, 'accounts': 6, 'delete their accounts': 0}
+258 Requirements review
+269 Updating Requirements
+287 [Frontend]: Registration/Login/Confirmation email pages
+322 Milestone 1 Group Report
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.10. Users shall be able to change their password.
+
+{'change': 13, 'password': 11, 'change their password': 2}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.11. Users shall be able to join the attendance list of the event that they would like to participate, for their joined classes, in the case that quota is not full.
+
+{'join': 6, 'attendance': 2, 'list': 17, 'participate': 2, 'classes': 10, 'full': 5, 'join the attendance': 1, 'attendance list': 1, 'case that quota': 1, 'joined classes': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+311 [Frontend]: Create first version of discussion
+312 [Frontend]: Create first version of notes
+316 Mobile - Backend Connection
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+380 [Backend]: Total flow test
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+1.3.12. Users shall be able to give feedback, consisting of a compulsory rating point between one to five and an optional text explaining their thoughts, to the classes they have joined in.
+
+{'feedback': 5, 'consisting': 0, 'compulsory rating': 0, 'rating point': 1, 'optional text': 0, 'text explaining': 0, 'give feedback': 0, 'explaining their thoughts': 0, 'compulsory rating point': 0, 'optional text explaining': 0}
+258 Requirements review
+268 Project Plan Update
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+------------------------------------------------------------
+1.3.13. Users shall be able to comment on the learning space topics, to discuss about the resource.
+
+{'comment': 18, 'learning': 24, 'space': 28, 'discuss': 6, 'topics': 13, 'resource': 27, 'learning space': 16, 'space topics': 0, 'learning space topics': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+278 Meeting Notes Documentation - Mobile Team 19.10.22
+299 Learning Flutter
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+311 [Frontend]: Create first version of discussion
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+370 [Backend] Implementation of Discussion endpoint
+391 Mobile - Discussion Page
+394 Resource pages backend connection
+397 [Backend] Note Schema and Endpoint
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+450 [Backend]: Activities Schema 
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+1.3.14. Guest users shall be able to view available learning spaces on the site and their details like title, description and rating.
+
+{'view': 19, 'learning': 24, 'guest': 2, 'title': 9, 'description': 10, 'rating': 9, 'view available learning': 0, 'learning spaces': 6, 'details like title': 2, 'description and rating': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+283 Setting Up The Flutter Environment
+284 Learning Flutter and Running Initial Mobile App
+289 [Frontend]: course summary page
+299 Learning Flutter
+300 Catching up with Flutter
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+397 [Backend] Note Schema and Endpoint
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+437 Milestone 2 Group Report
+443 Organising the wiki page
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+454 [Mobile] Reaching Discussions through the resource page
+469 Mobile - Note Sharing
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+1.3.15.1. Learners shall be able to organize and schedule events.
+
+{'organize': 5, 'schedule': 4, 'learners': 8, 'events': 18, 'organize and schedule': 3, 'schedule events': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+400 [Mobile] Small Problem On The Course Tile
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+419 [Mobile] Events
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.15.2. The scope of an event depends on the organizer's initiative. It can be face-to-face or online.
+
+{'online': 5, 'scope': 3, 'event': 16, 'depends': 3, 'organizer': 2, 'initiative': 3, 'event depends': 3, 'organizer initiative': 0}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+408 Event creation terminology in the requirements
+419 [Mobile] Events
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.15.3. The organizer shall have the right to edit details (date/time, title, description, location, quota) of the event.
+
+{'organizer': 2, 'details': 10, 'event': 16, 'date': 6, 'time': 11, 'title': 9, 'description': 10, 'location': 5, 'quota': 3, 'edit details': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+289 [Frontend]: course summary page
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+357 Research: Geolocation
+397 [Backend] Note Schema and Endpoint
+408 Event creation terminology in the requirements
+418 [Frontend] Event creation
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+443 Organising the wiki page
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+1.3.15.4. The organizer shall have the right to cancel the event.
+
+{'organizer': 2, 'cancel': 3, 'event': 16, 'cancel the event': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+408 Event creation terminology in the requirements
+419 [Mobile] Events
+------------------------------------------------------------
+1.4.1. Admins shall be able to ban users for inappropriate behaviors.
+
+{'ban': 2, 'inappropriate': 2, 'admins': 2, 'behaviors': 2, 'inappropriate behaviors': 2}
+258 Requirements review
+269 Updating Requirements
+------------------------------------------------------------
+1.4.2. Admins shall be able to delete inappropriate comments and articles.
+
+{'delete': 14, 'inappropriate': 2, 'comments': 11, 'admins': 2, 'articles': 2, 'delete inappropriate': 1, 'inappropriate comments': 1, 'comments and articles': 1, 'delete inappropriate comments': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+352 Backend API specifications for M2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.1. The system shall keep a profile page for every user registered that can also be edited by the user.
+
+{'profile': 30, 'registered': 11, 'edited': 4}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2. The profile page shall have the following sections:
+
+{'profile': 30, 'sections': 6}
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+280 Organizing Wiki Side Bar and Main Page 
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.1.1. The system shall keep a bio section in the profile page written by the user.
+
+{'bio': 9, 'section': 13, 'profile': 30, 'written': 6, 'bio section': 0, 'profile page written': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+284 Learning Flutter and Running Initial Mobile App
+304 Document Individual Reports for Customer Milestone 1
+319 [Mobile] Backend Connection For Course Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+352 Backend API specifications for M2
+360 [Frontend] Making frontend application gdpr compliant
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+481 [Mobile] - Edit Profile Page
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.2.1. The system shall keep an achievement section for each user.
+
+{'achievement': 1, 'section': 13, 'achievement section': 0}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.2.2. The system shall keep a predefined list of badges that can be earned by a user.
+
+{'predefined': 2, 'list': 17, 'badges': 5, 'earned': 1, 'predefined list': 2, 'list of badges': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.2.3. Users will gain a badge when one the following occurs: a learner completes a learning space, a learner completes one topic of the learning space, a lecturer opens a new learning space, a lecturer arranges an event, and lecturer creates a quiz.
+
+{'completes one topic': 0, 'space': 28, 'lecturer opens': 2, 'lecturer arranges': 2, 'lecturer creates': 1, 'gain a badge': 2, 'arranges an event': 1, 'creates a quiz': 1, 'learner completes': 2, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.2.4. The system shall allow a lecturer to add more badges to the badge list of the learning space they created.
+
+{'lecturer': 6, 'add': 33, 'list': 17, 'learning': 24, 'created': 31, 'add more badges': 1, 'badge list': 1, 'lecturer to add': 1, 'learning space': 16, 'space they created': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+264 Creating personal wiki pages
+269 Updating Requirements
+270 Backend Api Specifications
+295 [Mobile] Home and search course pages
+299 Learning Flutter
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+394 Resource pages backend connection
+396 [Backend] Profile Page
+397 [Backend] Note Schema and Endpoint
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.1.2.2.5. Achievement page shall be updated when a user gains a badge.
+
+{'updated': 23, 'gains': 0, 'achievement': 1, 'badge': 5, 'gains a badge': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.3.1. The system shall keep an interests section in the profile page.
+
+{'interests': 14, 'section': 13, 'profile': 30, 'interests section': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+466 [Mobile] Interests in registration
+481 [Mobile] - Edit Profile Page
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.3.2. The system shall keep a predefined list for the possible interests a user may have.
+
+{'predefined': 2, 'list': 17, 'interests': 14, 'predefined list': 2}
+258 Requirements review
+269 Updating Requirements
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.3.2.1. The system shall promote users to choose from this list to define their interests.
+
+{'promote': 1, 'choose': 7, 'list': 17, 'define': 2, 'interests': 14, 'list to define': 1, 'define their interests': 1}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+357 Research: Geolocation
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+466 [Mobile] Interests in registration
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.3.2.2. Interests section shall be created based on the selections of a user from this list.
+
+{'section': 13, 'created': 31, 'based': 8, 'selections': 2, 'interests': 14, 'list': 17, 'created based': 3, 'interests section': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+264 Creating personal wiki pages
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+330 Update Requirements for Milestone 1
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+357 Research: Geolocation
+397 [Backend] Note Schema and Endpoint
+408 Event creation terminology in the requirements
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.4.1. The system shall keep an activities section for each user.
+
+{'activities': 15, 'section': 13, 'activities section': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.4.2. Activities page shall be visible to the users that follow the owner of the profile page.
+
+{'visible': 14, 'follow': 12, 'owner': 6, 'profile': 30, 'activities': 15, 'follow the owner': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+396 [Backend] Profile Page
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+450 [Backend]: Activities Schema 
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+474 [Mobile] - Activities and Feed
+479 [Frontend] Activities Page for Frontend
+482 [Mobile] Allowing users to see other user's profiles
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.1.2.4.3. The system shall update the activities page when at least one of the following happens: a learner joins a meeting, a learner completes a learning space or a section of it, a learner joins in a new learning space or a learner drops a learning space.
+
+{'space': 28, 'learner': 3, 'joins a meeting': 1, 'completes a learning': 0, 'drops a learning': 0, 'update the activities': 2, 'learner completes': 2, 'learner drops': 2, 'learner joins': 2, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.4.4. The system shall update the activities page when at least one of the following happens: if a user is also a lecturer in a learning space, the lecturer arranges a meeting or joins one, the lecturer opens a new learning space or the lecturer opens a quiz for one learning space.
+
+{'learning': 24, 'space': 28, 'lecturer': 6, 'lecturer arranges': 2, 'update the activities': 2, 'arranges a meeting': 1, 'meeting or joins': 1, 'opens a quiz': 2, 'lecturer opens': 2, 'learning space': 16}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.5.1. The system shall keep track of the learner process in a learning space showing the following features: how many sections of a learning space completed so far, the remaining sections of the learning space and how many quizzes the learner have attended so far for each learning space.
+
+{'space': 28, 'learning': 24, 'space showing': 0, 'space completed': 0, 'learner process': 0, 'remaining sections': 0, 'quizzes the learner': 0, 'learning space': 16, 'learning space showing': 0, 'learning space completed': 0}
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.5.2. The system shall keep a monitoring page section for every learning space that the learner takes.
+
+{'monitoring': 7, 'section': 13, 'learning': 24, 'space': 28, 'learner': 3, 'monitoring page section': 0, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.5.3. If a learner drops a learning space, their monitoring record shall be deleted.
+
+{'learner': 3, 'drops': 2, 'learning': 24, 'monitoring': 7, 'space': 28, 'deleted': 2, 'learner drops': 2, 'drops a learning': 0, 'monitoring record': 1, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+301 Creating Course and Enrollment schemas
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+411 [Frontend] : Profie page improvements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.5.4. If a user is also a lecturer, the following statistics shall be kept by the system about each learning space that the user gives: how many users have joined in the learning space, how many users have completed the learning space, how many users have dropped the learning space and how many users have attended which quizzes of a learning space.
+
+{'statistics': 2, 'joined': 7, 'completed': 17, 'lecturer': 6, 'space': 28, 'completed the learning': 0, 'dropped the learning': 0, 'learning': 24, 'attended which quizzes': 1, 'learning space': 16}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+299 Learning Flutter
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+464 [Frontend] Backend connection recommended spaces
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.1.2.6.1. The system shall keep a knowledge section in the profile page.
+
+{'knowledge': 11, 'section': 13, 'profile': 30, 'knowledge section': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+352 Backend API specifications for M2
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.6.2. The system shall keep a predefined list for the possible knowledge a user may have.
+
+{'predefined': 2, 'list': 17, 'knowledge': 11, 'predefined list': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.6.2.1. The system shall promote users to choose from this list to define their knowledge.
+
+{'promote': 1, 'choose': 7, 'list': 17, 'define': 2, 'knowledge': 11, 'list to define': 1, 'define their knowledge': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+357 Research: Geolocation
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+466 [Mobile] Interests in registration
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.6.2.2. Knowledge page shall be created based on the selections of a user from this list.
+
+{'created': 31, 'based': 8, 'selections': 2, 'knowledge': 11, 'list': 17, 'created based': 3}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+330 Update Requirements for Milestone 1
+352 Backend API specifications for M2
+357 Research: Geolocation
+397 [Backend] Note Schema and Endpoint
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.7.1. The system shall keep a rating point between one to five for each user that is a lecturer.
+
+{'rating': 9, 'point': 2, 'lecturer': 6, 'rating point': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+289 [Frontend]: course summary page
+352 Backend API specifications for M2
+408 Event creation terminology in the requirements
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.7.1.2. System shall keep the total number of ratings that are given to all learning spaces of the lecturer by the users. The rating point shall be the average of these ratings.
+
+{'total': 3, 'number': 6, 'learning': 24, 'spaces': 21, 'lecturer': 6, 'ratings': 5, 'number of ratings': 1, 'rating point': 1, 'total number': 1, 'learning spaces': 6}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+380 [Backend]: Total flow test
+400 [Mobile] Small Problem On The Course Tile
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+437 Milestone 2 Group Report
+476 [Backend] Finalized Space Ratings
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.1.2.8.1. The system shall keep a notes section in the profile page.
+
+{'notes': 49, 'section': 13, 'profile': 30, 'notes section': 3}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+280 Organizing Wiki Side Bar and Main Page 
+304 Document Individual Reports for Customer Milestone 1
+313 [Frontend]: Profile Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.1.2.8.2. System shall keep all the notes that user has taken during any coure that user has joined to.
+
+{'notes': 49, 'coure': 1, 'joined': 7}
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+416 [Frontend ] Discussion
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.1.2.8.3. The system shall categorize notes according to learning spaces that they were taken in.
+
+{'categorize': 2, 'notes': 49, 'learning': 24, 'spaces': 21, 'categorize notes': 1, 'learning spaces': 6}
+269 Updating Requirements
+280 Organizing Wiki Side Bar and Main Page 
+300 Catching up with Flutter
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+397 [Backend] Note Schema and Endpoint
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+439 [Frontend] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+464 [Frontend] Backend connection recommended spaces
+467 [Frontend] Backend connection popular spaces
+469 Mobile - Note Sharing
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.1.3.1. The system shall keep records of user profiles that are followed by the user.
+
+{'records': 3, 'profiles': 11}
+258 Requirements review
+301 Creating Course and Enrollment schemas
+451 [Frontend] Implementing Follow User and Block User Features
+------------------------------------------------------------
+2.1.3.2. The system shall allow a follower of a user to see the following features of a profile: achievements, monitoring, interests, knowledge, bio ,notes ,annotations and activities.
+
+{'profile': 30, 'annotations': 12, 'activities': 15, 'achievements': 9, 'monitoring': 7, 'interests': 14, 'knowledge': 11, 'bio': 9, 'notes': 49, 'annotations and activities': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+313 [Frontend]: Profile Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+404 [Mobile] Annotation
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+466 [Mobile] Interests in registration
+479 [Frontend] Activities Page for Frontend
+481 [Mobile] - Edit Profile Page
+494 Final Milestone Group Report
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.1.4.1. Users shall be able to change their privacy settings. A user shall have a public or a private profile. (described in 3.3.6.)
+
+{'public': 8, 'private': 7, 'profile': 30, 'change': 13, 'privacy': 6, 'private profile': 5, 'settings': 3, 'change their privacy': 2, 'privacy settings': 2}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+353 Backend Team Meeting #4
+357 Research: Geolocation
+360 [Frontend] Making frontend application gdpr compliant
+396 [Backend] Profile Page
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+481 [Mobile] - Edit Profile Page
+482 [Mobile] Allowing users to see other user's profiles
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.2.1. The system shall provide an interface such that users can ask and answer questions.
+
+{'provide': 17, 'interface': 12, 'answer': 1, 'questions': 5, 'provide an interface': 2, 'answer questions': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+356 [Frontend]: discussion table
+357 Research: Geolocation
+416 [Frontend ] Discussion
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.2.2. The system shall provide a discussion section for any type of user inside a learning space.
+
+{'provide': 17, 'discussion': 31, 'section': 13, 'type': 2, 'inside': 7, 'space': 28, 'provide a discussion': 1, 'discussion section': 1, 'inside a learning': 0, 'learning space': 16}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+361 [Frontend] Creation and display of space resources
+368 [Mobile] Content Page
+391 Mobile - Discussion Page
+394 Resource pages backend connection
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+450 [Backend]: Activities Schema 
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+454 [Mobile] Reaching Discussions through the resource page
+464 [Frontend] Backend connection recommended spaces
+467 [Frontend] Backend connection popular spaces
+471 [Mobile] Adding Note To A Resource
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.2.2.1. The system should support replying, mentioning and threaded messages to create a comment.
+
+{'support': 11, 'threaded': 0, 'replying': 0, 'mentioning': 1, 'comment': 18, 'threaded messages': 0, 'messages to create': 0, 'support replying': 0, 'mentioning and threaded': 0, 'create a comment': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+311 [Frontend]: Create first version of discussion
+322 Milestone 1 Group Report
+375 [Mobile] Creating Markdown Editor Widget
+437 Milestone 2 Group Report
+------------------------------------------------------------
+2.2.3. The system should support sharing resources and files.
+
+{'support': 11, 'sharing': 7, 'resources': 26, 'files': 11, 'support sharing': 2, 'sharing resources': 2, 'resources and files': 2, 'support sharing resources': 2}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+375 [Mobile] Creating Markdown Editor Widget
+404 [Mobile] Annotation
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+460 [Frontend]: Sharing and saving notes
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.3.1 The system shall provide a notes section in profile.
+
+{'provide': 17, 'notes': 49, 'section': 13, 'profile': 30, 'provide a notes': 3, 'notes section': 3, 'section in profile': 3}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+279 Meeting Notes Documentation - Backend Team
+280 Organizing Wiki Side Bar and Main Page 
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+304 Document Individual Reports for Customer Milestone 1
+313 [Frontend]: Profile Page
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+389 Backend - File Upload
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.3.2 The system shall support viewing notes of public and followed users on their profiles. Similarly notes reached by shared links should be visible if only the sharing end is public or followed.
+
+{'support': 11, 'viewing': 6, 'notes': 49, 'public': 8, 'similarly notes': 2, 'similarly notes reached': 2, 'profiles': 11, 'viewing notes': 4, 'support viewing': 4, 'support viewing notes': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+278 Meeting Notes Documentation - Mobile Team 19.10.22
+312 [Frontend]: Create first version of notes
+322 Milestone 1 Group Report
+331 Meeting notes for 30.10.2022
+375 [Mobile] Creating Markdown Editor Widget
+396 [Backend] Profile Page
+404 [Mobile] Annotation
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+430 Mobile - Note Taking
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.3.3 The system shall provide registered learners the ability to connect, annotate and tag notes.
+
+{'connect': 16, 'annotate': 5, 'notes': 49, 'provide registered': 3, 'registered learners': 3, 'learners the ability': 3, 'ability to connect': 3, 'annotate and tag': 5, 'tag notes': 4, 'provide registered learners': 3}
+258 Requirements review
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+404 [Mobile] Annotation
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+451 [Frontend] Implementing Follow User and Block User Features
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+464 [Frontend] Backend connection recommended spaces
+467 [Frontend] Backend connection popular spaces
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.4.1. The system shall provide a list of recommended learning spaces to learners.
+
+{'provide': 17, 'list': 17, 'recommended': 7, 'learners': 8, 'provide a list': 1, 'list of recommended': 2, 'recommended learning': 0, 'learning spaces': 6, 'spaces to learners': 0, 'recommended learning spaces': 0}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+357 Research: Geolocation
+373 Understand annotation database
+400 [Mobile] Small Problem On The Course Tile
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+464 [Frontend] Backend connection recommended spaces
+474 [Mobile] - Activities and Feed
+484 [Mobile] - Recommending Spaces
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.4.1.1 The learning spaces in the list shall either have semantically similar names to the learning spaces that the learner has completed previously or have tags that match with the learner's interests.
+
+{'interests': 14, 'spaces': 21, 'learner': 3, 'learning': 24, 'learner has completed': 1, 'semantically similar': 3, 'completed previously': 1, 'tags that match': 1, 'learner interests': 0, 'learning spaces': 6}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+484 [Mobile] - Recommending Spaces
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.1. For any search, the result shall be broadscale in the sense that the results for any search should include those items that would be returned for another search with nearly synonymous keywords.
+
+{'broadscale': 0, 'sense': 0, 'include': 8, 'items': 3, 'returned': 0, 'keywords': 1, 'search should include': 0, 'search': 13, 'include those items': 0, 'synonymous keywords': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+375 [Mobile] Creating Markdown Editor Widget
+420 Document Individual Reports for Milestone 2
+451 [Frontend] Implementing Follow User and Block User Features
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.2. Learning spaces shall be searched by entering keywords.
+
+{'spaces': 21, 'searched': 1, 'entering': 1, 'learning': 24, 'keywords': 1, 'searched by entering': 1, 'learning spaces': 6, 'entering keywords': 1}
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.3. The search results for learning spaces should adapt to the user, i.e. the default ranking of the results should reflect the user's behavior on the website.
+
+{'search': 13, 'learning': 24, 'website': 3, 'results': 6, 'results for learning': 0, 'results should reflect': 0, 'search results': 2, 'learning spaces': 6, 'spaces should adapt': 0, 'default ranking': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+295 [Mobile] Home and search course pages
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+325 [Frontend]: Search bar for my/courses page
+326 [Frontend]: Navigation layout for the user
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+357 Research: Geolocation
+416 [Frontend ] Discussion
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.5.3.1. The learning spaces that are similar to the user's previous learning spaces should be ranked higher than other learning spaces.
+
+{'similar': 9, 'previous': 7, 'ranked': 3, 'higher': 2, 'learning': 24, 'spaces': 21, 'previous learning': 0, 'ranked higher': 2, 'learning spaces': 6, 'previous learning spaces': 0}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+299 Learning Flutter
+300 Catching up with Flutter
+311 [Frontend]: Create first version of discussion
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.3.2. The learning spaces that are about a topic in which the user has shown interest should be ranked higher than other learning spaces.
+
+{'topic': 20, 'shown': 7, 'interest': 6, 'ranked': 3, 'higher': 2, 'learning': 24, 'spaces': 21, 'shown interest': 1, 'ranked higher': 2, 'learning spaces': 6}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+481 [Mobile] - Edit Profile Page
+484 [Mobile] - Recommending Spaces
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.5.3.3. The learning spaces that are similar to those that are taken by the users that the user follows should be ranked higher than other learning spaces.
+
+{'similar': 9, 'ranked': 3, 'higher': 2, 'learning': 24, 'spaces': 21, 'ranked higher': 2, 'learning spaces': 6}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+300 Catching up with Flutter
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+419 [Mobile] Events
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.4. The title and the first post of discussions in the communication channel shall be searched by entering keywords. Those results shall be ranked according to date.
+
+{'title': 9, 'post': 11, 'discussions': 17, 'communication': 10, 'channel': 8, 'keywords': 1, 'post of discussions': 1, 'communication channel': 6, 'searched by entering': 1, 'entering keywords': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+262 Communication Plan Update
+269 Updating Requirements
+270 Backend Api Specifications
+289 [Frontend]: course summary page
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+327 [Mobile] Profile Page
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+397 [Backend] Note Schema and Endpoint
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+443 Organising the wiki page
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.5. The notes belonging to a user shall be searchable.
+
+{'notes': 49, 'belonging': 2, 'searchable': 2, 'notes belonging': 2}
+258 Requirements review
+269 Updating Requirements
+------------------------------------------------------------
+2.5.6. It shall be possible to sort the results from newest to oldest or oldest to newest.
+
+{'newest to oldest': 1, 'oldest or oldest': 1, 'oldest to newest': 1, 'sort': 3, 'results': 6, 'newest': 1, 'oldest': 1, 'results from newest': 1, 'sort the results': 1}
+258 Requirements review
+269 Updating Requirements
+295 [Mobile] Home and search course pages
+325 [Frontend]: Search bar for my/courses page
+357 Research: Geolocation
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.5.7. The system shall provide filtering of search results.
+
+{'provide': 17, 'filtering': 3, 'search': 13, 'results': 6, 'provide filtering': 1, 'filtering of search': 1, 'search results': 2}
+258 Requirements review
+269 Updating Requirements
+295 [Mobile] Home and search course pages
+322 Milestone 1 Group Report
+325 [Frontend]: Search bar for my/courses page
+342 Customer Milestone Feedbacks
+357 Research: Geolocation
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.5.7.1. The system shall provide filtering on the learning space results according to the availability of in-person meetings.
+
+{'provide': 17, 'filtering': 3, 'learning': 24, 'meetings': 11, 'provide filtering': 1, 'learning space': 16, 'space results': 0, 'availability of in-person': 1, 'in-person meetings': 1, 'learning space results': 0}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.5.7.2. The system shall provide filtering on the discussion channel search results according to topic.
+
+{'provide': 17, 'filtering': 3, 'discussion': 31, 'topic': 20, 'provide filtering': 1, 'discussion channel': 4, 'channel search': 1, 'search results': 2, 'discussion channel search': 1, 'channel search results': 1}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+357 Research: Geolocation
+394 Resource pages backend connection
+416 [Frontend ] Discussion
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+450 [Backend]: Activities Schema 
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.5.7.3. The system shall provide filtering on the results according to date.
+
+{'provide': 17, 'filtering': 3, 'results': 6, 'date': 6, 'provide filtering': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+295 [Mobile] Home and search course pages
+322 Milestone 1 Group Report
+325 [Frontend]: Search bar for my/courses page
+342 Customer Milestone Feedbacks
+351 [Backend] User Schema update
+357 Research: Geolocation
+366 [Backend] Resend Confirmation mail
+408 Event creation terminology in the requirements
+415 [Frontend] NoteTaking
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+------------------------------------------------------------
+2.6.1. The system shall support annotating with text, images and URI.
+
+{'support': 11, 'annotating': 2, 'text': 9, 'images': 19, 'uri': 1, 'support annotating': 1, 'annotating with text': 1, 'images and uri': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+357 Research: Geolocation
+375 [Mobile] Creating Markdown Editor Widget
+404 [Mobile] Annotation
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.6.1.1. The system shall support external links in the case that users provide URI.
+
+{'support': 11, 'external': 0, 'links': 17, 'case': 13, 'provide': 17, 'uri': 1, 'support external': 0, 'external links': 0, 'provide uri': 0, 'support external links': 0}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+329 Update Use Case Diagram for Customer Milestone 1
+344 [mobile] - Adding Deep Links
+351 [Backend] User Schema update
+357 Research: Geolocation
+375 [Mobile] Creating Markdown Editor Widget
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.6.2. The system shall send notifications to the users if any of the following happens: a learning space they have created has a new user joined, an event is created and/or cancelled in a learning space they are joined in, another users follows or requests to follow them, and a user they have sent following request accepts their request.
+
+{'request': 18, 'accepts their request': 1, 'created': 31, 'joined': 7, 'event is created': 1, 'learning': 24, 'space': 28, 'request accepts': 1, 'send notifications': 1, 'learning space': 16}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+300 Catching up with Flutter
+301 Creating Course and Enrollment schemas
+303 Create Course and Enrollment related functions according to API specifications by front
+304 Document Individual Reports for Customer Milestone 1
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+356 [Frontend]: discussion table
+368 [Mobile] Content Page
+402 [Mobile] Add Topic
+408 Event creation terminology in the requirements
+416 [Frontend ] Discussion
+417 [Frontend]: create space
+420 Document Individual Reports for Milestone 2
+421 [Backend] Space Ratings
+437 Milestone 2 Group Report
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+2.6.3. The system shall provide a mechanism such that annotation can be applied to any note or learning space resource.
+
+{'provide': 17, 'mechanism': 4, 'annotation': 12, 'applied': 2, 'resource': 27, 'provide a mechanism': 2, 'note or learning': 0, 'learning space': 16, 'space resource': 0, 'learning space resource': 0}
+258 Requirements review
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+361 [Frontend] Creation and display of space resources
+373 Understand annotation database
+396 [Backend] Profile Page
+401 [Frontend]: Annotation
+404 [Mobile] Annotation
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+439 [Frontend] User Interface / User Experience
+448 Annotation Microservice
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+454 [Mobile] Reaching Discussions through the resource page
+471 [Mobile] Adding Note To A Resource
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+496 [Frontend] User Interface / User Experience
+------------------------------------------------------------
+2.6.4. The system shall highlight annotated text portions to emphasize annotation.
+
+{'highlight': 1, 'annotated': 2, 'annotation': 12, 'highlight annotated': 1, 'annotated text': 2, 'text portions': 2, 'portions to emphasize': 1, 'emphasize annotation': 2, 'highlight annotated text': 1, 'annotated text portions': 2}
+258 Requirements review
+269 Updating Requirements
+------------------------------------------------------------
+2.7.1. The system shall provide in-app and push notifications.
+
+{'provide': 17, 'in-app': 1, 'push': 2, 'notifications': 6, 'provide in-app': 1, 'in-app and push': 1, 'push notifications': 2}
+258 Requirements review
+269 Updating Requirements
+278 Meeting Notes Documentation - Mobile Team 19.10.22
+342 Customer Milestone Feedbacks
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.1.1. The platform shall be accessed via both a native Android application and a web application.
+
+{'platform': 11, 'accessed': 2, 'native': 1, 'android': 5, 'web': 14, 'application': 9, 'android application': 1, 'web application': 4, 'native android': 0, 'native android application': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+281 Initializing mobile app
+283 Setting Up The Flutter Environment
+299 Learning Flutter
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+357 Research: Geolocation
+360 [Frontend] Making frontend application gdpr compliant
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+481 [Mobile] - Edit Profile Page
+482 [Mobile] Allowing users to see other user's profiles
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.1.1.1 The web application of the platform shall support modern browsers (Chrome, Firefox, Safari, Opera, Edge).
+
+{'chrome': 0, 'firefox': 0, 'safari': 0, 'opera': 0, 'edge': 0, 'web application': 4, 'platform shall support': 0, 'support modern': 0, 'modern browsers': 0, 'support modern browsers': 0}
+304 Document Individual Reports for Customer Milestone 1
+357 Research: Geolocation
+420 Document Individual Reports for Milestone 2
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.1.1.2 The web application of the platform should be responsive.
+
+{'web': 14, 'application': 9, 'platform': 11, 'responsive': 1, 'web application': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+357 Research: Geolocation
+360 [Frontend] Making frontend application gdpr compliant
+375 [Mobile] Creating Markdown Editor Widget
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.1.2. The platform language shall be English.
+
+{'platform': 11, 'language': 2, 'english': 0, 'platform language': 0}
+375 [Mobile] Creating Markdown Editor Widget
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.1.3 The platform should support UTF-8 character encoding.
+
+{'platform': 11, 'support': 11, 'character': 0, 'encoding': 0, 'platform should support': 0, 'character encoding': 0}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+437 Milestone 2 Group Report
+------------------------------------------------------------
+3.2.1. Emails shall be valid and unique.
+
+{'valid': 4, 'emails': 3, 'unique': 3, 'valid and unique': 2}
+269 Updating Requirements
+287 [Frontend]: Registration/Login/Confirmation email pages
+322 Milestone 1 Group Report
+353 Backend Team Meeting #4
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.2. Passwords should be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character.
+
+{'long': 6, 'uppercase': 0, 'lowercase': 0, 'number': 6, 'passwords': 2, 'letter': 0, 'characters long': 0, 'special character': 0, 'uppercase letter': 0, 'lowercase letter': 0}
+258 Requirements review
+269 Updating Requirements
+270 Backend Api Specifications
+302 [Backend]: Registration, Login, Authorization
+306 [Mobile] Course Page
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+357 Research: Geolocation
+400 [Mobile] Small Problem On The Course Tile
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.3. The system shall encrypt passwords with the SHA-256 algorithm using a randomly generated salt. Passwords' hashes and their respective salts shall be stored in the database.
+
+{'encrypt': 0, 'passwords': 2, 'randomly': 0, 'respective salts': 0, "passwords' hashes": 0, 'algorithm': 1, 'generated salt': 0, 'encrypt passwords': 0, 'randomly generated': 0, 'randomly generated salt': 0}
+258 Requirements review
+302 [Backend]: Registration, Login, Authorization
+------------------------------------------------------------
+3.2.4. Users shall not be able to perform actions that are not in the scope of their roles.
+
+{'perform': 3, 'actions': 6, 'scope': 3, 'roles': 0, 'perform actions': 0}
+258 Requirements review
+269 Updating Requirements
+279 Meeting Notes Documentation - Backend Team
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+322 Milestone 1 Group Report
+357 Research: Geolocation
+408 Event creation terminology in the requirements
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.4.1 Users shall not be able to access or modify the data of other users.
+
+{'access': 11, 'modify': 5, 'data': 17, 'access or modify': 0, 'modify the data': 0}
+259 Mockup and Diagram Reviews
+270 Backend Api Specifications
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+357 Research: Geolocation
+408 Event creation terminology in the requirements
+437 Milestone 2 Group Report
+469 Mobile - Note Sharing
+476 [Backend] Finalized Space Ratings
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.4.2. API endpoints shall be protected with access tokens.
+
+{'endpoints': 20, 'protected': 0, 'access': 11, 'api': 15, 'tokens': 3, 'protected with access': 0, 'api endpoints': 4, 'access tokens': 0}
+270 Backend Api Specifications
+302 [Backend]: Registration, Login, Authorization
+316 Mobile - Backend Connection
+322 Milestone 1 Group Report
+351 [Backend] User Schema update
+352 Backend API specifications for M2
+357 Research: Geolocation
+380 [Backend]: Total flow test
+389 Backend - File Upload
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+482 [Mobile] Allowing users to see other user's profiles
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.4.2.1. New access tokens shall be generated in exchange for either user credentials or an unexpired refresh token.
+
+{'access': 11, 'generated': 1, 'exchange': 0, 'credentials': 0, 'unexpired': 0, 'access tokens': 0, 'refresh token': 3, 'generated in exchange': 0, 'unexpired refresh': 0, 'unexpired refresh token': 0}
+270 Backend Api Specifications
+302 [Backend]: Registration, Login, Authorization
+316 Mobile - Backend Connection
+322 Milestone 1 Group Report
+------------------------------------------------------------
+3.2.5. Some actions, such as account activation or password change, should be allowed only via email confirmation.
+
+{'account': 10, 'activation': 0, 'password': 11, 'actions': 6, 'change': 13, 'confirmation': 11, 'account activation': 0, 'activation or password': 0, 'password change': 1, 'email confirmation': 4}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+270 Backend Api Specifications
+279 Meeting Notes Documentation - Backend Team
+287 [Frontend]: Registration/Login/Confirmation email pages
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+302 [Backend]: Registration, Login, Authorization
+304 Document Individual Reports for Customer Milestone 1
+316 Mobile - Backend Connection
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+352 Backend API specifications for M2
+408 Event creation terminology in the requirements
+437 Milestone 2 Group Report
+465 [Mobile] Account deletion
+469 Mobile - Note Sharing
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.6. The platform shall use the HTTPS Protocol.
+
+{'platform': 11, 'https': 93, 'protocol': 2, 'https protocol': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+267 Platform Name Suggestions
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+373 Understand annotation database
+408 Event creation terminology in the requirements
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.2.7. All input provided by a user should be validated in order to mitigate attacks like SQL injection.
+
+{'input': 9, 'provided': 14, 'validated': 0, 'injection': 0, 'input provided': 0, 'validated in order': 0, 'order to mitigate': 0, 'mitigate attacks': 0, 'attacks like sql': 0, 'sql injection': 0}
+269 Updating Requirements
+270 Backend Api Specifications
+287 [Frontend]: Registration/Login/Confirmation email pages
+302 [Backend]: Registration, Login, Authorization
+322 Milestone 1 Group Report
+325 [Frontend]: Search bar for my/courses page
+343 [mobile] - Connecting Login and Registration pages to backend
+351 [Backend] User Schema update
+366 [Backend] Resend Confirmation mail
+375 [Mobile] Creating Markdown Editor Widget
+437 Milestone 2 Group Report
+481 [Mobile] - Edit Profile Page
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.1. The platform shall comply with the rules specified by KVKK and GDPR.
+
+{'platform': 11, 'comply': 2, 'rules': 1, 'kvkk': 1, 'gdpr': 3, 'platform shall comply': 0, 'kvkk and gdpr': 1}
+258 Requirements review
+322 Milestone 1 Group Report
+360 [Frontend] Making frontend application gdpr compliant
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.2. Users shall agree to the Terms of Service and Privacy Policy while registering.
+
+{'agree': 1, 'terms': 4, 'service': 6, 'privacy': 6, 'policy': 1, 'registering': 1, 'terms of service': 1, 'service and privacy': 1, 'privacy policy': 1, 'policy while registering': 1}
+269 Updating Requirements
+270 Backend Api Specifications
+304 Document Individual Reports for Customer Milestone 1
+316 Mobile - Backend Connection
+322 Milestone 1 Group Report
+357 Research: Geolocation
+360 [Frontend] Making frontend application gdpr compliant
+411 [Frontend] : Profie page improvements
+437 Milestone 2 Group Report
+448 Annotation Microservice
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.3. Processing personal data outside the purpose of collection shall be prohibited.
+
+{'personal': 16, 'data': 17, 'purpose': 3, 'collection': 6, 'processing': 0, 'prohibited': 0, 'personal data': 0, 'purpose of collection': 0, 'processing personal': 0, 'processing personal data': 0}
+259 Mockup and Diagram Reviews
+270 Backend Api Specifications
+279 Meeting Notes Documentation - Backend Team
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+357 Research: Geolocation
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+450 [Backend]: Activities Schema 
+460 [Frontend]: Sharing and saving notes
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.4. A user's personal data shall be deleted as soon as it fulfills its purpose for collection.
+
+{'personal': 16, 'data': 17, 'deleted': 2, 'fulfills': 0, 'purpose': 3, 'collection': 6, 'personal data': 0, 'fulfills its purpose': 0, 'purpose for collection': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+270 Backend Api Specifications
+279 Meeting Notes Documentation - Backend Team
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+301 Creating Course and Enrollment schemas
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+357 Research: Geolocation
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+450 [Backend]: Activities Schema 
+460 [Frontend]: Sharing and saving notes
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.5. If personal data is to be used, the user shall be asked for their consent clearly.
+
+{'personal': 16, 'data': 17, 'asked': 1, 'consent': 1, 'personal data': 0}
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+352 Backend API specifications for M2
+357 Research: Geolocation
+420 Document Individual Reports for Milestone 2
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.6. The system shall have two options for the visibility setting of a user profile:
+
+{'options': 9, 'visibility': 3, 'setting': 6, 'profile': 30, 'visibility setting': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+267 Platform Name Suggestions
+269 Updating Requirements
+283 Setting Up The Flutter Environment
+284 Learning Flutter and Running Initial Mobile App
+299 Learning Flutter
+300 Catching up with Flutter
+322 Milestone 1 Group Report
+411 [Frontend] : Profie page improvements
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+438 [Mobile] User Interface / User Experience
+448 Annotation Microservice
+481 [Mobile] - Edit Profile Page
+494 Final Milestone Group Report
+495 [Mobile] User Interface / User Experience
+------------------------------------------------------------
+3.3.6.1. Public Profile: The system shall allow other users to see a user's profile if the user opts to choose the public profile option.
+
+{'opts': 1, 'choose': 7, 'option': 9, 'public': 8, 'profile': 30, 'choose the public': 1, 'opts to choose': 1, 'profile option': 1, 'public profile': 3, 'public profile option': 1}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+351 [Backend] User Schema update
+353 Backend Team Meeting #4
+357 Research: Geolocation
+366 [Backend] Resend Confirmation mail
+396 [Backend] Profile Page
+402 [Mobile] Add Topic
+411 [Frontend] : Profie page improvements
+415 [Frontend] NoteTaking
+420 Document Individual Reports for Milestone 2
+425 [Mobile] Delete Resource
+435 [Mobile] Delete Topic
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+466 [Mobile] Interests in registration
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.3.6.2. Private Profile: The system shall not allow other non-follower users to see a user's profile if the user opts to choose the private profile.
+
+{'non-follower': 1, 'opts': 1, 'choose': 7, 'private': 7, 'profile': 30, 'choose the private': 1, 'opts to choose': 1, 'private profile': 5}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+357 Research: Geolocation
+396 [Backend] Profile Page
+411 [Frontend] : Profie page improvements
+420 Document Individual Reports for Milestone 2
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+466 [Mobile] Interests in registration
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.4.1. The platform shall respond to any request in at most 5 seconds.
+
+{'platform': 11, 'respond': 2, 'request': 18, 'platform shall respond': 2}
+258 Requirements review
+269 Updating Requirements
+322 Milestone 1 Group Report
+437 Milestone 2 Group Report
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.4.2. The platform shall support at least 100 simultaneous user actions.
+
+{'platform': 11, 'support': 11, 'simultaneous': 0, 'actions': 6, 'platform shall support': 0, 'simultaneous user actions': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+279 Meeting Notes Documentation - Backend Team
+290 Meeting Notes Documentation - Backend Team 22.10.2022
+322 Milestone 1 Group Report
+408 Event creation terminology in the requirements
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.4.3. The platform shall support at least 10000 user accounts.
+
+{'platform': 11, 'support': 11, 'accounts': 6, 'platform shall support': 0}
+258 Requirements review
+269 Updating Requirements
+287 [Frontend]: Registration/Login/Confirmation email pages
+322 Milestone 1 Group Report
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.4.4. Database backup should be generated each week.
+
+{'backup': 0, 'generated': 1, 'database': 13, 'week': 19, 'database backup': 0, 'generated each week': 0}
+270 Backend Api Specifications
+322 Milestone 1 Group Report
+353 Backend Team Meeting #4
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.4.5. In case of failure, the platform should be back online in at most 2 hours.
+
+{'case': 13, 'platform': 11, 'back': 5, 'online': 5, 'failure': 1, 'hours': 2, 'back online': 0, 'case of failure': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+319 [Mobile] Backend Connection For Course Page
+322 Milestone 1 Group Report
+323 Milestone 1 Presentation
+342 Customer Milestone Feedbacks
+346 Milestone 2 objectives
+347 Meeting notes for 08.11.2022
+357 Research: Geolocation
+408 Event creation terminology in the requirements
+420 Document Individual Reports for Milestone 2
+424 Auto-Restart of the Server
+437 Milestone 2 Group Report
+474 [Mobile] - Activities and Feed
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.5.1. Annotations shall be compliant with the W3C Web Annotation Data Model and follow W3C standards.
+
+{'compliant': 5, 'web': 14, 'follow': 12, 'annotation data': 4, 'standards': 5, 'data model': 4, 'web annotation': 4, 'model and follow': 0, 'annotation data model': 4, 'web annotation data': 4}
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+304 Document Individual Reports for Customer Milestone 1
+322 Milestone 1 Group Report
+342 Customer Milestone Feedbacks
+352 Backend API specifications for M2
+360 [Frontend] Making frontend application gdpr compliant
+373 Understand annotation database
+401 [Frontend]: Annotation
+404 [Mobile] Annotation
+420 Document Individual Reports for Milestone 2
+437 Milestone 2 Group Report
+448 Annotation Microservice
+494 Final Milestone Group Report
+------------------------------------------------------------
+3.5.2. Implementation of geolocation shall obey the guidelines of W3C GeoInfo.
+{'geolocation': 7, 'obey': 0, 'guidelines': 1, 'implementation': 10, 'geoinfo': 0, 'geolocation shall obey': 0, 'obey the guidelines': 0, 'implementation of geolocation': 0}
+258 Requirements review
+259 Mockup and Diagram Reviews
+269 Updating Requirements
+322 Milestone 1 Group Report
+346 Milestone 2 objectives
+353 Backend Team Meeting #4
+357 Research: Geolocation
+358 Group Meeting Week 6 - 13.11.2022
+370 [Backend] Implementation of Discussion endpoint
+381 Add param validation to get functions in API
+415 [Frontend] NoteTaking
+416 [Frontend ] Discussion
+437 Milestone 2 Group Report
+452 [Frontend] Implementing Note Sharing and Note Sorting/Filtering
+453 [Frontend] Updating interests and knowledge fields of profile page. 
+494 Final Milestone Group Report
+------------------------------------------------------------

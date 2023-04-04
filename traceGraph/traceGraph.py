@@ -19,13 +19,22 @@ token = os.getenv('GITHUB_TOKEN')
 print(username, token)
 
 repo_owner = 'bounswe'
-repo_name = 'bounswe2022group3'
+repo_number = 3
+repo_name = f'bounswe2022group{repo_number}'
 
-requirements_file_name = 'group3_requirements.txt'
-requirement_data_fname = 'requirement_data.json'
-issue_data_fname = 'issue_data.json'
-pr_data_fname = 'pr_data.json'
-commit_data_fname = 'commit_data.json'
+if repo_number == 2:
+    issue_number_threshold = 309 # for group 2
+elif repo_number == 3:
+    issue_number_threshold = 258 # for group 3
+else:
+    raise Exception("Invalid repo number")
+
+requirements_file_name = f'data_group{repo_number}/group{repo_number}_requirements.txt'
+requirement_data_fname = f'data_group{repo_number}/requirement_data.json'
+issue_data_fname = f'data_group{repo_number}/issue_data.json'
+pr_data_fname = f'data_group{repo_number}/pr_data.json'
+commit_data_fname = f'data_group{repo_number}/commit_data.json'
+output_file = f'group{repo_number}_req_to_issue.txt'
 
 
 ISSUE_queryTemplate = Template("""{
@@ -127,6 +136,17 @@ Commit_queryTemplate = Template("""{
         }
     }
 }""")
+
+# Removes all the data files, helper function when data is broken or needs to be refreshed.
+def clean_files():
+    if os.path.exists(commit_data_fname):
+        os.remove(commit_data_fname)
+    if os.path.exists(issue_data_fname):
+        os.remove(issue_data_fname)
+    if os.path.exists(pr_data_fname):
+        os.remove(pr_data_fname)
+    if os.path.exists(requirement_data_fname):
+        os.remove(requirement_data_fname)
 
 issues = []
 pullRequests = []
@@ -285,6 +305,7 @@ def requirement_parser():
 
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the issue/pr number.
 def build_issue_nodes():
+    global issue_number_threshold
     # Get all issues from the github api and write them to a json file.
 
     if not os.path.isfile(issue_data_fname): # Comment this out if the json file has broken data.
@@ -294,7 +315,7 @@ def build_issue_nodes():
     f.close()
     issue_nodes = {}
     for issue in data['issues']:
-        if issue['number'] < 309:
+        if issue['number'] < issue_number_threshold: # Skip the issues that were created in 352.
             continue
         node = Issue('issue', issue['number'], issue['title'], issue['body'], issue['comments'], issue['state'], issue['createdAt'], issue['closedAt'], issue['url'], issue['milestone'])
         issue_nodes[node.number] = node
@@ -356,6 +377,8 @@ class Node:
 
     def __str__(self):
         return f"Node: {self.node_type}-{self.node_id}"
+    
+
 
 class Issue(Node):
     def __init__(self, node_type, number, title, body, comments, state, created, closed, url, milestone):
@@ -367,7 +390,8 @@ class Issue(Node):
         self.comments = comment_parser(comments)
         self.number_of_comments = len(comments)
         self.state = state
-        self.time_to_finish = time_to_finish(created, closed)
+        if closed is not None:
+            self.time_to_finish = time_to_finish(created, closed)
         self.milestone = milestone
         self.text = self.title + ' ' + self.body
         # add the comments to the text
@@ -428,10 +452,17 @@ def search_keyword(keyword_list, node_id, graph):
                 print(str(e))
                 print(node.text)
                 print(keyword)
-                break
             if match != None and node.node_id != node_id:
                 found_nodes[keyword].add(node)
     
+    # Print the frequency of each keyword.
+    key_freq = {keyword: len(found_nodes[keyword]) for keyword in found_nodes.keys()}
+    graph.requirement_nodes[node_id].freqs = key_freq
+    
+    result = clean_noise(found_nodes)
+    return result
+
+def clean_noise(found_nodes):
     # We have a dictionary of keywords and the nodes that contain the keyword.
     # We will clean the keywords that has a lot of false positives.
     for keyword in found_nodes.keys():
@@ -449,10 +480,6 @@ def search_keyword(keyword_list, node_id, graph):
                     cleaned_nodes.add(node)
             found_nodes[keyword] = cleaned_nodes
     
-    # Print the frequency of each keyword.
-    # key_freq = {keyword: len(found_nodes[keyword]) for keyword in found_nodes.keys()}
-    # print(key_freq)
-
     # Merge all the nodes that contain the keywords.
     result = set()
     for keyword in found_nodes.keys():
@@ -468,15 +495,23 @@ def req_to_issue(graph):
         for node in found_nodes:
             req.traces.append(node)
 
+#clean_files() # Clean the data when changing the target repository.
 graph = Graph()
 print(len(graph.issue_nodes))
 
 req_to_issue(graph)
 
-f = open('req_to_issue.txt', 'w', encoding='utf-8')
+f = open(output_file, 'w', encoding='utf-8')
 for req in graph.requirement_nodes.values():
-    for node in req.traces:
-        f.write(f"{req.node_id} {req.keywords}\n")
+    if len(req.traces) == 0:
+        print(f"Requirement {req.node_id} has no traces.")
+        continue
+    print(req.traces)
+    sorted_traces = sorted(req.traces, key=lambda x: x.node_id)
+    print(sorted_traces)
+    f.write(f"{req.node_id} {req.description}\n")
+    f.write(f"{req.freqs}\n")
+    for node in sorted_traces:
         f.write(f"{node.node_id} {node.title}\n")
-        f.write(f"------------------------------------------------------------\n")
+    f.write(f"------------------------------------------------------------\n")
 f.close()
