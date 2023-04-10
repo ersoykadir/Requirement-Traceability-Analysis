@@ -3,7 +3,7 @@ import re
 nlp = spacy.load("en_core_web_sm")
 
 dep_file = open("dependency_links.txt", "w")
-req_file = open("Requirements.txt", "r")
+req_file = open("Requirements_group2.txt", "r")
 pattern = r"[A-Za-z][^.!?:()]*"
 for line in req_file:
     result = re.findall(pattern, line)
