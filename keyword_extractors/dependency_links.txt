@@ -1,0 +1,3988 @@
+1.1.1.1.1. Guests shall enter an unused username, an unregistered email address, and a strong password to signup.
+
+
+            TOKEN: Guests
+            MODIFIED :  
+
+            
+
+            TOKEN: enter
+            MODIFIED :  
+
+            
+
+            TOKEN: unused
+            MODIFIED :  
+
+            
+
+            TOKEN: username
+            MODIFIED : enter username 
+
+            
+
+            TOKEN: unregistered
+            MODIFIED :  
+
+            
+
+            TOKEN: email
+            MODIFIED : email address 
+
+            
+
+            TOKEN: address
+            MODIFIED :  
+
+            
+
+            TOKEN: strong
+            MODIFIED :  
+
+            
+
+            TOKEN: password
+            MODIFIED :  
+
+            
+
+            TOKEN: signup
+            MODIFIED :  
+
+            
+1.1.1.1.2. Guests shall agree to the privacy policy and terms&conditions to signup.
+
+
+            TOKEN: Guests
+            MODIFIED :  
+
+            
+
+            TOKEN: agree
+            MODIFIED :  
+
+            
+
+            TOKEN: privacy
+            MODIFIED : privacy policy 
+
+            
+
+            TOKEN: policy
+            MODIFIED :  
+
+            
+
+            TOKEN: terms&conditions
+            MODIFIED :  
+
+            
+
+            TOKEN: signup
+            MODIFIED :  
+
+            
+1.1.1.2.1. Users shall provide their usernames and passwords to log in.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: provide
+            MODIFIED :  
+
+            
+
+            TOKEN: usernames
+            MODIFIED : provide usernames 
+
+            
+
+            TOKEN: passwords
+            MODIFIED :  
+
+            
+
+            TOKEN: log
+            MODIFIED :  
+
+            
+1.1.1.3.1. Users shall enter the received verification codes (via their registered email addresses) to complete the email verification process.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: enter
+            MODIFIED :  
+
+            
+
+            TOKEN: verification
+            MODIFIED : verification codes 
+
+            
+
+            TOKEN: codes
+            MODIFIED : enter codes 
+
+            
+1.1.1.4.1. Users shall first enter the email addresses they signed up with and then the verification code they received.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: enter
+            MODIFIED :  
+
+            
+
+            TOKEN: email
+            MODIFIED : email addresses 
+
+            
+
+            TOKEN: addresses
+            MODIFIED : enter addresses 
+
+            
+
+            TOKEN: verification
+            MODIFIED : verification code 
+
+            
+
+            TOKEN: code
+            MODIFIED :  
+
+            
+1.1.1.4.2. Users shall be authenticated after verification and be logged in.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: verification
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+1.1.1.5.1. Users shall be able to log out.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: log
+            MODIFIED :  
+
+            
+1.1.1.6.1. Users shall be able to change their passwords from the settings screen.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: change
+            MODIFIED :  
+
+            
+
+            TOKEN: passwords
+            MODIFIED : change passwords 
+
+            
+
+            TOKEN: settings
+            MODIFIED : settings screen 
+
+            
+
+            TOKEN: screen
+            MODIFIED :  
+
+            
+1.1.2.1. Users shall have a profile page.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED : have page 
+
+            
+1.1.2.2. Users shall be able to edit their profile page.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: edit
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED : edit page 
+
+            
+1.1.2.3. Users shall be able to display their full name on their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: display
+            MODIFIED :  
+
+            
+
+            TOKEN: full
+            MODIFIED :  
+
+            
+
+            TOKEN: name
+            MODIFIED : display name 
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.4. Users shall have a profile picture.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED :  
+
+            
+
+            TOKEN: picture
+            MODIFIED : have picture 
+
+            
+1.1.2.5. Users shall be able to change their profile picture.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: change
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile picture 
+
+            
+
+            TOKEN: picture
+            MODIFIED : change picture 
+
+            
+1.1.2.6. Users shall have a bio in their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: bio
+            MODIFIED : have bio 
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.7. Users shall have a "My Events" section on their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: Events
+            MODIFIED :  
+
+            
+
+            TOKEN: section
+            MODIFIED : have section 
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.8. Users shall be able to determine their profile page visibility as public or private.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: determine
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED : page visibility 
+
+            
+
+            TOKEN: visibility
+            MODIFIED : determine visibility 
+
+            
+
+            TOKEN: public
+            MODIFIED :  
+
+            
+
+            TOKEN: private
+            MODIFIED :  
+
+            
+1.1.2.9. Followers, Follows, My Events, Interest Areas, Achievements, Progress, Notes, and Annotations sections shall be hidden on private profiles.
+
+
+            TOKEN: Events
+            MODIFIED :  
+
+            
+
+            TOKEN: Annotations
+            MODIFIED : Annotations sections 
+
+            
+
+            TOKEN: sections
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: private
+            MODIFIED :  
+
+            
+
+            TOKEN: profiles
+            MODIFIED :  
+
+            
+1.1.2.10.1 Users shall identify their interest areas.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: identify
+            MODIFIED :  
+
+            
+
+            TOKEN: interest
+            MODIFIED : interest areas 
+
+            
+
+            TOKEN: areas
+            MODIFIED : identify areas 
+
+            
+1.1.2.10.2 Users shall display their interest areas in their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: display
+            MODIFIED :  
+
+            
+
+            TOKEN: interest
+            MODIFIED : interest areas 
+
+            
+
+            TOKEN: areas
+            MODIFIED : display areas 
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.11.1. Users shall be able to earn achievements via the completion of a specific amount of Learning Spaces with related topics.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: earn
+            MODIFIED :  
+
+            
+
+            TOKEN: achievements
+            MODIFIED : earn achievements 
+
+            
+
+            TOKEN: completion
+            MODIFIED :  
+
+            
+
+            TOKEN: specific
+            MODIFIED :  
+
+            
+
+            TOKEN: amount
+            MODIFIED :  
+
+            
+
+            TOKEN: related
+            MODIFIED :  
+
+            
+
+            TOKEN: topics
+            MODIFIED :  
+
+            
+1.1.2.11.2. Users shall view their achievements from the achievements section of their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: view
+            MODIFIED :  
+
+            
+
+            TOKEN: achievements
+            MODIFIED : view achievements 
+
+            
+
+            TOKEN: achievements
+            MODIFIED : achievements section 
+
+            
+
+            TOKEN: section
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.12.1. Users shall be able to track their progress.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: track
+            MODIFIED :  
+
+            
+
+            TOKEN: progress
+            MODIFIED : track progress 
+
+            
+1.1.2.13.1. Users shall view their notes taken on a learning space in the notes section of their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: view
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : view notes 
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : notes section 
+
+            
+
+            TOKEN: section
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.14.1. Users shall be able to annotate post images and texts in learning spaces.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: annotate
+            MODIFIED :  
+
+            
+
+            TOKEN: post
+            MODIFIED : post images 
+
+            
+
+            TOKEN: images
+            MODIFIED : annotate images 
+
+            
+
+            TOKEN: texts
+            MODIFIED :  
+
+            
+
+            TOKEN: spaces
+            MODIFIED : learning spaces 
+
+            
+1.1.2.14.2. Users shall be able to view annotations made by other users.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: view
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED : view annotations 
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+1.1.2.14.3. Users shall be able to browse annotations by category, by course, by history, and by upvotes they have received.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: browse
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED : browse annotations 
+
+            
+
+            TOKEN: category
+            MODIFIED :  
+
+            
+
+            TOKEN: course
+            MODIFIED :  
+
+            
+
+            TOKEN: history
+            MODIFIED :  
+
+            
+
+            TOKEN: upvotes
+            MODIFIED :  
+
+            
+1.1.2.14.4. Users shall access the annotations they have added for course material from the annotations section of their profile pages.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: access
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED : access annotations 
+
+            
+
+            TOKEN: course
+            MODIFIED : course material 
+
+            
+
+            TOKEN: material
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED : annotations section 
+
+            
+
+            TOKEN: section
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile pages 
+
+            
+
+            TOKEN: pages
+            MODIFIED :  
+
+            
+1.1.2.15.1. Users shall be able to see all learning spaces they created or enrolled in.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: spaces
+            MODIFIED : see spaces 
+
+            
+1.1.2.16.1. Users shall be able to see the feedback they have received for their learning content contributions in the recommendations section.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: feedback
+            MODIFIED : see feedback 
+
+            
+
+            TOKEN: learning
+            MODIFIED : learning contributions 
+
+            
+
+            TOKEN: content
+            MODIFIED : content contributions 
+
+            
+
+            TOKEN: contributions
+            MODIFIED :  
+
+            
+
+            TOKEN: recommendations
+            MODIFIED : recommendations section 
+
+            
+
+            TOKEN: section
+            MODIFIED :  
+
+            
+1.1.3.1.1. Users shall see each other's profiles.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: profiles
+            MODIFIED : see profiles 
+
+            
+1.1.3.1.2. Users shall be able to follow each other.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: follow
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED : follow other 
+
+            
+1.1.3.1.3. Users shall see the information of people they follow; their achievements and activities.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: information
+            MODIFIED : see information 
+
+            
+
+            TOKEN: people
+            MODIFIED :  
+
+            
+
+            TOKEN: achievements
+            MODIFIED :  
+
+            
+
+            TOKEN: activities
+            MODIFIED :  
+
+            
+1.1.3.1.4. Users shall be able to share notes with each other.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: share
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : share notes 
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+1.1.3.1.5. Users shall be able to block other users.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: block
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : block users 
+
+            
+1.1.3.1.6. Users could prevent other users to see their profile by blocking them.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: prevent
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : prevent users 
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : see profile 
+
+            
+1.1.3.2.1.1. Users shall enter a title and description and choose an icon and categories to create a learning space.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: enter
+            MODIFIED :  
+
+            
+
+            TOKEN: title
+            MODIFIED : enter title 
+
+            
+
+            TOKEN: description
+            MODIFIED :  
+
+            
+
+            TOKEN: choose
+            MODIFIED :  
+
+            
+
+            TOKEN: icon
+            MODIFIED : choose icon 
+
+            
+
+            TOKEN: categories
+            MODIFIED :  
+
+            
+
+            TOKEN: create
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED : create space 
+
+            
+1.1.3.2.2.1. Users shall be able to edit all material they provided.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: edit
+            MODIFIED :  
+
+            
+
+            TOKEN: material
+            MODIFIED : edit material 
+
+            
+1.1.3.2.2.2. Users shall be able to delete learning spaces they created.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: delete
+            MODIFIED :  
+
+            
+
+            TOKEN: learning
+            MODIFIED : learning spaces 
+
+            
+
+            TOKEN: spaces
+            MODIFIED : delete spaces 
+
+            
+1.1.3.2.3.1. Users shall see the contents in the learning space.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: contents
+            MODIFIED : see contents 
+
+            
+
+            TOKEN: learning
+            MODIFIED : learning space 
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+1.1.3.2.3.2. Users shall be able to navigate learning material in the order they desire.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: navigate
+            MODIFIED :  
+
+            
+
+            TOKEN: material
+            MODIFIED : navigate material 
+
+            
+
+            TOKEN: order
+            MODIFIED :  
+
+            
+1.1.3.2.3.3. Users shall be able to review other users in terms of providing learning material by giving stars and optionally providing feedback.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: review
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : review users 
+
+            
+
+            TOKEN: terms
+            MODIFIED :  
+
+            
+
+            TOKEN: material
+            MODIFIED : providing material 
+
+            
+
+            TOKEN: stars
+            MODIFIED : giving stars 
+
+            
+
+            TOKEN: feedback
+            MODIFIED : providing feedback 
+
+            
+1.1.3.2.3.4. Users shall be able to report inappropriate comments in the discussion forum of the learning space.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: report
+            MODIFIED :  
+
+            
+
+            TOKEN: inappropriate
+            MODIFIED :  
+
+            
+
+            TOKEN: comments
+            MODIFIED : report comments 
+
+            
+
+            TOKEN: discussion
+            MODIFIED : discussion forum 
+
+            
+
+            TOKEN: forum
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+1.1.3.2.4.1. Each user shall have his/her notes section under each lecture.
+
+
+            TOKEN: user
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : notes section 
+
+            
+
+            TOKEN: section
+            MODIFIED : have section 
+
+            
+
+            TOKEN: lecture
+            MODIFIED :  
+
+            
+1.1.3.2.4.2. Users shall create and edit notes under the notes section via typing.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: create
+            MODIFIED :  
+
+            
+
+            TOKEN: edit
+            MODIFIED : edit notes 
+
+            
+
+            TOKEN: notes
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : notes section 
+
+            
+
+            TOKEN: section
+            MODIFIED :  
+
+            
+1.1.3.2.4.3. Users shall be able to mention other notes from other learning spaces or/and other users in his/her.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: mention
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : mention notes 
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: learning
+            MODIFIED : learning spaces 
+
+            
+
+            TOKEN: spaces
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+1.1.3.2.4.4. Users shall connect, annotate and tag notes.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: connect
+            MODIFIED :  
+
+            
+
+            TOKEN: annotate
+            MODIFIED :  
+
+            
+
+            TOKEN: tag
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : connect notes 
+
+            
+1.1.3.2.5.1. Participants shall be able to create community events for that learning space.
+
+
+            TOKEN: Participants
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: create
+            MODIFIED :  
+
+            
+
+            TOKEN: community
+            MODIFIED : community events 
+
+            
+
+            TOKEN: events
+            MODIFIED : create events 
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+1.1.3.2.5.2. Created events shall only be available to currently enrolled learners.
+
+
+            TOKEN: events
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: available
+            MODIFIED :  
+
+            
+
+            TOKEN: learners
+            MODIFIED :  
+
+            
+1.1.3.2.5.3. Created events should have a specific date, duration, location and limit for the number of participants.
+
+
+            TOKEN: events
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: specific
+            MODIFIED :  
+
+            
+
+            TOKEN: date
+            MODIFIED : have date 
+
+            
+
+            TOKEN: duration
+            MODIFIED :  
+
+            
+
+            TOKEN: location
+            MODIFIED :  
+
+            
+
+            TOKEN: limit
+            MODIFIED :  
+
+            
+
+            TOKEN: number
+            MODIFIED :  
+
+            
+
+            TOKEN: participants
+            MODIFIED :  
+
+            
+1.1.3.2.5.4. The event creator can give a brief description of the topics of discussion for the event.
+
+
+            TOKEN: event
+            MODIFIED : event creator 
+
+            
+
+            TOKEN: creator
+            MODIFIED :  
+
+            
+
+            TOKEN: give
+            MODIFIED :  
+
+            
+
+            TOKEN: brief
+            MODIFIED :  
+
+            
+
+            TOKEN: description
+            MODIFIED : give description 
+
+            
+
+            TOKEN: topics
+            MODIFIED :  
+
+            
+
+            TOKEN: discussion
+            MODIFIED :  
+
+            
+
+            TOKEN: event
+            MODIFIED :  
+
+            
+1.1.3.2.5.5. Event creators shall be able to cancel events that they have created.
+
+
+            TOKEN: Event
+            MODIFIED : Event creators 
+
+            
+
+            TOKEN: creators
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: cancel
+            MODIFIED :  
+
+            
+
+            TOKEN: events
+            MODIFIED : cancel events 
+
+            
+1.1.3.2.5.6. Created events should be visible on the learning space info page along with the date, duration, location and number of participants.
+
+
+            TOKEN: events
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: visible
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED : space info 
+
+            
+
+            TOKEN: info
+            MODIFIED : info page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+
+            TOKEN: date
+            MODIFIED :  
+
+            
+
+            TOKEN: duration
+            MODIFIED :  
+
+            
+
+            TOKEN: location
+            MODIFIED :  
+
+            
+
+            TOKEN: number
+            MODIFIED :  
+
+            
+
+            TOKEN: participants
+            MODIFIED :  
+
+            
+1.1.3.2.5.7. The number of learners who will join the event will be visible on the event information.
+
+
+            TOKEN: number
+            MODIFIED :  
+
+            
+
+            TOKEN: learners
+            MODIFIED :  
+
+            
+
+            TOKEN: join
+            MODIFIED :  
+
+            
+
+            TOKEN: event
+            MODIFIED : join event 
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: visible
+            MODIFIED :  
+
+            
+
+            TOKEN: event
+            MODIFIED : event information 
+
+            
+
+            TOKEN: information
+            MODIFIED :  
+
+            
+1.1.3.2.7.1. Participants of a learning space shall be able to create discussion posts.
+
+
+            TOKEN: Participants
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: create
+            MODIFIED :  
+
+            
+
+            TOKEN: discussion
+            MODIFIED : discussion posts 
+
+            
+
+            TOKEN: posts
+            MODIFIED : create posts 
+
+            
+1.1.4.1. Participants shall deliver learning material in form of posts which contain text and images.
+
+
+            TOKEN: Participants
+            MODIFIED :  
+
+            
+
+            TOKEN: deliver
+            MODIFIED :  
+
+            
+
+            TOKEN: material
+            MODIFIED : learning material 
+
+            
+
+            TOKEN: form
+            MODIFIED :  
+
+            
+
+            TOKEN: posts
+            MODIFIED :  
+
+            
+
+            TOKEN: text
+            MODIFIED : contain text 
+
+            
+
+            TOKEN: images
+            MODIFIED :  
+
+            
+1.1.4.2. Learning Space shall have the main page where users can see introduction, events, sections, notes, annotations.
+
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: main
+            MODIFIED :  
+
+            
+
+            TOKEN: page
+            MODIFIED : have page 
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: see
+            MODIFIED :  
+
+            
+
+            TOKEN: introduction
+            MODIFIED : see introduction 
+
+            
+
+            TOKEN: events
+            MODIFIED :  
+
+            
+
+            TOKEN: sections
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED :  
+
+            
+1.1.4.3. The creator of a learning space shall be able to add additional admins to the learning space.
+
+
+            TOKEN: creator
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: add
+            MODIFIED :  
+
+            
+
+            TOKEN: additional
+            MODIFIED :  
+
+            
+
+            TOKEN: admins
+            MODIFIED : add admins 
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+1.1.5.1. Admin shall evaluate reports and takes action accordingly.
+
+
+            TOKEN: evaluate
+            MODIFIED :  
+
+            
+
+            TOKEN: reports
+            MODIFIED : evaluate reports 
+
+            
+
+            TOKEN: action
+            MODIFIED : takes action 
+
+            
+1.1.5.2. Admin shall be able to ban users permanently and temporarily.
+
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: ban
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : ban users 
+
+            
+1.1.5.3. Admin shall be able to view all contents.
+
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: view
+            MODIFIED :  
+
+            
+
+            TOKEN: contents
+            MODIFIED : view contents 
+
+            
+1.1.5.4. Admin shall be able to remove any content.
+
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: remove
+            MODIFIED :  
+
+            
+
+            TOKEN: content
+            MODIFIED : remove content 
+
+            
+1.2.1.1. Users will get various learning spaces as recommendations.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: get
+            MODIFIED :  
+
+            
+
+            TOKEN: various
+            MODIFIED :  
+
+            
+
+            TOKEN: learning
+            MODIFIED : learning spaces 
+
+            
+
+            TOKEN: spaces
+            MODIFIED : get spaces 
+
+            
+
+            TOKEN: recommendations
+            MODIFIED :  
+
+            
+1.2.1.2. These recommendations will be based on users' preferences about the topics of learning space. Learning spaces that have similar topics will be chosen to recommend.
+
+
+            TOKEN: recommendations
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: preferences
+            MODIFIED :  
+
+            
+
+            TOKEN: topics
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED : learning space 
+
+            
+1.2.1.3. The recommendations will be displayed on the home page.
+
+
+            TOKEN: recommendations
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: home
+            MODIFIED : home page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+1.2.2.1 Users shall get notifications from the system.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: get
+            MODIFIED :  
+
+            
+
+            TOKEN: notifications
+            MODIFIED : get notifications 
+
+            
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+1.2.2.2 The system shall notify users who did not complete almost done section of the registration.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: complete
+            MODIFIED :  
+
+            
+
+            TOKEN: section
+            MODIFIED : notify section 
+
+            
+
+            TOKEN: registration
+            MODIFIED :  
+
+            
+1.2.2.3 The system shall notify users regarding any posts on the discussion forum of the lectures they take or give.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: posts
+            MODIFIED :  
+
+            
+
+            TOKEN: discussion
+            MODIFIED : discussion forum 
+
+            
+
+            TOKEN: forum
+            MODIFIED :  
+
+            
+
+            TOKEN: lectures
+            MODIFIED :  
+
+            
+
+            TOKEN: give
+            MODIFIED :  
+
+            
+1.2.2.4 The system shall notify users when other users share notes with them.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : share notes 
+
+            
+1.2.2.5 The system shall notify users when they earn an achievement.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: achievement
+            MODIFIED : earn achievement 
+
+            
+1.2.2.6 The system shall notify users to give feedback after each completed lecture.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: give
+            MODIFIED :  
+
+            
+
+            TOKEN: feedback
+            MODIFIED : give feedback 
+
+            
+
+            TOKEN: lecture
+            MODIFIED :  
+
+            
+1.2.2.7 The system shall notify lecturers when a user provides feedback on one of their courses.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: lecturers
+            MODIFIED : notify lecturers 
+
+            
+
+            TOKEN: user
+            MODIFIED :  
+
+            
+
+            TOKEN: feedback
+            MODIFIED : provides feedback 
+
+            
+
+            TOKEN: courses
+            MODIFIED :  
+
+            
+1.2.2.8 The system shall notify users when an event is created for a lecture they are taking or giving.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: event
+            MODIFIED :  
+
+            
+
+            TOKEN: lecture
+            MODIFIED :  
+
+            
+1.2.2.9 The system shall notify users when a poll is created in a lecture they are taking.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: poll
+            MODIFIED :  
+
+            
+
+            TOKEN: lecture
+            MODIFIED :  
+
+            
+1.2.2.10 The system shall notify users when they do not use the application for more than one day.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: use
+            MODIFIED :  
+
+            
+
+            TOKEN: application
+            MODIFIED : use application 
+
+            
+
+            TOKEN: day
+            MODIFIED :  
+
+            
+1.2.2.11 Users shall be able to turn their notifications on or off.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: turn
+            MODIFIED :  
+
+            
+
+            TOKEN: notifications
+            MODIFIED : turn notifications 
+
+            
+1.2.2.12 The system shall notify users when other users follow them.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: notify
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : notify users 
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+1.2.3.1 The system shall implement semantic searching.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: implement
+            MODIFIED :  
+
+            
+
+            TOKEN: semantic
+            MODIFIED :  
+
+            
+
+            TOKEN: searching
+            MODIFIED : implement searching 
+
+            
+1.2.3.2 The system shall allow users to search for other users.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: search
+            MODIFIED :  
+
+            
+
+            TOKEN: other
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+1.2.3.2.1 The system shall allow searching for users by their username.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: username
+            MODIFIED :  
+
+            
+1.2.3.3 The system shall allow users to search for courses.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: search
+            MODIFIED :  
+
+            
+
+            TOKEN: courses
+            MODIFIED :  
+
+            
+1.2.3.4 The system shall offer filters for search results.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: offer
+            MODIFIED :  
+
+            
+
+            TOKEN: filters
+            MODIFIED : offer filters 
+
+            
+
+            TOKEN: search
+            MODIFIED : search results 
+
+            
+
+            TOKEN: results
+            MODIFIED :  
+
+            
+1.2.3.4.1 The system shall allow users to filter search results as only users or only courses.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: filter
+            MODIFIED :  
+
+            
+
+            TOKEN: search
+            MODIFIED : search results 
+
+            
+
+            TOKEN: results
+            MODIFIED : filter results 
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: courses
+            MODIFIED :  
+
+            
+1.2.3.5 The system shall allow users to browse for recommended courses.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: browse
+            MODIFIED :  
+
+            
+
+            TOKEN: courses
+            MODIFIED :  
+
+            
+1.2.3.6 The system shall allow users to browse for learning spaces created or joined by a user's from his/her profile page.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: browse
+            MODIFIED :  
+
+            
+
+            TOKEN: spaces
+            MODIFIED : learning spaces 
+
+            
+
+            TOKEN: user
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+1.2.3.7 The system shall allow users to browse their notes.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: browse
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED : browse notes 
+
+            
+1.2.3.8 The system shall allow users to browse for notes filtered by their tags.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: browse
+            MODIFIED :  
+
+            
+
+            TOKEN: notes
+            MODIFIED :  
+
+            
+
+            TOKEN: tags
+            MODIFIED :  
+
+            
+1.2.3.9 The system shall allow users to browse the activities and achievements of users they follow on the user's profile page.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: browse
+            MODIFIED :  
+
+            
+
+            TOKEN: activities
+            MODIFIED : browse activities 
+
+            
+
+            TOKEN: achievements
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: user
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+1.2.5.1. The forum features should be unique to the learning space. There is also a discussion section for the learning space.
+
+
+            TOKEN: forum
+            MODIFIED : forum features 
+
+            
+
+            TOKEN: features
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: unique
+            MODIFIED :  
+
+            
+
+            TOKEN: space
+            MODIFIED :  
+
+            
+1.2.5.2. The discussion contents should be stored.
+
+
+            TOKEN: discussion
+            MODIFIED : discussion contents 
+
+            
+
+            TOKEN: contents
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+1.2.5.3. The forum should include a timestamp for each entry and the sender's name should be at top of the each entry.
+
+
+            TOKEN: forum
+            MODIFIED :  
+
+            
+
+            TOKEN: include
+            MODIFIED :  
+
+            
+
+            TOKEN: timestamp
+            MODIFIED : include timestamp 
+
+            
+
+            TOKEN: entry
+            MODIFIED :  
+
+            
+
+            TOKEN: sender
+            MODIFIED :  
+
+            
+
+            TOKEN: name
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: top
+            MODIFIED :  
+
+            
+
+            TOKEN: entry
+            MODIFIED :  
+
+            
+1.2.5.4. The discussion entry creator's name should direct any user to his/her profile page.
+
+
+            TOKEN: discussion
+            MODIFIED : discussion creator 
+
+            
+
+            TOKEN: entry
+            MODIFIED : entry creator 
+
+            
+
+            TOKEN: creator
+            MODIFIED :  
+
+            
+
+            TOKEN: name
+            MODIFIED :  
+
+            
+
+            TOKEN: direct
+            MODIFIED :  
+
+            
+
+            TOKEN: user
+            MODIFIED : direct user 
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+1.2.6.1. System shall allow users to optionally provide additional information about their full names, birth date, state of education, gender just after the signup stage.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: provide
+            MODIFIED :  
+
+            
+
+            TOKEN: additional
+            MODIFIED :  
+
+            
+
+            TOKEN: information
+            MODIFIED : provide information 
+
+            
+
+            TOKEN: full
+            MODIFIED :  
+
+            
+
+            TOKEN: names
+            MODIFIED :  
+
+            
+
+            TOKEN: birth
+            MODIFIED : birth date 
+
+            
+
+            TOKEN: date
+            MODIFIED :  
+
+            
+
+            TOKEN: state
+            MODIFIED :  
+
+            
+
+            TOKEN: education
+            MODIFIED :  
+
+            
+
+            TOKEN: gender
+            MODIFIED :  
+
+            
+
+            TOKEN: signup
+            MODIFIED :  
+
+            
+
+            TOKEN: stage
+            MODIFIED :  
+
+            
+1.2.6.2. System should allow users to select educational topics, and titles which they are interested in in the almost done stage.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: select
+            MODIFIED :  
+
+            
+
+            TOKEN: educational
+            MODIFIED :  
+
+            
+
+            TOKEN: topics
+            MODIFIED : select topics 
+
+            
+
+            TOKEN: titles
+            MODIFIED :  
+
+            
+
+            TOKEN: interested
+            MODIFIED :  
+
+            
+
+            TOKEN: stage
+            MODIFIED :  
+
+            
+1.2.7.1. System shall allow users to delete their accounts.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: allow
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: delete
+            MODIFIED :  
+
+            
+
+            TOKEN: accounts
+            MODIFIED : delete accounts 
+
+            
+1.2.7.2. All personalized information about the deleted users have to be anonymized or completely deleted according to the privacy policy that will be determined later on.
+
+
+            TOKEN: information
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: privacy
+            MODIFIED : privacy policy 
+
+            
+
+            TOKEN: policy
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+1.2.8.1. Users shall be able to create annotations.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: create
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED : create annotations 
+
+            
+1.2.8.2. Annotations should comply to the W3 Web Annotation Data Model.
+
+
+            TOKEN: Annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: comply
+            MODIFIED :  
+
+            
+1.2.8.3. Owner of the annotations shall be able to set annotations as public or private.
+
+
+            TOKEN: annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: set
+            MODIFIED :  
+
+            
+
+            TOKEN: annotations
+            MODIFIED : set annotations 
+
+            
+
+            TOKEN: public
+            MODIFIED :  
+
+            
+
+            TOKEN: private
+            MODIFIED :  
+
+            
+1.2.8.4. Created annotations shall be reachable from both profile page and relevant target resource(s).
+
+
+            TOKEN: annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: reachable
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+
+            TOKEN: relevant
+            MODIFIED :  
+
+            
+
+            TOKEN: target
+            MODIFIED : target resource 
+
+            
+
+            TOKEN: resource
+            MODIFIED :  
+
+            
+1.2.8.5. Annotations may have a body attribute.
+
+
+            TOKEN: Annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: body
+            MODIFIED : body attribute 
+
+            
+
+            TOKEN: attribute
+            MODIFIED : have attribute 
+
+            
+1.2.8.6. Annotations shall have a target attribute.
+
+
+            TOKEN: Annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: target
+            MODIFIED : target attribute 
+
+            
+
+            TOKEN: attribute
+            MODIFIED : have attribute 
+
+            
+1.2.8.7. Annotations may have more than one body attribute and one target attribute.
+
+
+            TOKEN: Annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: body
+            MODIFIED : body attribute 
+
+            
+
+            TOKEN: attribute
+            MODIFIED : have attribute 
+
+            
+
+            TOKEN: target
+            MODIFIED : target attribute 
+
+            
+
+            TOKEN: attribute
+            MODIFIED :  
+
+            
+1.2.8.8. Annotations with public visibility should be listed on that annotation's creator's profile page.
+
+
+            TOKEN: Annotations
+            MODIFIED :  
+
+            
+
+            TOKEN: public
+            MODIFIED :  
+
+            
+
+            TOKEN: visibility
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: annotation
+            MODIFIED :  
+
+            
+
+            TOKEN: creator
+            MODIFIED :  
+
+            
+
+            TOKEN: profile
+            MODIFIED : profile page 
+
+            
+
+            TOKEN: page
+            MODIFIED :  
+
+            
+2.1.1. System should have a Website interface that provides an web specific user experience.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: interface
+            MODIFIED : have interface 
+
+            
+
+            TOKEN: web
+            MODIFIED :  
+
+            
+
+            TOKEN: specific
+            MODIFIED :  
+
+            
+
+            TOKEN: user
+            MODIFIED : user experience 
+
+            
+
+            TOKEN: experience
+            MODIFIED : provides experience 
+
+            
+2.1.2. System should have a Android application interface that provides an mobile specific user experience.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: application
+            MODIFIED : application interface 
+
+            
+
+            TOKEN: interface
+            MODIFIED : have interface 
+
+            
+
+            TOKEN: mobile
+            MODIFIED :  
+
+            
+
+            TOKEN: specific
+            MODIFIED :  
+
+            
+
+            TOKEN: user
+            MODIFIED : user experience 
+
+            
+
+            TOKEN: experience
+            MODIFIED : provides experience 
+
+            
+2.1.3. System should support UTF-8 character encoding.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: support
+            MODIFIED :  
+
+            
+
+            TOKEN: UTF-8
+            MODIFIED :  
+
+            
+
+            TOKEN: character
+            MODIFIED : character encoding 
+
+            
+
+            TOKEN: encoding
+            MODIFIED : support encoding 
+
+            
+2.1.4. System should support English language.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: support
+            MODIFIED :  
+
+            
+
+            TOKEN: English
+            MODIFIED :  
+
+            
+
+            TOKEN: language
+            MODIFIED : support language 
+
+            
+2.2.1. Ethical concerns must be considered, so system must follow the rules defined by GDPR/KVKK.
+
+
+            TOKEN: Ethical
+            MODIFIED :  
+
+            
+
+            TOKEN: concerns
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: follow
+            MODIFIED :  
+
+            
+
+            TOKEN: rules
+            MODIFIED : follow rules 
+
+            
+2.2.1.1 A well-defined explanation about how users data will be used must be given to users.
+
+
+            TOKEN: explanation
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED : users data 
+
+            
+
+            TOKEN: data
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+2.2.1.2 Users must agree to the Privacy Policy and User Agreement.
+
+
+            TOKEN: Users
+            MODIFIED :  
+
+            
+
+            TOKEN: agree
+            MODIFIED :  
+
+            
+2.2.1.3 If any change happens in the policy, users must be notified about it.
+
+
+            TOKEN: change
+            MODIFIED :  
+
+            
+
+            TOKEN: policy
+            MODIFIED :  
+
+            
+
+            TOKEN: users
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+2.2.2. Learning Spaces can be private or public. If a LS is private, its content should not be visible to every user in the app.
+
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: private
+            MODIFIED :  
+
+            
+
+            TOKEN: public
+            MODIFIED :  
+
+            
+2.3.1 All sensitive data shall be encrypted before storing.
+
+
+            TOKEN: sensitive
+            MODIFIED :  
+
+            
+
+            TOKEN: data
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+2.3.2 The system shall block the account if any security issue is observed.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: block
+            MODIFIED :  
+
+            
+
+            TOKEN: account
+            MODIFIED : block account 
+
+            
+
+            TOKEN: security
+            MODIFIED : security issue 
+
+            
+
+            TOKEN: issue
+            MODIFIED :  
+
+            
+2.4.1 The system should be able to handle at least 10.000 users and 500 user actions simultaneously.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: handle
+            MODIFIED :  
+
+            
+2.4.2 The system should have a response time of at most 2.0 seconds excluding network based delay.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: response
+            MODIFIED : response time 
+
+            
+
+            TOKEN: time
+            MODIFIED : have time 
+
+            
+2.5.1 The system should provide a user-friendly interface. It should contain a basic site map and should not contain a confusing linking system.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: provide
+            MODIFIED :  
+
+            
+
+            TOKEN: user
+            MODIFIED :  
+
+            
+
+            TOKEN: friendly
+            MODIFIED :  
+
+            
+
+            TOKEN: interface
+            MODIFIED : provide interface 
+
+            
+2.5.2 The system should provide a direct feedback mechanism. Upon interaction, user shall be informed about success or failure of their action.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: provide
+            MODIFIED :  
+
+            
+
+            TOKEN: direct
+            MODIFIED :  
+
+            
+
+            TOKEN: feedback
+            MODIFIED : feedback mechanism 
+
+            
+
+            TOKEN: mechanism
+            MODIFIED : provide mechanism 
+
+            
+2.5.3 The system should have a well-chosen typeface that should be readable and clean.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: have
+            MODIFIED :  
+
+            
+
+            TOKEN: typeface
+            MODIFIED : have typeface 
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: readable
+            MODIFIED :  
+
+            
+
+            TOKEN: clean
+            MODIFIED :  
+
+            
+2.6.1 The system should get backups and send them off-site at regular intervals for the possibility of disasters.
+
+
+            TOKEN: system
+            MODIFIED :  
+
+            
+
+            TOKEN: get
+            MODIFIED :  
+
+            
+
+            TOKEN: backups
+            MODIFIED : get backups 
+
+            
+
+            TOKEN: send
+            MODIFIED :  
+
+            
+
+            TOKEN: site
+            MODIFIED : send site 
+
+            
+
+            TOKEN: regular
+            MODIFIED :  
+
+            
+
+            TOKEN: intervals
+            MODIFIED :  
+
+            
+
+            TOKEN: possibility
+            MODIFIED :  
+
+            
+
+            TOKEN: disasters
+            MODIFIED :  
+
+            
+2.6.2 System shall be able to reinitialize itself and continue functioning in case of an unexpected shutdown.
+
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: be
+            MODIFIED :  
+
+            
+
+            TOKEN: able
+            MODIFIED :  
+
+            
+
+            TOKEN: reinitialize
+            MODIFIED :  
+
+            
+
+            TOKEN: continue
+            MODIFIED :  
+
+            
+
+            TOKEN: case
+            MODIFIED :  
+
+            
+
+            TOKEN: unexpected
+            MODIFIED :  
+
+            
+
+            TOKEN: shutdown
+            MODIFIED :  
+
+            
+2.6.3 System shall keep logs regarding the unexpected shutdown.
+
+            TOKEN: System
+            MODIFIED :  
+
+            
+
+            TOKEN: keep
+            MODIFIED :  
+
+            
+
+            TOKEN: logs
+            MODIFIED : keep logs 
+
+            
+
+            TOKEN: unexpected
+            MODIFIED :  
+
+            
+
+            TOKEN: shutdown
+            MODIFIED :  
+
+            
