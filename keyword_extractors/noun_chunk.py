@@ -11,16 +11,17 @@ for line in req_file:
     piano_doc = nlp(piano_text)
     dep_file.write("{}\n".format(line))
     tokens = filter(lambda token: token.tag_ == 'VB' or token.tag_ ==
-                    "NN" or token.tag_ == "NNS" or token.tag_ == "JJ", piano_doc)
+                    "NN"  or token.tag_ == "VBS" or token.tag_ == "NNS", piano_doc)
     for token in tokens:
-        objects = ""
-        if (token.dep_ == 'dobj'):
-            objects = token.head.text + " " + token.text
-        if (token.dep_ == 'compound'):
-            objects = token.text + " " + token.head.text
         dep_file.write(
             f"""
-            TOKEN: {token.text}
-            MODIFIED : {objects} \n
+            TOKEN: {token} / Tag: {token.tag_}, Exp: {spacy.explain(token.tag_)} - Link: {token.dep_}, Exp: {spacy.explain(token.dep_)}
             \n"""
         )
+        if token.tag_ == 'VB':
+            for t in token.children:
+                dep_file.write(
+                    f"""
+                    children: {t.text} / Tag : {t.tag_}, Exp: {spacy.explain(t.tag_)} - Link: {t.dep_}, Exp: {spacy.explain(t.dep_)}
+                    \n"""
+                )
