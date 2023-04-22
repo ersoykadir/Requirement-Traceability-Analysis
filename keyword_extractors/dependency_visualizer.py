@@ -3,7 +3,7 @@ from spacy import displacy
 import re
 nlp = spacy.load("en_core_web_sm")
 
-text= "1.1.2.5. Users shall be able to change their profile picture."
+text= " Followers, Follows, My Events, Interest Areas, Achievements, Progress, Notes, and Annotations sections shall be hidden on private profiles."
 pattern = r"[A-Za-z][^.!?:()]*"
 result = re.findall(pattern, text)
 piano_text = result[0]
