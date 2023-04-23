@@ -19,19 +19,7 @@ class neo4jConnector:
                         "SET a.message = $message "
                         "RETURN a.message + ', from node ' + id(a)", message=message)
         return result.data()
-    
-    @staticmethod
-    def create_person_tx(tx, name):
-        query = ("CREATE (a:Person {name: $name, id: randomUUID()}) "
-                "RETURN a.id AS node_id")
-        result = tx.run(query, name=name)
-        record = result.single()
-        return record["node_id"]
-    
-    def create_person(self, name):
-        with self.driver.session() as session:
-            node_id = session.execute_write(self.create_person_tx, name)
-    
+
     @staticmethod
     def create_issue_from_file_tx(tx):
         query = ('''CALL apoc.load.json('file:///data.json') YIELD value as v 

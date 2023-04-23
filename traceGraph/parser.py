@@ -1,6 +1,5 @@
 import json
 from neo4j_connection import create_issue_nodes
-import datetime
 
 repo_owner = 'bounswe'
 repo_number = 3
@@ -21,15 +20,6 @@ def comment_parser(comments):
         comment_list.append(comment['body'])
     return comment_list
 
-# Utility function to convert a github timestamp to a datetime object, to calculate time to finish an issue.
-def time_to_finish(created, closed):
-    closed = closed.replace('T', ' ').replace('Z', '')
-    created = created.replace('T', ' ').replace('Z', '')
-    closed = datetime.datetime.strptime(closed, '%Y-%m-%d %H:%M:%S')
-    created = datetime.datetime.strptime(created, '%Y-%m-%d %H:%M:%S')
-    time_to_finish = closed - created
-    return str(time_to_finish)
-
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the issue/pr number.
 def build_issue_nodes():
     # Get all issues from the github api and write them to a json file.
@@ -43,13 +33,8 @@ def build_issue_nodes():
         #     continue
 
         # Since neo4j does not support dictionaries as properties, we need to convert the dictionaries to lists or strings.
-        issue['number_of_comments'] = issue['comments']['totalCount']
-        comment_list = comment_parser(issue['comments'])
-        issue['comment_list'] = comment_list  
-        issue['time_to_finish'] = time_to_finish(issue['createdAt'], issue['closedAt'])
-        issue['text'] = issue['title'] + ' ' + issue['body']
-        for comment in comment_list:
-            issue['text'] += ' ' + comment
+        issue['commentCount'] = issue['comments']['totalCount']
+        issue['comment_list'] = comment_parser(issue['comments'])   
         del issue['comments']
         if issue['milestone'] is not None:
             issue['milestone'] = issue['milestone']['description']
