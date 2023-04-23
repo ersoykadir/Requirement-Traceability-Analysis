@@ -354,6 +354,18 @@ def build_commit_nodes():
         commit_nodes[node.node_id] = node
     return commit_nodes
 
+def build_requirement_nodes():
+    artifact_type = 'requirements'
+    data_fname = f'data_group{repo_number}/{artifact_type}_data.json'
+    f = open(data_fname, 'r')
+    data = json.loads(f.read())
+    f.close()
+    requirement_nodes = {}
+    for req in data[artifact_type]:
+        node = Requirement('requirement', req['number'], req['description'])
+        requirement_nodes[node.node_id] = node
+    return requirement_nodes
+
 # Class representing graph nodes. Each node represents a software artifact (issue, pull request, requirement, commit).
 class Node:
     def __init__(self, node_type, node_id):
