@@ -41,15 +41,18 @@ for line in req_file:
             elif token.dep_ == 'conj':
                 if token.head.tag_[0:2] == 'VB':
                     text = token.head.text + " " + token.text
+                    print(text, 'conj-noun-verb')
                     token_dict['verbobj'].add(text)
                     tokens_to_remove['verb'].add(token.head.text)
                 elif token.head.tag_[0:2] == 'NN':
                     if token.head.head.tag_[0:2] == 'VB':
                         text = token.head.head.text + " " + token.head.text + " " + token.text
                         token_dict['verbobj'].add(text)
+                        print(text, 'conj-noun-noun-verb')
                         tokens_to_remove['verb'].add(token.head.head.text)
                     else:
                         text = token.head.text + " " + token.text
+                        print(text, 'conj-noun-noun')
                         token_dict['coupled_nouns'].add(text)
                         tokens_to_remove['noun'].add(token.head.text)
             else:
@@ -59,7 +62,7 @@ for line in req_file:
             TOKEN: {token} / Tag: {token.tag_}, Exp: {spacy.explain(token.tag_)} - Link: {token.dep_}, Exp: {spacy.explain(token.dep_)} - Head: {token.head.text}
             \n    """
         )
-    print(token_dict)
+    #print(token_dict)
     dep_file.write(str(token_dict) + '\n')
     
 # Coupled nouns are conjuction of two nouns, we want the artifacts to have both of them while searching
