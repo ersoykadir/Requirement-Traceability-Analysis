@@ -54,7 +54,7 @@
     
             TOKEN: signup / Tag: VB, Exp: verb, base form - Link: relcl, Exp: relative clause modifier - Head: password
             
-    {'noun': {'address', 'Guests'}, 'verb': {'enter', 'signup'}, 'verbobj': {'enter username'}, 'nounphrase': {'email address'}, 'coupled_nouns': {'address password'}, 'coupled_verbs': set()}
+    {'noun': {'Guests', 'address'}, 'verb': {'enter', 'signup'}, 'verbobj': {'enter username'}, 'nounphrase': {'email address'}, 'coupled_nouns': {'address password'}, 'coupled_verbs': set()}
 1.1.1.1.2. Guests shall agree to the privacy policy and terms&conditions to signup.
 
 
@@ -90,7 +90,7 @@
     
             TOKEN: signup / Tag: VB, Exp: verb, base form - Link: xcomp, Exp: open clausal complement - Head: agree
             
-    {'noun': {'Guests'}, 'verb': {'agree', 'signup'}, 'verbobj': {'agree to policy'}, 'nounphrase': {'privacy policy'}, 'coupled_nouns': {'policy terms&conditions'}, 'coupled_verbs': set()}
+    {'noun': {'Guests'}, 'verb': {'signup', 'agree'}, 'verbobj': {'agree to policy'}, 'nounphrase': {'privacy policy'}, 'coupled_nouns': {'policy terms&conditions'}, 'coupled_verbs': set()}
 1.1.1.2.1. Users shall provide their usernames and passwords to log in.
 
 
@@ -123,7 +123,7 @@
     
             TOKEN: in / Tag: RP, Exp: adverb, particle - Link: prt, Exp: particle - Head: log
             
-    {'noun': {'Users'}, 'verb': {'provide', 'log'}, 'verbobj': {'provide usernames passwords', 'provide usernames'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'provide', 'log'}, 'verbobj': {'provide usernames', 'provide usernames passwords'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.1.3.1. Users shall enter the received verification codes (via their registered email addresses) to complete the email verification process.
 
 
@@ -186,7 +186,7 @@
     
             TOKEN: process / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: complete
             
-    {'noun': {'Users'}, 'verb': {'registered', 'complete', 'enter', 'received'}, 'verbobj': {'enter codes', 'complete process', 'enter via addresses'}, 'nounphrase': {'verification codes', 'email verification', 'email addresses', 'verification process'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'registered', 'enter', 'received', 'complete'}, 'verbobj': {'complete process', 'enter codes', 'enter via addresses'}, 'nounphrase': {'email addresses', 'verification codes', 'email verification', 'verification process'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.1.4.1. Users shall first enter the email addresses they signed up with and then the verification code they received.
 
 
@@ -243,7 +243,7 @@
     
             TOKEN: received / Tag: VBD, Exp: verb, past tense - Link: relcl, Exp: relative clause modifier - Head: code
             
-    {'noun': {'Users'}, 'verb': {'signed', 'enter', 'received'}, 'verbobj': {'enter code', 'enter addresses'}, 'nounphrase': {'verification code', 'email addresses'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'signed', 'enter', 'received'}, 'verbobj': {'enter addresses', 'enter code'}, 'nounphrase': {'email addresses', 'verification code'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.1.4.2. Users shall be authenticated after verification and be logged in.
 
 
@@ -300,7 +300,7 @@
     
             TOKEN: out / Tag: RP, Exp: adverb, particle - Link: prt, Exp: particle - Head: log
             
-    {'noun': {'Users'}, 'verb': {'log', 'be'}, 'verbobj': set(), 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'log'}, 'verbobj': set(), 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.1.6.1. Users shall be able to change their passwords from the settings screen.
 
 
@@ -339,7 +339,7 @@
     
             TOKEN: screen / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: from
             
-    {'noun': {'Users'}, 'verb': {'be', 'change'}, 'verbobj': {'change passwords', 'change from screen'}, 'nounphrase': {'settings screen'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'change'}, 'verbobj': {'change from screen', 'change passwords'}, 'nounphrase': {'settings screen'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.1. Users shall have a profile page.
 
 
@@ -390,7 +390,7 @@
     
             TOKEN: page / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: edit
             
-    {'noun': {'Users'}, 'verb': {'edit', 'be'}, 'verbobj': {'edit page'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'edit'}, 'verbobj': {'edit page'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.3. Users shall be able to display their full name on their profile pages.
 
 
@@ -432,7 +432,7 @@
     
             TOKEN: pages / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: on
             
-    {'noun': {'Users'}, 'verb': {'display', 'be'}, 'verbobj': {'display name', 'display on pages'}, 'nounphrase': {'profile pages'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'display'}, 'verbobj': {'display name', 'display on pages'}, 'nounphrase': {'profile pages'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.4. Users shall have a profile picture.
 
 
@@ -597,7 +597,7 @@
     
             TOKEN: private / Tag: JJ, Exp: adjective (English), other noun-modifier (Chinese) - Link: conj, Exp: conjunct - Head: public
             
-    {'noun': {'Users'}, 'verb': {'determine', 'be'}, 'verbobj': {'determine visibility'}, 'nounphrase': {'profile page', 'page visibility'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'determine'}, 'verbobj': {'determine visibility'}, 'nounphrase': {'profile page', 'page visibility'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.9. Followers, Follows, My Events, Interest Areas, Achievements, Progress, Notes, and Annotations sections shall be hidden on private profiles.
 
 
@@ -675,7 +675,10 @@
     
             TOKEN: profiles / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: on
             
-    {'noun': {'Follows', 'Followers'}, 'verb': {'hidden', 'be'}, 'verbobj': {'hidden on profiles'}, 'nounphrase': {'Interest Areas', 'Annotations sections'}, 'coupled_nouns': {'Achievements Progress', 'Progress Notes', 'Areas Achievements', 'Follows Events', 'Events Areas', 'Notes sections'}, 'coupled_verbs': set()}
+noun compoun noun
+verb dobj noun
+verb pobj noun
+    {'noun': {'Follows', 'Followers'}, 'verb': {'be', 'hidden'}, 'verbobj': {'hidden on profiles'}, 'nounphrase': {'Interest Areas', 'Annotations sections'}, 'coupled_nouns': {'Events Areas', 'Follows Events', 'Notes sections', 'Achievements Progress', 'Areas Achievements', 'Progress Notes'}, 'coupled_verbs': set()}
 1.1.2.10.1 Users shall identify their interest areas.
 
 
@@ -729,7 +732,7 @@
     
             TOKEN: pages / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: in
             
-    {'noun': {'Users'}, 'verb': {'display'}, 'verbobj': {'display in pages', 'display areas'}, 'nounphrase': {'interest areas', 'profile pages'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'display'}, 'verbobj': {'display areas', 'display in pages'}, 'nounphrase': {'profile pages', 'interest areas'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.11.1. Users shall be able to earn achievements via the completion of a specific amount of Learning Spaces with related topics.
 
 
@@ -822,7 +825,7 @@
     
             TOKEN: profile / Tag: NN, Exp: noun, singular or mass - Link: compound, Exp: compound - Head: pages
             
-    {'noun': {'Users'}, 'verb': {'view'}, 'verbobj': {'view achievements', 'view from section'}, 'nounphrase': {'profile pages', 'achievements section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'view'}, 'verbobj': {'view from section', 'view achievements'}, 'nounphrase': {'achievements section', 'profile pages'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.12.1. Users shall be able to track their progress.
 
 
@@ -849,7 +852,7 @@
     
             TOKEN: progress / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: track
             
-    {'noun': {'Users'}, 'verb': {'track', 'be'}, 'verbobj': {'track progress'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'track'}, 'verbobj': {'track progress'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.13.1. Users shall view their notes taken on a learning space in the notes section of their profile pages.
 
 
@@ -903,7 +906,7 @@
     
             TOKEN: profile / Tag: NN, Exp: noun, singular or mass - Link: compound, Exp: compound - Head: pages
             
-    {'noun': {'Users'}, 'verb': {'view', 'taken', 'learning'}, 'verbobj': {'view notes', 'taken in section', 'taken on space'}, 'nounphrase': {'profile pages', 'notes section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'view', 'taken', 'learning'}, 'verbobj': {'taken on space', 'view notes', 'taken in section'}, 'nounphrase': {'notes section', 'profile pages'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.14.1. Users shall be able to annotate post images and texts in learning spaces.
 
 
@@ -945,7 +948,7 @@
     
             TOKEN: spaces / Tag: NNS, Exp: noun, plural - Link: dobj, Exp: direct object - Head: learning
             
-    {'noun': {'Users'}, 'verb': {'annotate', 'learning', 'be'}, 'verbobj': {'annotate images', 'annotate images texts', 'learning spaces'}, 'nounphrase': {'post images'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'annotate', 'be', 'learning'}, 'verbobj': {'learning spaces', 'annotate images texts', 'annotate images'}, 'nounphrase': {'post images'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.14.2. Users shall be able to view annotations made by other users.
 
 
@@ -981,7 +984,7 @@
     
             TOKEN: users / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: by
             
-    {'noun': {'Users'}, 'verb': {'view', 'be', 'made'}, 'verbobj': {'made by users', 'view annotations'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'view', 'be', 'made'}, 'verbobj': {'view annotations', 'made by users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.14.3. Users shall be able to browse annotations by category, by course, by history, and by upvotes they have received.
 
 
@@ -1050,7 +1053,7 @@
     
             TOKEN: received / Tag: VBN, Exp: verb, past participle - Link: ROOT, Exp: root - Head: received
             
-    {'noun': {'Users'}, 'verb': {'have', 'browse', 'be', 'received'}, 'verbobj': {'browse annotations', 'browse by category', 'by by history', 'received by course', 'received by upvotes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'have', 'be', 'received', 'browse'}, 'verbobj': {'received by upvotes', 'by by history', 'received by course', 'browse annotations', 'browse by category'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.14.4. Users shall access the annotations they have added for course material from the annotations section of their profile pages.
 
 
@@ -1107,7 +1110,7 @@
     
             TOKEN: profile / Tag: NN, Exp: noun, singular or mass - Link: compound, Exp: compound - Head: pages
             
-    {'noun': {'Users'}, 'verb': {'have', 'added', 'access'}, 'verbobj': {'access annotations', 'added from section', 'added for material'}, 'nounphrase': {'profile pages', 'course material', 'annotations section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'have', 'access', 'added'}, 'verbobj': {'added for material', 'access annotations', 'added from section'}, 'nounphrase': {'profile pages', 'course material', 'annotations section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.2.15.1. Users shall be able to see all learning spaces they created or enrolled in.
 
 
@@ -1152,7 +1155,7 @@
     
             TOKEN: in / Tag: IN, Exp: conjunction, subordinating or preposition - Link: prep, Exp: prepositional modifier - Head: enrolled
             
-    {'noun': {'Users'}, 'verb': {'see', 'created', 'learning', 'be'}, 'verbobj': {'see spaces'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'created enrolled'}}
+    {'noun': {'Users'}, 'verb': {'be', 'see', 'created', 'learning'}, 'verbobj': {'see spaces'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'created enrolled'}}
 1.1.2.16.1. Users shall be able to see the feedback they have received for their learning content contributions in the recommendations section.
 
 
@@ -1212,7 +1215,7 @@
     
             TOKEN: recommendations / Tag: NNS, Exp: noun, plural - Link: compound, Exp: compound - Head: section
             
-    {'noun': {'Users'}, 'verb': {'see', 'received', 'be', 'have'}, 'verbobj': {'received for contributions', 'see feedback'}, 'nounphrase': {'content contributions', 'learning contributions', 'recommendations section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'have', 'be', 'see', 'received'}, 'verbobj': {'see feedback', 'received for contributions'}, 'nounphrase': {'recommendations section', 'content contributions', 'learning contributions'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.1.1. Users shall see each other's profiles.
 
 
@@ -1365,7 +1368,7 @@
     
             TOKEN: users / Tag: NNS, Exp: noun, plural - Link: dobj, Exp: direct object - Head: block
             
-    {'noun': {'Users'}, 'verb': {'block', 'be'}, 'verbobj': {'block users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'block'}, 'verbobj': {'block users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.1.6. Users could prevent other users to see their profile by blocking them.
 
 
@@ -1404,7 +1407,7 @@
     
             TOKEN: them / Tag: PRP, Exp: pronoun, personal - Link: dobj, Exp: direct object - Head: blocking
             
-    {'noun': {'Users'}, 'verb': {'see', 'prevent', 'blocking'}, 'verbobj': {'see profile', 'prevent users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'prevent', 'see', 'blocking'}, 'verbobj': {'see profile', 'prevent users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.1.1. Users shall enter a title and description and choose an icon and categories to create a learning space.
 
 
@@ -1461,7 +1464,7 @@
     
             TOKEN: space / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: create
             
-    {'noun': {'Users'}, 'verb': {'create', 'enter', 'learning'}, 'verbobj': {'choose icon', 'enter title description', 'enter title', 'create space', 'choose icon categories'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'enter choose'}}
+    {'noun': {'Users'}, 'verb': {'enter', 'create', 'learning'}, 'verbobj': {'create space', 'choose icon categories', 'choose icon', 'enter title', 'enter title description'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'enter choose'}}
 1.1.3.2.2.1. Users shall be able to edit all material they provided.
 
 
@@ -1494,7 +1497,7 @@
     
             TOKEN: provided / Tag: VBD, Exp: verb, past tense - Link: relcl, Exp: relative clause modifier - Head: material
             
-    {'noun': {'Users'}, 'verb': {'edit', 'provided', 'be'}, 'verbobj': {'edit material'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'provided', 'edit'}, 'verbobj': {'edit material'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.2.2. Users shall be able to delete learning spaces they created.
 
 
@@ -1527,7 +1530,7 @@
     
             TOKEN: created / Tag: VBD, Exp: verb, past tense - Link: relcl, Exp: relative clause modifier - Head: spaces
             
-    {'noun': {'Users'}, 'verb': {'created', 'delete', 'be'}, 'verbobj': {'delete spaces'}, 'nounphrase': {'learning spaces'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'created', 'delete'}, 'verbobj': {'delete spaces'}, 'nounphrase': {'learning spaces'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.3.1. Users shall see the contents in the learning space.
 
 
@@ -1596,7 +1599,7 @@
     
             TOKEN: desire / Tag: VBP, Exp: verb, non-3rd person singular present - Link: ccomp, Exp: clausal complement - Head: be
             
-    {'noun': {'Users'}, 'verb': {'navigate', 'desire', 'learning', 'be'}, 'verbobj': {'navigate in order', 'navigate material'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'desire', 'be', 'learning', 'navigate'}, 'verbobj': {'navigate in order', 'navigate material'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.3.3. Users shall be able to review other users in terms of providing learning material by giving stars and optionally providing feedback.
 
 
@@ -1662,7 +1665,7 @@
     
             TOKEN: feedback / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: providing
             
-    {'noun': {'Users'}, 'verb': {'giving', 'be', 'review', 'learning', 'providing'}, 'verbobj': {'review users', 'review in terms', 'providing feedback', 'providing material', 'giving stars'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'giving providing'}}
+    {'noun': {'Users'}, 'verb': {'providing', 'learning', 'giving', 'be', 'review'}, 'verbobj': {'providing material', 'review in terms', 'giving stars', 'providing feedback', 'review users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'giving providing'}}
 1.1.3.2.3.4. Users shall be able to report inappropriate comments in the discussion forum of the learning space.
 
 
@@ -1707,7 +1710,7 @@
     
             TOKEN: learning / Tag: VBG, Exp: verb, gerund or present participle - Link: compound, Exp: compound - Head: space
             
-    {'noun': {'Users'}, 'verb': {'report', 'learning', 'be'}, 'verbobj': {'report comments'}, 'nounphrase': {'discussion forum'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'learning', 'report'}, 'verbobj': {'report comments'}, 'nounphrase': {'discussion forum'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.4.1. Each user shall have his/her notes section under each lecture.
 
 
@@ -1779,7 +1782,7 @@
     
             TOKEN: typing / Tag: VBG, Exp: verb, gerund or present participle - Link: pcomp, Exp: complement of preposition - Head: via
             
-    {'noun': {'Users'}, 'verb': {'edit', 'create', 'typing'}, 'verbobj': {'create notes'}, 'nounphrase': {'notes section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'edit', 'typing', 'create'}, 'verbobj': {'create notes'}, 'nounphrase': {'notes section'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.4.3. Users shall be able to mention other notes from other learning spaces or/and other users in his/her.
 
 
@@ -1842,7 +1845,7 @@
     
             TOKEN: her / Tag: PRP$, Exp: pronoun, possessive - Link: pobj, Exp: object of preposition - Head: in
             
-    {'noun': {'Users'}, 'verb': {'mention', 'be'}, 'verbobj': {'be users', 'mention notes'}, 'nounphrase': {'learning spaces'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'mention'}, 'verbobj': {'mention notes', 'be users'}, 'nounphrase': {'learning spaces'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.4.4. Users shall connect, annotate and tag notes.
 
 
@@ -1869,7 +1872,7 @@
     
             TOKEN: notes / Tag: NNS, Exp: noun, plural - Link: dobj, Exp: direct object - Head: connect
             
-    {'noun': {'Users'}, 'verb': {'connect'}, 'verbobj': {'connect annotate', 'connect annotate tag', 'connect notes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'connect'}, 'verbobj': {'connect notes', 'connect annotate tag', 'connect annotate'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.5.1. Participants shall be able to create community events for that learning space.
 
 
@@ -1905,7 +1908,7 @@
     
             TOKEN: learning / Tag: VBG, Exp: verb, gerund or present participle - Link: compound, Exp: compound - Head: space
             
-    {'noun': {'Participants'}, 'verb': {'create', 'learning', 'be'}, 'verbobj': {'create events'}, 'nounphrase': {'community events'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Participants'}, 'verb': {'be', 'create', 'learning'}, 'verbobj': {'create events'}, 'nounphrase': {'community events'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.5.2. Created events shall only be available to currently enrolled learners.
 
 
@@ -1938,7 +1941,7 @@
     
             TOKEN: learners / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'events'}, 'verb': {'Created', 'be', 'enrolled'}, 'verbobj': {'available to learners'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'events'}, 'verb': {'be', 'Created', 'enrolled'}, 'verbobj': {'available to learners'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.5.3. Created events should have a specific date, duration, location and limit for the number of participants.
 
 
@@ -1989,7 +1992,7 @@
     
             TOKEN: of / Tag: IN, Exp: conjunction, subordinating or preposition - Link: prep, Exp: prepositional modifier - Head: number
             
-    {'noun': {'events'}, 'verb': {'have', 'Created'}, 'verbobj': {'have date duration', 'have date'}, 'nounphrase': set(), 'coupled_nouns': {'duration location', 'location limit'}, 'coupled_verbs': set()}
+    {'noun': {'events'}, 'verb': {'have', 'Created'}, 'verbobj': {'have date duration', 'have date'}, 'nounphrase': set(), 'coupled_nouns': {'location limit', 'duration location'}, 'coupled_verbs': set()}
 1.1.3.2.5.4. The event creator can give a brief description of the topics of discussion for the event.
 
 
@@ -2070,7 +2073,7 @@
     
             TOKEN: created / Tag: VBN, Exp: verb, past participle - Link: relcl, Exp: relative clause modifier - Head: events
             
-    {'noun': {'creators'}, 'verb': {'have', 'created', 'be', 'cancel'}, 'verbobj': {'cancel events'}, 'nounphrase': {'Event creators'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'creators'}, 'verb': {'cancel', 'be', 'created', 'have'}, 'verbobj': {'cancel events'}, 'nounphrase': {'Event creators'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.5.6. Created events should be visible on the learning space info page along with the date, duration, location and number of participants.
 
 
@@ -2139,7 +2142,7 @@
     
             TOKEN: of / Tag: IN, Exp: conjunction, subordinating or preposition - Link: prep, Exp: prepositional modifier - Head: duration
             
-    {'noun': {'events'}, 'verb': {'Created', 'learning', 'be'}, 'verbobj': {'along with date', 'visible on page'}, 'nounphrase': {'info page', 'space info'}, 'coupled_nouns': {'location number', 'duration location', 'date duration'}, 'coupled_verbs': set()}
+    {'noun': {'events'}, 'verb': {'be', 'Created', 'learning'}, 'verbobj': {'along with date', 'visible on page'}, 'nounphrase': {'space info', 'info page'}, 'coupled_nouns': {'date duration', 'duration location', 'location number'}, 'coupled_verbs': set()}
 1.1.3.2.5.7. The number of learners who will join the event will be visible on the event information.
 
 
@@ -2187,7 +2190,7 @@
     
             TOKEN: information / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: on
             
-    {'noun': {'number'}, 'verb': {'join', 'be'}, 'verbobj': {'join event', 'be on information'}, 'nounphrase': {'event information'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'number'}, 'verb': {'be', 'join'}, 'verbobj': {'be on information', 'join event'}, 'nounphrase': {'event information'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.3.2.7.1. Participants of a learning space shall be able to create discussion posts.
 
 
@@ -2223,7 +2226,7 @@
     
             TOKEN: posts / Tag: NNS, Exp: noun, plural - Link: dobj, Exp: direct object - Head: create
             
-    {'noun': {'Participants'}, 'verb': {'create', 'learning', 'be'}, 'verbobj': {'create posts'}, 'nounphrase': {'discussion posts'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Participants'}, 'verb': {'be', 'create', 'learning'}, 'verbobj': {'create posts'}, 'nounphrase': {'discussion posts'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.4.1. Participants shall deliver learning material in form of posts which contain text and images.
 
 
@@ -2265,7 +2268,7 @@
     
             TOKEN: images / Tag: NNS, Exp: noun, plural - Link: conj, Exp: conjunct - Head: text
             
-    {'noun': {'Participants'}, 'verb': {'deliver', 'learning', 'contain'}, 'verbobj': {'contain text', 'learning material', 'learning in form', 'contain text images'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Participants'}, 'verb': {'contain', 'deliver', 'learning'}, 'verbobj': {'learning in form', 'contain text images', 'contain text', 'learning material'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.4.2. Learning Space shall have the main page where users can see introduction, events, sections, notes, annotations.
 
 
@@ -2328,7 +2331,7 @@
     
             TOKEN: annotations / Tag: NNS, Exp: noun, plural - Link: conj, Exp: conjunct - Head: notes
             
-    {'noun': {'Space', 'users'}, 'verb': {'have', 'see'}, 'verbobj': {'see introduction events', 'have page', 'see introduction'}, 'nounphrase': {'Learning Space'}, 'coupled_nouns': {'sections notes', 'events sections', 'notes annotations'}, 'coupled_verbs': set()}
+    {'noun': {'users', 'Space'}, 'verb': {'have', 'see'}, 'verbobj': {'see introduction', 'have page', 'see introduction events'}, 'nounphrase': {'Learning Space'}, 'coupled_nouns': {'notes annotations', 'events sections', 'sections notes'}, 'coupled_verbs': set()}
 1.1.4.3. The creator of a learning space shall be able to add additional admins to the learning space.
 
 
@@ -2379,7 +2382,7 @@
     
             TOKEN: space / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'creator'}, 'verb': {'add', 'learning', 'be'}, 'verbobj': {'add admins', 'add to space'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'creator'}, 'verb': {'add', 'be', 'learning'}, 'verbobj': {'add to space', 'add admins'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.5.1. Admin shall evaluate reports and takes action accordingly.
 
 
@@ -2406,7 +2409,7 @@
     
             TOKEN: accordingly / Tag: RB, Exp: adverb - Link: advmod, Exp: adverbial modifier - Head: takes
             
-    {'noun': {'Admin'}, 'verb': {'evaluate'}, 'verbobj': {'takes action', 'evaluate reports'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'evaluate takes'}}
+    {'noun': {'Admin'}, 'verb': {'evaluate'}, 'verbobj': {'evaluate reports', 'takes action'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'evaluate takes'}}
 1.1.5.2. Admin shall be able to ban users permanently and temporarily.
 
 
@@ -2439,7 +2442,7 @@
     
             TOKEN: temporarily / Tag: RB, Exp: adverb - Link: conj, Exp: conjunct - Head: permanently
             
-    {'noun': {'Admin'}, 'verb': {'ban', 'be'}, 'verbobj': {'ban users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Admin'}, 'verb': {'be', 'ban'}, 'verbobj': {'ban users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.1.5.3. Admin shall be able to view all contents.
 
 
@@ -2493,7 +2496,7 @@
     
             TOKEN: content / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: remove
             
-    {'noun': {'Admin'}, 'verb': {'remove', 'be'}, 'verbobj': {'remove content'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Admin'}, 'verb': {'be', 'remove'}, 'verbobj': {'remove content'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.1.1. Users will get various learning spaces as recommendations.
 
 
@@ -2565,7 +2568,7 @@
     
             TOKEN: space / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: learning
             
-    {'noun': {'recommendations', 'users'}, 'verb': {'based', 'learning', 'be'}, 'verbobj': {'learning space', 'based on preferences'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'recommendations'}, 'verb': {'be', 'based', 'learning'}, 'verbobj': {'based on preferences', 'learning space'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.1.3. The recommendations will be displayed on the home page.
 
 
@@ -2661,7 +2664,7 @@
     
             TOKEN: the / Tag: DT, Exp: determiner - Link: det, Exp: determiner - Head: registration
             
-    {'noun': {'system'}, 'verb': {'notify', 'done', 'complete', 'did'}, 'verbobj': {'notify section', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system'}, 'verb': {'did', 'done', 'notify', 'complete'}, 'verbobj': {'notify section', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.3 The system shall notify users regarding any posts on the discussion forum of the lectures they take or give.
 
 
@@ -2715,7 +2718,7 @@
     
             TOKEN: give / Tag: VB, Exp: verb, base form - Link: conj, Exp: conjunct - Head: take
             
-    {'noun': {'system'}, 'verb': {'notify', 'take', 'regarding'}, 'verbobj': {'notify regarding posts', 'notify users'}, 'nounphrase': {'discussion forum'}, 'coupled_nouns': set(), 'coupled_verbs': {'take give'}}
+    {'noun': {'system'}, 'verb': {'regarding', 'take', 'notify'}, 'verbobj': {'notify regarding posts', 'notify users'}, 'nounphrase': {'discussion forum'}, 'coupled_nouns': set(), 'coupled_verbs': {'take give'}}
 1.2.2.4 The system shall notify users when other users share notes with them.
 
 
@@ -2754,7 +2757,7 @@
     
             TOKEN: them / Tag: PRP, Exp: pronoun, personal - Link: pobj, Exp: object of preposition - Head: with
             
-    {'noun': {'system', 'users'}, 'verb': {'notify', 'share'}, 'verbobj': {'share notes', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'share', 'notify'}, 'verbobj': {'notify users', 'share notes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.5 The system shall notify users when they earn an achievement.
 
 
@@ -2787,7 +2790,7 @@
     
             TOKEN: achievement / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: earn
             
-    {'noun': {'system'}, 'verb': {'notify', 'earn'}, 'verbobj': {'notify users', 'earn achievement'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system'}, 'verb': {'earn', 'notify'}, 'verbobj': {'earn achievement', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.6 The system shall notify users to give feedback after each completed lecture.
 
 
@@ -2826,7 +2829,7 @@
     
             TOKEN: lecture / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: after
             
-    {'noun': {'system'}, 'verb': {'notify', 'give', 'completed'}, 'verbobj': {'give after lecture', 'notify users', 'give feedback'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system'}, 'verb': {'completed', 'give', 'notify'}, 'verbobj': {'give feedback', 'give after lecture', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.7 The system shall notify lecturers when a user provides feedback on one of their courses.
 
 
@@ -2874,7 +2877,7 @@
     
             TOKEN: courses / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: of
             
-    {'noun': {'system', 'user'}, 'verb': {'notify', 'provides'}, 'verbobj': {'notify lecturers', 'provides feedback', 'one of courses'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system', 'user'}, 'verb': {'provides', 'notify'}, 'verbobj': {'notify lecturers', 'provides feedback', 'one of courses'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.8 The system shall notify users when an event is created for a lecture they are taking or giving.
 
 
@@ -2931,7 +2934,7 @@
     
             TOKEN: giving / Tag: VBG, Exp: verb, gerund or present participle - Link: conj, Exp: conjunct - Head: taking
             
-    {'noun': {'system', 'event'}, 'verb': {'taking', 'are', 'notify', 'is', 'created'}, 'verbobj': {'created for lecture', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'taking giving'}}
+    {'noun': {'system', 'event'}, 'verb': {'are', 'notify', 'is', 'taking', 'created'}, 'verbobj': {'notify users', 'created for lecture'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'taking giving'}}
 1.2.2.9 The system shall notify users when a poll is created in a lecture they are taking.
 
 
@@ -2982,7 +2985,7 @@
     
             TOKEN: taking / Tag: VBG, Exp: verb, gerund or present participle - Link: relcl, Exp: relative clause modifier - Head: lecture
             
-    {'noun': {'system', 'poll'}, 'verb': {'taking', 'are', 'notify', 'is', 'created'}, 'verbobj': {'created in lecture', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system', 'poll'}, 'verb': {'are', 'notify', 'is', 'taking', 'created'}, 'verbobj': {'created in lecture', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.10 The system shall notify users when they do not use the application for more than one day.
 
 
@@ -3036,7 +3039,7 @@
     
             TOKEN: day / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: for
             
-    {'noun': {'system'}, 'verb': {'notify', 'do', 'use'}, 'verbobj': {'use application', 'notify users', 'use for day'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system'}, 'verb': {'do', 'use', 'notify'}, 'verbobj': {'use for day', 'use application', 'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.11 Users shall be able to turn their notifications on or off.
 
 
@@ -3072,7 +3075,7 @@
     
             TOKEN: off / Tag: RB, Exp: adverb - Link: conj, Exp: conjunct - Head: on
             
-    {'noun': {'Users'}, 'verb': {'turn', 'be'}, 'verbobj': {'turn notifications'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'turn'}, 'verbobj': {'turn notifications'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.2.12 The system shall notify users when other users follow them.
 
 
@@ -3105,7 +3108,7 @@
     
             TOKEN: them / Tag: PRP, Exp: pronoun, personal - Link: dobj, Exp: direct object - Head: follow
             
-    {'noun': {'system', 'users'}, 'verb': {'notify', 'follow'}, 'verbobj': {'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'follow', 'notify'}, 'verbobj': {'notify users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.3.1 The system shall implement semantic searching.
 
 
@@ -3159,7 +3162,7 @@
     
             TOKEN: users / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: for
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'search'}, 'verbobj': {'search for users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'search', 'allow'}, 'verbobj': {'search for users'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.3.2.1 The system shall allow searching for users by their username.
 
 
@@ -3222,7 +3225,7 @@
     
             TOKEN: courses / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: for
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'search'}, 'verbobj': {'search for courses'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'search', 'allow'}, 'verbobj': {'search for courses'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.3.4 The system shall offer filters for search results.
 
 
@@ -3297,7 +3300,7 @@
     
             TOKEN: courses / Tag: NNS, Exp: noun, plural - Link: conj, Exp: conjunct - Head: users
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'filter'}, 'verbobj': {'filter results', 'filter as users'}, 'nounphrase': {'search results'}, 'coupled_nouns': {'users courses'}, 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'allow', 'filter'}, 'verbobj': {'filter as users', 'filter results'}, 'nounphrase': {'search results'}, 'coupled_nouns': {'users courses'}, 'coupled_verbs': set()}
 1.2.3.5 The system shall allow users to browse for recommended courses.
 
 
@@ -3330,7 +3333,7 @@
     
             TOKEN: courses / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: for
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'browse', 'recommended'}, 'verbobj': {'browse for courses'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'recommended', 'allow', 'browse'}, 'verbobj': {'browse for courses'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.3.6 The system shall allow users to browse for learning spaces created or joined by a user's from his/her profile page.
 
 
@@ -3399,7 +3402,7 @@
     
             TOKEN: profile / Tag: NN, Exp: noun, singular or mass - Link: compound, Exp: compound - Head: page
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'created', 'browse', 'learning'}, 'verbobj': {'learning spaces', 'joined by user'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': {'created joined'}}
+    {'noun': {'users', 'system'}, 'verb': {'created', 'allow', 'learning', 'browse'}, 'verbobj': {'joined by user', 'learning spaces'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': {'created joined'}}
 1.2.3.7 The system shall allow users to browse their notes.
 
 
@@ -3429,7 +3432,7 @@
     
             TOKEN: notes / Tag: NNS, Exp: noun, plural - Link: dobj, Exp: direct object - Head: browse
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'browse'}, 'verbobj': {'browse notes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'allow', 'browse'}, 'verbobj': {'browse notes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.3.8 The system shall allow users to browse for notes filtered by their tags.
 
 
@@ -3471,7 +3474,7 @@
     
             TOKEN: tags / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: by
             
-    {'noun': {'system', 'users'}, 'verb': {'allow', 'filtered', 'browse'}, 'verbobj': {'filtered by tags', 'browse for notes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system'}, 'verb': {'filtered', 'allow', 'browse'}, 'verbobj': {'filtered by tags', 'browse for notes'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.3.9 The system shall allow users to browse the activities and achievements of users they follow on the user's profile page.
 
 
@@ -3534,7 +3537,7 @@
     
             TOKEN: page / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: on
             
-    {'noun': {'system', 'users', 'user'}, 'verb': {'allow', 'browse', 'follow'}, 'verbobj': {'browse activities achievements', 'follow on page', 'browse activities'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'system', 'user'}, 'verb': {'follow', 'allow', 'browse'}, 'verbobj': {'follow on page', 'browse activities', 'browse activities achievements'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.5.1. The forum features should be unique to the learning space. There is also a discussion section for the learning space.
 
 
@@ -3567,7 +3570,7 @@
     
             TOKEN: space / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'features'}, 'verb': {'learning', 'be'}, 'verbobj': {'unique to space'}, 'nounphrase': {'forum features'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'features'}, 'verb': {'be', 'learning'}, 'verbobj': {'unique to space'}, 'nounphrase': {'forum features'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.5.2. The discussion contents should be stored.
 
 
@@ -3588,7 +3591,7 @@
     
             TOKEN: stored / Tag: VBN, Exp: verb, past participle - Link: ROOT, Exp: root - Head: stored
             
-    {'noun': {'contents'}, 'verb': {'stored', 'be'}, 'verbobj': set(), 'nounphrase': {'discussion contents'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'contents'}, 'verb': {'be', 'stored'}, 'verbobj': set(), 'nounphrase': {'discussion contents'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.5.3. The forum should include a timestamp for each entry and the sender's name should be at top of the each entry.
 
 
@@ -3651,7 +3654,7 @@
     
             TOKEN: each / Tag: DT, Exp: determiner - Link: det, Exp: determiner - Head: entry
             
-    {'noun': {'name', 'sender', 'forum'}, 'verb': {'be', 'include'}, 'verbobj': {'be at top', 'include timestamp'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'sender', 'forum', 'name'}, 'verb': {'be', 'include'}, 'verbobj': {'be at top', 'include timestamp'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.5.4. The discussion entry creator's name should direct any user to his/her profile page.
 
 
@@ -3702,7 +3705,7 @@
     
             TOKEN: page / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'creator', 'name'}, 'verb': {'direct'}, 'verbobj': {'direct user', 'direct to page'}, 'nounphrase': {'profile page', 'discussion creator', 'entry creator'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'creator', 'name'}, 'verb': {'direct'}, 'verbobj': {'direct to page', 'direct user'}, 'nounphrase': {'profile page', 'entry creator', 'discussion creator'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.6.1. System shall allow users to optionally provide additional information about their full names, birth date, state of education, gender just after the signup stage.
 
 
@@ -3780,7 +3783,7 @@
     
             TOKEN: stage / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: after
             
-    {'noun': {'System', 'date', 'users', 'gender'}, 'verb': {'allow', 'provide'}, 'verbobj': {'provide after stage', 'provide information'}, 'nounphrase': {'birth date'}, 'coupled_nouns': {'date state'}, 'coupled_verbs': set()}
+    {'noun': {'System', 'users', 'date', 'gender'}, 'verb': {'provide', 'allow'}, 'verbobj': {'provide after stage', 'provide information'}, 'nounphrase': {'birth date'}, 'coupled_nouns': {'date state'}, 'coupled_verbs': set()}
 1.2.6.2. System should allow users to select educational topics, and titles which they are interested in in the almost done stage.
 
 
@@ -3846,7 +3849,7 @@
     
             TOKEN: stage / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: in
             
-    {'noun': {'System', 'users'}, 'verb': {'select', 'allow', 'done', 'are'}, 'verbobj': {'interested in stage', 'allow titles', 'select topics'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'System', 'users'}, 'verb': {'select', 'are', 'allow', 'done'}, 'verbobj': {'allow titles', 'interested in stage', 'select topics'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.7.1. System shall allow users to delete their accounts.
 
 
@@ -3948,7 +3951,7 @@
     
             TOKEN: on / Tag: IN, Exp: conjunction, subordinating or preposition - Link: prep, Exp: prepositional modifier - Head: determined
             
-    {'noun': {'information'}, 'verb': {'deleted', 'anonymized', 'have', 'according', 'determined', 'be', 'personalized'}, 'verbobj': {'according to policy'}, 'nounphrase': {'privacy policy'}, 'coupled_nouns': set(), 'coupled_verbs': {'anonymized deleted'}}
+    {'noun': {'information'}, 'verb': {'determined', 'be', 'deleted', 'anonymized', 'personalized', 'according', 'have'}, 'verbobj': {'according to policy'}, 'nounphrase': {'privacy policy'}, 'coupled_nouns': set(), 'coupled_verbs': {'anonymized deleted'}}
 1.2.8.1. Users shall be able to create annotations.
 
 
@@ -3972,7 +3975,7 @@
     
             TOKEN: annotations / Tag: NNS, Exp: noun, plural - Link: dobj, Exp: direct object - Head: create
             
-    {'noun': {'Users'}, 'verb': {'create', 'be'}, 'verbobj': {'create annotations'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Users'}, 'verb': {'be', 'create'}, 'verbobj': {'create annotations'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.8.2. Annotations should comply to the W3 Web Annotation Data Model.
 
 
@@ -4005,7 +4008,7 @@
     
             TOKEN: Model / Tag: NNP, Exp: noun, proper singular - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'Annotations'}, 'verb': {'comply'}, 'verbobj': {'comply to Model'}, 'nounphrase': {'W3 Model', 'Annotation Model', 'Data Model', 'Web Annotation'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Annotations'}, 'verb': {'comply'}, 'verbobj': {'comply to Model'}, 'nounphrase': {'W3 Model', 'Data Model', 'Web Annotation', 'Annotation Model'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.8.3. Owner of the annotations shall be able to set annotations as public or private.
 
 
@@ -4047,7 +4050,7 @@
     
             TOKEN: private / Tag: JJ, Exp: adjective (English), other noun-modifier (Chinese) - Link: conj, Exp: conjunct - Head: public
             
-    {'noun': {'Owner'}, 'verb': {'set', 'be'}, 'verbobj': {'set annotations'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Owner'}, 'verb': {'be', 'set'}, 'verbobj': {'set annotations'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 1.2.8.4. Created annotations shall be reachable from both profile page and relevant target resource(s).
 
 
@@ -4092,7 +4095,7 @@
     
             TOKEN: ) / Tag: -RRB-, Exp: right round bracket - Link: punct, Exp: punctuation - Head: be
             
-    {'noun': {'annotations'}, 'verb': {'Created', 'be'}, 'verbobj': {'reachable from page'}, 'nounphrase': {'profile page', 'target resource(s'}, 'coupled_nouns': {'page resource(s'}, 'coupled_verbs': set()}
+    {'noun': {'annotations'}, 'verb': {'be', 'Created'}, 'verbobj': {'reachable from page'}, 'nounphrase': {'profile page', 'target resource(s'}, 'coupled_nouns': {'page resource(s'}, 'coupled_verbs': set()}
 1.2.8.5. Annotations may have a body attribute.
 
 
@@ -4218,7 +4221,7 @@
     
             TOKEN: page / Tag: NN, Exp: noun, singular or mass - Link: pobj, Exp: object of preposition - Head: on
             
-    {'noun': {'Annotations', 'creator', 'annotation'}, 'verb': {'listed', 'be'}, 'verbobj': {'listed on page'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'creator', 'annotation', 'Annotations'}, 'verb': {'listed', 'be'}, 'verbobj': {'listed on page'}, 'nounphrase': {'profile page'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.1.1. System should have a Website interface that provides an web specific user experience.
 
 
@@ -4260,7 +4263,7 @@
     
             TOKEN: experience / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: provides
             
-    {'noun': {'System', 'web'}, 'verb': {'have', 'provides'}, 'verbobj': {'have interface', 'provides experience'}, 'nounphrase': {'Website interface', 'user experience'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'System', 'web'}, 'verb': {'have', 'provides'}, 'verbobj': {'provides experience', 'have interface'}, 'nounphrase': {'user experience', 'Website interface'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.1.2. System should have a Android application interface that provides an mobile specific user experience.
 
 
@@ -4305,7 +4308,7 @@
     
             TOKEN: experience / Tag: NN, Exp: noun, singular or mass - Link: dobj, Exp: direct object - Head: provides
             
-    {'noun': {'System'}, 'verb': {'have', 'provides'}, 'verbobj': {'have interface', 'provides experience'}, 'nounphrase': {'user experience', 'Android interface', 'application interface'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'System'}, 'verb': {'have', 'provides'}, 'verbobj': {'provides experience', 'have interface'}, 'nounphrase': {'user experience', 'application interface', 'Android interface'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.1.3. System should support UTF-8 character encoding.
 
 
@@ -4398,7 +4401,7 @@
     
             TOKEN: KVKK / Tag: NNP, Exp: noun, proper singular - Link: pobj, Exp: object of preposition - Head: by
             
-    {'noun': {'system', 'concerns', 'GDPR'}, 'verb': {'considered', 'defined', 'be', 'follow'}, 'verbobj': {'defined by KVKK', 'follow rules'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system', 'GDPR', 'concerns'}, 'verb': {'be', 'follow', 'considered', 'defined'}, 'verbobj': {'defined by KVKK', 'follow rules'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.2.1.1 A well-defined explanation about how users data will be used must be given to users.
 
 
@@ -4452,7 +4455,7 @@
     
             TOKEN: users / Tag: NNS, Exp: noun, plural - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'data', 'explanation'}, 'verb': {'defined', 'used', 'be', 'given'}, 'verbobj': {'given to users'}, 'nounphrase': {'users data'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'explanation', 'data'}, 'verb': {'be', 'defined', 'given', 'used'}, 'verbobj': {'given to users'}, 'nounphrase': {'users data'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.2.1.2 Users must agree to the Privacy Policy and User Agreement.
 
 
@@ -4485,7 +4488,7 @@
     
             TOKEN: Agreement / Tag: NNP, Exp: noun, proper singular - Link: pobj, Exp: object of preposition - Head: to
             
-    {'noun': {'Users', 'Policy'}, 'verb': {'agree'}, 'verbobj': {'agree to Agreement'}, 'nounphrase': {'Privacy Policy', 'User Agreement'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'Policy', 'Users'}, 'verb': {'agree'}, 'verbobj': {'agree to Agreement'}, 'nounphrase': {'Privacy Policy', 'User Agreement'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.2.1.3 If any change happens in the policy, users must be notified about it.
 
 
@@ -4530,7 +4533,7 @@
     
             TOKEN: it / Tag: PRP, Exp: pronoun, personal - Link: pobj, Exp: object of preposition - Head: about
             
-    {'noun': {'users', 'change'}, 'verb': {'notified', 'happens', 'be'}, 'verbobj': {'happens in policy'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'users', 'change'}, 'verb': {'be', 'happens', 'notified'}, 'verbobj': {'happens in policy'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.2.2. Learning Spaces can be private or public. If a LS is private, its content should not be visible to every user in the app.
 
 
@@ -4581,7 +4584,7 @@
     
             TOKEN: storing / Tag: VBG, Exp: verb, gerund or present participle - Link: pcomp, Exp: complement of preposition - Head: before
             
-    {'noun': {'data'}, 'verb': {'storing', 'be', 'encrypted'}, 'verbobj': set(), 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'data'}, 'verb': {'be', 'encrypted', 'storing'}, 'verbobj': set(), 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.3.2 The system shall block the account if any security issue is observed.
 
 
@@ -4620,7 +4623,7 @@
     
             TOKEN: observed / Tag: VBN, Exp: verb, past participle - Link: advcl, Exp: adverbial clause modifier - Head: block
             
-    {'noun': {'system', 'issue'}, 'verb': {'observed', 'is', 'block'}, 'verbobj': {'block account'}, 'nounphrase': {'security issue'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'issue', 'system'}, 'verb': {'block', 'observed', 'is'}, 'verbobj': {'block account'}, 'nounphrase': {'security issue'}, 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.4.1 The system should be able to handle at least 10.000 users and 500 user actions simultaneously.
 
 
@@ -4653,7 +4656,7 @@
     
             TOKEN: 10 / Tag: CD, Exp: cardinal number - Link: dobj, Exp: direct object - Head: handle
             
-    {'noun': {'system'}, 'verb': {'handle', 'be'}, 'verbobj': set(), 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system'}, 'verb': {'be', 'handle'}, 'verbobj': set(), 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.4.2 The system should have a response time of at most 2.0 seconds excluding network based delay.
 
 
@@ -4794,7 +4797,7 @@
     
             TOKEN: clean / Tag: JJ, Exp: adjective (English), other noun-modifier (Chinese) - Link: conj, Exp: conjunct - Head: readable
             
-    {'noun': {'system'}, 'verb': {'have', 'chosen', 'be'}, 'verbobj': {'have typeface'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
+    {'noun': {'system'}, 'verb': {'have', 'be', 'chosen'}, 'verbobj': {'have typeface'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': set()}
 2.6.1 The system should get backups and send them off-site at regular intervals for the possibility of disasters.
 
 
@@ -4851,7 +4854,7 @@
     
             TOKEN: of / Tag: IN, Exp: conjunction, subordinating or preposition - Link: prep, Exp: prepositional modifier - Head: possibility
             
-    {'noun': {'system'}, 'verb': {'get'}, 'verbobj': {'send for possibility', 'send at intervals', 'send site', 'get backups'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'get send'}}
+    {'noun': {'system'}, 'verb': {'get'}, 'verbobj': {'send at intervals', 'send for possibility', 'get backups', 'send site'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'get send'}}
 2.6.2 System shall be able to reinitialize itself and continue functioning in case of an unexpected shutdown.
 
 
@@ -4899,7 +4902,7 @@
     
             TOKEN: unexpected / Tag: JJ, Exp: adjective (English), other noun-modifier (Chinese) - Link: amod, Exp: adjectival modifier - Head: shutdown
             
-    {'noun': {'System'}, 'verb': {'reinitialize', 'functioning', 'be'}, 'verbobj': {'functioning in case'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'reinitialize continue'}}
+    {'noun': {'System'}, 'verb': {'be', 'reinitialize', 'functioning'}, 'verbobj': {'functioning in case'}, 'nounphrase': set(), 'coupled_nouns': set(), 'coupled_verbs': {'reinitialize continue'}}
 2.6.3 System shall keep logs regarding the unexpected shutdown.
 
             TOKEN: System / Tag: NN, Exp: noun, singular or mass - Link: nsubj, Exp: nominal subject - Head: keep
