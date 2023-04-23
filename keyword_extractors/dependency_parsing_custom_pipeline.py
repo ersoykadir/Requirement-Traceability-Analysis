@@ -3,9 +3,9 @@ import re
 from collections import Counter
 
 nlp = spacy.load("en_core_web_sm")
-stopwords=set(line.strip().lower() for line in open('SmartStopword.txt'))
 
-def most_frequent_words(file):
+def most_frequent_words(file, stopwords_path):
+    stopwords=set(line.strip().lower() for line in open(stopwords_path))
     complete_text = nlp(file.read())
     words = [
         token.text
@@ -16,29 +16,30 @@ def most_frequent_words(file):
     for tup in Counter(words).most_common(5):
         stopwords.add(tup[0])
 
-def remove_stopwords(tokens):
+def remove_stopwords(tokens, stopwords_path):
+    stopwords=set(line.strip().lower() for line in open(stopwords_path))
     return filter(lambda x: x.text.lower() not in stopwords, tokens) 
 
 def verb_analysis(token, token_dict):
+    flag = False
     for child in token.children:
         if child.dep_ == "acomp" or child.dep_ == "dobj" or child.dep_ == "comp" or child.dep_ == "prt":
             token_dict["verb-objects"].append(f"""{token.text} {child.text}""")
-            return True
-    return False
+            flag = True
+    return flag
 
 def noun_analysis(token, token_dict):
+    flag = False
     for child in token.children:
         if child.dep_ == "compound" or child.dep_ == "nmod" or child.dep_ == "amod":
+            if token.text == 'address':
+                print(child.text)
             token_dict["noun-objects"].append(f"""{child.text} {token.text}""")
-            return True
-    return False
+            flag = True
+    return flag
     
-
-#dep_file = open("dependency_links.txt", "w") 
-#req_file = open("Requirements_group2.txt", "r")
-
 #Regex pattern to remove numbers of requirement statements.
-def custom_extractor(line):
+def custom_extractor(line, stopwords_path):
 
     pattern = r"[A-Za-z][^.!?:()]*"
     token_dict = {"verbs": [], "verb-objects": [], "nouns": [], "noun-objects":[]}
@@ -53,7 +54,7 @@ def custom_extractor(line):
     tokens = filter(lambda token: token.tag_[0:2] == 'VB' or token.tag_[0:2] == "NN" , doc)
     
     #removes English stopwords from token list.
-    tokens = remove_stopwords(tokens)
+    tokens = remove_stopwords(tokens, stopwords_path)
 
     for token in tokens:
         if token.tag_[0:2] == 'VB':
@@ -63,4 +64,3 @@ def custom_extractor(line):
             if not noun_analysis(token, token_dict):
                 token_dict["nouns"].append(token.text)
     return token_dict
-  

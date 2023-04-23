@@ -4,22 +4,24 @@ Requirements Traceability Graph
 """
 
 import requests
+import sys
 import json
 from string import Template
 import datetime
 import os
-from keyword_extractors.extractor_rake import extract_rake
-from keyword_extractors.extractor_yake import extract_yake
 from dotenv import load_dotenv
 import re
 load_dotenv()
+
+sys.path.append('..')
+from keyword_extractors.extractor_yake import extract_yake
 
 username = os.getenv('GITHUB_USERNAME')
 token = os.getenv('GITHUB_TOKEN')
 print(username, token)
 
 repo_owner = 'bounswe'
-repo_number = 3
+repo_number = 2
 repo_name = f'bounswe2022group{repo_number}'
 
 if repo_number == 2:
@@ -354,6 +356,18 @@ def build_commit_nodes():
         commit_nodes[node.node_id] = node
     return commit_nodes
 
+def build_requirement_nodes():
+    artifact_type = 'requirements'
+    data_fname = f'data_group{repo_number}/{artifact_type}_data.json'
+    f = open(data_fname, 'r')
+    data = json.loads(f.read())
+    f.close()
+    requirement_nodes = {}
+    for req in data[artifact_type]:
+        node = Requirement('requirement', req['number'], req['description'])
+        requirement_nodes[node.node_id] = node
+    return requirement_nodes
+
 # Class representing graph nodes. Each node represents a software artifact (issue, pull request, requirement, commit).
 class Node:
     def __init__(self, node_type, node_id):
@@ -420,7 +434,7 @@ class Requirement(Node):
         self.description = description
         self.text = self.description
         try:
-            self.keywords = extract_yake(self.text)
+            self.keywords = extract_yake(self.text, '../keyword_extractors/SmartStopword.txt')
         except Exception as e:
             print(str(e))
 
@@ -495,23 +509,23 @@ def req_to_issue(graph):
         for node in found_nodes:
             req.traces.append(node)
 
-#clean_files() # Clean the data when changing the target repository.
-graph = Graph()
-print(len(graph.issue_nodes))
+# #clean_files() # Clean the data when changing the target repository.
+# graph = Graph()
+# print(len(graph.issue_nodes))
 
-req_to_issue(graph)
+# req_to_issue(graph)
 
-f = open(output_file, 'w', encoding='utf-8')
-for req in graph.requirement_nodes.values():
-    if len(req.traces) == 0:
-        print(f"Requirement {req.node_id} has no traces.")
-        continue
-    print(req.traces)
-    sorted_traces = sorted(req.traces, key=lambda x: x.node_id)
-    print(sorted_traces)
-    f.write(f"{req.node_id} {req.description}\n")
-    f.write(f"{req.freqs}\n")
-    for node in sorted_traces:
-        f.write(f"{node.node_id} {node.title}\n")
-    f.write(f"------------------------------------------------------------\n")
-f.close()
+# f = open(output_file, 'w', encoding='utf-8')
+# for req in graph.requirement_nodes.values():
+#     if len(req.traces) == 0:
+#         print(f"Requirement {req.node_id} has no traces.")
+#         continue
+#     print(req.traces)
+#     sorted_traces = sorted(req.traces, key=lambda x: x.node_id)
+#     print(sorted_traces)
+#     f.write(f"{req.node_id} {req.description}\n")
+#     f.write(f"{req.freqs}\n")
+#     for node in sorted_traces:
+#         f.write(f"{node.node_id} {node.title}\n")
+#     f.write(f"------------------------------------------------------------\n")
+# f.close()
