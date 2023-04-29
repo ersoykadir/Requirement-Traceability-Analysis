@@ -17,20 +17,6 @@ username = os.getenv('GITHUB_USERNAME')
 token = os.getenv('GITHUB_TOKEN')
 print(username, token)
 
-repo_owner = 'bounswe'
-repo_number = 3
-repo_name = f'bounswe2022group{repo_number}'
-
-if repo_number == 2:
-    issue_number_threshold = 309 # for group 2
-elif repo_number == 3:
-    issue_number_threshold = 258 # for group 3
-else:
-    raise Exception("Invalid repo number")
-
-requirements_file_name = f'data_group{repo_number}/group{repo_number}_requirements.txt'
-output_file = f'group{repo_number}_req_to_issue.txt'
-
 # Acquires data from the github graphql api, given a graphql query.
 def get_data_from_api(body):
     global username, token
@@ -76,7 +62,7 @@ artifact_template = {
 }
 
 # Gets all issues, page by page, and writes them to a json file.
-def get_all_pages(artifact_type):
+def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
     template = artifact_template[artifact_type]
     get_page = get_artifact_page[artifact_type]
     pages = []
@@ -99,8 +85,9 @@ def get_all_pages(artifact_type):
     f.write(json.dumps(dump, indent=4))
     f.close()
 
-def get_requirements():
-    
+def get_requirements(repo_number):
+
+    requirements_file_name = f'data_group{repo_number}/group{repo_number}_requirements.txt'
     f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
     data = f.readlines()
     f.close()
@@ -125,11 +112,16 @@ def get_requirements():
     f.write(json.dumps(dump, indent=4))
     f.close()
 
+import sys
 def main():
-    get_all_pages('issues')
-    get_all_pages('pullRequests')
-    get_all_pages('commits')
-    get_requirements()
+    repo_number = int(sys.argv[1])
+    repo_owner = 'bounswe'
+    repo_name = f'bounswe2022group{repo_number}'
+    
+    get_all_pages('issues', repo_owner, repo_number, repo_name)
+    get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
+    get_all_pages('commits', repo_owner, repo_number, repo_name)
+    get_requirements(repo_number)
 
 if __name__ == "__main__":
     main()
