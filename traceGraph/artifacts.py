@@ -8,7 +8,6 @@ Acquires software artifacts(issue, pr, commmit, requirement) and writes them to 
 import os
 import requests
 import json
-import glob
 from dotenv import load_dotenv
 from graphql_templates import ISSUE_queryTemplate, PR_queryTemplate, COMMIT_queryTemplate
 load_dotenv()
@@ -112,9 +111,10 @@ def get_requirements(repo_number):
     f.write(json.dumps(dump, indent=4))
     f.close()
 
-import sys
+import sys, time
 def main():
-    repo_number = int(sys.argv[1])
+    start = time.time()
+    repo_number = sys.argv[1]
     repo_owner = 'bounswe'
     repo_name = f'bounswe2022group{repo_number}'
     
@@ -122,6 +122,8 @@ def main():
     get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
     get_all_pages('commits', repo_owner, repo_number, repo_name)
     get_requirements(repo_number)
+    end = time.time()
+    print(f"Time elapsed: {end-start}")
 
 if __name__ == "__main__":
     main()
