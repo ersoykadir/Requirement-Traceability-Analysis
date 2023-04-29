@@ -28,6 +28,7 @@ class neo4jConnector:
                 SET n = properties
                 RETURN n
                 ''')
+        
         result = tx.run(query)
         record = result.data()
         return record
@@ -38,27 +39,52 @@ class neo4jConnector:
             print(result)
 
     @staticmethod
-    def create_issue_tx(tx, issues):
-        query = ('''
-                UNWIND $issues AS properties
-                CREATE (n:Issue)
+    def create_artifact_tx(tx, artifacts, label):
+        query = (f'''
+                UNWIND $artifacts AS properties
+                CREATE (n:{label})
                 SET n = properties
                 RETURN n
-                ''')
-        result = tx.run(query, issues=issues)
+                ''').format(label=label)
+        result = tx.run(query, artifacts=artifacts)
         record = result.data()
         return record
 
-    def create_issue(self, issues):
+    def create_artifact(self, artifacts, label):
         with self.driver.session() as session:
-            result = session.execute_write(self.create_issue_tx, issues)
-            print(result)
+            result = session.execute_write(self.create_artifact_tx, artifacts, label)
+            #print(result)
 
-def create_issue_nodes(issues):
+    @staticmethod
+    def create_single_artifact_tx(tx, properties, label):
+        query = (f'''
+                CREATE (n:{label})
+                SET n = $properties
+                RETURN n
+                ''').format(label=label)
+        result = tx.run(query, properties=properties)
+        record = result.data()
+        return record
+
+    def create_single_artifact(self, properties, label):
+        with self.driver.session() as session:
+            result = session.execute_write(self.create_artifact_tx, properties, label)
+            #print(result)
+
+def create_artifact_nodes(artifacts, label):
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
         #print(issues)
-        neo.create_issue(issues)
+        neo.create_artifact(artifacts, label)
+        neo.close()
+    except Exception as e:
+        return 'Error: ' + str(e)
+
+def create_single_artifact_node(properties, label):
+    try:
+        neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
+        #print(issues)
+        neo.create_single_artifact(properties, label)
         neo.close()
     except Exception as e:
         return 'Error: ' + str(e)
