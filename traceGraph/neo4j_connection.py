@@ -45,7 +45,6 @@ class neo4jConnector:
     def create_issue_from_file(self):
         with self.driver.session() as session:
             result = session.execute_write(self.create_issue_from_file_tx)
-            print(result)
 
     @staticmethod
     def create_artifact_tx(tx, artifacts, label):
@@ -62,36 +61,43 @@ class neo4jConnector:
     def create_artifact(self, artifacts, label):
         with self.driver.session() as session:
             result = session.execute_write(self.create_artifact_tx, artifacts, label)
-            #print(result)
     
     @staticmethod
-    def create_req_issue_trace_tx(tx, req_number, node_list, weight, keyword):
+    def create_req_issue_trace_tx(tx, req_issue_trace, artifact_label):
         query = ('''
                 match (r:Requirement)
                 where r.number = '{req_number}'
                 with r
-                UNWIND {node_list} AS issue_numbers
-                match (i:Issue)
-                where i.number= issue_numbers
+                UNWIND {node_list} AS node_numbers
+                match (i:{artifact_label})
+                where i.number= node_numbers
                 merge (i)<-[t:tracesTo]-(r)
                 set t.weight = {weight}
                 set t.keyword = '{keyword}'
                 return *
-                ''').format(req_number=req_number, node_list=node_list, weight=weight, keyword=keyword)
-        result = tx.run(query)
-        record = result.data()
-        return record
+                ''')
+        
+        for req_number in req_issue_trace:
+            for tuple in req_issue_trace[req_number]:
+                keyword, node_list, weight = tuple
+                query = query.format(req_number=req_number, node_list=node_list, weight=weight, keyword=keyword, artifact_label=artifact_label)
+                result = tx.run(query)
+                record = result.data()
+        #return record
 
-    def create_req_issue_trace(self, req_issue_trace):
+    def create_req_issue_trace(self, req_issue_trace, artifact_label):
         try:
             with self.driver.session() as session:
                 print("connecting to neo4j")
-                for req_number in req_issue_trace:
-                    for tuple in req_issue_trace[req_number]:
-                        keyword, node_list, weight = tuple
-                        result = session.execute_write(self.create_req_issue_trace_tx, req_number, node_list, weight, keyword)
+                # Send query for each requirement instead of for each keyword!
+                # for req_number in req_issue_trace:
+                #     for tuple in req_issue_trace[req_number]:
+                #         keyword, node_list, weight = tuple
+                #         result = session.execute_write(self.create_req_issue_trace_tx, req_number, node_list, weight, keyword, artifact_label)
+                result = session.execute_write(self.create_req_issue_trace_tx, req_issue_trace, artifact_label)
         except Exception as e:
-            return 'Error: ' + str(e) + ' ' + req_number 
+            return 'Error: ' + str(e)  
+        
     @staticmethod
     def create_single_artifact_tx(tx, properties, label):
         query = (f'''
@@ -106,23 +112,20 @@ class neo4jConnector:
     def create_single_artifact(self, properties, label):
         with self.driver.session() as session:
             result = session.execute_write(self.create_artifact_tx, properties, label)
-            #print(result)
 
 def create_artifact_nodes(artifacts, label):
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
-        #print(issues)
         neo.create_artifact(artifacts, label)
         neo.close()
     except Exception as e:
         return 'Error: ' + str(e)
 import time
-def create_req_issue_traces(req_issue_trace):
+def create_req_issue_traces(req_issue_trace, artifact_label):
     start = time.time() 
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
-        print('here')
-        neo.create_req_issue_trace(req_issue_trace)
+        neo.create_req_issue_trace(req_issue_trace, artifact_label)
         neo.close()
     except Exception as e:
         return 'Error: ' + str(e) 
@@ -132,7 +135,6 @@ def create_req_issue_traces(req_issue_trace):
 def create_single_artifact_node(properties, label):
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
-        #print(issues)
         neo.create_single_artifact(properties, label)
         neo.close()
     except Exception as e:
