@@ -1,4 +1,13 @@
 from neo4j import GraphDatabase
+from dotenv import load_dotenv
+load_dotenv()
+import os
+
+neo4j_password = os.getenv('NEO4J_PASSWORD')
+
+word_regex = '.*\\b{0}\\b.*'
+verbobj_regex = '.*\\b{0}\\s((?:[\\w,;:\\\'\\"`]+\\s)*){1}\\b.*'
+noun_phrase_regex = '.*\\b{0}\\s{1}\\b.*'
 
 class neo4jConnector:
 
@@ -54,7 +63,32 @@ class neo4jConnector:
         with self.driver.session() as session:
             result = session.execute_write(self.create_artifact_tx, artifacts, label)
             #print(result)
+    
+    @staticmethod
+    def create_req_issue_trace_tx(tx, regex, number):
+        query = ('''
+                match (i:Issue)
+                where i.text =~ '$regex'
+                with i
+                match (r:Requirement {number: '$number'})
+                create (i)<-[t:tracesTo]-(r)
+                return *
+                ''')
+        print(query)
+        result = tx.run(query, regex=regex, number=number)
+        record = result.data()
+        return record
 
+    def create_req_issue_trace(self, token_dict, number):
+        try:
+            with self.driver.session() as session:
+                print("connecting to neo4j")
+                for keyword in token_dict['verbs']:
+                    print(keyword)
+                    result = session.execute_write(self.create_req_issue_trace_tx, word_regex.format(keyword), number)
+                    print(result)
+        except Exception as e:
+            return 'Error: ' + str(e) + ' ' + number
     @staticmethod
     def create_single_artifact_tx(tx, properties, label):
         query = (f'''
@@ -79,6 +113,15 @@ def create_artifact_nodes(artifacts, label):
         neo.close()
     except Exception as e:
         return 'Error: ' + str(e)
+
+def create_req_issue_traces(token_dict, number):
+    try:
+        neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
+        #print(issues)
+        neo.create_req_issue_trace(token_dict, number)
+        neo.close()
+    except Exception as e:
+        return 'Error: ' + str(e) + ' ' + + number
 
 def create_single_artifact_node(properties, label):
     try:
