@@ -32,6 +32,8 @@ def noun_analysis(token, token_dict):
     flag = False
     for child in token.children:
         if child.dep_ == "compound" or child.dep_ == "nmod" or child.dep_ == "amod":
+            if token.text == 'address':
+                print(child.text)
             token_dict["noun-objects"].append(f"""{child.text} {token.text}""")
             flag = True
     return flag
