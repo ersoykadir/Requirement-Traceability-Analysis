@@ -156,6 +156,7 @@ class Commit(Node):
         tempDate = committedDate.replace('T', ' ').replace('Z', '')
         self.committedDate = datetime.datetime.strptime(tempDate, '%Y-%m-%d %H:%M:%S')
         self.text = self.message
+        self.number = id
 
 class Requirement(Node):
     def __init__(self, node_type, id, description):

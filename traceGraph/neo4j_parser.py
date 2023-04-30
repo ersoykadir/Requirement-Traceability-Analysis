@@ -92,6 +92,7 @@ def build_commit_nodes(repo_number):
             commit['associatedPullRequests'] = None
 
         commit['text'] = commit['message']
+        commit['number'] = commit['oid']
     # Create neo4j nodes
     print(len(data['commits']))
     result = create_artifact_nodes(data['commits'], 'Commit')
