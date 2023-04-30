@@ -71,5 +71,13 @@ def custom_extractor(line, stopwords_path):
                 token_dict["nouns"].append(token.lemma_)
     return token_dict
 
-print(str(custom_extractor(lemmatizer("1.2.8.4. Created annotations shall be reachable from both profile page and relevant target resource(s)."), "")))
-print(lemmatizer("1.2.8.4. Created annotations shall be reachable from both profile page and relevant target resource(s)."))
+def extract_keywords(file_name, stopwords_path):
+    file = open(file_name, "r")
+    out = open(f"keywords_{file_name}.txt", "w")
+    for line in file:
+        out.write("{}\n".format(line))
+        keywords = custom_extractor(line, stopwords_path)
+        out.write("{}\n".format(keywords))
+    file.close()
+
+extract_keywords("Requirements_group2.txt", "SmartStopword.txt")
