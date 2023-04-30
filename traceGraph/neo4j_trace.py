@@ -72,11 +72,12 @@ def search_keyword_list(nodes, keyword_list):
 def lemmatize_issue(issue):
     issue.text = lemmatizer(issue.text)
 
-def lemmatize(graph):
+def lemmatize_and_remove_stopwords(graph):
     start = time.time()
     threads = []
     for issue in graph.issue_nodes.values():
         issue.text = lemmatizer(issue.text)
+        issue.text = remove_stopwords_from_text(issue.text, "../keyword_extractors/SmartStopword.txt")
         # lemma_thread = threading.Thread(target=lemmatize_issue, args=(issue,))
         # threads.append(lemma_thread)
         # lemma_thread.start()
@@ -85,18 +86,11 @@ def lemmatize(graph):
     end = time.time()
     print("Time taken to lemmatize all graph: ", end - start)
 
-def remove_stopwords(graph):
-    start = time.time()
-    for issue in graph.issue_nodes.values():
-        issue.text = remove_stopwords_from_text(issue.text, "../keyword_extractors/SmartStopword.txt")
-    end = time.time()
-    print("Time taken to remove stopwords all graph: ", end - start)
-
 def trace(repo_number):
     req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
     start = time.time()
     graph = Graph(repo_number)
-    lemmatize(graph)
+    lemmatize_and_remove_stopwords(graph)
     print("Time taken to create graph: ", time.time() - start)
     req_to_issue = {}
     req_to_pr = {}
