@@ -8,8 +8,8 @@ Acquires software artifacts(issue, pr, commmit, requirement) and writes them to 
 import os
 import requests
 import json
-from dotenv import load_dotenv
 from graphql_templates import ISSUE_queryTemplate, PR_queryTemplate, COMMIT_queryTemplate
+from dotenv import load_dotenv
 load_dotenv()
 
 username = os.getenv('GITHUB_USERNAME')
@@ -22,6 +22,7 @@ def get_data_from_api(body):
     url = 'https://api.github.com/graphql'
     r = requests.post(url = url, json = {"query":body}, auth=(username, token))
     data = r.json()
+    #print(data)
     return data
 
 # Gets a page of issues, appends them to the global issues list, and returns the hasNextPage and endCursor values.

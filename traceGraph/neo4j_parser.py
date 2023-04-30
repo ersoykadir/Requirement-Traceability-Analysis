@@ -27,6 +27,11 @@ def build_issue_nodes(repo_number):
         del issue['comments']
         if issue['milestone'] is not None:
             issue['milestone'] = issue['milestone']['description']
+        
+        issue['text'] = issue['title'] + ' ' + issue['body']
+        # add the comments to the text
+        for comment in issue['comment_list']:
+            issue['text'] += ' ' + comment
 
     # Create neo4j nodes from data['issues']
     print(len(data['issues']))
@@ -63,6 +68,11 @@ def build_pr_nodes(repo_number):
         pr['commitCount'] = pr['commits']['totalCount']
         pr['commit_list'] = commit_parser(pr['commits'])
         del pr['commits']
+
+        pr['text'] = pr['title'] + ' ' + pr['body']
+        # add the comments to the text
+        for comment in pr['comment_list']:
+            pr['text'] += ' ' + comment
     
     # Create neo4j nodes
     print(len(data['pullRequests']))
@@ -80,6 +90,8 @@ def build_commit_nodes(repo_number):
             commit['associatedPullRequests'] = commit['associatedPullRequests']['nodes'][0]['number']
         else:
             commit['associatedPullRequests'] = None
+
+        commit['text'] = commit['message']
     # Create neo4j nodes
     print(len(data['commits']))
     result = create_artifact_nodes(data['commits'], 'Commit')
@@ -90,6 +102,8 @@ def build_requirement_nodes(repo_number):
     f = open(data_fname, 'r')
     data = json.loads(f.read())
     f.close()
+    for requirement in data['requirements']:
+        requirement['text'] = requirement['description']
 
     # Create neo4j nodes
     print(len(data['requirements']))
@@ -107,10 +121,10 @@ def main():
     else:
         raise Exception("Invalid repo number")
 
-    build_issue_nodes()
-    build_pr_nodes()
-    build_commit_nodes()
-    build_requirement_nodes()
+    build_issue_nodes(repo_number)
+    build_pr_nodes(repo_number)
+    build_commit_nodes(repo_number)
+    build_requirement_nodes(repo_number)
 
 if __name__ == '__main__':
     main()
