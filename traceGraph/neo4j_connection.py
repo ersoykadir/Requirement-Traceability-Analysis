@@ -65,30 +65,33 @@ class neo4jConnector:
             #print(result)
     
     @staticmethod
-    def create_req_issue_trace_tx(tx, regex, number):
+    def create_req_issue_trace_tx(tx, req_number, node_list, weight, keyword):
         query = ('''
+                match (r:Requirement)
+                where r.number = '{req_number}'
+                with r
+                UNWIND {node_list} AS issue_numbers
                 match (i:Issue)
-                where i.text =~ '$regex'
-                with i
-                match (r:Requirement {number: '$number'})
-                create (i)<-[t:tracesTo]-(r)
+                where i.number= issue_numbers
+                merge (i)<-[t:tracesTo]-(r)
+                set t.weight = {weight}
+                set t.keyword = '{keyword}'
                 return *
-                ''')
-        print(query)
-        result = tx.run(query, regex=regex, number=number)
+                ''').format(req_number=req_number, node_list=node_list, weight=weight, keyword=keyword)
+        result = tx.run(query)
         record = result.data()
         return record
 
-    def create_req_issue_trace(self, token_dict, number):
+    def create_req_issue_trace(self, req_issue_trace):
         try:
             with self.driver.session() as session:
                 print("connecting to neo4j")
-                for keyword in token_dict['verbs']:
-                    print(keyword)
-                    result = session.execute_write(self.create_req_issue_trace_tx, word_regex.format(keyword), number)
-                    print(result)
+                for req_number in req_issue_trace:
+                    for tuple in req_issue_trace[req_number]:
+                        keyword, node_list, weight = tuple
+                        result = session.execute_write(self.create_req_issue_trace_tx, req_number, node_list, weight, keyword)
         except Exception as e:
-            return 'Error: ' + str(e) + ' ' + number
+            return 'Error: ' + str(e) + ' ' + req_number 
     @staticmethod
     def create_single_artifact_tx(tx, properties, label):
         query = (f'''
@@ -113,15 +116,18 @@ def create_artifact_nodes(artifacts, label):
         neo.close()
     except Exception as e:
         return 'Error: ' + str(e)
-
-def create_req_issue_traces(token_dict, number):
+import time
+def create_req_issue_traces(req_issue_trace):
+    start = time.time() 
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", "password")
-        #print(issues)
-        neo.create_req_issue_trace(token_dict, number)
+        print('here')
+        neo.create_req_issue_trace(req_issue_trace)
         neo.close()
     except Exception as e:
-        return 'Error: ' + str(e) + ' ' + + number
+        return 'Error: ' + str(e) 
+    end = time.time()
+    print("Time taken to connect neo4j and create trace for keyword: ", end - start)
 
 def create_single_artifact_node(properties, label):
     try:
