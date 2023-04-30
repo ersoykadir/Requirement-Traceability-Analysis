@@ -64,3 +64,14 @@ def custom_extractor(line, stopwords_path):
             if not noun_analysis(token, token_dict):
                 token_dict["nouns"].append(token.text)
     return token_dict
+
+def extract_keywords(file_name, stopwords_path):
+    file = open(file_name, "r")
+    out = open(f"keywords_{file_name}.txt", "w")
+    for line in file:
+        out.write("{}\n".format(line))
+        keywords = custom_extractor(line, stopwords_path)
+        out.write("{}\n".format(keywords))
+    file.close()
+
+extract_keywords("Requirements_group2.txt", "SmartStopword.txt")

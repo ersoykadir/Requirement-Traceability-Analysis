@@ -35,7 +35,6 @@ def find_trace(graph, keyword):
         except Exception as e:
             print(str(e))
             print(node.text)
-            print(keywords)
         if match != None:
             # print(match, node.node_id)
             found_nodes.add(node)
@@ -53,30 +52,36 @@ def search_keyword(graph, keywords):
         found_nodes[keyword] = find_trace(graph, (keyword, "nounphrase"))
     return found_nodes
 
-    
+import time
+def main():
+    start = time.time()
+    repo_number = sys.argv[1]
+    g = Graph(repo_number)
+    trace_file = open(f"trace_links_group{repo_number}.txt", "w", encoding="utf-8") 
+    req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
 
-g = Graph()
+    for line in req_file:
+        token_dict = custom_extractor(line, "../keyword_extractors/SmartStopword.txt")
+        trace_file.write("{}".format(line))
+        trace_file.write("{}\n".format(token_dict))
 
-# keywords = {'verbs': [], 'verb-objects': ['share notes'], 'nouns': ['notes'], 'noun-objects': []}
+        nodes = search_keyword(g, token_dict)
+        #sorted_traces = sorted(nodes, key=lambda x: x.node_id)
+        for keyword in nodes.keys():
+            trace_file.write(keyword + ' ' + str(len(nodes[keyword])) + "\n")
+            for node in nodes[keyword]:
+                try:
+                    trace_file.write(f"{node.node_id} {node.title}\n")
+                except Exception as e:
+                    print(str(e))
+                    #print(node.text)
+                    print(node.node_id)
+            trace_file.write('------------------' + '\n')
+        trace_file.write('\n')
+    trace_file.close()
+    req_file.close()
+    end = time.time()
+    print(f"Time elapsed: {end - start}")
 
-trace_file = open("trace_links.txt", "w", encoding="utf-8") 
-req_file = open("data_group2/group2_requirements.txt", "r", encoding="utf-8")
-
-for line in req_file:
-    token_dict = custom_extractor(line, "../keyword_extractors/SmartStopword.txt")
-    trace_file.write("{}".format(line))
-    trace_file.write("{}\n".format(token_dict))
-
-    nodes = search_keyword(g, token_dict)
-    #sorted_traces = sorted(nodes, key=lambda x: x.node_id)
-    for keyword in nodes.keys():
-        trace_file.write(keyword + ' ' + str(len(nodes[keyword])) + "\n")
-        for node in nodes[keyword]:
-            try:
-                trace_file.write(f"{node.node_id} {node.title}\n")
-            except Exception as e:
-                print(str(e))
-                #print(node.text)
-                print(node.node_id)
-        trace_file.write('------------------' + '\n')
-    trace_file.write('\n')
+if __name__ == "__main__":
+    main()
