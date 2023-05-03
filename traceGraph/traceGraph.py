@@ -6,6 +6,11 @@ Requirements Traceability Graph
 import sys
 import json
 import datetime
+from nltk.corpus import stopwords
+import string
+from nltk.tokenize import word_tokenize
+from gensim.models import Word2Vec as w2v
+import numpy as np
 
 sys.path.append('..')
 from keyword_extractors.extractor_yake import extract_yake
@@ -40,8 +45,7 @@ def commit_parser(related_commits):
     return commit_ids, commit_nodes
 
 # Parses the data from the json files and creates a dictionary of graph nodes, where the key is the issue/pr number.
-def build_issue_nodes(repo_number):
-    global issue_number_threshold
+def build_issue_nodes(repo_number, issue_number_threshold):
     # Get all issues from the github api and write them to a json file.
     issue_data_fname = f'data_group{repo_number}/issues_data.json'
     f = open(issue_data_fname, 'r')
@@ -49,8 +53,8 @@ def build_issue_nodes(repo_number):
     f.close()
     issue_nodes = {}
     for issue in data['issues']:
-        # if issue['number'] < issue_number_threshold: # Skip the issues that were created in 352.
-        #     continue
+        if issue['number'] < issue_number_threshold: # Skip the issues that were created in 352.
+            continue
         node = Issue('issue', issue['number'], issue['title'], issue['body'], issue['comments'], issue['state'], issue['createdAt'], issue['closedAt'], issue['url'], issue['milestone'])
         issue_nodes[node.number] = node
     return issue_nodes
@@ -65,6 +69,7 @@ def build_pr_nodes(repo_number):
     pr_nodes = {}
     commit_nodes = {}
     for pr in data['pullRequests']:
+
         node = PullRequest('pullRequest', pr['number'], pr['title'], pr['body'], pr['comments'], pr['state'], pr['createdAt'], pr['closedAt'], pr['url'], pr['milestone'], pr['commits'])
         pr_nodes[node.number] = node
         # Parse the commits of the pull request.
@@ -97,6 +102,8 @@ def build_requirement_nodes(repo_number):
         requirement_nodes[node.node_id] = node
     return requirement_nodes
 
+total_missing_tokens = 0
+
 # Class representing graph nodes. Each node represents a software artifact (issue, pull request, requirement, commit).
 class Node:
     def __init__(self, node_type, node_id):
@@ -117,6 +124,36 @@ class Node:
             - PR - title, description, merged or not
             - Commit - commit message, code changed in that commit
         '''
+    def preprocess_text(self):
+        self.text = self.text.rstrip('\n')
+        self.text = self.text.lower()
+        self.text = self.text.translate(str.maketrans('', '', string.punctuation))
+        self.text = self.text.translate(str.maketrans('', '', string.digits))
+        sw = stopwords.words('english')
+        tokens = word_tokenize(self.text)
+        self.tokens = [w for w in tokens if not w in sw]
+
+    def create_vector(self, model):
+        try:
+            # sw = stopwords.words('english')
+            # tokens = word_tokenize(self.text)
+            # tokens = [w for w in tokens if not w in sw]
+            self.word_vector = []
+            for token in self.tokens:
+                try:
+                    self.word_vector.append(model.wv[token])
+                except KeyError:
+                    print(token, 'not in vocabulary')
+                    global total_missing_tokens
+                    total_missing_tokens += 1
+            # self.word_vector = model.wv[self.tokens]
+            self.average_word_vector = np.mean(self.word_vector, axis=0)
+        except Exception as e:
+            print(e)
+            print(self.text)
+            print(self.tokens)
+            print(self.node_type, self.node_id)
+            raise e
 
     def __str__(self):
         return f"Node: {self.node_type}-{self.node_id}"
@@ -163,6 +200,7 @@ class Requirement(Node):
         super().__init__(node_type, id)
         self.description = description
         self.text = self.description
+        self.number = id
         try:
             self.keywords = extract_yake(self.text, '../keyword_extractors/SmartStopword.txt')
         except Exception as e:
@@ -171,11 +209,53 @@ class Requirement(Node):
 # Class representing the graph of software artifacts.
 class Graph:
     def __init__(self, repo_number):
+
+        if repo_number == 2:
+            self.issue_number_threshold = 309 # for group 2
+        elif repo_number == 3:
+            self.issue_number_threshold = 258 # for group 3
+        else:
+            raise Exception("Invalid repo number")
+        
         self.nodes = {}
-        self.issue_nodes = build_issue_nodes(repo_number)
+        self.issue_nodes = build_issue_nodes(repo_number, self.issue_number_threshold)
         self.pr_nodes, self.commit_nodes = build_pr_nodes(repo_number)
-        self. commit_nodes = self.commit_nodes | build_commit_nodes(repo_number)
+        self.commit_nodes = self.commit_nodes | build_commit_nodes(repo_number)
         self.requirement_nodes = build_requirement_nodes(repo_number)
+        self.nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes | self.requirement_nodes
+
 
     def __str__(self):
-        return f"Graph with {len(self.nodes)} nodes."
+        return f"Graph with {len(self.issue_nodes)} nodes."
+
+    def create_model(self):
+        texts = []
+        total_tokens = 0
+        for node in self.nodes.values():
+            node.preprocess_text()
+            texts.append(node.tokens)
+            total_tokens += len(node.tokens)
+        print(len(texts))
+        # tokens = [word_tokenize(text) for text in texts]
+        # tokens = self.remove_stopwords(tokens)
+        self.model = w2v(
+            texts,
+            min_count=3,  
+            sg = 1,       
+            window=7      
+        )
+        for node in self.nodes.values():
+            node.create_vector(self.model)
+        print('Total missing tokens:', total_missing_tokens)
+        print('Total tokens:', total_tokens)
+
+    def remove_stopwords(self, tokens):
+        res = []
+        sw = stopwords.words('english')
+        for text in tokens:
+            original = text
+            text = [w for w in text if w not in sw]
+            if len(text) < 1:
+                text = original
+            res.append(text)
+        return res

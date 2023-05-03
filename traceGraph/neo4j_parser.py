@@ -1,5 +1,5 @@
 import json
-from neo4j_connection import create_artifact_nodes, create_single_artifact_node
+from neo4j_connection import create_artifact_nodes, clean_artifact_nodes, neo4jConnector, neo4j_password
 
 # Parses the comments of an issue or pull request.
 def comment_parser(comments):
@@ -19,6 +19,7 @@ def build_issue_nodes(repo_number):
     for issue in data['issues']:
         # if issue['number'] < issue_number_threshold: # Skip the issues that were created in 352.
         #     # remove the issue from the list
+        #     data['issues'].remove(issue)
         #     continue
 
         # Since neo4j does not support dictionaries as properties, we need to convert the dictionaries to lists or strings.
@@ -36,7 +37,6 @@ def build_issue_nodes(repo_number):
     # Create neo4j nodes from data['issues']
     print(len(data['issues']))
     result = create_artifact_nodes(data['issues'], 'Issue')
-    print(result)
 
 # Parses the commits of a pull request.
 def commit_parser(related_commits):
@@ -126,6 +126,11 @@ def main():
     build_pr_nodes(repo_number)
     build_commit_nodes(repo_number)
     build_requirement_nodes(repo_number)
+
+    # Clean the nodes
+    neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
+    clean_artifact_nodes(neo, issue_number_threshold, 'Issue')
+    neo.close()
 
 if __name__ == '__main__':
     main()
