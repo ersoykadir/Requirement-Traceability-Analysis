@@ -64,6 +64,9 @@ artifact_template = {
 
 # Gets all issues, page by page, and writes them to a json file.
 def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
+    if os.path.exists(f'data_group{repo_number}/{artifact_type}_data.json'):
+        print(f'{artifact_type} already exists.')
+        return
     template = artifact_template[artifact_type]
     get_page = get_artifact_page[artifact_type]
     pages = []
@@ -87,7 +90,9 @@ def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
     f.close()
 
 def get_requirements(repo_number):
-
+    if os.path.exists(f'data_group{repo_number}/requirements_data.json'):
+        print('requirements already exists.')
+        return
     requirements_file_name = f'data_group{repo_number}/group{repo_number}_requirements.txt'
     f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
     data = f.readlines()
@@ -118,7 +123,7 @@ def get_artifacts(repo_number):
     start = time.time()
     repo_owner = 'bounswe'
     repo_name = f'bounswe2022group{repo_number}'
-    
+
     get_all_pages('issues', repo_owner, repo_number, repo_name)
     get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
     get_all_pages('commits', repo_owner, repo_number, repo_name)
