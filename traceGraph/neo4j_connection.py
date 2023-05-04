@@ -146,7 +146,7 @@ class neo4jConnector:
     @staticmethod
     def clean_all_data_tx(tx):
         query = ('''
-                MATCH (n:)
+                MATCH (n)
                 detach delete n
                 ''')
         result = tx.run(query)
