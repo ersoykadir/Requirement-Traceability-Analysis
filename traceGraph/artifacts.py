@@ -1,6 +1,6 @@
 """
 Kadir Ersoy - Ecenur Sezer
-Requirements Traceability Graph
+Requirements Traceability Tool
 
 Acquires software artifacts(issue, pr, commmit, requirement) and writes them to json files.
 """
@@ -8,8 +8,8 @@ Acquires software artifacts(issue, pr, commmit, requirement) and writes them to 
 import os
 import requests
 import json
-from dotenv import load_dotenv
 from graphql_templates import ISSUE_queryTemplate, PR_queryTemplate, COMMIT_queryTemplate
+from dotenv import load_dotenv
 load_dotenv()
 
 username = os.getenv('GITHUB_USERNAME')
@@ -22,6 +22,7 @@ def get_data_from_api(body):
     url = 'https://api.github.com/graphql'
     r = requests.post(url = url, json = {"query":body}, auth=(username, token))
     data = r.json()
+    #print(data)
     return data
 
 # Gets a page of issues, appends them to the global issues list, and returns the hasNextPage and endCursor values.
@@ -54,6 +55,7 @@ get_artifact_page = {
     'commits': get_commit_page
 }
 
+# graphql query templates for each artifact type
 artifact_template = {
     'issues': ISSUE_queryTemplate,
     'pullRequests': PR_queryTemplate,
@@ -62,6 +64,9 @@ artifact_template = {
 
 # Gets all issues, page by page, and writes them to a json file.
 def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
+    if os.path.exists(f'data_group{repo_number}/{artifact_type}_data.json'):
+        print(f'{artifact_type} already exists.')
+        return
     template = artifact_template[artifact_type]
     get_page = get_artifact_page[artifact_type]
     pages = []
@@ -85,7 +90,9 @@ def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
     f.close()
 
 def get_requirements(repo_number):
-
+    if os.path.exists(f'data_group{repo_number}/requirements_data.json'):
+        print('requirements already exists.')
+        return
     requirements_file_name = f'data_group{repo_number}/group{repo_number}_requirements.txt'
     f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
     data = f.readlines()
@@ -112,6 +119,18 @@ def get_requirements(repo_number):
     f.close()
 
 import sys, time
+def get_artifacts(repo_number):
+    start = time.time()
+    repo_owner = 'bounswe'
+    repo_name = f'bounswe2022group{repo_number}'
+
+    get_all_pages('issues', repo_owner, repo_number, repo_name)
+    get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
+    get_all_pages('commits', repo_owner, repo_number, repo_name)
+    get_requirements(repo_number)
+    end = time.time()
+    print(f"Time elapsed for acquiring artifacts from github: {end-start}")
+
 def main():
     start = time.time()
     repo_number = sys.argv[1]
