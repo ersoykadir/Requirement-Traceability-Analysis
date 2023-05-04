@@ -7,12 +7,23 @@ import sys
 
 def main():
     repo_number = int(sys.argv[1])
+    try:
+        search_method = str(sys.argv[2])
+        print(search_method)
+    except:
+        print("Please enter a valid search method!")
     get_artifacts(repo_number)
     clean_all_data(repo_number) # Beware! This will delete all data in the neo4j database
     # TODO: There is a problem with creating only missing nodes so we have to delete all data before creation for now
     create_neo4j_nodes(repo_number)
-    trace(repo_number)
-    # trace_wv(repo_number) # comment above and uncomment this line to use word2vec
+
+    if(search_method == 'word-vector'):
+        trace_wv(repo_number) # comment above and uncomment this line to use word2vec
+    elif(search_method == "keyword"):
+        trace(repo_number)
+    else:
+        print("Please enter a valid search method!")
+
 
 if __name__ == '__main__':
     main()
