@@ -50,11 +50,11 @@ class neo4jConnector:
     def create_artifact_tx(tx, artifacts, label):
         query = (f'''
                 UNWIND $artifacts AS properties
-                CREATE (n:{label})
+                create (n: {label} )
                 SET n = properties
                 RETURN n
                 ''').format(label=label)
-        result = tx.run(query, artifacts=artifacts)
+        result = tx.run(query, artifacts=artifacts, label=label)
         record = result.data()
         return record
 
@@ -143,6 +143,20 @@ class neo4jConnector:
         with self.driver.session() as session:
             result = session.execute_write(self.clean_artifacts_tx, threshold, label)
 
+    @staticmethod
+    def clean_all_data_tx(tx):
+        query = ('''
+                MATCH (n:)
+                detach delete n
+                ''')
+        result = tx.run(query)
+        record = result.data()
+        return record
+
+    def clean_all_data(self):
+        with self.driver.session() as session:
+            result = session.execute_write(self.clean_all_data_tx)
+
 def create_artifact_nodes(artifacts, label):
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
@@ -172,5 +186,12 @@ def create_traces_w2v(neo:neo4jConnector, req_issue_trace, artifact_label):
 def clean_artifact_nodes(neo:neo4jConnector, threshold, label):
     try:
         neo.clean_artifacts(threshold, label)
+    except Exception as e:
+        return 'Error: ' + str(e)
+    
+def clean_all_data(neo:neo4jConnector):
+    try:
+        neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
+        neo.clean_all_data()
     except Exception as e:
         return 'Error: ' + str(e)

@@ -1,6 +1,6 @@
 """
 Kadir Ersoy - Ecenur Sezer
-Requirements Traceability Graph
+Requirements Traceability Tool
 
 Acquires software artifacts(issue, pr, commmit, requirement) and writes them to json files.
 """
@@ -55,6 +55,7 @@ get_artifact_page = {
     'commits': get_commit_page
 }
 
+# graphql query templates for each artifact type
 artifact_template = {
     'issues': ISSUE_queryTemplate,
     'pullRequests': PR_queryTemplate,
@@ -113,6 +114,18 @@ def get_requirements(repo_number):
     f.close()
 
 import sys, time
+def get_artifacts(repo_number):
+    start = time.time()
+    repo_owner = 'bounswe'
+    repo_name = f'bounswe2022group{repo_number}'
+    
+    get_all_pages('issues', repo_owner, repo_number, repo_name)
+    get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
+    get_all_pages('commits', repo_owner, repo_number, repo_name)
+    get_requirements(repo_number)
+    end = time.time()
+    print(f"Time elapsed for acquiring artifacts from github: {end-start}")
+
 def main():
     start = time.time()
     repo_number = sys.argv[1]
