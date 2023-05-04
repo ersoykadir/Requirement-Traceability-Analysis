@@ -33,10 +33,10 @@ def find_similar_nodes(artifact_nodes, req_node, topn=20):
             try:
                 if math.isnan(artifact.average_word_vector):
                     continue
-                similarity = cos_sim(req_node.average_word_vector, artifact.average_word_vector)
-                similarities.append((artifact, similarity))
             except:
                 pass
+            similarity = cos_sim(req_node.average_word_vector, artifact.average_word_vector)
+            similarities.append((artifact, similarity))
         similarities.sort(key=lambda x: x[1], reverse=True)
         similar_nodes = []
         for i in range(topn):

@@ -139,7 +139,7 @@ class Node:
                 try:
                     self.word_vector.append(model.wv[token])
                 except KeyError:
-                    print(token, 'not in vocabulary')
+                    #print(token, 'not in vocabulary')
                     global total_missing_tokens
                     total_missing_tokens += 1
             # self.word_vector = model.wv[self.tokens]
