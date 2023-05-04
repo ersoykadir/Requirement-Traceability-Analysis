@@ -91,6 +91,8 @@ GITHUB_USERNAME=<your github username>
 GITHUB_TOKEN=<your github token>
 NEO4J_PASSWORD="password"
 ```
+You can find a file named _.env.example_ as a template in the root directory.
+
 Navigate to the traceGraph directory under the root.
 ```bash
 cd ./traceGraph
