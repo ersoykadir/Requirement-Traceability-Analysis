@@ -1,3 +1,11 @@
+"""
+Kadir Ersoy - Ecenur Sezer
+Requirements Traceability Tool
+
+How to run:     python ./main.py <repo_number> <search_method>
+Please beware that neo4j server should be up before running this script. Further details can be found in ReadME.
+"""
+
 from artifacts import get_artifacts
 from neo4j_parser import create_neo4j_nodes
 from neo4j_trace import trace
