@@ -98,6 +98,7 @@ def trace(repo_number):
     req_to_issue = {}
     req_to_pr = {}
     req_to_commit = {}
+    issue_to_pr = {}
 
     # most frequent words
     # most_frequent_words(f"data_group{repo_number}/group{repo_number}_requirements.txt", "../keyword_extractors/SmartStopword.txt")
@@ -106,25 +107,42 @@ def trace(repo_number):
     start = time.time()
     for line in req_file:
         line = line.split(' ', 1)
-        req_number, description = line[0], line[1]
+        number, description = line[0], line[1]
         # Extract keywords from requirement description
         # token dictionary = {verbs: [], verb-objects: [], nouns: [], noun-objects: []}
         token_dict = custom_extractor(description, "../keyword_extractors/SmartStopword.txt")
 
-        req_to_issue[req_number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
-        req_to_pr[req_number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
-        req_to_commit[req_number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
+        req_to_issue[number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
+        req_to_pr[number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
+        req_to_commit[number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
 
     print("Time taken to search for keywords: ", time.time() - start)
-
+    issue_to_pr = trace_issue_to_pr(graph)
     # Connect to Neo4j and create traces
     start = time.time()
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_traces(neo, req_to_issue, 'Issue')
-    create_traces(neo, req_to_pr, 'PullRequest')
-    create_traces(neo, req_to_commit, 'Commit')
+    create_traces(neo, req_to_issue, 'Requirement','Issue')
+    #create_traces(neo, req_to_pr, 'Requirement','PullRequest')
+    create_traces(neo, req_to_commit, 'Requirement','Commit')
+    create_traces(neo, issue_to_pr, 'Issue','PullRequest')
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
+
+def trace_issue_to_pr(graph):
+    start = time.time()
+    issue_to_pr = {}
+
+    # Find PRs that have matching keywords for each issue
+    start = time.time()
+    for issue in graph.issue_nodes.values():
+        # Extract keywords from requirement description
+        # token dictionary = {verbs: [], verb-objects: [], nouns: [], noun-objects: []}
+        token_dict = custom_extractor(issue.trace_text, "../keyword_extractors/SmartStopword.txt")
+        issue_to_pr[issue.number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
+
+    print("Time taken to search for keywords of issues: ", time.time() - start)
+
+    return issue_to_pr
 
 def main():
     repo_number = int(sys.argv[1])

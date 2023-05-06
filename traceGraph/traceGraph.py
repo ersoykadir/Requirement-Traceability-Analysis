@@ -163,6 +163,7 @@ class Issue(Node):
         self.url = url
         self.title = title
         self.body = body
+        self.trace_text = title
         self.comments = comment_parser(comments)
         self.number_of_comments = len(comments)
         self.state = state

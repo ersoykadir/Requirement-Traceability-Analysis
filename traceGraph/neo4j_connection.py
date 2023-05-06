@@ -63,13 +63,15 @@ class neo4jConnector:
             result = session.execute_write(self.create_artifact_tx, artifacts, label)
     
     @staticmethod
-    def create_trace_tx(tx, req_number, node_list, weight, keyword, artifact_label):
+    def create_trace_tx(tx, number, node_list, weight, keyword, source_artifact_label, dest_artifact_label):
+        if(source_artifact_label == "Requirement"):
+            number = f"\"{number}\""
         query = ('''
-                match (r:Requirement)
-                where r.number = '{req_number}'
+                match (r:{source_artifact_label})
+                where r.number = {number}
                 with r
                 UNWIND {node_list} AS node_numbers
-                match (i:{artifact_label})
+                match (i:{dest_artifact_label})
                 where i.number= node_numbers
                 create (i)<-[t:tracesTo]-(r)
                 set t.weight = {weight}
@@ -80,23 +82,23 @@ class neo4jConnector:
         # for req_number in req_issue_trace:
         #     for tuple in req_issue_trace[req_number]:
         #         keyword, node_list, weight = tuple
-        query = query.format(req_number=req_number, node_list=node_list, weight=weight, keyword=keyword, artifact_label=artifact_label)
+        query = query.format(number=number, node_list=node_list, weight=weight, keyword=keyword, source_artifact_label=source_artifact_label, dest_artifact_label=dest_artifact_label)
         result = tx.run(query)
         record = result.data()
         #return record
 
-    def create_trace(self, req_issue_trace, artifact_label):
+    def create_trace(self, traces, source_artifact_label, dest_artifact_label):
         try:
             with self.driver.session() as session:
                 print("connecting to neo4j")
                 # if artifact_label == 'Issue':
                 #     print(req_issue_trace)
                 # Send query for each requirement instead of for each keyword!
-                for req_number in req_issue_trace:
-                    for tuple in req_issue_trace[req_number]:
+                for number in traces:
+                    for tuple in traces[number]:
                         keyword, node_list, weight = tuple
                         if len(node_list) > 0:
-                            result = session.execute_write(self.create_trace_tx, req_number, node_list, weight, keyword, artifact_label)
+                            result = session.execute_write(self.create_trace_tx, number, node_list, weight, keyword, source_artifact_label, dest_artifact_label)
                 # result = session.execute_write(self.create_req_issue_trace_tx, req_issue_trace, artifact_label)
         except Exception as e:
             return 'Error: ' + str(e)  
@@ -165,14 +167,14 @@ def create_artifact_nodes(artifacts, label):
     except Exception as e:
         return 'Error: ' + str(e) + ' for label: ' + label
 import time
-def create_traces(neo:neo4jConnector, req_issue_trace, artifact_label):
+def create_traces(neo:neo4jConnector, req_issue_trace, source_artifact_label, dest_artifact_label):
     start = time.time() 
     try:
-        neo.create_trace(req_issue_trace, artifact_label)
+        neo.create_trace(req_issue_trace, source_artifact_label, dest_artifact_label)
     except Exception as e:
         return 'Error: ' + str(e) 
     end = time.time()
-    print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
+    print(f"Time taken to connect neo4j and create traces for {dest_artifact_label}: ", end - start)
 
 def create_traces_w2v(neo:neo4jConnector, req_issue_trace, artifact_label):
     start = time.time() 
