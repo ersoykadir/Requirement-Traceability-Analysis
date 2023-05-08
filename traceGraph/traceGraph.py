@@ -101,6 +101,8 @@ def build_requirement_nodes(repo_number):
     requirement_nodes = {}
     for req in data['requirements']:
         node = Requirement('requirement', req['number'], req['description'])
+        if req['parent'] != "":
+            node.parent = requirement_nodes[req['parent']]
         requirement_nodes[node.node_id] = node
     return requirement_nodes
 
@@ -197,10 +199,24 @@ class Requirement(Node):
         self.description = description
         self.text = self.description
         self.number = id
+        self.parent = None
+        self.keyword_dict = {}
         # try:
         #     self.keywords = self.extract_keywords()
         # except Exception as e:
         #     print(str(e), self.node_id, self.node_type)
+    def extract_keywords(self):
+        try:
+            print("Extracting keywords for requirement", self.node_id)
+            keyword_dict = custom_extractor(self.text, '../keyword_extractors/SmartStopword.txt')
+            if self.parent is not None:
+                # parent_keywords = custom_extractor(self.parent.text, '../keyword_extractors/SmartStopword.txt')
+                parent_keywords = self.parent.keyword_dict
+                for key_type in keyword_dict:
+                    keyword_dict[key_type] = list(set(keyword_dict[key_type] + parent_keywords[key_type]))
+            self.keyword_dict = keyword_dict
+        except Exception as e:
+            print(str(e), self.node_id, self.node_type)
 
 # Class representing the graph of software artifacts.
 class Graph:

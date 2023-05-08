@@ -102,12 +102,17 @@ def get_requirements(repo_number):
 
     for line in data:
         # Assuming that the requirement number is the first word in the line
+        if len(line) == 0:
+            continue
         req = line.split(' ', 1)
-        req_number = req[0]
+        req_number = req[0].strip()
+        if req_number[-1] == '.':
+            req_number = req_number[:-1]
         req_description = req[1]
         req_dict = {
             'number': req_number,
-            'description': req_description
+            'description': req_description,
+            'parent': '.'.join(req_number.split('.')[:-1])
         }
         requirements.append(req_dict)
     
