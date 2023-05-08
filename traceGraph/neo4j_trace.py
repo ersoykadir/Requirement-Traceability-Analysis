@@ -25,13 +25,13 @@ noun_phrase_regex = r'\b{0}\s{1}\b'
 def search_pattern(nodes, regex, keyword, weight, found_nodes):
     result = set()
     compiled_regex = re.compile(regex, flags=re.IGNORECASE)
-    for issue in nodes:
+    for node in nodes:
         try:
-            match = compiled_regex.search(issue.text)
+            match = compiled_regex.search(node.text)
         except Exception as e:
-            print(str(e), issue.number)
+            print(str(e), node.number)
         if match != None:
-            result.add(issue.number)
+            result.add(node.number)
     result = list(result)
     found_nodes.append((keyword, result, weight))
 
@@ -79,13 +79,9 @@ def lemmatize_remove(artifact):
 
 # Lemmatize and remove stopwords from each artifact in the graph
 def lemmatize_and_remove_stopwords(graph):
-    threads = []
-    for issue in graph.issue_nodes.values():
-        lemma_thread = threading.Thread(target=lemmatize_remove, args=(issue,))
-        threads.append(lemma_thread)
-        lemma_thread.start()
-    for thread in threads:
-        thread.join()
+    for art in graph.artifact_nodes.values():
+        # print(art.node_id)
+        lemmatize_remove(art)
 
 def trace(repo_number):
     # Create graph, lemmatize and remove stopwords from each artifact

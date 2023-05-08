@@ -17,7 +17,7 @@ from gensim.models import Word2Vec as w2v
 import numpy as np
 
 sys.path.append('..')
-from keyword_extractors.extractor_yake import extract_yake
+from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor
 
 # Utility function to convert a github timestamp to a datetime object, to calculate the time to finish an issue.
 def time_to_finish(created, closed):
@@ -198,9 +198,9 @@ class Requirement(Node):
         self.text = self.description
         self.number = id
         # try:
-        #     self.keywords = extract_yake(self.text, '../keyword_extractors/SmartStopword.txt')
+        #     self.keywords = self.extract_keywords()
         # except Exception as e:
-        #     print(str(e))
+        #     print(str(e), self.node_id, self.node_type)
 
 # Class representing the graph of software artifacts.
 class Graph:
@@ -219,6 +219,7 @@ class Graph:
         self.commit_nodes = build_commit_nodes(repo_number)
         self.requirement_nodes = build_requirement_nodes(repo_number)
         self.nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes | self.requirement_nodes
+        self.artifact_nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes
 
 
     def __str__(self):
