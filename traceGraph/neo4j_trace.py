@@ -22,7 +22,7 @@ verbobj_regex = r'\b{0}\s((?:[\w,;:\'\"`]+\s)*){1}\b'
 noun_phrase_regex = r'\b{0}\s{1}\b'
 
 # Searches for the regex pattern in given nodes.
-def search_pattern(nodes, regex, keyword, weight, found_nodes):
+def search_pattern(nodes, regex, keyword, found_nodes):
     result = set()
     compiled_regex = re.compile(regex, flags=re.IGNORECASE)
     for node in nodes:
@@ -52,24 +52,24 @@ def search_keyword_list(nodes, keyword_list):
     threads = []
     for keyword in keyword_list['verbs']:
         regex = word_regex.format(keyword)
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 0.5, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     for keyword in keyword_list['verb-objects']:
         keywords = keyword.split()
         regex = verbobj_regex.format(keywords[0], keywords[1])
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 1, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     for keyword in keyword_list['nouns']:
         regex = word_regex.format(keyword)
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 0.5, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     for keyword in keyword_list['noun-objects']:
         keywords = keyword.split()
         regex = noun_phrase_regex.format(keywords[0], keywords[1])
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 1, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     
