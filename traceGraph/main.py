@@ -19,8 +19,17 @@ def main():
         search_method = str(sys.argv[2])
         print(search_method)
     except:
-        print("Please enter a valid search method!")
-    get_artifacts(repo_number)
+        raise Exception("Please enter a valid search method!")
+    try:
+        mode = sys.argv[3]
+        if mode == "req_tree":
+            parent_mode = True
+        else:
+            raise Exception("Please enter a valid mode!")
+    except:
+        parent_mode = False
+        print('here-------------')
+    get_artifacts(repo_number, parent_mode)
     clean_all_data(repo_number) # Beware! This will delete all data in the neo4j database
     # TODO: There is a problem with creating only missing nodes so we have to delete all data before creation for now
     create_neo4j_nodes(repo_number)
@@ -28,7 +37,7 @@ def main():
     if(search_method == 'word-vector'):
         trace_wv(repo_number) # comment above and uncomment this line to use word2vec
     elif(search_method == "keyword"):
-        trace(repo_number)
+        trace(repo_number, parent_mode)
     else:
         print("Please enter a valid search method!")
 

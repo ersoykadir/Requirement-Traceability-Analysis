@@ -90,14 +90,14 @@ def lemmatize_and_remove_stopwords(graph):
     graph.save_graph()
 
 import pickle
-def trace(repo_number):
+def trace(repo_number, parent_mode):
     # Create graph, lemmatize and remove stopwords from each artifact
     start = time.time()
     #req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
     if os.path.exists(f"data_group{repo_number}/graph.pkl"):
         graph = pickle.load(open(f"data_group{repo_number}/graph.pkl", "rb"))
     else:
-        graph = Graph(repo_number)
+        graph = Graph(repo_number, parent_mode)
         lemmatize_and_remove_stopwords(graph)
     print("Time taken to lemmatize and create graph: ", time.time() - start)
 
@@ -112,7 +112,7 @@ def trace(repo_number):
     start = time.time()
     for req in graph.requirement_nodes.values():
         req_number = req.number
-        req.extract_keywords()
+        req.extract_keywords(parent_mode)
         token_dict = req.keyword_dict
 
         req_to_issue[req_number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
@@ -132,7 +132,12 @@ def trace(repo_number):
 
 def main():
     repo_number = int(sys.argv[1])
-    trace(repo_number)
+    mode = sys.argv[2]
+    if mode == "req_tree":
+        parent_mode = True
+    else:
+        parent_mode = False
+    trace(repo_number, parent_mode)
 
 if __name__ == "__main__":
     main()

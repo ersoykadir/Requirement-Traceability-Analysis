@@ -8,7 +8,7 @@ Writes traces to neo4j database.
 
 import time, os, sys, math, operator
 from neo4j_connection import neo4jConnector, create_traces_w2v
-from traceGraph import Graph
+from trace_graph import Graph
 from dotenv import load_dotenv
 load_dotenv()
 

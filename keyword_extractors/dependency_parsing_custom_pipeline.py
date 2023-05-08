@@ -22,10 +22,6 @@ def most_frequent_words(req_file, stopwords_path):
     for tup in Counter(words).most_common(5):
         f.write(f"{tup[0]}\n")
 
-def remove_stopwords(tokens, stopwords_path):
-    stopwords=set(line.strip().lower() for line in open(stopwords_path))
-    return filter(lambda x: x.text.lower() not in stopwords, tokens) 
-
 def verb_analysis(token, token_dict):
     flag = False
     for child in token.children:
@@ -47,14 +43,34 @@ def noun_analysis(token, token_dict):
             if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_)
             if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_)
             flag = True
+        if child.dep_ == 'prep':
+            for sub_child in child.children:
+                if sub_child.dep_ == "pobj":
+                    token_dict["verb-objects"].append(f"""{token.lemma_} {child.lemma_} {sub_child.lemma_}""")
+                    flag = True
     return flag
 
 def remove_stopwords_from_text(text, stopwords_path):
     stopwords=set(line.strip().lower() for line in open(stopwords_path))
     return " ".join(filter(lambda x: x.lower() not in stopwords, text.split()))
 
+def remove_stopwords(tokens, stopwords_path):
+    stopwords=set(line.strip().lower() for line in open(stopwords_path))
+    return filter(lambda x: x.text.lower() not in stopwords, tokens) 
+
+def remove_stopwords_from_keywords(tokens, stopwords_path, repo_stopwords_path):
+    stopwords=set(line.strip().lower() for line in open(stopwords_path))
+    repo_stopwords=set(line.strip().lower() for line in open(repo_stopwords_path))
+    combined = stopwords | repo_stopwords
+    return list(filter(lambda x: x.lower() not in combined, tokens))
+
+def clean_token_dict(token_dict, stopwords_path, repo_stopwords_path):
+    for key in token_dict:
+        token_dict[key] = remove_stopwords_from_keywords(token_dict[key], stopwords_path, repo_stopwords_path)
+    return token_dict
+
 #Regex pattern to remove numbers of requirement statements.
-def custom_extractor(line, stopwords_path):
+def custom_extractor(line, stopwords_path, repo_stopwords_path):
 
     pattern = r"[A-Za-z][^.!?:()]*"
     token_dict = {"verbs": [], "verb-objects": [], "nouns": [], "noun-objects":[]}
@@ -70,7 +86,6 @@ def custom_extractor(line, stopwords_path):
     
     #removes English stopwords from token list.
     tokens = remove_stopwords(tokens, stopwords_path)
-
     for token in tokens:
         if token.tag_[0:2] == 'VB':
             if not verb_analysis(token, token_dict):
@@ -78,6 +93,7 @@ def custom_extractor(line, stopwords_path):
         elif token.tag_[0:2] == 'NN':
             if not noun_analysis(token, token_dict):
                 token_dict["nouns"].append(token.lemma_)
+    clean_token_dict(token_dict, repo_stopwords_path, repo_stopwords_path)
     return token_dict
 
 def extract_keywords(file_name, stopwords_path):

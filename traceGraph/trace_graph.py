@@ -93,7 +93,7 @@ def build_commit_nodes(repo_number):
     return commit_nodes
 
 # Parses the data from the requirements file and creates a dictionary of graph nodes, where the key is the requirement number.
-def build_requirement_nodes(repo_number):
+def build_requirement_nodes(repo_number, parent_mode):
     data_fname = f'data_group{repo_number}/requirements_data.json'
     f = open(data_fname, 'r')
     data = json.loads(f.read())
@@ -101,7 +101,7 @@ def build_requirement_nodes(repo_number):
     requirement_nodes = {}
     for req in data['requirements']:
         node = Requirement('requirement', req['number'], req['description'])
-        if req['parent'] != "":
+        if parent_mode and req['parent'] != "":
             node.parent = requirement_nodes[req['parent']]
         requirement_nodes[node.node_id] = node
     return requirement_nodes
@@ -205,15 +205,20 @@ class Requirement(Node):
         #     self.keywords = self.extract_keywords()
         # except Exception as e:
         #     print(str(e), self.node_id, self.node_type)
-    def extract_keywords(self):
+    def extract_keywords(self, parent_mode):
         try:
             print("Extracting keywords for requirement", self.node_id)
-            keyword_dict = custom_extractor(self.text, '../keyword_extractors/SmartStopword.txt')
-            if self.parent is not None:
+            keyword_dict = custom_extractor(self.text, '../keyword_extractors/SmartStopword.txt', '../keyword_extractors/repo_stopwords.txt')
+            if self.parent is not None and parent_mode:
                 # parent_keywords = custom_extractor(self.parent.text, '../keyword_extractors/SmartStopword.txt')
                 parent_keywords = self.parent.keyword_dict
+                if self.number == '1.2.1':
+                    print(keyword_dict)
+                    print(parent_keywords)
                 for key_type in keyword_dict:
                     keyword_dict[key_type] = list(set(keyword_dict[key_type] + parent_keywords[key_type]))
+                if self.number == '1.2.1':
+                    print(keyword_dict)
             self.keyword_dict = keyword_dict
         except Exception as e:
             print(str(e), self.node_id, self.node_type)
@@ -221,7 +226,7 @@ class Requirement(Node):
 import pickle
 # Class representing the graph of software artifacts.
 class Graph:
-    def __init__(self, repo_number):
+    def __init__(self, repo_number, parent_mode):
 
         if repo_number == 2:
             self.issue_number_threshold = 309 # for group 2
@@ -234,7 +239,7 @@ class Graph:
         self.issue_nodes = build_issue_nodes(repo_number, self.issue_number_threshold)
         self.pr_nodes = build_pr_nodes(repo_number)
         self.commit_nodes = build_commit_nodes(repo_number)
-        self.requirement_nodes = build_requirement_nodes(repo_number)
+        self.requirement_nodes = build_requirement_nodes(repo_number, parent_mode)
         self.nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes | self.requirement_nodes
         self.artifact_nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes
 
