@@ -7,10 +7,11 @@ Writes traces to a file.
 """
 
 
-import re, sys
+import re, sys, time, threading
 from traceGraph import Graph
 sys.path.append('..')
-from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor
+from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, remove_stopwords_from_text
+
 
 # Regular expressions to search for keywords in text.
 word_regex = r'\b{0}\b'
@@ -50,17 +51,37 @@ def search_keyword(graph, keyword_list):
         found_nodes[keyword] = find_trace(graph, regex)
     return found_nodes
 
-import time
+# Lemmatize and remove stopwords from the artifact
+def lemmatize_remove(artifact):
+    artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
+    artifact.text = lemmatizer(artifact.text)
+
+# Lemmatize and remove stopwords from each artifact in the graph
+def lemmatize_and_remove_stopwords(graph):
+    threads = []
+    # for art in graph.artifact_nodes.values():
+    #     print(art.node_id)
+    #     lemma_thread = threading.Thread(target=lemmatize_remove, args=(art,))
+    #     threads.append(lemma_thread)
+    #     lemma_thread.start()
+    # for thread in threads:
+    #     thread.join()
+    for art in graph.artifact_nodes.values():
+        lemmatize_remove(art)
+
 def main():
+    start_all = time.time()
     start = time.time()
     repo_number = int(sys.argv[1])
     g = Graph(repo_number)
+    lemmatize_and_remove_stopwords(g)
+    print(f"Graph created in {time.time() - start} seconds")
     trace_file = open(f"trace_links_group{repo_number}.txt", "w", encoding="utf-8") 
-    req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
 
-    for line in req_file:
-        token_dict = custom_extractor(line, "../keyword_extractors/SmartStopword.txt")
-        trace_file.write("{}".format(line))
+    for req in g.requirement_nodes.values():
+        req.extract_keywords()
+        token_dict = req.keyword_dict
+        trace_file.write("{}".format(req.text))
         trace_file.write("{}\n".format(token_dict))
 
         nodes = search_keyword(g, token_dict)
@@ -71,15 +92,12 @@ def main():
                 try:
                     trace_file.write(f"{node.node_id} {node.title}\n")
                 except Exception as e:
-                    print(str(e))
-                    #print(node.text)
-                    print(node.node_id)
+                    print(str(e), node.node_id)
             trace_file.write('------------------' + '\n')
         trace_file.write('\n')
     trace_file.close()
-    req_file.close()
     end = time.time()
-    print(f"Time elapsed: {end - start}")
+    print(f"Time elapsed: {end - start_all}")
 
 if __name__ == "__main__":
     main()
