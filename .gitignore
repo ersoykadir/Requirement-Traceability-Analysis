@@ -14,3 +14,4 @@ pip-selfcheck.json
 __pycache__
 *data.json
 *.txt
+*.pkl

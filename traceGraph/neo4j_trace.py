@@ -12,7 +12,7 @@ load_dotenv()
 sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, most_frequent_words, remove_stopwords_from_text
 from neo4j_connection import create_traces, neo4jConnector, create_traces_v2
-from traceGraph import Graph
+from trace_graph import Graph
 
 neo4j_password = os.getenv("NEO4J_PASSWORD")
 
@@ -87,13 +87,18 @@ def lemmatize_and_remove_stopwords(graph):
     for art in graph.artifact_nodes.values():
         # print(art.node_id)
         lemmatize_remove(art)
+    graph.save_graph()
 
+import pickle
 def trace(repo_number):
     # Create graph, lemmatize and remove stopwords from each artifact
     start = time.time()
     #req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
-    graph = Graph(repo_number)
-    lemmatize_and_remove_stopwords(graph)
+    if os.path.exists(f"data_group{repo_number}/graph.pkl"):
+        graph = pickle.load(open(f"data_group{repo_number}/graph.pkl", "rb"))
+    else:
+        graph = Graph(repo_number)
+        lemmatize_and_remove_stopwords(graph)
     print("Time taken to lemmatize and create graph: ", time.time() - start)
 
     req_to_issue = {}
