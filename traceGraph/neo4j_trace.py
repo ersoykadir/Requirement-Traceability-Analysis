@@ -44,16 +44,25 @@ def search_pattern(nodes, regex, keyword, weight, found_nodes):
             else:
                 found_nodes[node_number] = [weight, keyword]
 
-
-# # Search keyword regex pattern in given nodes and add the results to found_nodes.
-# def search_pattern_multi_threaded(found_nodes, nodes, keyword, regex, weight):
-#     result = search_pattern(nodes, regex)
-#     found_nodes.append((keyword, result, weight))
+def combine_dictionaries(dict1, dict2):
+    try:
+        for key in dict2.keys():
+            if key in dict1.keys():
+                dict1[key][0] = dict1[key][0] + dict2[key][0]
+                dict1[key][1].extend(dict2[key][1])
+                dict1[key][1] = list(set(dict1[key][1]))
+            else:
+                dict1[key] = dict2[key]
+        return dict1
+    except Exception as e:
+        print(str(e))
+        print('req_to_pr:', dict1)
+        print('req_to_commit:', dict2)
+        raise e
 
 # Given keyword list, search for each keyword in the nodes.
 def search_keyword_list(nodes, keyword_list):
     found_nodes = {}
-    # { node_number: [weight, keyword1, keyword2, ...]}
     threads = []
     for keyword in keyword_list['verbs']:
         regex = word_regex.format(keyword)
@@ -80,9 +89,12 @@ def search_keyword_list(nodes, keyword_list):
     
     for thread in threads:
         thread.join()
-
     for node_number in found_nodes.keys():
-        found_nodes[node_number] = [found_nodes[node_number][0], list(set(found_nodes[node_number][1:]))]
+        try:
+            found_nodes[node_number] = [found_nodes[node_number][0], list(set(found_nodes[node_number][1:]))]
+        except Exception as e:
+            print(str(e), node_number, found_nodes[node_number])
+            raise e
     return found_nodes
 
 # Lemmatize and remove stopwords from the artifact
@@ -111,7 +123,7 @@ def trace(repo_number, parent_mode):
 
     req_to_issue = {}
     req_to_pr = {}
-    
+    req_to_commit = {}
     # most frequent words
     # most_frequent_words(f"data_group{repo_number}/group{repo_number}_requirements.txt", "../keyword_extractors/SmartStopword.txt")
 
@@ -124,16 +136,16 @@ def trace(repo_number, parent_mode):
 
         req_to_issue[req_number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
         req_to_pr[req_number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
-        req_to_pr[req_number] += (search_keyword_list(graph.commit_nodes.values(), token_dict))
-        #print(req_to_pr[req_number])
+        req_to_commit[req_number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
 
     print("Time taken to search for keywords: ", time.time() - start)
-
+    for req in req_to_pr.keys():
+        req_to_pr[req] = combine_dictionaries(req_to_pr[req], req_to_commit[req])
     # Connect to Neo4j and create traces
     start = time.time()
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_traces(neo, req_to_issue, 'Issue')
-    create_traces(neo, req_to_pr, 'PullRequest')
+    create_traces_v2(neo, req_to_issue, 'Issue')
+    create_traces_v2(neo, req_to_pr, 'PullRequest')
     link_commits_prs(neo)
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)

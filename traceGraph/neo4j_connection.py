@@ -112,8 +112,8 @@ class neo4jConnector:
                 match (i:{artifact_label})
                 where i.number= art_key_pair[0]
                 create (i)<-[t:tracesTo]-(r)
-                set t.keywords = art_key_pair[1][0]
-                set t.weight = art_key_pair[1][1]
+                set t.weight = art_key_pair[1][0]
+                set t.keywords = art_key_pair[1][1]
                 return *
                 ''')
         query = query.format(req_number=req_number, artifact_key_pairs=artifact_key_pairs, artifact_label=artifact_label)
@@ -207,7 +207,6 @@ class neo4jConnector:
                     where datetime(n.createdAt) <= datetime("{date}")
                     delete n
                 ''').format(date=date)
-        print(query_issue)
         query_pr = (f'''
                     Match(n:PullRequest) 
                     where datetime(n.createdAt) <= datetime("{date}")
