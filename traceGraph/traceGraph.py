@@ -94,8 +94,7 @@ def build_commit_nodes(repo_number):
         node = Commit('commit', commit['oid'], commit['message'], commit['committedDate'], commit['url'], associatedPullRequest)
         commit_nodes[node.node_id] = node
     return commit_nodes
-def find_number(x):
-    return x["number"]
+
 # Parses the data from the requirements file and creates a dictionary of graph nodes, where the key is the requirement number.
 def build_requirement_nodes(repo_number):
     data_fname = f'data_group{repo_number}/requirements_data.json'
