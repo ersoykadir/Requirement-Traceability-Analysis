@@ -7,7 +7,7 @@ Writes traces to neo4j database.
 """
 
 import time, os, sys, math, operator
-from neo4j_connection import neo4jConnector, create_traces_w2v
+from neo4j_connection import neo4jConnector, create_traces_w2v, link_commits_prs
 from traceGraph import Graph
 from dotenv import load_dotenv
 load_dotenv()
@@ -40,7 +40,10 @@ def find_similar_nodes(artifact_nodes, req_node, topn=20):
         similarities.sort(key=lambda x: x[1], reverse=True)
         similar_nodes = []
         for i in range(topn):
-            similar_nodes.append(similarities[i][0].node_id) # we might want to return the similarity score as well
+            if similarities[i][0].node_type == "commit":
+                if similarities[i][0].associatedPullRequest != None: similar_nodes.append(similarities[i][0].associatedPullRequest)
+            else:
+                similar_nodes.append(similarities[i][0].node_id) # we might want to return the similarity score as well
         return similar_nodes
     except Exception as e:
         print(str(e))
@@ -69,7 +72,7 @@ def trace(repo_number):
 
         req_to_issue[req_number] = find_similar_nodes(graph.issue_nodes.values(), requirement)
         req_to_pr[req_number] = find_similar_nodes(graph.pr_nodes.values(), requirement)
-        req_to_commit[req_number] = find_similar_nodes(graph.commit_nodes.values(), requirement)
+        req_to_pr[req_number] += (find_similar_nodes(graph.commit_nodes.values(), requirement))
     
     print("Time taken to search for similar nodes: ", time.time() - start)
 
@@ -78,7 +81,9 @@ def trace(repo_number):
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
     create_traces_w2v(neo, req_to_issue, 'Issue')
     create_traces_w2v(neo, req_to_pr, 'PullRequest')
-    create_traces_w2v(neo, req_to_commit, 'Commit')
+    #create_traces_w2v(neo, req_to_commit, 'Commit')
+    link_commits_prs(neo)
+
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
 
