@@ -74,8 +74,8 @@ def build_pr_nodes(repo_number):
         node = PullRequest('pullRequest', pr['number'], pr['title'], pr['body'], pr['comments'], pr['state'], pr['createdAt'], pr['closedAt'], pr['url'], pr['milestone'], pr['commits'])
         pr_nodes[node.number] = node
         # Parse the commits of the pull request.
-        commit_ids, related_commit_nodes = commit_parser(pr['commits'])
-        node.related_commits = commit_ids
+        #commit_ids, related_commit_nodes = commit_parser(pr['commits'])
+        #node.related_commits = commit_ids
         # commit_nodes = commit_nodes | related_commit_nodes
     #return pr_nodes, commit_nodes
     return pr_nodes
@@ -88,10 +88,14 @@ def build_commit_nodes(repo_number):
     f.close()
     commit_nodes = {}
     for commit in data['commits']:
-        node = Commit('commit', commit['oid'], commit['message'], commit['committedDate'], commit['url'])
+        associatedPullRequest = None
+        if len(commit['associatedPullRequests']['nodes']) > 0:
+            associatedPullRequest = commit['associatedPullRequests']['nodes'][0]['number']
+        node = Commit('commit', commit['oid'], commit['message'], commit['committedDate'], commit['url'], associatedPullRequest)
         commit_nodes[node.node_id] = node
     return commit_nodes
-
+def find_number(x):
+    return x["number"]
 # Parses the data from the requirements file and creates a dictionary of graph nodes, where the key is the requirement number.
 def build_requirement_nodes(repo_number):
     data_fname = f'data_group{repo_number}/requirements_data.json'
@@ -180,7 +184,7 @@ class PullRequest(Issue):
         self.related_commits = related_commits
 
 class Commit(Node):
-    def __init__(self, node_type, id, message, committedDate, url):
+    def __init__(self, node_type, id, message, committedDate, url, associatedPullRequest):
         # TODO: Maybe add more info about the commit, like the files changed, additions, deletions, etc.
         # File change patches are not available in the graphQL API, so we need to use the GitHub API to get them, if necessary
         super().__init__(node_type, id)
@@ -190,6 +194,7 @@ class Commit(Node):
         self.committedDate = datetime.datetime.strptime(tempDate, '%Y-%m-%d %H:%M:%S')
         self.text = self.message
         self.number = id
+        self.associatedPullRequest = associatedPullRequest
 
 class Requirement(Node):
     def __init__(self, node_type, id, description):

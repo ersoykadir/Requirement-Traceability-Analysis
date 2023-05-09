@@ -129,6 +129,26 @@ class neo4jConnector:
             return 'Error: ' + str(e)  
 
     @staticmethod
+    def link_commit_pr_tx(tx):
+        query = ('''
+                MATCH (n:Commit), (p:PullRequest)
+                where n.associatedPullRequests = p.number
+                create (p)-[t:relatedCommit]->(n)
+                RETURN * 
+                ''')
+        query = query.format()
+        result = tx.run(query)
+        record = result.data()
+
+    def link_commit_pr(self):
+        try:
+            with self.driver.session() as session:
+                print("connecting to neo4j")
+                result = session.execute_write(self.link_commit_pr_tx)
+        except Exception as e:
+            return 'Error: ' + str(e)  
+        
+    @staticmethod
     def clean_artifacts_tx(tx, threshold, label):
         query = (f'''
                 MATCH (n:{label})
@@ -182,6 +202,15 @@ def create_traces_w2v(neo:neo4jConnector, req_issue_trace, artifact_label):
         return 'Error: ' + str(e) 
     end = time.time()
     print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
+
+def link_commits_prs(neo:neo4jConnector):
+    start = time.time() 
+    try:
+        neo.link_commit_pr()
+    except Exception as e:
+        return 'Error: ' + str(e) 
+    end = time.time()
+    print(f"Time taken to connect neo4j and link commits and prs: ", end - start)
 
 def clean_artifact_nodes(neo:neo4jConnector, threshold, label):
     try:
