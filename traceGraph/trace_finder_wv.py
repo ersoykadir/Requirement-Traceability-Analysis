@@ -32,7 +32,7 @@ def find_similar_issues(graph, req_number, topn=10):
         similarities.sort(key=lambda x: x[1], reverse=True)
         similar_nodes = []
         for i in range(topn):
-            similar_nodes.append((similarities[i][0].node_id, similarities[i][0].title, similarities[i][1]))
+            similar_nodes.append((similarities[i][0].number, similarities[i][0].title, similarities[i][1]))
     except Exception as e:
         print(str(e))
         return []

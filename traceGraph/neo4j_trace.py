@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, most_frequent_words, remove_stopwords_from_text
-from neo4j_connection import create_traces, neo4jConnector, create_traces_v2
+from neo4j_connection import create_traces, neo4jConnector, create_traces_v2, link_commits_prs
 from trace_graph import Graph
 
 neo4j_password = os.getenv("NEO4J_PASSWORD")
@@ -31,15 +31,18 @@ def search_pattern(nodes, regex, keyword, weight, found_nodes):
         except Exception as e:
             print(str(e), node.number)
         if match != None:
-            # result.add(node.number)
-            node_number = node.number
+            if node.node_type == 'commit':
+                if node.associatedPullRequest != None: 
+                    node_number = node.associatedPullRequest
+                else:
+                    continue
+            else:
+                node_number = node.number
             if node_number in found_nodes.keys():
                 found_nodes[node_number][0] = found_nodes[node_number][0] + weight
                 found_nodes[node_number].append(keyword)
             else:
                 found_nodes[node_number] = [weight, keyword]
-    # result = list(result)
-    #found_nodes.append((keyword, result, weight))
 
 
 # # Search keyword regex pattern in given nodes and add the results to found_nodes.
@@ -90,7 +93,7 @@ def lemmatize_remove(artifact):
 # Lemmatize and remove stopwords from each artifact in the graph
 def lemmatize_and_remove_stopwords(graph):
     for art in graph.artifact_nodes.values():
-        # print(art.node_id)
+        # print(art.number)
         lemmatize_remove(art)
     graph.save_graph()
 
@@ -108,8 +111,7 @@ def trace(repo_number, parent_mode):
 
     req_to_issue = {}
     req_to_pr = {}
-    req_to_commit = {}
-
+    
     # most frequent words
     # most_frequent_words(f"data_group{repo_number}/group{repo_number}_requirements.txt", "../keyword_extractors/SmartStopword.txt")
 
@@ -122,16 +124,17 @@ def trace(repo_number, parent_mode):
 
         req_to_issue[req_number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
         req_to_pr[req_number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
-        req_to_commit[req_number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
+        req_to_pr[req_number] += (search_keyword_list(graph.commit_nodes.values(), token_dict))
+        #print(req_to_pr[req_number])
 
     print("Time taken to search for keywords: ", time.time() - start)
 
     # Connect to Neo4j and create traces
     start = time.time()
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_traces_v2(neo, req_to_issue, 'Issue')
-    create_traces_v2(neo, req_to_pr, 'PullRequest')
-    create_traces_v2(neo, req_to_commit, 'Commit')
+    create_traces(neo, req_to_issue, 'Issue')
+    create_traces(neo, req_to_pr, 'PullRequest')
+    link_commits_prs(neo)
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
 

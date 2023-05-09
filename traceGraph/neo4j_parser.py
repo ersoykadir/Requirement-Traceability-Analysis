@@ -63,7 +63,7 @@ def build_pr_nodes(repo_number):
 
         # Parse the commits of the pull request.
         pr['commitCount'] = pr['commits']['totalCount']
-        pr['commit_list'] = commit_parser(pr['commits'])
+        #pr['commit_list'] = commit_parser(pr['commits'])
         del pr['commits']
 
         pr['text'] = pr['title'] + ' ' + pr['body']
