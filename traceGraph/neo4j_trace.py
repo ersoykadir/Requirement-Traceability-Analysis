@@ -22,7 +22,7 @@ verbobj_regex = r'\b{0}\s((?:[\w,;:\'\"`]+\s)*){1}\b'
 noun_phrase_regex = r'\b{0}\s{1}\b'
 
 # Searches for the regex pattern in given nodes.
-def search_pattern(nodes, regex, keyword, found_nodes):
+def search_pattern(nodes, regex, keyword, weight, found_nodes):
     result = set()
     compiled_regex = re.compile(regex, flags=re.IGNORECASE)
     for node in nodes:
@@ -34,9 +34,10 @@ def search_pattern(nodes, regex, keyword, found_nodes):
             # result.add(node.number)
             node_number = node.number
             if node_number in found_nodes.keys():
+                found_nodes[node_number][0] = found_nodes[node_number][0] + weight
                 found_nodes[node_number].append(keyword)
             else:
-                found_nodes[node_number] = [keyword]
+                found_nodes[node_number] = [weight, keyword]
     # result = list(result)
     #found_nodes.append((keyword, result, weight))
 
@@ -49,32 +50,36 @@ def search_pattern(nodes, regex, keyword, found_nodes):
 # Given keyword list, search for each keyword in the nodes.
 def search_keyword_list(nodes, keyword_list):
     found_nodes = {}
+    # { node_number: [weight, keyword1, keyword2, ...]}
     threads = []
     for keyword in keyword_list['verbs']:
         regex = word_regex.format(keyword)
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 0.5, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     for keyword in keyword_list['verb-objects']:
         keywords = keyword.split()
         regex = verbobj_regex.format(keywords[0], keywords[1])
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 1, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     for keyword in keyword_list['nouns']:
         regex = word_regex.format(keyword)
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 0.5, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     for keyword in keyword_list['noun-objects']:
         keywords = keyword.split()
         regex = noun_phrase_regex.format(keywords[0], keywords[1])
-        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, found_nodes))
+        search_thread = threading.Thread(target=search_pattern, args=(nodes, regex, keyword, 1, found_nodes))
         threads.append(search_thread)
         search_thread.start()
     
     for thread in threads:
         thread.join()
+
+    for node_number in found_nodes.keys():
+        found_nodes[node_number] = [found_nodes[node_number][0], list(set(found_nodes[node_number][1:]))]
     return found_nodes
 
 # Lemmatize and remove stopwords from the artifact
