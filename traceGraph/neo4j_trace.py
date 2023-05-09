@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, most_frequent_words, remove_stopwords_from_text
-from neo4j_connection import create_traces, neo4jConnector
+from neo4j_connection import create_traces, neo4jConnector, link_commits_prs
 from traceGraph import Graph
 
 neo4j_password = os.getenv("NEO4J_PASSWORD")
@@ -31,7 +31,10 @@ def search_pattern(nodes, regex, keyword, weight, found_nodes):
         except Exception as e:
             print(str(e), node.number)
         if match != None:
-            result.add(node.number)
+            if node.node_type == 'commit':
+                if node.associatedPullRequest != None: result.add(node.associatedPullRequest)
+            else:
+                result.add(node.number)
     result = list(result)
     found_nodes.append((keyword, result, weight))
 
@@ -93,8 +96,7 @@ def trace(repo_number):
 
     req_to_issue = {}
     req_to_pr = {}
-    req_to_commit = {}
-
+    
     # most frequent words
     # most_frequent_words(f"data_group{repo_number}/group{repo_number}_requirements.txt", "../keyword_extractors/SmartStopword.txt")
 
@@ -109,7 +111,8 @@ def trace(repo_number):
 
         req_to_issue[req_number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
         req_to_pr[req_number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
-        req_to_commit[req_number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
+        req_to_pr[req_number] += (search_keyword_list(graph.commit_nodes.values(), token_dict))
+        #print(req_to_pr[req_number])
 
     print("Time taken to search for keywords: ", time.time() - start)
 
@@ -118,7 +121,8 @@ def trace(repo_number):
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
     create_traces(neo, req_to_issue, 'Issue')
     create_traces(neo, req_to_pr, 'PullRequest')
-    create_traces(neo, req_to_commit, 'Commit')
+    link_commits_prs(neo)
+
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
 

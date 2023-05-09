@@ -1,3 +1,4 @@
+import datetime
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
 load_dotenv()
@@ -129,6 +130,26 @@ class neo4jConnector:
             return 'Error: ' + str(e)  
 
     @staticmethod
+    def link_commit_pr_tx(tx):
+        query = ('''
+                MATCH (n:Commit), (p:PullRequest)
+                where n.associatedPullRequests = p.number
+                create (p)-[t:relatedCommit]->(n)
+                RETURN * 
+                ''')
+        query = query.format()
+        result = tx.run(query)
+        record = result.data()
+
+    def link_commit_pr(self):
+        try:
+            with self.driver.session() as session:
+                print("connecting to neo4j")
+                result = session.execute_write(self.link_commit_pr_tx)
+        except Exception as e:
+            return 'Error: ' + str(e)  
+        
+    @staticmethod
     def clean_artifacts_tx(tx, threshold, label):
         query = (f'''
                 MATCH (n:{label})
@@ -142,6 +163,34 @@ class neo4jConnector:
     def clean_artifacts(self, threshold, label):
         with self.driver.session() as session:
             result = session.execute_write(self.clean_artifacts_tx, threshold, label)
+
+    @staticmethod
+    def filter_artifacts_tx(tx, date):
+        query_issue = (f'''
+                    Match(n:Issue) 
+                    where datetime(n.createdAt) <= datetime("{date}")
+                    delete n
+                ''').format(date=date)
+        print(query_issue)
+        query_pr = (f'''
+                    Match(n:PullRequest) 
+                    where datetime(n.createdAt) <= datetime("{date}")
+                    delete n
+                ''').format(date=date)
+        query_commit = (f'''
+                    Match(n:Commit) 
+                    where datetime(n.committedDate) <= datetime("{date}")
+                    delete n
+                ''').format(date=date)
+        result = tx.run(query_issue)
+        result = tx.run(query_pr)
+        result = tx.run(query_commit)
+        record = result.data()
+        return record
+
+    def filter_artifacts(self, date):
+        with self.driver.session() as session:
+            result = session.execute_write(self.filter_artifacts_tx, date)
 
     @staticmethod
     def clean_all_data_tx(tx):
@@ -183,6 +232,15 @@ def create_traces_w2v(neo:neo4jConnector, req_issue_trace, artifact_label):
     end = time.time()
     print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
 
+def link_commits_prs(neo:neo4jConnector):
+    start = time.time() 
+    try:
+        neo.link_commit_pr()
+    except Exception as e:
+        return 'Error: ' + str(e) 
+    end = time.time()
+    print(f"Time taken to connect neo4j and link commits and prs: ", end - start)
+
 def clean_artifact_nodes(neo:neo4jConnector, threshold, label):
     try:
         neo.clean_artifacts(threshold, label)
@@ -195,3 +253,14 @@ def clean_all_data(neo:neo4jConnector):
         neo.clean_all_data()
     except Exception as e:
         return 'Error: ' + str(e)
+    
+def filter_artifact(date:datetime):
+    try:
+        neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
+        neo.filter_artifacts(date)
+        neo.close()
+    except Exception as e:
+        return 'Error: ' + str(e)
+    
+
+    
