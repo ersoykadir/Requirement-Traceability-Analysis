@@ -144,16 +144,20 @@ def get_artifacts(repo_number, parent_mode):
 def main():
     start = time.time()
     repo_number = sys.argv[1]
-    mode = sys.argv[2]
     repo_owner = 'bounswe'
     repo_name = f'bounswe2022group{repo_number}'
     
     get_all_pages('issues', repo_owner, repo_number, repo_name)
     get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
     get_all_pages('commits', repo_owner, repo_number, repo_name)
-    if mode == 'req_tree':
-        parent_mode = True
-    else:
+    
+    try:
+        mode = sys.argv[2]
+        if mode == "req_tree":
+            parent_mode = True
+        else:
+            raise Exception("Please enter a valid mode!")
+    except:
         parent_mode = False
     get_requirements(repo_number, parent_mode)
     end = time.time()
