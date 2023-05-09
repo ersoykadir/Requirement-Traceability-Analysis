@@ -1,3 +1,4 @@
+import datetime
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
 load_dotenv()
@@ -164,6 +165,34 @@ class neo4jConnector:
             result = session.execute_write(self.clean_artifacts_tx, threshold, label)
 
     @staticmethod
+    def filter_artifacts_tx(tx, date):
+        query_issue = (f'''
+                    Match(n:Issue) 
+                    where datetime(n.createdAt) <= datetime("{date}")
+                    delete n
+                ''').format(date=date)
+        print(query_issue)
+        query_pr = (f'''
+                    Match(n:PullRequest) 
+                    where datetime(n.createdAt) <= datetime("{date}")
+                    delete n
+                ''').format(date=date)
+        query_commit = (f'''
+                    Match(n:Commit) 
+                    where datetime(n.committedDate) <= datetime("{date}")
+                    delete n
+                ''').format(date=date)
+        result = tx.run(query_issue)
+        result = tx.run(query_pr)
+        result = tx.run(query_commit)
+        record = result.data()
+        return record
+
+    def filter_artifacts(self, date):
+        with self.driver.session() as session:
+            result = session.execute_write(self.filter_artifacts_tx, date)
+
+    @staticmethod
     def clean_all_data_tx(tx):
         query = ('''
                 MATCH (n)
@@ -224,3 +253,14 @@ def clean_all_data(neo:neo4jConnector):
         neo.clean_all_data()
     except Exception as e:
         return 'Error: ' + str(e)
+    
+def filter_artifact(date:datetime):
+    try:
+        neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
+        neo.filter_artifacts(date)
+        neo.close()
+    except Exception as e:
+        return 'Error: ' + str(e)
+    
+
+    
