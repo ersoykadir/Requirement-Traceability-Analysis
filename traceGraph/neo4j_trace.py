@@ -11,8 +11,8 @@ from dotenv import load_dotenv
 load_dotenv()
 sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, most_frequent_words, remove_stopwords_from_text
-from neo4j_connection import create_traces, neo4jConnector, link_commits_prs
-from traceGraph import Graph
+from neo4j_connection import create_traces, neo4jConnector, create_traces_v2, link_commits_prs
+from trace_graph import Graph
 
 neo4j_password = os.getenv("NEO4J_PASSWORD")
 
@@ -32,21 +32,37 @@ def search_pattern(nodes, regex, keyword, weight, found_nodes):
             print(str(e), node.number)
         if match != None:
             if node.node_type == 'commit':
-                if node.associatedPullRequest != None: result.add(node.associatedPullRequest)
+                if node.associatedPullRequest != None: 
+                    node_number = node.associatedPullRequest
+                else:
+                    continue
             else:
-                result.add(node.number)
-    result = list(result)
-    found_nodes.append((keyword, result, weight))
+                node_number = node.number
+            if node_number in found_nodes.keys():
+                found_nodes[node_number][0] = found_nodes[node_number][0] + weight
+                found_nodes[node_number].append(keyword)
+            else:
+                found_nodes[node_number] = [weight, keyword]
 
-
-# # Search keyword regex pattern in given nodes and add the results to found_nodes.
-# def search_pattern_multi_threaded(found_nodes, nodes, keyword, regex, weight):
-#     result = search_pattern(nodes, regex)
-#     found_nodes.append((keyword, result, weight))
+def combine_dictionaries(dict1, dict2):
+    try:
+        for key in dict2.keys():
+            if key in dict1.keys():
+                dict1[key][0] = dict1[key][0] + dict2[key][0]
+                dict1[key][1].extend(dict2[key][1])
+                dict1[key][1] = list(set(dict1[key][1]))
+            else:
+                dict1[key] = dict2[key]
+        return dict1
+    except Exception as e:
+        print(str(e))
+        print('req_to_pr:', dict1)
+        print('req_to_commit:', dict2)
+        raise e
 
 # Given keyword list, search for each keyword in the nodes.
 def search_keyword_list(nodes, keyword_list):
-    found_nodes = []
+    found_nodes = {}
     threads = []
     for keyword in keyword_list['verbs']:
         regex = word_regex.format(keyword)
@@ -73,6 +89,12 @@ def search_keyword_list(nodes, keyword_list):
     
     for thread in threads:
         thread.join()
+    for node_number in found_nodes.keys():
+        try:
+            found_nodes[node_number] = [found_nodes[node_number][0], list(set(found_nodes[node_number][1:]))]
+        except Exception as e:
+            print(str(e), node_number, found_nodes[node_number])
+            raise e
     return found_nodes
 
 # Lemmatize and remove stopwords from the artifact
@@ -83,52 +105,59 @@ def lemmatize_remove(artifact):
 # Lemmatize and remove stopwords from each artifact in the graph
 def lemmatize_and_remove_stopwords(graph):
     for art in graph.artifact_nodes.values():
-        # print(art.node_id)
+        # print(art.number)
         lemmatize_remove(art)
+    graph.save_graph()
 
-def trace(repo_number):
+import pickle
+def trace(repo_number, parent_mode):
     # Create graph, lemmatize and remove stopwords from each artifact
     start = time.time()
-    req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
-    graph = Graph(repo_number)
-    lemmatize_and_remove_stopwords(graph)
+    #req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
+    if os.path.exists(f"data_group{repo_number}/graph.pkl"):
+        graph = pickle.load(open(f"data_group{repo_number}/graph.pkl", "rb"))
+    else:
+        graph = Graph(repo_number, parent_mode)
+        lemmatize_and_remove_stopwords(graph)
     print("Time taken to lemmatize and create graph: ", time.time() - start)
 
     req_to_issue = {}
     req_to_pr = {}
-    
+    req_to_commit = {}
     # most frequent words
     # most_frequent_words(f"data_group{repo_number}/group{repo_number}_requirements.txt", "../keyword_extractors/SmartStopword.txt")
 
     # Find artifacts that have matching keywords for each requirement
     start = time.time()
-    for line in req_file:
-        line = line.split(' ', 1)
-        req_number, description = line[0], line[1]
-        # Extract keywords from requirement description
-        # token dictionary = {verbs: [], verb-objects: [], nouns: [], noun-objects: []}
-        token_dict = custom_extractor(description, "../keyword_extractors/SmartStopword.txt")
+    for req in graph.requirement_nodes.values():
+        req_number = req.number
+        req.extract_keywords(parent_mode)
+        token_dict = req.keyword_dict
 
         req_to_issue[req_number] = search_keyword_list(graph.issue_nodes.values(), token_dict)
         req_to_pr[req_number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
-        req_to_pr[req_number] += (search_keyword_list(graph.commit_nodes.values(), token_dict))
-        #print(req_to_pr[req_number])
+        req_to_commit[req_number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
 
     print("Time taken to search for keywords: ", time.time() - start)
-
+    for req in req_to_pr.keys():
+        req_to_pr[req] = combine_dictionaries(req_to_pr[req], req_to_commit[req])
     # Connect to Neo4j and create traces
     start = time.time()
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_traces(neo, req_to_issue, 'Issue')
-    create_traces(neo, req_to_pr, 'PullRequest')
+    create_traces_v2(neo, req_to_issue, 'Issue')
+    create_traces_v2(neo, req_to_pr, 'PullRequest')
     link_commits_prs(neo)
-
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
 
 def main():
     repo_number = int(sys.argv[1])
-    trace(repo_number)
+    mode = sys.argv[2]
+    if mode == "req_tree":
+        parent_mode = True
+    else:
+        parent_mode = False
+    trace(repo_number, parent_mode)
 
 if __name__ == "__main__":
     main()

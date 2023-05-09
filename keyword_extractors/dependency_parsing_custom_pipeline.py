@@ -22,39 +22,61 @@ def most_frequent_words(req_file, stopwords_path):
     for tup in Counter(words).most_common(5):
         f.write(f"{tup[0]}\n")
 
-def remove_stopwords(tokens, stopwords_path):
-    stopwords=set(line.strip().lower() for line in open(stopwords_path))
-    return filter(lambda x: x.text.lower() not in stopwords, tokens) 
-
 def verb_analysis(token, token_dict):
     flag = False
     for child in token.children:
         if child.dep_ == "acomp" or child.dep_ == "dobj" or child.dep_ == "comp" or child.dep_ == "prt":
-            token_dict["verb-objects"].append(f"""{token.lemma_} {child.lemma_}""")
+            token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()}""")
             flag = True
         if child.dep_ == 'prep':
             for sub_child in child.children:
                 if sub_child.dep_ == "pobj":
-                    token_dict["verb-objects"].append(f"""{token.lemma_} {child.lemma_} {sub_child.lemma_}""")
+                    token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
                     flag = True
     return flag
 
 def noun_analysis(token, token_dict):
     flag = False
+    compounds = []
     for child in token.children:
-        if child.dep_ == "compound" or child.dep_ == "nmod" or child.dep_ == "amod":
-            token_dict["noun-objects"].append(f"""{child.lemma_} {token.lemma_}""")
-            if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_)
-            if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_)
+        if child.dep_ == "nmod" or child.dep_ == "amod":
+            token_dict["noun-objects"].append(f"""{child.lemma_.lower()} {token.lemma_.lower()}""")
+            if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_.lower())
+            if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_.lower())
             flag = True
+        if child.dep_ == "compound":
+            compounds.append(child.lemma_.lower())
+            flag = True
+        if child.dep_ == 'prep':
+            for sub_child in child.children:
+                if sub_child.dep_ == "pobj":
+                    token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
+                    flag = True
+    if len(compounds) > 0:
+        token_dict["noun-objects"].append(f"""{" ".join(compounds)} {token.lemma_.lower()}""")
     return flag
 
 def remove_stopwords_from_text(text, stopwords_path):
     stopwords=set(line.strip().lower() for line in open(stopwords_path))
     return " ".join(filter(lambda x: x.lower() not in stopwords, text.split()))
 
+def remove_stopwords(tokens, stopwords_path):
+    stopwords=set(line.strip().lower() for line in open(stopwords_path))
+    return filter(lambda x: x.text.lower() not in stopwords, tokens) 
+
+def remove_stopwords_from_keywords(tokens, stopwords_path, repo_stopwords_path):
+    stopwords=set(line.strip().lower() for line in open(stopwords_path))
+    repo_stopwords=set(line.strip().lower() for line in open(repo_stopwords_path))
+    combined = stopwords | repo_stopwords
+    return list(filter(lambda x: x.lower() not in combined, tokens))
+
+def clean_token_dict(token_dict, stopwords_path, repo_stopwords_path):
+    for key in token_dict:
+        token_dict[key] = remove_stopwords_from_keywords(token_dict[key], stopwords_path, repo_stopwords_path)
+    return token_dict
+
 #Regex pattern to remove numbers of requirement statements.
-def custom_extractor(line, stopwords_path):
+def custom_extractor(line, stopwords_path, repo_stopwords_path):
 
     pattern = r"[A-Za-z][^.!?:()]*"
     token_dict = {"verbs": [], "verb-objects": [], "nouns": [], "noun-objects":[]}
@@ -70,21 +92,25 @@ def custom_extractor(line, stopwords_path):
     
     #removes English stopwords from token list.
     tokens = remove_stopwords(tokens, stopwords_path)
-
+    
     for token in tokens:
         if token.tag_[0:2] == 'VB':
             if not verb_analysis(token, token_dict):
-                token_dict["verbs"].append(token.lemma_)
+                token_dict["verbs"].append(token.lemma_.lower())
         elif token.tag_[0:2] == 'NN':
             if not noun_analysis(token, token_dict):
-                token_dict["nouns"].append(token.lemma_)
+                token_dict["nouns"].append(token.lemma_.lower())
+    
+    clean_token_dict(token_dict, repo_stopwords_path, repo_stopwords_path)
     return token_dict
 
-def extract_keywords(file_name, stopwords_path):
+def extract_keywords(file_name, stopwords_path, repo_stopwords_path):
     file = open(file_name, "r")
     out = open(f"keywords_{file_name}.txt", "w")
     for line in file:
         out.write("{}\n".format(line))
-        keywords = custom_extractor(line, stopwords_path)
+        keywords = custom_extractor(line, stopwords_path, repo_stopwords_path)
         out.write("{}\n".format(keywords))
     file.close()
+
+# extract_keywords("Requirements_group3.txt", "SmartStopword.txt", 'repo_stopwords.txt')

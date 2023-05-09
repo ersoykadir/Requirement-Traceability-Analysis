@@ -8,7 +8,7 @@ Writes traces to neo4j database.
 
 import time, os, sys, math, operator
 from neo4j_connection import neo4jConnector, create_traces_w2v, link_commits_prs
-from traceGraph import Graph
+from trace_graph import Graph
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -43,7 +43,7 @@ def find_similar_nodes(artifact_nodes, req_node, topn=20):
             if similarities[i][0].node_type == "commit":
                 if similarities[i][0].associatedPullRequest != None: similar_nodes.append(similarities[i][0].associatedPullRequest)
             else:
-                similar_nodes.append(similarities[i][0].node_id) # we might want to return the similarity score as well
+                similar_nodes.append(similarities[i][0].number) # we might want to return the similarity score as well
         return similar_nodes
     except Exception as e:
         print(str(e))

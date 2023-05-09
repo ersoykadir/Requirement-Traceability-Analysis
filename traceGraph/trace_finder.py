@@ -28,7 +28,7 @@ def find_trace(graph, regex):
             print(str(e))
             print(node.text)
         if match != None:
-            # print(match, node.node_id)
+            # print(match, node.number)
             found_nodes.add(node)
     return found_nodes
 
@@ -60,7 +60,7 @@ def lemmatize_remove(artifact):
 def lemmatize_and_remove_stopwords(graph):
     threads = []
     # for art in graph.artifact_nodes.values():
-    #     print(art.node_id)
+    #     print(art.number)
     #     lemma_thread = threading.Thread(target=lemmatize_remove, args=(art,))
     #     threads.append(lemma_thread)
     #     lemma_thread.start()
@@ -90,9 +90,9 @@ def main():
             trace_file.write(keyword + ' ' + str(len(nodes[keyword])) + "\n")
             for node in nodes[keyword]:
                 try:
-                    trace_file.write(f"{node.node_id} {node.title}\n")
+                    trace_file.write(f"{node.number} {node.title}\n")
                 except Exception as e:
-                    print(str(e), node.node_id)
+                    print(str(e), node.number)
             trace_file.write('------------------' + '\n')
         trace_file.write('\n')
     trace_file.close()

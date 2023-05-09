@@ -103,6 +103,42 @@ class neo4jConnector:
             return 'Error: ' + str(e)  
     
     @staticmethod
+    def create_trace_v2_tx(tx, req_number, artifact_key_pairs, artifact_label):
+        query = ('''
+                match (r:Requirement)
+                where r.number = '{req_number}'
+                with r
+                UNWIND {artifact_key_pairs} AS art_key_pair
+                match (i:{artifact_label})
+                where i.number= art_key_pair[0]
+                create (i)<-[t:tracesTo]-(r)
+                set t.weight = art_key_pair[1][0]
+                set t.keywords = art_key_pair[1][1]
+                return *
+                ''')
+        query = query.format(req_number=req_number, artifact_key_pairs=artifact_key_pairs, artifact_label=artifact_label)
+        result = tx.run(query)
+        record = result.data()
+        #return record
+
+    def create_trace_v2(self, trace, artifact_label):
+        try:
+            with self.driver.session() as session:
+                print("connecting to neo4j")
+                # if artifact_label == 'Issue':
+                #     print(req_issue_trace)
+                # Send query for each requirement instead of for each keyword!
+                for req_number in trace:
+                    req_trace = trace[req_number]
+                    artifacts = list(req_trace.keys())
+                    keywords = list(req_trace.values())
+                    artifact_key_pairs = [[i, j] for i, j in zip(artifacts, keywords)]
+                    result = session.execute_write(self.create_trace_v2_tx, req_number, artifact_key_pairs, artifact_label)
+                # result = session.execute_write(self.create_req_issue_trace_tx, req_issue_trace, artifact_label)
+        except Exception as e:
+            return 'Error: ' + str(e) 
+
+    @staticmethod
     def create_trace_w2v_tx(tx, req_number, node_list, artifact_label):
         query = ('''
                 match (r:Requirement)
@@ -171,7 +207,6 @@ class neo4jConnector:
                     where datetime(n.createdAt) <= datetime("{date}")
                     delete n
                 ''').format(date=date)
-        print(query_issue)
         query_pr = (f'''
                     Match(n:PullRequest) 
                     where datetime(n.createdAt) <= datetime("{date}")
@@ -218,6 +253,15 @@ def create_traces(neo:neo4jConnector, req_issue_trace, artifact_label):
     start = time.time() 
     try:
         neo.create_trace(req_issue_trace, artifact_label)
+    except Exception as e:
+        return 'Error: ' + str(e) 
+    end = time.time()
+    print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
+
+def create_traces_v2(neo:neo4jConnector, trace, artifact_label):
+    start = time.time() 
+    try:
+        neo.create_trace_v2(trace, artifact_label)
     except Exception as e:
         return 'Error: ' + str(e) 
     end = time.time()

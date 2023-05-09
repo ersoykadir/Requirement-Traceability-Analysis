@@ -89,11 +89,16 @@ def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
     f.write(json.dumps(dump, indent=4))
     f.close()
 
-def get_requirements(repo_number):
-    if os.path.exists(f'data_group{repo_number}/requirements_data.json'):
-        print('requirements already exists.')
-        return
-    requirements_file_name = f'data_group{repo_number}/group{repo_number}_requirements.txt'
+# Assumption:   The requirements have numbers in the format "1.2.3" or "1.2.3." and the description is the rest of the line.
+#               The parent of a requirement is the requirement with the same number, but without the last number. (1.1 is the parent of 1.1.1)       
+def get_requirements(repo_number, parent_mode):
+    # if os.path.exists(f'data_group{repo_number}/requirements_data.json'):
+    #     print('requirements already exists.')
+    #     return
+    if parent_mode:
+        requirements_file_name = f'data_group{repo_number}/requirements.txt'
+    else:
+        requirements_file_name = f'data_group{repo_number}/requirements_wout_headers.txt'
     f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
     data = f.readlines()
     f.close()
@@ -102,12 +107,17 @@ def get_requirements(repo_number):
 
     for line in data:
         # Assuming that the requirement number is the first word in the line
+        if len(line) == 0:
+            continue
         req = line.split(' ', 1)
-        req_number = req[0]
+        req_number = req[0].strip()
+        if req_number[-1] == '.':
+            req_number = req_number[:-1]
         req_description = req[1]
         req_dict = {
             'number': req_number,
-            'description': req_description
+            'description': req_description,
+            'parent': '.'.join(req_number.split('.')[:-1])
         }
         requirements.append(req_dict)
     
@@ -119,7 +129,7 @@ def get_requirements(repo_number):
     f.close()
 
 import sys, time
-def get_artifacts(repo_number):
+def get_artifacts(repo_number, parent_mode):
     start = time.time()
     repo_owner = 'bounswe'
     repo_name = f'bounswe2022group{repo_number}'
@@ -127,7 +137,7 @@ def get_artifacts(repo_number):
     get_all_pages('issues', repo_owner, repo_number, repo_name)
     get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
     get_all_pages('commits', repo_owner, repo_number, repo_name)
-    get_requirements(repo_number)
+    get_requirements(repo_number, parent_mode)
     end = time.time()
     print(f"Time elapsed for acquiring artifacts from github: {end-start}")
 
@@ -140,7 +150,16 @@ def main():
     get_all_pages('issues', repo_owner, repo_number, repo_name)
     get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
     get_all_pages('commits', repo_owner, repo_number, repo_name)
-    get_requirements(repo_number)
+    
+    try:
+        mode = sys.argv[2]
+        if mode == "req_tree":
+            parent_mode = True
+        else:
+            raise Exception("Please enter a valid mode!")
+    except:
+        parent_mode = False
+    get_requirements(repo_number, parent_mode)
     end = time.time()
     print(f"Time elapsed: {end-start}")
 
