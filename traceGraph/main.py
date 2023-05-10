@@ -35,7 +35,7 @@ def main():
     filter_artifact(datetime.datetime(2022,6,1).isoformat())
 
     if(search_method == 'word-vector'):
-        trace_wv(repo_number) # comment above and uncomment this line to use word2vec
+        trace_wv(repo_number, parent_mode) # comment above and uncomment this line to use word2vec
     elif(search_method == "keyword"):
         trace(repo_number, parent_mode)
     else:
