@@ -48,14 +48,14 @@ def find_similar_nodes(artifact_nodes, req_node, topn=20):
     except Exception as e:
         print(str(e))
 
-def trace(repo_number):
+def trace(repo_number, parent_mode):
 
     # Create graph and word2vec model
     # Graph is created from the given github data
     # It is used to find similar artifacts for each requirement
     start = time.time()
-    req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
-    graph = Graph(repo_number)
+    # req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
+    graph = Graph(repo_number, parent_mode)
     graph.create_model()
     print("Time taken to create graph and word2vec model: ", time.time() - start)
 
@@ -65,11 +65,8 @@ def trace(repo_number):
 
     # Find artifacts similar to each requirement
     start = time.time()
-    for line in req_file:
-        line = line.split(' ', 1)
-        req_number = line[0]
-        requirement = graph.requirement_nodes[req_number]
-
+    for requirement in graph.requirement_nodes.values():
+        req_number = requirement.number
         req_to_issue[req_number] = find_similar_nodes(graph.issue_nodes.values(), requirement)
         req_to_pr[req_number] = find_similar_nodes(graph.pr_nodes.values(), requirement)
         req_to_pr[req_number] += (find_similar_nodes(graph.commit_nodes.values(), requirement))
@@ -89,7 +86,15 @@ def trace(repo_number):
 
 def main():
     repo_number = int(sys.argv[1])
-    trace(repo_number)
+    try:
+        mode = sys.argv[2]
+        if mode == "req_tree":
+            parent_mode = True
+        else:
+            raise Exception("Please enter a valid mode!")
+    except:
+        parent_mode = False
+    trace(repo_number, parent_mode)
 
 if __name__ == '__main__':
     main()

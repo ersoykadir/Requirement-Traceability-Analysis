@@ -152,10 +152,13 @@ def trace(repo_number, parent_mode):
 
 def main():
     repo_number = int(sys.argv[1])
-    mode = sys.argv[2]
-    if mode == "req_tree":
-        parent_mode = True
-    else:
+    try:
+        mode = sys.argv[2]
+        if mode == "req_tree":
+            parent_mode = True
+        else:
+            raise Exception("Please enter a valid mode!")
+    except:
         parent_mode = False
     trace(repo_number, parent_mode)
 
