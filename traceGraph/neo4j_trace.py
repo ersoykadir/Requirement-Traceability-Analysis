@@ -13,6 +13,7 @@ sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, most_frequent_words, remove_stopwords_from_text
 from neo4j_connection import create_traces, neo4jConnector, create_traces_v2, link_commits_prs
 from trace_graph import Graph
+from dashboard_pdf import create_pdf
 
 neo4j_password = os.getenv("NEO4J_PASSWORD")
 
@@ -149,6 +150,7 @@ def trace(repo_number, parent_mode):
     link_commits_prs(neo)
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
+    create_pdf(graph)
 
 def main():
     repo_number = int(sys.argv[1])
