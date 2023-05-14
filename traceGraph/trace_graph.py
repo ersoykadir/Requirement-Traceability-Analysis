@@ -181,6 +181,8 @@ class PullRequest(Issue):
     def __init__(self, node_type, number, title, body, comments, state, created, closed, url, milestone, related_commits):
         super().__init__(node_type, number, title, body, comments, state, created, closed, url, milestone)
         self.related_commits = related_commits
+        if closed is not None:
+            self.time_to_finish = time_to_finish(created, closed)
 
 class Commit(Node):
     def __init__(self, node_type, id, message, committedDate, url, associatedPullRequest):

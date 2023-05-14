@@ -1,46 +1,54 @@
-<hr/>
+<hr />
 <h2 style="text-align: center;"><strong>Dashboard</strong></p>
 <hr/>
 
 <p style="text-align: center;"><strong>General Information</strong></p>
 
-<p style="text-align: left;">Average number of traces linked to requirements:</p>
-<p style="text-align: left;">Number of requirements with zero link:</p>
+<p style="text-align: left;">Average number of traces linked to requirements: {{avg}}</p>
+<p style="text-align: left;">Requirements with zero link:</p>
+{% for req in zero_link_reqs %}
+<div>
+    <li style="text-align: left;">Number: {{req}}</li>
+    <br>
+</div>
+{% endfor %}
+
 
 
 <p style="text-align: center;"><strong>Artifact Information</strong></p>
 
 <p style="text-align: left;">Requirements:</p>
-    {% for req in requirements %}
+{% for req in requirements %}
 <div>
-<li style="text-align: left;">Number: {{req.number}}</li>
-<li style="text-align: left;">Description: {{req.description}}</li>
-<li style="text-align: left;">Number of Traced PRs: {{req.number_of_connected_prs}}</li>
-<li style="text-align: left;">Number of Traced Issues: {{req.number_of_connected_issues}}</li>
-<br>
+    <li style="text-align: left;">Number: {{req.number}}</li>
+    <li style="text-align: left;">Description: {{req.description}}</li>
+    <li style="text-align: left;">Number of Traced PRs: {{req.number_of_connected_prs}}</li>
+    <li style="text-align: left;">Number of Traced Issues: {{req.number_of_connected_issues}}</li>
+    <br>
 </div>
-    {% endfor %}
+{% endfor %}
 
 <p style="text-align: left;">Issues:</p>
-    {% for issue in issues %}
+{% for issue in issues %}
 <div>
-<li style="text-align: left;">Number: {{issue.number}}</li>
-<li style="text-align: left;">Title: {{issue.title}}</li>
-<li style="text-align: left;">Status: {{issue.state}}</li>
-<li style="text-align: left;">URL: {{issue.url}}</li>
-<br>
+    <li style="text-align: left;">Number: {{issue.number}}</li>
+    <li style="text-align: left;">Title: {{issue.title}}</li>
+    <li style="text-align: left;">Status: {{issue.state}}</li>
+    <li style="text-align: left;">Time Taken to Complete: {{issue.time_to_finish}}</li>
+    <li style="text-align: left;">URL: <a href="{{ issue.url}}">{{issue.url}}</a></li>
+    <br>
+
 </div>
-    {% endfor %}
+{% endfor %}
 
 <p style="text-align: left;">PRs:</p>
-    {% for pr in prs %}
+{% for pr in prs %}
 <div>
-<li style="text-align: left;">Number: {{pr.number}}</li>
-<li style="text-align: left;">Title: {{pr.title}}</li>
-<li style="text-align: left;">Status: {{pr.state}}</li>
-<li style="text-align: left;">URL: {{pr.url}}</li>
-<br>
+    <li style="text-align: left;">Number: {{pr.number}}</li>
+    <li style="text-align: left;">Title: {{pr.title}}</li>
+    <li style="text-align: left;">Status: {{pr.state}}</li>
+    <li style="text-align: left;">Time Taken to Complete: {{pr.time_to_finish}}</li>
+    <li style="text-align: left;">URL: <a href="{{ pr.url }}">{{pr.url}}</a></li>
+    <br>
 </div>
-    {% endfor %}
-
-    
+{% endfor %}

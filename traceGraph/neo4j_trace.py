@@ -139,6 +139,9 @@ def trace(repo_number, parent_mode):
         req_to_pr[req_number] = search_keyword_list(graph.pr_nodes.values(), token_dict)
         req_to_commit[req_number] = search_keyword_list(graph.commit_nodes.values(), token_dict)
 
+        graph.requirement_nodes[req_number].number_of_connected_issues = len(req_to_issue[req_number])
+        graph.requirement_nodes[req_number].number_of_connected_prs = len(req_to_pr[req_number])
+
     print("Time taken to search for keywords: ", time.time() - start)
     for req in req_to_pr.keys():
         req_to_pr[req] = combine_dictionaries(req_to_pr[req], req_to_commit[req])
