@@ -39,7 +39,8 @@ def build_issue_nodes(repo_number):
 
         # Convert the dates to neo4j Date objects
         issue['createdAt'] = DateTime.from_iso_format(issue['createdAt'].replace('Z', '+00:00'))
-        issue['closedAt'] = DateTime.from_iso_format(issue['closedAt'].replace('Z', '+00:00'))
+        if(issue['closedAt'] is not None):
+            issue['closedAt'] = DateTime.from_iso_format(issue['closedAt'].replace('Z', '+00:00'))
 
     # Create neo4j nodes from data['issues']
     result = create_artifact_nodes(data['issues'], 'Issue')
@@ -79,7 +80,8 @@ def build_pr_nodes(repo_number):
         
         # Convert the dates to neo4j Date objects
         pr['createdAt'] = DateTime.from_iso_format(pr['createdAt'].replace('Z', '+00:00'))
-        pr['closedAt'] = DateTime.from_iso_format(pr['closedAt'].replace('Z', '+00:00'))
+        if(pr['closedAt'] is not None):
+            pr['closedAt'] = DateTime.from_iso_format(pr['closedAt'].replace('Z', '+00:00'))
     
     # Create neo4j nodes
     result = create_artifact_nodes(data['pullRequests'], 'PullRequest')
