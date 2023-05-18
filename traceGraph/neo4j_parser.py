@@ -6,7 +6,9 @@ Reads artifact data from json files and creates neo4j nodes.
 """
 
 import json
-from neo4j_connection import create_artifact_nodes, clean_artifact_nodes, neo4jConnector, neo4j_password
+from neo4j_connection import create_artifact_nodes, create_indexes, neo4jConnector, neo4j_password
+from neo4j.time import Date, DateTime
+
 
 # Parses the comments of an issue or pull request.
 def comment_parser(comments):
@@ -34,6 +36,10 @@ def build_issue_nodes(repo_number):
         # add the comments to the text
         for comment in issue['comment_list']:
             issue['text'] += ' ' + comment
+
+        # Convert the dates to neo4j Date objects
+        issue['createdAt'] = DateTime.from_iso_format(issue['createdAt'].replace('Z', '+00:00'))
+        issue['closedAt'] = DateTime.from_iso_format(issue['closedAt'].replace('Z', '+00:00'))
 
     # Create neo4j nodes from data['issues']
     result = create_artifact_nodes(data['issues'], 'Issue')
@@ -70,6 +76,10 @@ def build_pr_nodes(repo_number):
         # add the comments to the text
         for comment in pr['comment_list']:
             pr['text'] += ' ' + comment
+        
+        # Convert the dates to neo4j Date objects
+        pr['createdAt'] = DateTime.from_iso_format(pr['createdAt'].replace('Z', '+00:00'))
+        pr['closedAt'] = DateTime.from_iso_format(pr['closedAt'].replace('Z', '+00:00'))
     
     # Create neo4j nodes
     result = create_artifact_nodes(data['pullRequests'], 'PullRequest')
@@ -88,6 +98,7 @@ def build_commit_nodes(repo_number):
 
         commit['text'] = commit['message']
         commit['number'] = commit['oid']
+        commit['createdAt'] = DateTime.from_iso_format(commit['committedDate'].replace('Z', '+00:00'))
     # Create neo4j nodes
     result = create_artifact_nodes(data['commits'], 'Commit')
 
@@ -119,9 +130,11 @@ def create_neo4j_nodes(repo_number):
     build_commit_nodes(repo_number)
     build_requirement_nodes(repo_number)
 
-    # Clean the nodes from practice app
+    # Create indexes
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    clean_artifact_nodes(neo, issue_number_threshold, 'Issue')
+    create_indexes(neo,'Issue', 'number')
+    create_indexes(neo,'PullRequest', 'number')
+    create_indexes(neo,'Commit', 'number')
     neo.close()
     end = time.time()
     print(f"Time elapsed for creating neo4j nodes: {end-start}")
@@ -141,9 +154,11 @@ def main():
     build_commit_nodes(repo_number)
     build_requirement_nodes(repo_number)
 
-    # Clean the nodes from practice app
+    # Create indexes
     neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    clean_artifact_nodes(neo, issue_number_threshold, 'Issue')
+    create_indexes(neo,'Issue', 'number')
+    create_indexes(neo,'PullRequest', 'number')
+    create_indexes(neo,'Commit', 'number')
     neo.close()
 
 if __name__ == '__main__':

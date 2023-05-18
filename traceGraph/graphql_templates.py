@@ -8,7 +8,7 @@ This file contains github graphql query templates for each artifact type.
 from string import Template
 ISSUE_queryTemplate = Template("""{
     repository(owner:"$owner", name:"$name") {
-        issues(first: 100, states:CLOSED, after:$cursor) {
+        issues(first: 100, after:$cursor) {
             totalCount
             nodes{
                 url

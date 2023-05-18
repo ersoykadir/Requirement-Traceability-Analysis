@@ -186,19 +186,17 @@ class neo4jConnector:
             return 'Error: ' + str(e)  
         
     @staticmethod
-    def clean_artifacts_tx(tx, threshold, label):
+    def create_index_tx(tx, label, field):
         query = (f'''
-                MATCH (n:{label})
-                where n.number < {threshold}
-                delete n
-                ''').format(label=label, threshold=threshold)
+                CREATE INDEX ON :{label}({field})
+                ''').format(label=label, field=field)
         result = tx.run(query)
         record = result.data()
         return record
 
-    def clean_artifacts(self, threshold, label):
+    def create_index(self, label, field):
         with self.driver.session() as session:
-            result = session.execute_write(self.clean_artifacts_tx, threshold, label)
+            result = session.execute_write(self.create_index_tx, label, field)
 
     @staticmethod
     def filter_artifacts_tx(tx, date):
@@ -285,9 +283,9 @@ def link_commits_prs(neo:neo4jConnector):
     end = time.time()
     print(f"Time taken to connect neo4j and link commits and prs: ", end - start)
 
-def clean_artifact_nodes(neo:neo4jConnector, threshold, label):
+def create_indexes(neo:neo4jConnector, label, field):
     try:
-        neo.clean_artifacts(threshold, label)
+        neo.create_index(label, field)
     except Exception as e:
         return 'Error: ' + str(e)
     
@@ -295,6 +293,7 @@ def clean_all_data(neo:neo4jConnector):
     try:
         neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
         neo.clean_all_data()
+        neo.close()
     except Exception as e:
         return 'Error: ' + str(e)
     
