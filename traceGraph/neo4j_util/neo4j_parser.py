@@ -11,6 +11,7 @@ from word_vector import document_embedding
 
 from .neo4j_connection import create_artifact_nodes, create_indexes, neo4jConnector, neo4j_password
 from artifacts.artifacts import get_repo_creation_date
+from config import Config
 
 repo_creation_date = None
 
@@ -23,8 +24,8 @@ def comment_parser(comments):
     return comment_list
 
 # Parses the data from the issue file and creates neo4j nodes.
-def build_issue_nodes(repo_number):
-    issue_data_fname = f'data_group{repo_number}/issues_data.json'
+def build_issue_nodes():
+    issue_data_fname = f'data_{Config().repo_name}/issues_data.json'
     f = open(issue_data_fname, 'r')
     data = json.loads(f.read())
     f.close()
@@ -63,8 +64,8 @@ def commit_parser(related_commits):
     return commit_ids
 
 # Parses the data from the pull requests file and creates neo4j nodes.
-def build_pr_nodes(repo_number):
-    pr_data_fname = f'data_group{repo_number}/pullRequests_data.json'
+def build_pr_nodes():
+    pr_data_fname = f'data_{Config().repo_name}/pullRequests_data.json'
     f = open(pr_data_fname, 'r')
     data = json.loads(f.read())
     f.close()
@@ -98,8 +99,8 @@ def build_pr_nodes(repo_number):
     result = create_artifact_nodes(data['pullRequests'], 'PullRequest')
 
 # Parses the data from the commit file and creates neo4j nodes.
-def build_commit_nodes(repo_number):
-    commit_data_fname = f'data_group{repo_number}/commits_data.json'
+def build_commit_nodes():
+    commit_data_fname = f'data_{Config().repo_name}/commits_data.json'
     f = open(commit_data_fname, 'r')
     data = json.loads(f.read())
     f.close()
@@ -122,8 +123,8 @@ def build_commit_nodes(repo_number):
     result = create_artifact_nodes(data['commits'], 'Commit')
 
 # Parses the data from the requirements file and creates neo4j nodes.
-def build_requirement_nodes(repo_number):
-    data_fname = f'data_group{repo_number}/requirements_data.json'
+def build_requirement_nodes():
+    data_fname = f'data_{Config().repo_name}/requirements_data.json'
     f = open(data_fname, 'r')
     data = json.loads(f.read())
     f.close()
@@ -138,29 +139,19 @@ import sys, time
 
 def create_neo4j_nodes(repo_number):
     global repo_creation_date
-    repo_owner = 'bounswe'
-    repo_name = f'bounswe2022group{repo_number}'
-    repo_creation_date = get_repo_creation_date(repo_owner, repo_name)
+    repo_creation_date = get_repo_creation_date()
 
     start = time.time()
-    # if repo_number == 2:
-    #     issue_number_threshold = 309 # for group 2
-    # elif repo_number == 3:
-    #     issue_number_threshold = 258 # for group 3
-    # else:
-    #     raise Exception("Invalid repo number")
 
-    build_issue_nodes(repo_number)
-    build_pr_nodes(repo_number)
-    build_commit_nodes(repo_number)
-    build_requirement_nodes(repo_number)
+    build_issue_nodes()
+    build_pr_nodes()
+    build_commit_nodes()
+    build_requirement_nodes()
 
     # Create indexes
-    neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_indexes(neo,'Issue', 'number')
-    create_indexes(neo,'PullRequest', 'number')
-    create_indexes(neo,'Commit', 'number')
-    neo.close()
+    create_indexes('Issue', 'number')
+    create_indexes('PullRequest', 'number')
+    create_indexes('Commit', 'number')
     end = time.time()
     print(f"Time elapsed for creating neo4j nodes: {end-start}")
 

@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from .graphql_templates import ISSUE_queryTemplate, PR_queryTemplate, COMMIT_queryTemplate, REQ_queryTemplate
+from config import Config
 
 username = os.getenv('GITHUB_USERNAME')
 token = os.getenv('GITHUB_TOKEN')
@@ -64,8 +65,8 @@ artifact_template = {
 }
 
 # Gets all issues, page by page, and writes them to a json file.
-def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
-    if os.path.exists(f'data_group{repo_number}/{artifact_type}_data.json'):
+def get_all_pages(artifact_type):
+    if os.path.exists(f'data_{Config().repo_name}/{artifact_type}_data.json'):
         print(f'{artifact_type} already exists.')
         return
     template = artifact_template[artifact_type]
@@ -78,13 +79,13 @@ def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
         if endCursor != "null":
             endCursor = "\"" + endCursor + "\""
         # Update the query with the new endCursor
-        query = template.substitute(owner=repo_owner, name=repo_name, cursor=endCursor)
+        query = template.substitute(owner=Config().repo_owner, name=Config().repo_name, cursor=endCursor)
         # Get the next page of issues
         page_data, hasNextPage, endCursor = get_page(query)
         pages = pages + page_data
     
     # Write the issues to a json file
-    data_fname = f'data_group{repo_number}/{artifact_type}_data.json'
+    data_fname = f'data_{Config().repo_name}/{artifact_type}_data.json'
     f = open(data_fname, 'w')
     dump = {artifact_type: pages}
     f.write(json.dumps(dump, indent=4))
@@ -92,12 +93,12 @@ def get_all_pages(artifact_type, repo_owner, repo_number, repo_name):
 
 # Assumption:   The requirements have numbers in the format "1.2.3" or "1.2.3." and the description is the rest of the line.
 #               The parent of a requirement is the requirement with the same number, but without the last number. (1.1 is the parent of 1.1.1)       
-def get_requirements(repo_number, parent_mode):
+def get_requirements():
 
-    if parent_mode:
-        requirements_file_name = f'data_group{repo_number}/requirements.txt'
+    if Config().parent_mode:
+        requirements_file_name = f'data_{Config().repo_name}/requirements.txt'
     else:
-        requirements_file_name = f'data_group{repo_number}/requirements_wout_headers.txt'
+        requirements_file_name = f'data_{Config().repo_name}/requirements_wout_headers.txt'
     f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
     data = f.readlines()
     f.close()
@@ -121,53 +122,26 @@ def get_requirements(repo_number, parent_mode):
         requirements.append(req_dict)
     
     # Write the requirements to a json file
-    data_fname = f'data_group{repo_number}/requirements_data.json'
+    data_fname = f'data_{Config().repo_name}/requirements_data.json'
     f = open(data_fname, 'w')
     dump = {'requirements': requirements}
     f.write(json.dumps(dump, indent=4))
     f.close()
 
-def get_repo_creation_date(repo_owner, repo_name):
+def get_repo_creation_date():
     template = REQ_queryTemplate
-    query = template.substitute(owner=repo_owner, name=repo_name)
+    query = template.substitute(owner=Config().repo_owner, name=Config().repo_name)
     data = get_data_from_api(query)
     repo_creation_date = data['data']['repository']['createdAt']
     return repo_creation_date
 
-import sys, time
-def get_artifacts(repo_number, parent_mode):
+import time
+def get_artifacts():
     start = time.time()
-    repo_owner = 'bounswe'
-    repo_name = f'bounswe2022group{repo_number}'
 
-    get_all_pages('issues', repo_owner, repo_number, repo_name)
-    get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
-    get_all_pages('commits', repo_owner, repo_number, repo_name)
-    get_requirements(repo_number, parent_mode)
+    get_all_pages('issues')
+    get_all_pages('pullRequests')
+    get_all_pages('commits')
+    get_requirements()
     end = time.time()
     print(f"Time elapsed for acquiring artifacts from github: {end-start}")
-
-def main():
-    start = time.time()
-    repo_number = sys.argv[1]
-    repo_owner = 'bounswe'
-    repo_name = f'bounswe2022group{repo_number}'
-    
-    get_all_pages('issues', repo_owner, repo_number, repo_name)
-    get_all_pages('pullRequests', repo_owner, repo_number, repo_name)
-    get_all_pages('commits', repo_owner, repo_number, repo_name)
-    
-    try:
-        mode = sys.argv[2]
-        if mode == "req_tree":
-            parent_mode = True
-        else:
-            raise Exception("Please enter a valid mode!")
-    except:
-        parent_mode = False
-    get_requirements(repo_number, parent_mode)
-    end = time.time()
-    print(f"Time elapsed: {end-start}")
-
-if __name__ == "__main__":
-    main()
