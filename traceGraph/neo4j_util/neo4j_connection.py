@@ -9,7 +9,7 @@ neo4j_password = os.getenv('NEO4J_PASSWORD')
 neo4j_uri = os.getenv('NEO4J_URI')
 
 class neo4jConnector:
-
+    # Having single neo4j connection might be worse, must test!!!
     def __new__(cls):
         if not hasattr(cls, 'instance'):
             cls.instance = object.__new__(cls)
