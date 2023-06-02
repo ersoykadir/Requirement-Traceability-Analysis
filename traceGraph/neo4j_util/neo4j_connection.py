@@ -4,345 +4,125 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 
+neo4j_username = os.getenv('NEO4J_USERNAME')
 neo4j_password = os.getenv('NEO4J_PASSWORD')
-
-word_regex = '.*\\b{0}\\b.*'
-verbobj_regex = '.*\\b{0}\\s((?:[\\w,;:\\\'\\"`]+\\s)*){1}\\b.*'
-noun_phrase_regex = '.*\\b{0}\\s{1}\\b.*'
+neo4j_uri = os.getenv('NEO4J_URI')
 
 class neo4jConnector:
 
-    def __init__(self, uri, user, password):
-        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = object.__new__(cls)
+            cls.instance.__initialized = False
+        return cls.instance
+
+    def __init__(self):
+        if self.__initialized: return
+        self.__initialized = True
+
+        self.driver = GraphDatabase.driver(neo4j_uri, auth=(neo4j_username, neo4j_password))
 
     def close(self):
         self.driver.close()
 
-    def print_greeting(self, message):
-        with self.driver.session() as session:
-            greeting = session.execute_write(self._create_and_return_greeting, message)
-            print(greeting)
-
     @staticmethod
-    def _create_and_return_greeting(tx, message):
-        result = tx.run("CREATE (a:Greeting) "
-                        "SET a.message = $message "
-                        "RETURN a.message + ', from node ' + id(a)", message=message)
-        return result.data()
-
-    @staticmethod
-    def create_issue_from_file_tx(tx):
-        query = ('''CALL apoc.load.json('file:///data.json') YIELD value as v 
-                UNWIND v.issues AS properties
-                CREATE (n:Issue)
-                SET n = properties
-                RETURN n
-                ''')
-        
-        result = tx.run(query)
+    def tx(tx, query, params):        
+        result = tx.run(query, params)
         record = result.data()
         return record
 
-    def create_issue_from_file(self):
-        with self.driver.session() as session:
-            result = session.execute_write(self.create_issue_from_file_tx)
-
-    @staticmethod
-    def create_artifact_tx(tx, artifacts, label):
-        query = (f'''
-                UNWIND $artifacts AS properties
-                create (n: {label} )
-                SET n = properties
-                RETURN n
-                ''').format(label=label)
-        result = tx.run(query, artifacts=artifacts, label=label)
-        record = result.data()
-        return record
-
-    def create_artifact(self, artifacts, label):
-        with self.driver.session() as session:
-            result = session.execute_write(self.create_artifact_tx, artifacts, label)
-    
-    @staticmethod
-    def create_trace_tx(tx, req_number, node_list, weight, keyword, artifact_label):
-        query = ('''
-                match (r:Requirement)
-                where r.number = '{req_number}'
-                with r
-                UNWIND {node_list} AS node_numbers
-                match (i:{artifact_label})
-                where i.number= node_numbers
-                create (i)<-[t:tracesTo]-(r)
-                set t.weight = {weight}
-                set t.keyword = '{keyword}'
-                return *
-                ''')
-        
-        # for req_number in req_issue_trace:
-        #     for tuple in req_issue_trace[req_number]:
-        #         keyword, node_list, weight = tuple
-        query = query.format(req_number=req_number, node_list=node_list, weight=weight, keyword=keyword, artifact_label=artifact_label)
-        result = tx.run(query)
-        record = result.data()
-        #return record
-
-    def create_trace(self, req_issue_trace, artifact_label):
+    def execute_query(self, query, params=None):
         try:
             with self.driver.session() as session:
-                print("connecting to neo4j")
-                # if artifact_label == 'Issue':
-                #     print(req_issue_trace)
-                # Send query for each requirement instead of for each keyword!
-                for req_number in req_issue_trace:
-                    for tuple in req_issue_trace[req_number]:
-                        keyword, node_list, weight = tuple
-                        if len(node_list) > 0:
-                            result = session.execute_write(self.create_trace_tx, req_number, node_list, weight, keyword, artifact_label)
-                # result = session.execute_write(self.create_req_issue_trace_tx, req_issue_trace, artifact_label)
+                result = session.execute_write(self.tx, query, params)
         except Exception as e:
-            return 'Error: ' + str(e)  
-    
-    @staticmethod
-    def create_trace_v2_tx(tx, req_number, artifact_key_pairs, artifact_label):
-        query = ('''
-                match (r:Requirement)
-                where r.number = '{req_number}'
-                with r
-                UNWIND {artifact_key_pairs} AS art_key_pair
-                match (i:{artifact_label})
-                where i.number= art_key_pair[0]
-                create (i)<-[t:tracesTo]-(r)
-                set t.weight = art_key_pair[1][0]
-                set t.keywords = art_key_pair[1][1]
-                return *
-                ''')
-        query = query.format(req_number=req_number, artifact_key_pairs=artifact_key_pairs, artifact_label=artifact_label)
-        result = tx.run(query)
-        record = result.data()
-        #return record
+            print(query, params)
+            print(result)
+            raise e
 
-    def create_trace_v2(self, trace, artifact_label):
-        try:
-            with self.driver.session() as session:
-                print("connecting to neo4j")
-                for req_number in trace:
-                    req_trace = trace[req_number]
-                    artifacts = list(req_trace.keys())
-                    keywords = list(req_trace.values())
-                    artifact_key_pairs = [[i, j] for i, j in zip(artifacts, keywords)]
-                    result = session.execute_write(self.create_trace_v2_tx, req_number, artifact_key_pairs, artifact_label)
-        except Exception as e:
-            return 'Error: ' + str(e) 
-        
-    @staticmethod
-    def create_trace_pr_tx(tx, pr_number, artifact_key_pairs, artifact_label):
-        query = ('''
-                match (p:PullRequest)
-                where p.number = {pr_number}
-                with p
-                UNWIND {artifact_key_pairs} AS art_key_pair
-                match (a:{artifact_label})
-                where a.number= art_key_pair[0]
-                create (a)<-[t:tracesTo]-(p)
-                set t.weight = art_key_pair[1][0]
-                set t.keywords = art_key_pair[1][1]
-                return *
-                ''')
-        query = query.format(pr_number=pr_number, artifact_key_pairs=artifact_key_pairs, artifact_label=artifact_label)
-        print(query)
-        result = tx.run(query)
-        record = result.data()
-        #return record
+########################
 
-    def create_trace_pr(self, trace, artifact_label):
-        try:
-            with self.driver.session() as session:
-                print("connecting to neo4j")
-                for pr_number in trace:
-                    req_trace = trace[pr_number]
-                    artifacts = list(req_trace.keys())
-                    keywords = list(req_trace.values())
-                    artifact_key_pairs = [[i, j] for i, j in zip(artifacts, keywords)]
-                    result = session.execute_write(self.create_trace_pr_tx, pr_number, artifact_key_pairs, artifact_label)
-        except Exception as e:
-            return 'Error: ' + str(e) 
-        
-    @staticmethod
-    def create_trace_w2v_tx(tx, req_number, node_list, artifact_label):
-        query = ('''
-                match (r:Requirement)
-                where r.number = '{req_number}'
-                with r
-                UNWIND {node_list} AS node_numbers
-                match (i:{artifact_label})
-                where i.number= node_numbers
-                create (i)<-[t:tracesTo]-(r)
-                return *
-                ''')
-        query = query.format(req_number=req_number, node_list=node_list, artifact_label=artifact_label)
-        result = tx.run(query)
-        record = result.data()
-        #return record
+def create_issue_from_json(json_file):
+    query = ('''CALL apoc.load.json('$json_file') YIELD value as v 
+        UNWIND v.issues AS properties
+        CREATE (n:Issue)
+        SET n = properties
+        RETURN n
+    ''')
+    params = {'json_file': json_file}
 
-    def create_trace_w2v(self, req_issue_trace, artifact_label):
-        try:
-            with self.driver.session() as session:
-                print("connecting to neo4j")
-                for req_number in req_issue_trace:
-                    node_list = req_issue_trace[req_number]
-                    result = session.execute_write(self.create_trace_w2v_tx, req_number, node_list, artifact_label)
-        except Exception as e:
-            return 'Error: ' + str(e)  
-
-    @staticmethod
-    def link_commit_pr_tx(tx):
-        query = ('''
-                MATCH (n:Commit), (p:PullRequest)
-                where n.associatedPullRequests = p.number
-                create (p)-[t:relatedCommit]->(n)
-                RETURN * 
-                ''')
-        query = query.format()
-        result = tx.run(query)
-        record = result.data()
-
-    def link_commit_pr(self):
-        try:
-            with self.driver.session() as session:
-                print("connecting to neo4j")
-                result = session.execute_write(self.link_commit_pr_tx)
-        except Exception as e:
-            return 'Error: ' + str(e)  
-        
-    @staticmethod
-    def create_index_tx(tx, label, field):
-        query = (f'''
-                CREATE INDEX ON :{label}({field})
-                ''').format(label=label, field=field)
-        result = tx.run(query)
-        record = result.data()
-        return record
-
-    def create_index(self, label, field):
-        with self.driver.session() as session:
-            result = session.execute_write(self.create_index_tx, label, field)
-
-    @staticmethod
-    def filter_artifacts_tx(tx, date):
-        query_issue = (f'''
-                    Match(n:Issue) 
-                    where date(n.createdAt) <= date("{date}")
-                    delete n
-                ''').format(date=date)
-        query_pr = (f'''
-                    Match(n:PullRequest) 
-                    where date(n.createdAt) <= date("{date}")
-                    delete n
-                ''').format(date=date)
-        query_commit = (f'''
-                    Match(n:Commit) 
-                    where date(n.committedDate) <= date("{date}")
-                    delete n
-                ''').format(date=date)
-        result = tx.run(query_issue)
-        result = tx.run(query_pr)
-        result = tx.run(query_commit)
-        record = result.data()
-        return record
-
-    def filter_artifacts(self, date):
-        with self.driver.session() as session:
-            result = session.execute_write(self.filter_artifacts_tx, date)
-
-    @staticmethod
-    def clean_all_data_tx(tx):
-        query = ('''
-                MATCH (n)
-                detach delete n
-                ''')
-        result = tx.run(query)
-        record = result.data()
-        return record
-
-    def clean_all_data(self):
-        with self.driver.session() as session:
-            result = session.execute_write(self.clean_all_data_tx)
+    neo4jConnector().execute_query(query, params)
 
 def create_artifact_nodes(artifacts, label):
-    try:
-        neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-        neo.create_artifact(artifacts, label)
-        neo.close()
-    except Exception as e:
-        return 'Error: ' + str(e) + ' for label: ' + label
+    query = (f'''
+        UNWIND $artifacts AS properties
+        create (n: $label )
+        SET n = properties
+        RETURN n
+    ''')
+    params = {'artifacts': artifacts, 'label': label}
 
-import time
-def create_traces(neo:neo4jConnector, req_issue_trace, artifact_label):
-    start = time.time() 
-    try:
-        neo.create_trace(req_issue_trace, artifact_label)
-    except Exception as e:
-        return 'Error: ' + str(e) 
-    end = time.time()
-    print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
+    neo4jConnector.execute_query(query, params)
 
-def create_traces_v2(neo:neo4jConnector, trace, artifact_label):
-    start = time.time() 
-    try:
-        neo.create_trace_v2(trace, artifact_label)
-    except Exception as e:
-        return 'Error: ' + str(e) 
-    end = time.time()
-    print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
+def link_commits_prs():
+    query = ('''
+        MATCH (n:Commit), (p:PullRequest)
+        where n.associatedPullRequests = p.number
+        create (p)-[t:relatedCommit]->(n)
+        RETURN * 
+    ''')
+    neo4jConnector().execute_query(query)
 
-def create_traces_pr(neo:neo4jConnector, trace, artifact_label):
-    start = time.time() 
-    try:
-        neo.create_trace_pr(trace, artifact_label)
-    except Exception as e:
-        return 'Error: ' + str(e) 
-    end = time.time()
-    print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
-
-def create_traces_w2v(neo:neo4jConnector, req_issue_trace, artifact_label):
-    start = time.time() 
-    try:
-        neo.create_trace_w2v(req_issue_trace, artifact_label)
-    except Exception as e:
-        return 'Error: ' + str(e) 
-    end = time.time()
-    print(f"Time taken to connect neo4j and create traces for {artifact_label}: ", end - start)
-
-def link_commits_prs(neo:neo4jConnector):
-    start = time.time() 
-    try:
-        neo.link_commit_pr()
-    except Exception as e:
-        return 'Error: ' + str(e) 
-    end = time.time()
-    print(f"Time taken to connect neo4j and link commits and prs: ", end - start)
-
-def create_indexes(neo:neo4jConnector, label, field):
-    try:
-        neo.create_index(label, field)
-    except Exception as e:
-        return 'Error: ' + str(e)
+def create_indexes(label, field):
+    query = (f'''
+        CREATE INDEX ON :$label($field)
+    ''')
+    params = { "label": label, "field": field }
     
-def clean_all_data(neo:neo4jConnector):
-    try:
-        neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-        neo.clean_all_data()
-        neo.close()
-    except Exception as e:
-        return 'Error: ' + str(e)
-    
-def filter_artifact(date:datetime):
-    try:
-        neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-        neo.filter_artifacts(date)
-        neo.close()
-    except Exception as e:
-        return 'Error: ' + str(e)
-    
+    neo4jConnector().execute_query(query, params)
 
+def clean_all_data():
+    query = ('''
+        MATCH (n)
+        detach delete n
+    ''')   
     
+    neo4jConnector().execute_query(query)
+
+def filter_artifacts(date):
+    query_issue = (f'''
+        Match(n:Issue) 
+        where date(n.createdAt) <= date("$date")
+        delete n
+    ''')
+    query_pr = (f'''
+        Match(n:PullRequest) 
+        where date(n.createdAt) <= date("$date")
+        delete n
+    ''')
+    query_commit = (f'''
+        Match(n:Commit) 
+        where date(n.committedDate) <= date("$date")
+        delete n
+    ''')
+    params = {'date': date}
+    neo4jConnector().execute_query(query_issue, params)
+    neo4jConnector().execute_query(query_pr, params)
+    neo4jConnector().execute_query(query_commit, params)
+    
+def create_traces_v3(traces):
+    query = (f'''
+                UNWIND $traces AS trace
+                MATCH (r:Requirement)
+                WHERE r.number = trace[0]
+                WITH r, trace[1] as trace_list
+                unwind trace_list AS art_key_pair
+                MATCH (i:PullRequest)
+                WHERE i.number = art_key_pair[0]
+                CREATE (i)<-[t:tracesTo]-(r)
+                SET t.weight = art_key_pair[1][0]
+                SET t.keywords = art_key_pair[1][1]
+                RETURN *
+            ''')
+    params = {'traces': traces}
+    neo4jConnector().execute_query(query, params)
