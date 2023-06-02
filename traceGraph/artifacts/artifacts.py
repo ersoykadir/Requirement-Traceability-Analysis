@@ -14,15 +14,11 @@ load_dotenv()
 from .graphql_templates import ISSUE_queryTemplate, PR_queryTemplate, COMMIT_queryTemplate, REQ_queryTemplate
 from config import Config
 
-username = os.getenv('GITHUB_USERNAME')
-token = os.getenv('GITHUB_TOKEN')
-print(username, token)
 
 # Acquires data from the github graphql api, given a graphql query.
 def get_data_from_api(body):
-    global username, token
     url = 'https://api.github.com/graphql'
-    r = requests.post(url = url, json = {"query":body}, auth=(username, token))
+    r = requests.post(url = url, json = {"query":body}, auth=(Config().github_username, Config().github_token))
     data = r.json()
     #print(data)
     return data

@@ -13,12 +13,12 @@ load_dotenv()
 #sys.path.append('..')
 
 from .filter import filter_traces
-from .neo4j_connection import create_traces, neo4jConnector, create_traces_v2, link_commits_prs, create_traces_pr
 from traceGraph.ground_truth import recall_and_precision
 from traceGraph.graph.Graph import Graph
 from traceGraph.word_vector import document_embedding
 
-neo4j_password = os.getenv("NEO4J_PASSWORD")
+from config import Config
+from neo4j_connection import neo4jConnector
 
 # Regular expressions to search for keywords in text.
 word_regex = r'\b{0}\b'
@@ -119,28 +119,32 @@ def combine_results(graph):
         req_to_commit[req_number] = req.commit_traces
     return req_to_issue, req_to_pr, req_to_commit
 
+def trace_dict_to_list(req_to_issue, req_to_pr, req_to_commit):
+    
+    issue_traces = [[r_num, trace] for r_num, trace in zip(req_to_issue.keys(), req_to_issue.values())]
+    pr_traces = [[r_num, trace] for r_num, trace in zip(req_to_pr.keys(), req_to_pr.values())]
+    commit_traces = [[r_num, trace] for r_num, trace in zip(req_to_commit.keys(), req_to_commit.values())]
+    return issue_traces, pr_traces, commit_traces
+
+
 import pickle
-def trace(repo_number, parent_mode, filter_mode):
+def trace():
     # Create graph, lemmatize and remove stopwords from each artifact
     start = time.time()
-    if os.path.exists(f"data_group{repo_number}/graph.pkl"):
-        graph = pickle.load(open(f"data_group{repo_number}/graph.pkl", "rb"))
+    if os.path.exists(f"data_{Config().repo_name}/graph.pkl") and not Config().reset_graph:
+        graph = pickle.load(open(f"data_{Config().repo_name}/graph.pkl", "rb"))
     else:
-        graph = Graph(repo_number, parent_mode)
+        graph = Graph()
     print("Time taken to lemmatize and create graph: ", time.time() - start)
 
     # Create tfidf model
     graph.create_model('tfidf')
 
-    # req_to_issue = {}
-    # req_to_pr = {}
-    # req_to_commit = {}
-
     # Find artifacts that have matching keywords for each requirement
     start = time.time()
     for req in graph.requirement_nodes.values():
         req_number = req.number
-        req.extract_keywords(parent_mode)
+        req.extract_keywords()
         token_dict = req.keyword_dict
 
         # Search for keywords in each artifact type
@@ -156,28 +160,8 @@ def trace(repo_number, parent_mode, filter_mode):
 
     graph.connect_prs_from_commits()
 
-    # # Get commits that have associated prs
-    # commits_to_delete = []
-    # for req in req_to_commit.keys():
-    #     for commit_number in req_to_commit[req].keys():
-    #         associated_pr = graph.commit_nodes[commit_number].associatedPullRequest
-    #         if associated_pr != None:
-    #             # combine data with req_to_pr
-    #             if associated_pr in req_to_pr[req].keys():
-    #                 req_to_pr[req][associated_pr] = combine(req_to_pr[req][associated_pr], req_to_commit[req][commit_number])
-    #             else:
-    #                 req_to_pr[req][associated_pr] = req_to_commit[req][commit_number]
-    #             commits_to_delete.append(commit_number)
-    #         else:
-    #             pass
-    
-    # for commit_number in commits_to_delete:
-    #     for req in req_to_commit.keys():
-    #         if commit_number in req_to_commit[req].keys():
-    #             del req_to_commit[req][commit_number]
-
     # Filter by similarity
-    if filter_mode:
+    if Config().filter_mode:
         start = time.time()
         filter_traces(graph)
         print("Time taken to filter traces: ", time.time() - start)
@@ -190,42 +174,10 @@ def trace(repo_number, parent_mode, filter_mode):
 
     # Connect to Neo4j and create traces
     start = time.time()
-    neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_traces_v2(neo, req_to_issue, 'Issue')
-    create_traces_v2(neo, req_to_pr, 'PullRequest')
-    create_traces_v2(neo, req_to_commit, 'Commit')
-    link_commits_prs(neo)
-    neo.close()
+    issue_traces, pr_traces, commit_traces = trace_dict_to_list(req_to_issue, req_to_pr, req_to_commit)
+    neo4jConnector().create_traces_v3(issue_traces, 'Issue')
+    neo4jConnector().create_traces_v3(pr_traces, 'PullRequest')
+    neo4jConnector().create_traces_v3(commit_traces, 'Commit')
+    neo4jConnector().link_commits_prs()
+    neo4jConnector().close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
-
-def main():
-    repo_number = int(sys.argv[1])
-    parent_mode = False
-    filter_mode = False
-    try:
-        for i in range(2, len(sys.argv)):
-            if sys.argv[i] == "-p":
-                parent_mode = True
-            elif sys.argv[i] == "-f":
-                filter_mode = True
-            else:
-                raise Exception("Please enter a valid mode!")            
-        # mode = sys.argv[2]
-        # if mode == "req_tree":
-        #     parent_mode = True
-        # else:
-        #     parent_mode = False
-
-        # filter = sys.argv[3]
-        # if filter == "-f":
-        #     filter_mode = True
-        # else:
-        #     filter_mode = False
-        
-    except:
-        raise Exception("Please enter a valid mode!")
-
-    trace(repo_number, parent_mode, filter_mode)
-
-if __name__ == "__main__":
-    main()

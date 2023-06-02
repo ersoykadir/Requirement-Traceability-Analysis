@@ -9,8 +9,8 @@ import json
 from neo4j.time import Date, DateTime
 from word_vector import document_embedding
 
-from .neo4j_connection import create_artifact_nodes, create_indexes, neo4jConnector, neo4j_password
 from artifacts.artifacts import get_repo_creation_date
+from neo4j_util.neo4j_connection import neo4jConnector
 from config import Config
 
 repo_creation_date = None
@@ -52,7 +52,7 @@ def build_issue_nodes():
         issue['weeks_diff'] = issue['days_diff'] // 7
 
     # Create neo4j nodes from data['issues']
-    result = create_artifact_nodes(data['issues'], 'Issue')
+    result = neo4jConnector().create_artifact_nodes(data['issues'], 'Issue')
 
 # Parses the commits of a pull request.
 def commit_parser(related_commits):
@@ -96,7 +96,7 @@ def build_pr_nodes():
         pr['weeks_diff'] = pr['days_diff'] // 7
     
     # Create neo4j nodes
-    result = create_artifact_nodes(data['pullRequests'], 'PullRequest')
+    result = neo4jConnector().create_artifact_nodes(data['pullRequests'], 'PullRequest')
 
 # Parses the data from the commit file and creates neo4j nodes.
 def build_commit_nodes():
@@ -120,7 +120,7 @@ def build_commit_nodes():
         commit['weeks_diff'] = commit['days_diff'] // 7
 
     # Create neo4j nodes
-    result = create_artifact_nodes(data['commits'], 'Commit')
+    result = neo4jConnector().create_artifact_nodes(data['commits'], 'Commit')
 
 # Parses the data from the requirements file and creates neo4j nodes.
 def build_requirement_nodes():
@@ -133,7 +133,7 @@ def build_requirement_nodes():
         # requirement['vector'] = document_embedding(requirement['text']).tolist()
 
     # Create neo4j nodes
-    result = create_artifact_nodes(data['requirements'], 'Requirement')
+    result = neo4jConnector().create_artifact_nodes(data['requirements'], 'Requirement')
 
 import sys, time
 
@@ -149,31 +149,10 @@ def create_neo4j_nodes(repo_number):
     build_requirement_nodes()
 
     # Create indexes
-    create_indexes('Issue', 'number')
-    create_indexes('PullRequest', 'number')
-    create_indexes('Commit', 'number')
+    neo4jConnector().create_indexes('Issue', 'number')
+    neo4jConnector().create_indexes('PullRequest', 'number')
+    neo4jConnector().create_indexes('Commit', 'number')
+    neo4jConnector().create_indexes('Requirement', 'number')
+
     end = time.time()
     print(f"Time elapsed for creating neo4j nodes: {end-start}")
-
-def main():
-    global repo_creation_date
-    repo_number = int(sys.argv[1])
-    repo_owner = 'bounswe'
-    repo_name = f'bounswe2022group{repo_number}'
-    repo_creation_date = get_repo_creation_date(repo_owner, repo_name)
-
-    build_issue_nodes(repo_number)
-    build_pr_nodes(repo_number)
-    build_commit_nodes(repo_number)
-    build_requirement_nodes(repo_number)
-
-    # Create indexes
-    # neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    # create_indexes(neo,'Issue', 'number')
-    # create_indexes(neo,'PullRequest', 'number')
-    # create_indexes(neo,'Commit', 'number')
-    # neo.close()
-
-if __name__ == '__main__':
-    main()
-    

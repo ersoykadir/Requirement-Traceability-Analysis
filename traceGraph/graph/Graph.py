@@ -8,22 +8,16 @@ sys.path.append('..')
 from keyword_extractor.custom_extractor import lemmatizer, remove_stopwords_from_text
 from .node_parser import build_issue_nodes, build_pr_nodes, build_commit_nodes, build_requirement_nodes
 
+from config import Config
 
 # Class representing the graph of software artifacts.
 class Graph:
-    def __init__(self, repo_number, parent_mode):
-        # if repo_number == 2:
-        #     self.issue_number_threshold = 309 # for group 2
-        # elif repo_number == 3:
-        #     self.issue_number_threshold = 258 # for group 3
-        # else:
-        #     raise Exception("Invalid repo number")
-        self.repo_number = repo_number	
+    def __init__(self):
         self.nodes = {}
-        self.issue_nodes = build_issue_nodes(repo_number)
-        self.pr_nodes = build_pr_nodes(repo_number)
-        self.commit_nodes = build_commit_nodes(repo_number)
-        self.requirement_nodes = build_requirement_nodes(repo_number, parent_mode)
+        self.issue_nodes = build_issue_nodes()
+        self.pr_nodes = build_pr_nodes()
+        self.commit_nodes = build_commit_nodes()
+        self.requirement_nodes = build_requirement_nodes()
         self.nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes | self.requirement_nodes
         self.artifact_nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes
 
@@ -31,7 +25,7 @@ class Graph:
         self.save_graph()
 
     def save_graph(self):	
-        with open(f'./data_group{self.repo_number}/graph.pkl', 'wb') as f:	
+        with open(f'./data_{Config().repo_name}/graph.pkl', 'wb') as f:	
             pickle.dump(self, f) 
 
     def __str__(self):

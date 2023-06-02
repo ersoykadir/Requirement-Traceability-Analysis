@@ -5,7 +5,7 @@ import sys
     
 def get_mode():
     try:
-        parent_mode, filter_mode, pickle_mode, filter_threshold = False, False, False, 0
+        parent_mode, filter_mode, reset_graph, filter_threshold = False, False, False, 0
         for i in range(2, len(sys.argv)):
             if sys.argv[i] == "-p":
                 parent_mode = True
@@ -15,11 +15,11 @@ def get_mode():
                     filter_threshold = sys.argv[i+1]
                 except:
                     raise Exception("Please enter a valid filter threshold!")
-            elif sys.argv[i] == "-pck":
-                pickle_mode = True
+            elif sys.argv[i] == "-rg":
+                reset_graph = True
             else:
                 raise Exception("Please enter a valid option!")
-        return parent_mode, filter_mode, pickle_mode, filter_threshold
+        return parent_mode, filter_mode, reset_graph, filter_threshold
     except:
         raise Exception("Please enter a valid mode!")
 
@@ -32,19 +32,28 @@ def get_search_method():
 
 class Config:
 
+    # environment variables
+    neo4j_username = os.environ.get('NEO4J_USERNAME')
+    neo4j_password = os.environ.get('NEO4J_PASSWORD')
+    neo4j_uri = os.environ.get('NEO4J_URI')
+    github_username = os.environ.get('GITHUB_USERNAME')
+    github_token = os.environ.get('GITHUB_TOKEN')
+
+
     # Specify github repository
     repo_owner = 'bounswe'
     repo_number = 2
     repo_name = f'bounswe2022group{repo_number}'
 
+    # Tracing parameters
     search_method = 'keyword'
-
     parent_mode = False
     filter_mode = False
-    pickle_mode = False
+    reset_graph = True
     filter_threshold = 0
 
-    neo4jConnector = None
+    filter_nodes_before_date = '2022-06-01T00:00:00Z'
+    
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):
@@ -56,6 +65,5 @@ class Config:
         if self.__initialized: return
         self.__initialized = True
 
-        self.parent_mode, self.filter_mode, self.pickle_mode, self.filter_threshold = get_mode()
+        self.parent_mode, self.filter_mode, self.reset_graph, self.filter_threshold = get_mode()
         self.search_method = get_search_method()
-        self.neo4jConnector = 

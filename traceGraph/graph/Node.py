@@ -17,6 +17,7 @@ import numpy as np
 
 #sys.path.append('..')
 from keyword_extractor.custom_extractor import custom_extractor
+from config import Config
 
 # Class representing graph nodes. Each node represents a software artifact (issue, pull request, requirement, commit).
 class Node:
@@ -122,20 +123,13 @@ class Requirement(Node):
         self.issue_traces = {}
         self.pr_traces = {}
         self.commit_traces = {}
-        # try:
-        #     self.keywords = self.extract_keywords()
-        # except Exception as e:
-        #     print(str(e), self.number, self.node_type)
-    def extract_keywords(self, parent_mode):	
+    def extract_keywords(self):	
         try:	
             print("Extracting keywords for requirement", self.number)	
             keyword_dict = custom_extractor(self.text, '../keyword_extractors/SmartStopword.txt', '../keyword_extractors/repo_stopwords.txt')	
-            if self.parent is not None and parent_mode:	
+            if self.parent is not None and Config().parent_mode:	
                 # parent_keywords = custom_extractor(self.parent.text, '../keyword_extractors/SmartStopword.txt')	
                 parent_keywords = self.parent.keyword_dict	
-                if self.number == '1.1.1.4.2':	
-                    print(keyword_dict)	
-                    print(parent_keywords)	
                 for key_type in keyword_dict:	
                     keyword_dict[key_type] = list(set(keyword_dict[key_type] + parent_keywords[key_type]))	
             self.keyword_dict = keyword_dict	
