@@ -1,0 +1,188 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[utf8]{inputenc} % To use Unicode (e.g. Turkish) characters
+\usepackage[T1]{fontenc}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\usepackage{amsmath, amsthm, amssymb}
+ % Some extra symbols
+\usepackage[bottom]{footmisc}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{longtable}
+\graphicspath{{figs/}} % Graphics will be here
+
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+
+\usepackage{soul}
+\usepackage[dvipsnames]{xcolor}
+\DeclareRobustCommand{\fba}[1]{ {\begingroup\sethlcolor{BurntOrange}\hl{(fba:) #1}\endgroup} }
+\DeclareRobustCommand{\sgk}[1]{ {\begingroup\sethlcolor{Yellow}\hl{(sgk:) #1}\endgroup} }
+\begin{document}
+
+
+\title{Title Comes Here }
+\author{
+ \IEEEauthorblockN{Kadir Ersoy, Ecenur Sezer, Suzan Üsküdarlı, Fatma Başak Aydemir}
+\IEEEauthorblockA{
+Boğaziçi University\\
+Istanbul, Türkiye \\
+\{kadir.ersoy, ecenur.sezer, suzan.uskudarli, basak.aydemir\}@boun.edu.tr}
+}
+
+\date{May 2021}
+
+\maketitle
+\begin{abstract}
+
+\end{abstract}
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
+
+\section{Introduction} \label{section:introduction}
+
+% Why glossaries are important
+%Glossaries are part of requirements documentation to ensure a common vocabulary and understanding of terms to facilitate collaboration and avoid ambiguity\cite{young2004requirements}. Ideally, a glossary is built as the requirements are documented; however, glossaries can be added to the project documentation after the other documents are completed due to the lack of time and resources~\cite{arora2016automated}.
+
+% Models in RE
+%Models are also part of the software project documentation and various types of models are used to facilitate software engineering activities. For example, feature models present the hierarchy of the features of a software product~\cite{chen2005approach}. Goal models have been widely studied and extended in the literature to capture requirements as goals and the structural hierarchy among them~\cite{horkoff2019goal}. Alternatively, use case diagrams are used to capture actors and scenarios~\cite{some2006supporting}.
+
+% What do we propose
+%This paper proposes a technique that extracts glossary terms from a set of models and builds a glossary graph based on the relatedness of the terms by applying a natural language processing (NLP) pipeline. Similar to the approach of Aydemir and Dalpiaz~\cite{aydemir2020supporting}, our pipeline is independent of the modeling language structure. Thus, we provide a flexible architecture that does not require extensive changes when a new modeling language is added to the project. The pipeline matches the slightly different terms for the same concept by measuring the similarity of different noun phrases using sentence embeddings. We extract keywords using a deep language model and connect related terms to build a glossary graph.
+
+% Large-scale software development processes consist of multiple aspects such as performance, security, and reliability. Multiple experts are required to generate a large-scale software system and satisfy the goals of different aspects. Hence, cooperation in such environments is crucial. Collaborative approaches are applied in every phase such as requirements modeling, implementation, and testing of a software development process due to the significant impact on the success of the software systems by providing a high-level overview of the system and substituting for detailed reports. Yet, cooperation is not adequate single-handed due to the need for abstraction during development. Models play an important role and are widely used in large-scale software development processes due to the high-level abstraction they provide. Therefore, collaborative modeling approaches become essential to form viable shared environments.
+
+% In a shared environment, modeling processes are complex due to the need for multiple models to represent different aspects of the project. Therefore, all of the stakeholders must have a common sense of understanding about the key concepts \cite{gemkow2018automatic}. This can be achieved via glossaries which provide domain-specific information about the terms in a single point of view. However, glossaries need to be continuously updated throughout the requirements elicitation process \cite{arora2016automated}. Due to the need for continuous effort, glossary creation is overlooked in most real-world projects. Although, glossaries are beneficial for stakeholders throughout the project timeline.
+
+%Our implementation includes a web-based collaborative modeling environment that supports BPMN\footnote{https://www.bpmn.org/} and iStar2.0~\cite{dalpiaz2016istar}. These two languages are selected based on the availability of open-source modeling editors. The modeling environment is connected to a web service that keeps track of the changes in the models and updates the glossary during the modeling process. Our source code is publicly available\footnote{https://github.com/goktugkose/Automated-Glossary-Extraction}.
+
+%The remainder of the paper is structured as follows. Sec. \ref{section:problem} defines the problem. Sec. \ref{section:related_work} reviews the related work. Sec. \ref{section:method} focuses on the study design including modeling environment design, heuristics, NLP pipeline and method. Sec. \ref{section:evaluation} reports on the evaluation plan. Finally, Sec. \ref{section:conclusion} concludes the paper.
+
+\section{Problem and Motivation}
+\label{section:problem}
+
+%A glossary lists the terms for a given project. Building a glossary during the documentation of the main artifacts such as the requirements document requires additional time and effort. Glossaries may also be built after finalizing the documents, in that case, the project suffers from the lack of a common vocabulary during the documentation.
+
+%Models are also used for the entire or partial documentation. For large-scale projects, multiple modelers with different expertise may work from different locations and time zones, therefore it is difficult to have synchronous communication among the modelers. Modelers from different backgrounds may use different terms for the same concepts and asynchronous communication makes it difficult to catch and fix this problem. Fig.~\ref{fig:twomodels} demonstrates the scenario of missing concepts among two models for a software system. The concepts \emph{item} and \emph{credit card} from the BPMN model, and concept \emph{item} from the iStar model can be extracted. Thus, the absence of the concept \emph{credit card} in the iStar model prevents the models from full coverage of the requirements of the system.
+
+%A glossary automatically updated during the modeling process can support the remote collaboration of the modelers. By consulting the glossary, the modelers can identify the terms used in the project and analyze the coverage of their models. Even in the non-collaborative scenario, automatically generating the glossary saves time and effort. With this motivation at hand, we propose a pipeline to extract the terms for a project from a set of models and link the related terms.
+
+
+
+% The increase in the percentage of software professionals working remotely due to the pandemic results in the need for support tools for remote collaboration.
+
+
+
+%Collaborative tasks support modelers to use their time and budget effectively \cite{stallinger2001system}. However, in such environments with remote work opportunities or involving modelers that participate from different locations even from different time zones to reduce the cost of the project, separate works of these different modelers may not represent all of the requirements of the system. To overcome this problem, physically gathering modelers that are working apart from each other can be an option, but it is a time-consuming and expensive effort that can lead to problems in software projects with strict deadlines and limited budgets. These distributed environments might be suffering from a lack of communication since modelers work apart from each other in different locations. Therefore, different models for different parts of the project might not cover all of the requirements of the system. Several problems such as difficulties during implementation, delay in the project timeline, or failure of the project might be faced due to a lack of missing concepts in models. Hence, models should provide full coverage of the requirements of the system. Fig. \ref{fig:twomodels} demonstrates the scenario of missing concepts among two models for a software system. The concepts \emph{item and credit card} from the BPMN model, and concept \emph{item} from the iStar model can be extracted. Thus, the absence of the concept \emph{credit card} in the iStar model prevents the models from full coverage of the requirements of the system.
+
+
+%To the best of our knowledge, there is no well-defined platform that extracts glossaries from various models. Our method does not require aligning the meta-models of the modeling languages so it enables easily adding different modeling languages to the project. To this end, our approach focuses on improving the effectiveness of collaborative modeling approaches in requirements engineering (RE) by designing an automated glossary extraction pipeline that uses natural language processing techniques to prevent stakeholders from spending recurring effort on constructing glossaries with requirements models. In this paper, we present (i) a Web-based modeling environment for both goal and business process models, (ii) an NLP pipeline for automatically extracting glossaries from the models that are constructed with NL using several heuristics, (iii) a graph representation of glossaries.
+
+\section{Related Work}
+\label{section:related_work}
+
+%This work is interrelated to several topics in software engineering. In this section, we discuss glossaries along with model-driven software development and requirements engineering practices as our potential application areas. Literature states that collaboration is a key concept for both requirements engineering and software engineering disciplines.
+
+%\emph{Glossary Extraction}. Arora et al. \cite{arora2016automated} state that glossaries increase the communication between stakeholders via providing accurate and understandable definitions about requirements. Even though a glossary is useful to avoid misinterpretations among stakeholders, it is rarely used for software requirements due to the effort needed for the creation \cite{berry2000contract}. To prevent stakeholders from spending superfluous effort on glossary extraction, several methods were proposed. Arora et al. \cite{arora2016automated} propose a method for automated extraction and clustering of glossary terms from requirements definitions. Dwarakanath et al. \cite{dwarakanath2013automatic} propose a method for glossary extraction that relies on the linguistic properties of requirements definitions. Gemkow et al. \cite{gemkow2018automatic} propose a method for glossary extraction from large-scale requirements by combining linguistic and statistical approaches.
+
+%\emph{Model-driven Development}. Various software engineering methodologies that involve model usage have been proposed and model-driven development is one of the approaches. The emergence of model-driven development (MDD) methods provides an opportunity to take advantage of models. Selic \cite{selic2003pragmatics} points out that model usage in software engineering is less frequent compared to other engineering disciplines and models are not used primarily even though software engineering has great potential to benefit from the models. Steffen et al. \cite{steffen2006model} propose the jABC framework that supports model-driven development processes by composing reusable building blocks into hierarchical graph structures. Cetinkaya et al. \cite{cetinkaya2011mdd4ms} propose the MDD4MS framework that applies model-driven simulation so that provides a model development life-cycle by automatically transforming the source models into destination models to generate final source code. Buchmann \cite{buchmann2012valkyrie} proposes the Valkyrie environment that supports code generation by refining UML diagrams into class diagrams to provide fully executable code. Besides the high-level abstraction that was provided by models, they also support process automation and automated code and test generation from models to increase productivity in development processes. Our work can be complementary to the existing MDD frameworks.
+
+% \emph{Collaboration in Software Engineering}. Collaboration is a key concept to encourage the stakeholders to opt for model-based approaches. Teruel et al. \cite{teruel2011csrml} define collaborative systems as systems that allow users to work cooperatively while performing tasks. Whitehead \cite{whitehead2007collaboration} states that coordinating many stakeholders' efforts is a prerequisite of the development of a large-scale software system. Collaboration in large-scale software development environments is provided by various tools to automate and facilitate the entire development process. Herbsleb \cite{herbsleb2007global} states that globally distributed development environments are negatively affected in terms of coordination and discusses the activities designed to provide coordination along with stakeholders. Lanubile et al. \cite{lanubile2010collaboration} state that collaboration tools let stakeholders work together even when stakeholders work apart from each other and provided a list of collaborative development tool categories as (i) version-control systems, (ii) trackers, (iii) build tools, (iv) modelers, (v) knowledge centers, (vi) communication tools and (vii) Web 2.0 applications. In our research, our main goal is to support collaboration in large-scale software development environments.
+
+% \emph{Collaborative Modeling}. In the requirements engineering domain, collaboration among users might become a challenging task since there are various modeling languages to be synchronized. Nicolaescu et al. \cite{nicolaescu2018near} propose an approach called SyncMeta which consists of a meta-model and provides a near-real-time shared collaborative modeling environment to support view-based modeling. Aydemir and Dalpiaz \cite{aydemir2020supporting} point out that models in collaborative environments may be inconsistent due to the usage of various independent models. They have proposed a technique that provides a suggestion service with several heuristics and an NLP pipeline to help the modelers while aligning different models and minimize the difficulties that modelers may encounter in such collaborative environments.
+
+% \emph{Requirements Engineering}.Nuseibeh and Easterbrook \cite{nuseibeh2000requirements} define requirements engineering (RE) as "a process that determines the stakeholders and their needs to measure the success of the system". Applying requirements engineering techniques in a software project is crucial since a great portion of the projects throughout history either have failed or exceeded the budget due to the lack of proper requirements definitions \cite{stallinger2001system}. Lindland et al. \cite{lindland1994understanding} state that a great portion of developers agreed that the quality of a product strongly depends on requirements specification accuracy as well as advanced early-stage development. Davis et al. \cite{davis2006effectiveness} prove that software requirements definitions affect the quality of the product significantly. Lamsweerde \cite{van2000requirements} points out the increasing importance of requirements engineering in software engineering since defining requirement properly is a challenging task. Dalpiaz et al. \cite{dalpiaz2018natural} state that natural language (NL) is widely used in RE due to the ease of understanding even by inexperienced stakeholders besides the ambiguity of NL. Ferrari and Esuli \cite{ferrari2019nlp} propose a method for detecting cross-domain ambiguities in RE by building domain-specific language models to approximate the potential ambiguities. Even though the model-based approaches are widely used in the development phases of projects, these approaches are not commonly and effectively used in the field of RE compared to the software engineering domain in general \cite{loniewski2010systematic}. Horkoff et al. \cite{horkoff2019goal} point out the recent interest in goal-oriented requirements engineering that provides a feasible approach to modeling and eliciting requirements. Moreira et al. \cite{araujo2002aspect} also propose a requirements-level solution for aspect-oriented models that increases the reusability and maintainability of models.
+
+%\emph{Model-driven requirements engineering.}
+%Models are widely used in RE to represent requirements since natural language (NL) is widely used in RE due to the ease of understanding \cite{dalpiaz2018natural, nuseibeh2000requirements}. Assar \cite{assar2014model} states that models are used to facilitate requirements for better information extraction from requirements. Horkoff et al. \cite{horkoff2019goal} surveys widely studied goal-oriented requirements engineering (GORE) for various RE tasks. Use cases are also used in early requirements engineering phases \cite{some2006supporting,lubke2008visualizing}.  Lübke and Schneider \cite{lubke2008visualizing} automatically generates BPMN models from use cases. Requirements models are the primary intended sources for our work.
+
+\section{Method}
+\label{section:method}
+
+%In this work, we aim to extract glossary information from models. To achieve this goal, we propose an NLP-powered system that analyzes multiple models for a collaborative project and extracts concepts from the natural language text in the models. We develop several heuristics to detect relationships between models by extracting similar terms for the same concepts. Fig. \ref{fig:pipeline} summarizes the inner workings of the glossary extraction system.
+
+%\begin{figure*}[htp]
+%\centering
+%\begin{minipage}[b]{\textwidth}
+%\begin{subfigure}[b]{\linewidth}
+%  \centering
+%  \includegraphics[width=0.8\linewidth]{figs/architecture.png}
+%\end{subfigure}
+%\end{minipage}
+%  \caption{Pipeline of inner workings of the system}
+%  \label{fig:pipeline}
+%\end{figure*}
+
+%First, the NLP pipeline parses the natural language text in the models which was extracted from the model files via a web service, and stores them in the database. Since modelers generate requirements models mainly with NL, the NLP pipeline takes the model labels as input and extracts the main concepts of the model labels as output. Model labels consist of unconstrained natural language text. Therefore, applying pre-processing steps supports better glossary extraction from model labels. NLP pipeline covers several preprocessing steps as (i) case-folding to normalize the model labels (ii) punctuation and stop words removal to discard unnecessary information and (iii) lemmatization to reduce inflectional forms of words (we chose lemmatization instead of stemming due to its dependence on vocabulary as well as morphological features of words.) by using Python native libraries along with NLTK\footnote{https://www.nltk.org} to reveal the concepts that have been modeled to construct a glossary extraction system.
+
+%After generating the preprocessed model labels, our initial approach for capturing the information in the model labels is to extract nouns from the model labels. However, working only with nouns does not yield satisfactory results. Therefore, we decide to extract noun phrases from model labels using spaCy\footnote{https://spacy.io}. Even after extracting noun phrases from model labels, it is evident that preprocessed model labels are not representative enough and require more effort. To this end, we develop heuristics to perform better glossary extraction.
+
+\subsection{Heuristics}
+\label{sec:heuristics}
+
+%\textit{Heuristic 1 - Substring Match}. Our first heuristic depends on the substring matches that can be observed among noun phrases. This process can be briefly explained as clustering noun phrases with the subset of noun phrases that contain a particular noun phrase as a substring. For example, "item label" and "item label size" noun phrases will be clustered under the "item label" key because "item label size" denotes a property of "item label". By applying this heuristic, all of these noun phrases are clustered into a set and the shortest noun phrase will represent these noun phrases. This heuristic reduces the size of the initial set of noun phrases. The reduction in the size of the initial set of noun phrases also decreases the time and space complexity of further steps of processing.
+
+%After applying the first heuristic, we manage to cluster some of the model labels. However, there are still independent model labels. Even though the models are generated by modeling experts, modelers with different backgrounds may use different words for the same concept. For example, "shipment options" and "shipping offers" will be matched as similar noun phrases because of the high level of relatedness between the two of the noun phrases. To increase coverage of the NLP pipeline, we benefit from BERT \cite{devlin2018bert} which is a state-of-the-art deep language model. Thus, glossary extraction from models is provided by measuring the similarity of different noun phrases to each other and detecting different noun phrases that refer to a similar meaning via pre-trained sentence embeddings.
+
+%First, noun phrases are encoded using sentence transformers which are provided by Hugging Face\footnote{https://huggingface.co} and are designed to be used with a pre-trained model. There is a variety of pre-trained sentence embedding models available for sentence embedding. We choose \textit{paraphrase-mpnet-base-v2} due to its high performance on STSbenchmark test. This sentence encoding process yields vectors that have 768 dimensions for each noun phrase. To extract similar noun phrases, pairwise cosine similarities are calculated between each noun phrase, and the symmetrical similarity matrix is obtained.
+
+
+
+
+%\begin{algorithm}[htp]
+%\SetAlgoLined
+%\SetKwInOut{input}{Input}
+%\SetKwInOut{output}{Output}
+%\input{parent term P and term T}
+%\output{parent term}
+%parent = P\;
+%term\_string = T + parent\;
+%keywords = extracted keyword and probability pairs from term\_string using KEYBERT\\
+%\uIf{length of keywords $>$ 1}{
+%set most probable keyword as parent\\
+%}
+%\textbf{return} parent\;
+% \caption{Heuristic 3}
+%\end{algorithm}
+
+%\textit{Heuristic 3 - Keyword Extraction}. Keyword extraction methods are mostly used for extracting the most representative n-grams from the texts. In this heuristic, lemmatized versions of both key and value are collected for each pair and concatenated into a single string. (Line 2) KeyBERT is tuned to extract unigrams from that concatenated string. (Line 3) If there exists a smaller common unit of representation for a key-value pair, both key and value are clustered under that new representation. (Lines 4 - 5)
+
+%After applying these steps, all noun phrases extracted from the models are stored in a dictionary for reporting and visualized using an undirected graph for better understanding. Fig \ref{fig:graph} shows a sample representation extracted glossaries. Blue vertices denote matching model labels with concepts and red vertices (self-links) denote the mismatched model labels.
+
+%\begin{figure}[htp]
+%    \centering
+%    \includegraphics[width=0.9\linewidth]{figs/graph.png}
+%    \caption{Sample graph representation of extracted terms}
+%    \label{fig:graph}
+%\end{figure}
+
+\subsection{Implementation}
+\label{sec:impl}
+
+%We build a collaborative modeling environment by integrating two existing tools: \emph{i.} piStar \cite{pimentel2018pistar} for goal modeling and \emph{ii.} bpmn.io\footnote{https://bpmn.io} for business process modeling. We choose these two modeling environments because they are both open-source projects and the modeling languages they support are widely used for requirements engineering.
+
+%\begin{figure}[htp]
+%\centering
+%  \includegraphics[width=\linewidth]{figs/arch.png}
+%  \caption{Architecture of the system}
+%  \label{fig:architecture}
+%\label{label-c}
+%\end{figure}
+
+%We use two different open-source modeling tools for goal and business process modeling to form a viable combined modeling environment. When the users complete their work on a model, they will commit the model to the system. This committed work is used to update existing glossaries via the glossary extraction module of the system. The communication channel between the user and the system is provided by a web service. This web service is responsible for keeping track of the model versions to demonstrate changes in glossary over time, storing the model file in the disk, extracting model labels from the XML and JSON outputs of the goal and business process models, and transferring the extracted information to the database for glossary extraction from the models. Fig. \ref{fig:architecture} demonstrates the architecture of our system.
+
+\section{Evaluation Plan}
+\label{section:evaluation}
+
+%In this section, we share our planned experimental setup for evaluation. We hypothesize that (\textbf{H0}) our tool increases the efficiency of the requirements analyst for building a glossary of terms in terms of time. Therefore, we plan to evaluate our system with human experts. The experimental setup consists of two different scenarios to mitigate the effect of the learning curve. For the first run, participants will be asked to extract glossaries manually from a set of previously created models. Therefore, a gold standard set will be available for further investigation. For the second run, the participants will be asked to evaluate the automatically extracted glossaries in terms of completeness since glossaries will be automatically extracted with our method. After the second run, we will be able to gather qualitative feedback from the participants. To gather quantitative results, we will compare the automatically extracted glossaries with the gold standard set which was constructed by experts, to measure the performance of our system.
+
+\section{Conclusions}\label{section:conclusion}
+
+%We present a shared collaborative modeling environment instrumented with an automated glossary extraction pipeline from model labels using state-of-the-art NLP techniques without any supervision. Our approach prevents stakeholders from spending effort on a challenging and time-consuming task of manual glossary extraction. We develop two heuristics that use pre-trained BERT models and one simple heuristic that depends on substring matching.
+
+\textit{Future Work}. %In this section, we share our plans for glossary extraction. First, we plan to conduct an experimental evaluation with human experts as we stated in Sect. \ref{section:evaluation}. Second, we plan to improve our glossary extraction heuristics' performance using human experts' feedbacks. Finally, we aim to extend our method for automated domain model extraction from model labels and employing our method as a complementary for existing systems to form a hybrid system.
+
+\bibliographystyle{IEEEtran}
+\bibliography{paper}
+\end{document}
