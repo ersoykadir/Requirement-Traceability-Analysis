@@ -26,8 +26,8 @@
 1.1.2.8. Users shall be able to determine their profile page visibility as public or private.
 1.1.2.9. Followers, Follows, My Events, Interest Areas, Achievements, Progress, Notes, and Annotations sections shall be hidden on private profiles.
 1.1.2.10. Interests and Knowledge
-1.1.2.10.1. Users shall identify their interest areas
-1.1.2.10.2. Users shall display their interest areas in their profile pages
+1.1.2.10.1 Users shall identify their interest areas
+1.1.2.10.2 Users shall display their interest areas in their profile pages
 1.1.2.11. Achievements
 1.1.2.11.1. Users shall be able to earn achievements via the completion of a specific amount of Learning Spaces with related topics.
 1.1.2.11.2. Users shall view their achievements from the achievements section of their profile pages.
@@ -44,10 +44,41 @@
 1.1.2.15.1. Users shall be able to see all learning spaces they created or enrolled in.
 1.1.2.16. Reputation
 1.1.2.16.1. Users shall be able to see the feedback they have received for their learning content contributions in the recommendations section.
-1.1.3. User Interaction
+1.1.3 User Interaction
 1.1.3.1. User-User Interaction
+1.1.3.1.1. Users shall see each other's profiles.
+1.1.3.1.2. Users shall be able to follow each other.
+1.1.3.1.3. Users shall see the information of people they follow; their achievements and activities.
+1.1.3.1.4. Users shall be able to share notes with each other.
+1.1.3.1.5. Users shall be able to block other users.
+1.1.3.1.6. Users could prevent other users to see their profile by blocking them.
 1.1.3.2. User-Learning Space Interaction
-1.1.4. Learning Space Structure
+1.1.3.2.1. Creating Learning Space & Content
+1.1.3.2.1.1. Users shall enter a title and description and choose an icon and categories to create a learning space.
+1.1.3.2.2. Editing Learning Spaces
+1.1.3.2.2.1. Users shall be able to edit all material they provided.
+1.1.3.2.2.2. Users shall be able to delete learning spaces they created.
+1.1.3.2.3. Enrolling to Learning Spaces
+1.1.3.2.3.1. Users shall see the contents in the learning space.
+1.1.3.2.3.2. Users shall be able to navigate learning material in the order they desire.
+1.1.3.2.3.3. Users shall be able to review other users in terms of providing learning material by giving stars and optionally providing feedback.
+1.1.3.2.3.4. Users shall be able to report inappropriate comments in the discussion forum of the learning space.
+1.1.3.2.4. Notes and Annotation
+1.1.3.2.4.1. Each user shall have his/her notes section under each lecture.
+1.1.3.2.4.2. Users shall create and edit notes under the notes section via typing.
+1.1.3.2.4.3. Users shall be able to mention other notes from other learning spaces or/and other users in his/her.
+1.1.3.2.4.4. Users shall connect, annotate and tag notes.
+1.1.3.2.5. Community Events
+1.1.3.2.5.1. Participants shall be able to create community events for that learning space.
+1.1.3.2.5.2. Created events shall only be available to currently enrolled learners.
+1.1.3.2.5.3. Created events should have a specific date, duration, location and limit for the number of participants.
+1.1.3.2.5.4. The event creator can give a brief description of the topics of discussion for the event.
+1.1.3.2.5.5. Event creators shall be able to cancel events that they have created.
+1.1.3.2.5.6. Created events should be visible on the learning space info page along with the date, duration, location and number of participants.
+1.1.3.2.5.7. The number of learners who will join the event will be visible on the event information.
+1.1.3.2.6. Discussions Forum
+1.1.3.2.6.1. Participants of a learning space shall be able to create discussion posts.
+1.1.4 Learning Space Structure
 1.1.4.1. Participants shall deliver learning material in form of posts which contain text and images.
 1.1.4.2. Learning Space shall have the main page where users can see introduction, events, sections, notes, annotations.
 1.1.4.3. The creator of a learning space shall be able to add additional admins to the learning space.

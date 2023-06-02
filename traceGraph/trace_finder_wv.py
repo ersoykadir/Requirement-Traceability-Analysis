@@ -6,7 +6,7 @@ Creates traces from requirements to other artifacts using word vectors and cosin
 Writes traces to a file.
 """
 
-from traceGraph import Graph
+from traceGraph.graph import Graph
 import sys
 sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor

@@ -7,8 +7,8 @@ Writes traces to neo4j database.
 """
 
 import time, os, sys, math, operator
-from neo4j_connection import neo4jConnector, create_traces_w2v, link_commits_prs
-from trace_graph import Graph
+from .neo4j_connection import neo4jConnector, create_traces_w2v, link_commits_prs
+from traceGraph.graph import Graph
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -56,7 +56,9 @@ def trace(repo_number, parent_mode):
     start = time.time()
     # req_file = open(f"data_group{repo_number}/group{repo_number}_requirements.txt", "r", encoding="utf-8")
     graph = Graph(repo_number, parent_mode)
-    graph.create_model()
+    for a in graph.artifact_nodes.values():
+        print(len(a.text))
+    graph.create_model("w2v")
     print("Time taken to create graph and word2vec model: ", time.time() - start)
 
     req_to_issue = {}

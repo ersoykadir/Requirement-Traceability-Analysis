@@ -8,14 +8,15 @@ Writes traces to a file.
 
 
 import re, sys, time, threading
-from traceGraph import Graph
+from traceGraph.graph import Graph
 sys.path.append('..')
 from keyword_extractors.dependency_parsing_custom_pipeline import custom_extractor, lemmatizer, remove_stopwords_from_text
 
 
 # Regular expressions to search for keywords in text.
 word_regex = r'\b{0}\b'
-verbobj_regex = r'\b{0}\s((?:[\w,;:\'\"`]+\s)*){1}\b'
+verb_dobj_regex = r'\b{0}\s+((?:[\w,;:\'\"`\/]+\s+)*){1}\b'
+verb_pobj_regex = r'\b{0}\s+((?:[\w,;:\'\"`\/]+\s+)*){1}\s+((?:[\w,;:\'\"`\/]+\s+)*){2}\b'
 noun_phrase_regex = r'\b{0}\s{1}\b'
 
 def find_trace(graph, regex):
@@ -40,7 +41,10 @@ def search_keyword(graph, keyword_list):
         found_nodes[keyword] = find_trace(graph, regex)
     for keyword in keyword_list['verb-objects']:
         keywords = keyword.split()
-        regex = verbobj_regex.format(keywords[0], keywords[1])
+        if len(keywords) == 2:
+            regex = verb_dobj_regex.format(keywords[0], keywords[1])
+        if len(keywords) == 3:
+            regex = verb_pobj_regex.format(keywords[0], keywords[1], keywords[2])
         found_nodes[keyword] = find_trace(graph, regex)
     for keyword in keyword_list['nouns']:
         regex = word_regex.format(keyword)
