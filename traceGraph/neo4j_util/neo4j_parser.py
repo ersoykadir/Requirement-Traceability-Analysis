@@ -137,7 +137,7 @@ def build_requirement_nodes():
 
 import sys, time
 
-def create_neo4j_nodes(repo_number):
+def create_neo4j_nodes():
     global repo_creation_date
     repo_creation_date = get_repo_creation_date()
 
@@ -149,10 +149,10 @@ def create_neo4j_nodes(repo_number):
     build_requirement_nodes()
 
     # Create indexes
-    neo4jConnector().create_indexes('Issue', 'number')
-    neo4jConnector().create_indexes('PullRequest', 'number')
-    neo4jConnector().create_indexes('Commit', 'number')
-    neo4jConnector().create_indexes('Requirement', 'number')
+    # neo4jConnector().create_indexes('Issue', 'number')
+    # neo4jConnector().create_indexes('PullRequest', 'number')
+    # neo4jConnector().create_indexes('Commit', 'number')
+    # neo4jConnector().create_indexes('Requirement', 'number')
 
     end = time.time()
     print(f"Time elapsed for creating neo4j nodes: {end-start}")

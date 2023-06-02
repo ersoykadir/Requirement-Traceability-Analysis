@@ -18,7 +18,7 @@ from traceGraph.graph.Graph import Graph
 from traceGraph.word_vector import document_embedding
 
 from config import Config
-from neo4j_connection import neo4jConnector
+from neo4j_util.neo4j_connection import neo4jConnector
 
 # Regular expressions to search for keywords in text.
 word_regex = r'\b{0}\b'
@@ -119,12 +119,17 @@ def combine_results(graph):
         req_to_commit[req_number] = req.commit_traces
     return req_to_issue, req_to_pr, req_to_commit
 
-def trace_dict_to_list(req_to_issue, req_to_pr, req_to_commit):
+def trace_dict_to_list(trace_dict):
     
-    issue_traces = [[r_num, trace] for r_num, trace in zip(req_to_issue.keys(), req_to_issue.values())]
-    pr_traces = [[r_num, trace] for r_num, trace in zip(req_to_pr.keys(), req_to_pr.values())]
-    commit_traces = [[r_num, trace] for r_num, trace in zip(req_to_commit.keys(), req_to_commit.values())]
-    return issue_traces, pr_traces, commit_traces
+
+    trace_list = []
+    for r_num, traces in zip(trace_dict.keys(), trace_dict.values()):
+        artifacts = list(traces.keys())
+        trace = list(traces.values())
+        pairs = [[i, j] for i, j in zip(artifacts, trace)]
+        trace_list.append([r_num, pairs])
+
+    return trace_list
 
 
 import pickle
@@ -170,11 +175,13 @@ def trace():
     req_to_issue, req_to_pr, req_to_commit = combine_results(graph)
 
     # Recall and precision
-    recall_and_precision(graph)
+    # recall_and_precision(graph)
 
     # Connect to Neo4j and create traces
     start = time.time()
-    issue_traces, pr_traces, commit_traces = trace_dict_to_list(req_to_issue, req_to_pr, req_to_commit)
+    issue_traces = trace_dict_to_list(req_to_issue)
+    pr_traces = trace_dict_to_list(req_to_pr)
+    commit_traces = trace_dict_to_list(req_to_commit)
     neo4jConnector().create_traces_v3(issue_traces, 'Issue')
     neo4jConnector().create_traces_v3(pr_traces, 'PullRequest')
     neo4jConnector().create_traces_v3(commit_traces, 'Commit')

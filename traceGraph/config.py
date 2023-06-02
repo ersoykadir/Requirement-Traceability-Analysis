@@ -1,6 +1,4 @@
 import os
-import cv2
-import socket
 import sys
     
 def get_mode():
@@ -11,22 +9,21 @@ def get_mode():
                 parent_mode = True
             elif sys.argv[i] == "-f":
                 filter_mode = True
-                try:
-                    filter_threshold = sys.argv[i+1]
-                except:
-                    raise Exception("Please enter a valid filter threshold!")
             elif sys.argv[i] == "-rg":
                 reset_graph = True
             else:
                 raise Exception("Please enter a valid option!")
         return parent_mode, filter_mode, reset_graph, filter_threshold
-    except:
-        raise Exception("Please enter a valid mode!")
+    except Exception as e:
+        print("Options: -p, -f, -rg")
+        print("-p: parent mode, -f: filter mode, -rg: reset graph")
+        raise Exception("Please enter a valid mode!", str(e))
 
 def get_search_method():
 
     search_method = sys.argv[1]
-    if search_method != "keyword" or search_method != "word_vector":
+    if search_method != "keyword" and search_method != "word_vector":
+        print("Options: keyword, word_vector")
         raise Exception("Please enter a valid search method!")
     return search_method
 
@@ -42,7 +39,7 @@ class Config:
 
     # Specify github repository
     repo_owner = 'bounswe'
-    repo_number = 2
+    repo_number = 3
     repo_name = f'bounswe2022group{repo_number}'
 
     # Tracing parameters
@@ -50,9 +47,9 @@ class Config:
     parent_mode = False
     filter_mode = False
     reset_graph = True
-    filter_threshold = 0
+    filter_threshold = 0.01
 
-    filter_nodes_before_date = '2022-06-01T00:00:00Z'
+    filter_nodes_before_date = '2022-06-01'
     
 
     def __new__(cls):
@@ -65,5 +62,5 @@ class Config:
         if self.__initialized: return
         self.__initialized = True
 
-        self.parent_mode, self.filter_mode, self.reset_graph, self.filter_threshold = get_mode()
         self.search_method = get_search_method()
+        self.parent_mode, self.filter_mode, self.reset_graph, self.filter_threshold = get_mode()

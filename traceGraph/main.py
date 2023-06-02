@@ -19,7 +19,7 @@ def main():
     get_artifacts()
     neo4jConnector().clean_all_data() # Beware! This will delete all data in the neo4j database
     create_neo4j_nodes()
-    neo4jConnector().filter_artifacts(Config().filter_nodes_before_date[:10])
+    neo4jConnector().filter_artifacts(Config().filter_nodes_before_date)
 
     if(Config().search_method == 'word-vector'):
         trace_wv() # comment above and uncomment this line to use word2vec

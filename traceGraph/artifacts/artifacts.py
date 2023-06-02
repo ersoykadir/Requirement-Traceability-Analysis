@@ -135,6 +135,10 @@ import time
 def get_artifacts():
     start = time.time()
 
+    # Create the data directory if it doesn't exist
+    if not os.path.exists(f'data_{Config().repo_name}'):
+        os.makedirs(f'data_{Config().repo_name}')
+
     get_all_pages('issues')
     get_all_pages('pullRequests')
     get_all_pages('commits')

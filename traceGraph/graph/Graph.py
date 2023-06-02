@@ -96,7 +96,6 @@ class Graph:
         # Get commits that have associated prs
         for req in self.requirement_nodes.values():
             commits_to_delete = []
-            print(req.commit_traces.keys())
             for commit_number in req.commit_traces.keys():
                 associated_pr = self.commit_nodes[commit_number].associatedPullRequest
                 if associated_pr != None:
@@ -110,7 +109,6 @@ class Graph:
                     pass
         
             for commit_number in commits_to_delete:
-                if commit_number in req.commit_traces.keys():
-                    del req.commit_traces[commit_number]
+                del req.commit_traces[commit_number]
             
-            print(req.commit_traces.keys())
+            print(len(req.commit_traces.keys()))

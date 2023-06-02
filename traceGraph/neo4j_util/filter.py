@@ -1,9 +1,11 @@
 import numpy as np
+from config import Config
 
 def cosine_similarity(v1, v2):
     return np.dot(v1, v2)/(np.linalg.norm(v1)*np.linalg.norm(v2))
 
-def filter_by_similarity(node_number, trace_nodes, graph, threshold=0.01):
+def filter_by_similarity(node_number, trace_nodes, graph):
+    threshold = Config().filter_threshold
     filtered = {}
     a_vector = graph.nodes[node_number].vector
     # a_vector = document_embedding(graph.nodes[a])

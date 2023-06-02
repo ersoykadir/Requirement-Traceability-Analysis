@@ -7,7 +7,6 @@ Writes traces to neo4j database.
 """
 
 import time, os, sys, math, operator
-from .neo4j_connection import neo4jConnector, create_traces_w2v, link_commits_prs
 from traceGraph.graph import Graph
 from dotenv import load_dotenv
 load_dotenv()
@@ -77,11 +76,11 @@ def trace(repo_number, parent_mode):
 
     # Connect to Neo4j and create traces
     start = time.time()
-    neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
-    create_traces_w2v(neo, req_to_issue, 'Issue')
-    create_traces_w2v(neo, req_to_pr, 'PullRequest')
+    # neo = neo4jConnector("bolt://localhost:7687", "neo4j", neo4j_password)
+    # create_traces_w2v(neo, req_to_issue, 'Issue')
+    # create_traces_w2v(neo, req_to_pr, 'PullRequest')
     #create_traces_w2v(neo, req_to_commit, 'Commit')
-    link_commits_prs(neo)
+    # link_commits_prs(neo)
 
     neo.close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
