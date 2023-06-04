@@ -6,8 +6,7 @@ Reads artifact data from json files and creates neo4j nodes.
 """
 
 import json
-from neo4j.time import Date, DateTime
-from word_vector import document_embedding
+from neo4j.time import Date
 
 from artifacts.artifacts import get_repo_creation_date
 from neo4j_util.neo4j_connection import neo4jConnector
@@ -48,8 +47,13 @@ def build_issue_nodes():
         issue['createdAt'] = Date.from_iso_format(issue['createdAt'][:10])
         if(issue['closedAt'] is not None):
             issue['closedAt'] = Date.from_iso_format(issue['closedAt'][:10])
-        issue['days_diff'] = (issue['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
-        issue['weeks_diff'] = issue['days_diff'] // 7
+        # issue['days_diff'] = (issue['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
+        # issue['weeks_diff'] = issue['days_diff'] // 7
+
+        issue['created_week'] = (issue['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
+        issue['closed_week'] = None
+        if(issue['closedAt'] is not None):
+            issue['closed_week'] = (issue['closedAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
 
     # Create neo4j nodes from data['issues']
     result = neo4jConnector().create_artifact_nodes(data['issues'], 'Issue')
@@ -92,8 +96,12 @@ def build_pr_nodes():
         pr['createdAt'] = Date.from_iso_format(pr['createdAt'][:10])
         if(pr['closedAt'] is not None):
             pr['closedAt'] = Date.from_iso_format(pr['closedAt'][:10])
-        pr['days_diff'] = (pr['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
-        pr['weeks_diff'] = pr['days_diff'] // 7
+        # pr['days_diff'] = (pr['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
+        # pr['weeks_diff'] = pr['days_diff'] // 7
+        pr['created_week'] = (pr['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
+        pr['closed_week'] = None
+        if(pr['closedAt'] is not None):
+            pr['closed_week'] = (pr['closedAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
     
     # Create neo4j nodes
     result = neo4jConnector().create_artifact_nodes(data['pullRequests'], 'PullRequest')
@@ -148,11 +156,11 @@ def create_neo4j_nodes():
     build_commit_nodes()
     build_requirement_nodes()
 
-    # Create indexes
-    # neo4jConnector().create_indexes('Issue', 'number')
-    # neo4jConnector().create_indexes('PullRequest', 'number')
-    # neo4jConnector().create_indexes('Commit', 'number')
-    # neo4jConnector().create_indexes('Requirement', 'number')
+    # Create indexes 
+    neo4jConnector().create_indexes('Issue', 'number')
+    neo4jConnector().create_indexes('PullRequest', 'number')
+    neo4jConnector().create_indexes('Commit', 'number')
+    neo4jConnector().create_indexes('Requirement', 'number')
 
     end = time.time()
     print(f"Time elapsed for creating neo4j nodes: {end-start}")

@@ -79,7 +79,7 @@ class neo4jConnector:
         index_name = (f'{label}_{field}')
         field = (f'n.{field}')
         query = (f'''
-            CREATE INDEX {index_name} FOR (n:{label}) ON ({field})
+            CREATE INDEX {index_name} IF NOT EXISTS FOR (n:{label}) ON ({field})
         ''').format(index_name=index_name, label=label, field=field)
         params = { "label": label, "field": field }
         
