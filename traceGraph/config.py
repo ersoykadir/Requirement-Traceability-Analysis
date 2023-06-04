@@ -1,31 +1,43 @@
 import os
 import sys
+
+# Provide a how to run error message 
+how_to_run = f"\nHow to Run:   python main.py <search_method> <options> \n"
+options_description = f"""Options:  -rt, -rg
+-rt:    requirement tree mode, 
+        includes parent requirements for keyword extraction, requires a file named 'requirements.txt' in the root directory of the repository
+-rg:    reset graph,
+        deletes the graph pickle to re-create the graph from scratch
+"""
+how_to_run += options_description
     
 def get_mode():
+    global how_to_run
     try:
-        parent_mode, filter_mode, reset_graph, filter_threshold = False, False, False, 0
+        parent_mode, reset_graph, filter_threshold = False, False, 0
         for i in range(2, len(sys.argv)):
-            if sys.argv[i] == "-p":
+            if sys.argv[i] == "-rt":
                 parent_mode = True
-            elif sys.argv[i] == "-f":
-                filter_mode = True
             elif sys.argv[i] == "-rg":
                 reset_graph = True
             else:
                 raise Exception("Please enter a valid option!")
-        return parent_mode, filter_mode, reset_graph, filter_threshold
+        return parent_mode, reset_graph, filter_threshold
     except Exception as e:
-        print("Options: -p, -f, -rg")
-        print("-p: parent mode, -f: filter mode, -rg: reset graph")
-        raise Exception("Please enter a valid mode!", str(e))
+        print("Please enter a valid option!", str(e) + "\n" )
+        raise ValueError(how_to_run) from None
 
-def get_search_method():
-
-    search_method = sys.argv[1]
-    if search_method != "keyword" and search_method != "word_vector":
-        print("Options: keyword, word_vector")
-        raise Exception("Please enter a valid search method!")
-    return search_method
+def get_search_method(possible_search_methods):
+    global how_to_run
+    try:
+        search_method = sys.argv[1]
+        if search_method not in possible_search_methods: 
+            raise Exception()
+        return search_method
+    except Exception as e:
+        print("Please enter a valid search method!", str(e) + "\n")
+        p = "Possible search methods: " + str(possible_search_methods)
+        raise ValueError(p + how_to_run) from None
 
 class Config:
 
@@ -38,15 +50,14 @@ class Config:
 
 
     # Specify github repository
-    repo_owner = 'bounswe'
-    repo_number = 3
-    repo_name = f'bounswe2022group{repo_number}'
+    repo = 'bounswe/bounswe2022group3'
+    repo_owner, repo_name = repo.split('/')
 
     # Tracing parameters
+    possible_search_methods = ['keyword', 'tf-idf', 'word-vector']
     search_method = 'keyword'
     parent_mode = False
-    filter_mode = False
-    reset_graph = True
+    reset_graph = False
     filter_threshold = 0.01
 
     filter_nodes_before_date = '2022-06-01'
@@ -62,5 +73,5 @@ class Config:
         if self.__initialized: return
         self.__initialized = True
 
-        self.search_method = get_search_method()
-        self.parent_mode, self.filter_mode, self.reset_graph, self.filter_threshold = get_mode()
+        self.search_method = get_search_method(self.possible_search_methods)
+        self.parent_mode, self.reset_graph, self.filter_threshold = get_mode()

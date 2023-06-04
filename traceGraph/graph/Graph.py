@@ -32,7 +32,7 @@ class Graph:
         return f"Graph with {len(self.issue_nodes)} nodes."
 
     def create_model(self, modeltype):
-        if modeltype == 'tfidf':
+        if modeltype == 'tf-idf':
             corpus = {}
             for a in self.nodes.values():
                 corpus[a.number] = a.text
@@ -110,5 +110,3 @@ class Graph:
         
             for commit_number in commits_to_delete:
                 del req.commit_traces[commit_number]
-            
-            print(len(req.commit_traces.keys()))

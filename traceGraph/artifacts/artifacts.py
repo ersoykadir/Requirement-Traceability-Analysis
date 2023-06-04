@@ -91,13 +91,21 @@ def get_all_pages(artifact_type):
 #               The parent of a requirement is the requirement with the same number, but without the last number. (1.1 is the parent of 1.1.1)       
 def get_requirements():
 
-    if Config().parent_mode:
-        requirements_file_name = f'data_{Config().repo_name}/requirements.txt'
-    else:
-        requirements_file_name = f'data_{Config().repo_name}/requirements_wout_headers.txt'
-    f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
-    data = f.readlines()
-    f.close()
+    if os.path.exists(f'data_{Config().repo_name}/requirements_data.json'):
+        print('Requirements already exist.')
+        return
+    try:
+        if Config().parent_mode:
+            requirements_file_name = f'data_{Config().repo_name}/requirements(req_tree).txt'
+        else:
+            requirements_file_name = f'data_{Config().repo_name}/requirements.txt'
+        
+        f = open(requirements_file_name, 'r', encoding='utf-8', errors='ignore')
+        data = f.readlines()
+        f.close()
+    except FileNotFoundError:
+        print('Requirements file missing! Please add a requirements.txt and/or requirements(req_tree).txt file to the data folder.')
+        return
 
     requirements = [] # List of requirement dictionaries, to be written to a json file
 
