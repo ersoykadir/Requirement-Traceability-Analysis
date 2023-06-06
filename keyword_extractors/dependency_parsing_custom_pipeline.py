@@ -6,7 +6,7 @@ nlp = spacy.load("en_core_web_sm")
 
 def lemmatizer(text):
     tokens = nlp(text)
-    result = " ".join(token.lemma_ for token in tokens)
+    result = " ".join(token.lemma_.lower() for token in tokens)
     return result
 
 def most_frequent_words(req_file, stopwords_path):
@@ -57,7 +57,7 @@ def noun_analysis(token, token_dict):
         if child.dep_ == 'prep':
             for sub_child in child.children:
                 if sub_child.dep_ == "pobj":
-                    token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
+                    token_dict["noun-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
                     if token.dep_ == "dobj":
                         token_dict["verb-objects"].append(f"""{token.head.lemma_.lower()} {sub_child.lemma_.lower()}""")
                     flag = True

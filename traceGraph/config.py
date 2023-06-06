@@ -59,7 +59,7 @@ class Config:
     search_method = 'keyword'
     parent_mode = False
     reset_graph = False
-    filter_threshold = 0.5
+    filter_threshold = 0.3
 
     filter_nodes_before_date = '2022-06-01'
     
