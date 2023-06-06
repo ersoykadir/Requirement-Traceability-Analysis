@@ -6,7 +6,7 @@ nlp = spacy.load("en_core_web_sm")
 
 def lemmatizer(text):
     tokens = nlp(text)
-    result = " ".join(token.lemma_ for token in tokens)
+    result = " ".join(token.lemma_.lower() for token in tokens)
     return result
 
 def most_frequent_words(req_file, stopwords_path):
@@ -48,8 +48,8 @@ def noun_analysis(token, token_dict):
     for child in token.children:
         if child.dep_ == "nmod" or child.dep_ == "amod":
             token_dict["noun-objects"].append(f"""{child.lemma_.lower()} {token.lemma_.lower()}""")
-            if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_.lower())
-            if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_.lower())
+            # if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_.lower())
+            # if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_.lower())
             flag = True
         if child.dep_ == "compound":
             compounds.append(child.lemma_.lower())
@@ -58,6 +58,8 @@ def noun_analysis(token, token_dict):
             for sub_child in child.children:
                 if sub_child.dep_ == "pobj":
                     token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
+                    if token.dep_ == "dobj":
+                        token_dict["verb-objects"].append(f"""{token.head.lemma_.lower()} {sub_child.lemma_.lower()}""")
                     flag = True
         if child.dep_ == 'conj':
             if token.dep_ == 'dobj':
@@ -68,7 +70,9 @@ def noun_analysis(token, token_dict):
                 flag = True     
     if len(compounds) > 0:
         token_dict["noun-objects"].append(f"""{" ".join(compounds)} {token.lemma_.lower()}""")
-        token_dict["nouns"].append(f"""{token.lemma_.lower()}""")
+        if token.head.tag_[0:2] == "VB" and token.dep_ == "dobj":
+            token_dict["verb-objects"].append(f"""{token.head.lemma_.lower()} {" ".join(compounds)} {token.lemma_.lower()}""")
+        if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_.lower())
     return flag
 
 def remove_stopwords_from_text(text, stopwords_path):
