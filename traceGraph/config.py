@@ -14,7 +14,8 @@ how_to_run += options_description
 def get_mode():
     global how_to_run
     try:
-        parent_mode, reset_graph, filter_threshold = False, False, 0
+        parent_mode = False
+        reset_graph = False
         for i in range(2, len(sys.argv)):
             if sys.argv[i] == "-rt":
                 parent_mode = True
@@ -22,7 +23,7 @@ def get_mode():
                 reset_graph = True
             else:
                 raise Exception("Please enter a valid option!")
-        return parent_mode, reset_graph, filter_threshold
+        return parent_mode, reset_graph
     except Exception as e:
         print("Please enter a valid option!", str(e) + "\n" )
         raise ValueError(how_to_run) from None
@@ -58,7 +59,7 @@ class Config:
     search_method = 'keyword'
     parent_mode = False
     reset_graph = False
-    filter_threshold = 0.01
+    filter_threshold = 0.5
 
     filter_nodes_before_date = '2022-06-01'
     
@@ -72,6 +73,7 @@ class Config:
     def __init__(self) -> None:
         if self.__initialized: return
         self.__initialized = True
-
-        self.search_method = get_search_method(self.possible_search_methods)
-        self.parent_mode, self.reset_graph, self.filter_threshold = get_mode()
+        
+        if len(sys.argv) > 1:
+            self.search_method = get_search_method(self.possible_search_methods)
+            self.parent_mode, self.reset_graph = get_mode()
