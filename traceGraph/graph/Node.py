@@ -26,6 +26,8 @@ class Node:
         self.number = number
         self.text = '' # Textual description of the node.
         self.vector = None # Vector representation of the node.
+        self.average_word_vector = None # Average word vector representation of the node.
+        self.tokens = None # Tokens of the node.
 
     # Preprocesses and tokenizes the text of the node. To be used for the word embeddings.
     def preprocess_text(self):
@@ -40,16 +42,16 @@ class Node:
     # Creates the word vector of the node.
     def create_vector(self, model):
         try:
-            self.word_vector = []
+            word_vector = []
             total_missing_tokens = 0
             for token in self.tokens:
                 try:
-                    self.word_vector.append(model.wv[token])
+                    word_vector.append(model[token])
                 except KeyError:
                     #print(token, 'not in vocabulary')
                     total_missing_tokens += 1
             # self.word_vector = model.wv[self.tokens]
-            self.average_word_vector = np.mean(self.word_vector, axis=0)
+            self.vector = np.mean(word_vector, axis=0)
             return total_missing_tokens
         except Exception as e:
             print(e)

@@ -2,6 +2,7 @@ import sys, os
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec as w2v
+from gensim.models import KeyedVectors
 from nltk.corpus import stopwords
 sys.path.append('..')
 
@@ -33,6 +34,7 @@ class Graph:
 
     def create_model(self, modeltype):
         if modeltype == 'tf-idf':
+            print('Creating tf-idf vectors...')
             corpus = {}
             for a in self.nodes.values():
                 corpus[a.number] = a.text
@@ -45,7 +47,7 @@ class Graph:
                 a.vector = self.tfidf_vectors[index]
                 index += 1
 
-        elif modeltype == 'w2v':
+        elif modeltype == 'word-vector':
             texts = []
             total_tokens = 0
 
@@ -54,14 +56,11 @@ class Graph:
                 node.preprocess_text()
                 texts.append(node.tokens)
                 total_tokens += len(node.tokens)
-            
-            # Train the w2v model
-            self.model = w2v(
-                texts,
-                min_count=3,  
-                sg = 1,       
-                window=7      
-            )
+
+
+            pretrainedpath = r"C:\Users\KadirERSOY\gensim-data\word2vec-google-news-300\GoogleNews-vectors-negative300.bin"
+            self.model = KeyedVectors.load_word2vec_format(pretrainedpath, binary=True) #load the model
+
             # Create the word vectors for each node
             total_missing_tokens = 0
             for node in self.nodes.values():
@@ -71,13 +70,13 @@ class Graph:
 
     # Lemmatize and remove stopwords from the artifact
     def lemmatize_remove(self, artifact):
-        artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
+        # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
         artifact.text = lemmatizer(artifact.text)
 
     # Lemmatize and remove stopwords from each artifact in the graph
     def lemmatize_and_remove_stopwords(self):
         for artifact in self.artifact_nodes.values():
-            artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
+            # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
             artifact.text = lemmatizer(artifact.text)
 
     def combine(self, tuple1, tuple2):

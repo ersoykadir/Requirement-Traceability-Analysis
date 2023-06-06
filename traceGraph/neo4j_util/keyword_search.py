@@ -11,7 +11,7 @@ noun_phrase_regex = r'\b{0}\s{1}\b'
 
 # Searches for the regex pattern in given nodes.
 def search_pattern(nodes, regex, keyword, weight, found_nodes):
-    result = set()
+
     compiled_regex = re.compile(regex, flags=re.IGNORECASE)
     for node in nodes:
         try:

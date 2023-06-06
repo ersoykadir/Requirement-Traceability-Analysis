@@ -39,8 +39,8 @@ def build_pr_nodes():
         node = PullRequest('pullRequest', pr['number'], pr['title'], pr['body'], pr['comments'], pr['state'], pr['createdAt'], pr['closedAt'], pr['url'], pr['milestone'], pr['commits'])
         pr_nodes[node.number] = node
         # Parse the commits of the pull request.
-        commit_text = commit_parser(pr['commits'])
-        node.text += commit_text
+        # commit_text = commit_parser(pr['commits'])
+        # node.text += commit_text
     return pr_nodes
 
 # Parses the data from the commits file and creates a dictionary of graph nodes, where the key is the commit id.

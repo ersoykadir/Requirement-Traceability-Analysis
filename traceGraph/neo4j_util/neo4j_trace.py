@@ -11,9 +11,8 @@ from dotenv import load_dotenv
 load_dotenv()
 #sys.path.append('..')
 
-from .tf_idf import filter_traces
 from ground_truth import recall_and_precision
-from graph import Graph
+from graph.Graph import Graph
 
 from config import Config
 from neo4j_util.neo4j_connection import neo4jConnector
@@ -40,17 +39,17 @@ def trace_dict_to_list(trace_dict):
     return trace_list
 
 from neo4j_util.keyword_search import keyword_search
-from neo4j_util.tf_idf import filter_traces
-
+from .vector_trace import filter_traces, trace_w_vector
 
 def find_traces(graph):
     if Config().search_method == 'keyword':
         keyword_search(graph)
     elif Config().search_method == 'tf-idf':
         graph.create_model('tf-idf')
-        filter_traces(graph)
+        trace_w_vector(graph)
     elif Config().search_method == 'word-vector':
-        pass
+        graph.create_model('word-vector')
+        trace_w_vector(graph)
 
 import pickle
 def trace():
