@@ -7,20 +7,22 @@ search_methods = ['tf-idf', 'word-vector', 'keyword']
 parent_mode = True
 reset_graph = False
 Config()
-Config.parent_mode = parent_mode
-Config.reset_graph = reset_graph
-Config.experiment_mode = True
+Config().parent_mode = parent_mode
+Config().reset_graph = reset_graph
+Config().experiment_mode = True
+
 def experiment():
     for search_method in search_methods:
-        Config.search_method = search_method
+        Config().search_method = search_method
+
         if search_method == 'keyword':
-            Config.reset_graph = True
-            Config.filter_threshold = 0
+            Config().reset_graph = True
+            Config().filter_threshold = 0
             main()
             print("Keyword search is done!")
             continue
         for filter_threshold in filter_thresholds:
-            Config.filter_threshold = filter_threshold
+            Config().filter_threshold = filter_threshold
             main()
             print("Filter threshold: ", filter_threshold, " is done for", search_method, "!")
 
