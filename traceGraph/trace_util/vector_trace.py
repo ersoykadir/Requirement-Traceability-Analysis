@@ -18,11 +18,12 @@ def normalize(word_vec):
 def find_similar_nodes(node_number, trace_nodes, graph):
     threshold = Config().filter_threshold
     filtered = {}
-    a_vector = normalize(graph.nodes[node_number].vector)
+    a_vector = graph.nodes[node_number].vector
     for node in trace_nodes:
         b_vector = node.vector
-        if b_vector is None:
+        if a_vector is None or b_vector is None:
             continue
+        a_vector = normalize(a_vector)
         b_vector = normalize(b_vector)
         similarity = cosine_similarity(a_vector, b_vector)
         if similarity > 1:

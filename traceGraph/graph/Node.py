@@ -7,15 +7,12 @@ Utilized for representing each artifact as node and finding trace links between 
 Also creates w2v model and, word vectors for each artifact.
 """
 
-import sys
 from datetime import datetime
 from nltk.corpus import stopwords
 import string
 from nltk.tokenize import word_tokenize
-from gensim.models import Word2Vec as w2v
 import numpy as np
 
-#sys.path.append('..')
 from keyword_extractor.custom_extractor import custom_extractor
 from config import Config
 from nltk.stem.wordnet import WordNetLemmatizer

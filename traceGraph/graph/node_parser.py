@@ -1,3 +1,12 @@
+"""
+Kadir Ersoy - Ecenur Sezer
+Requirements Traceability Tool
+
+Node parser for the util graph.
+Utilized for representing each artifact as node and finding trace links between them.
+TODO: Get rid of the util graph and use only the neo4j graph.
+"""
+
 import json
 from .Node import Issue, PullRequest, Commit, Requirement
 from config import Config

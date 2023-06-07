@@ -36,29 +36,27 @@ def build_issue_nodes():
         if issue['milestone'] is not None:
             issue['milestone'] = issue['milestone']['description']
         
+        # Concatenate the title, body and comments to create a single text property.
         issue['text'] = issue['title'] + ' ' + issue['body']
-        # add the comments to the text
         for comment in issue['comment_list']:
             issue['text'] += ' ' + comment
 
-        # issue['vector'] = document_embedding(issue['text']).tolist()
-
-        # Convert the dates to neo4j Date objects
+        # Convert the dates to neo4j compatible format
         issue['createdAt'] = Date.from_iso_format(issue['createdAt'][:10])
         if(issue['closedAt'] is not None):
             issue['closedAt'] = Date.from_iso_format(issue['closedAt'][:10])
-        # issue['days_diff'] = (issue['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
-        # issue['weeks_diff'] = issue['days_diff'] // 7
 
+        # Calculate the weeks passed since the repo was created
         issue['created_week'] = (issue['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
         issue['closed_week'] = None
         if(issue['closedAt'] is not None):
             issue['closed_week'] = (issue['closedAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
 
-    # Create neo4j nodes from data['issues']
+    # Create neo4j nodes 
     result = neo4jConnector().create_artifact_nodes(data['issues'], 'Issue')
 
 # Parses the commits of a pull request.
+# Not used in the current version. Commits are not held as pr properties, but as separate nodes.
 def commit_parser(related_commits):
     commit_ids = []
     related_commits = related_commits['nodes']
@@ -86,18 +84,17 @@ def build_pr_nodes():
         #pr['commit_list'] = commit_parser(pr['commits'])
         del pr['commits']
 
+        # Concatenate the title, body and comments to create a single text property.
         pr['text'] = pr['title'] + ' ' + pr['body']
-        # add the comments to the text
         for comment in pr['comment_list']:
             pr['text'] += ' ' + comment
         
-        # pr['vector'] = document_embedding(pr['text']).tolist()
-        # Convert the dates to neo4j Date objects
+        # Convert the dates to neo4j compatible format
         pr['createdAt'] = Date.from_iso_format(pr['createdAt'][:10])
         if(pr['closedAt'] is not None):
             pr['closedAt'] = Date.from_iso_format(pr['closedAt'][:10])
-        # pr['days_diff'] = (pr['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
-        # pr['weeks_diff'] = pr['days_diff'] // 7
+
+        # Calculate the weeks passed since the repo was created
         pr['created_week'] = (pr['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
         pr['closed_week'] = None
         if(pr['closedAt'] is not None):
@@ -121,10 +118,12 @@ def build_commit_nodes():
         commit['text'] = commit['message']
         commit['number'] = commit['oid']
 
-        # commit['vector'] = document_embedding(commit['text']).tolist()
-        # Convert the dates to neo4j Date objects
+        # Convert the dates to neo4j compatible format
         commit['createdAt'] = Date.from_iso_format(commit['committedDate'][0:10])
         commit['closedAt'] = Date.from_iso_format(commit['committedDate'][0:10])
+
+        # Calculate the weeks passed since the repo was created
+        commit['created_week'] = (commit['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
         commit['closed_week'] = None
         if(commit['closedAt'] is not None):
             commit['closed_week'] = (commit['closedAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
@@ -140,13 +139,13 @@ def build_requirement_nodes():
     f.close()
     for requirement in data['requirements']:
         requirement['text'] = requirement['description']
-        # requirement['vector'] = document_embedding(requirement['text']).tolist()
-
     # Create neo4j nodes
     result = neo4jConnector().create_artifact_nodes(data['requirements'], 'Requirement')
 
 import sys, time
-
+"""
+    Creates the neo4j nodes for the issues, pull requests, commits and requirements.
+"""
 def create_neo4j_nodes():
     global repo_creation_date
     repo_creation_date = get_repo_creation_date()
@@ -158,7 +157,7 @@ def create_neo4j_nodes():
     build_commit_nodes()
     build_requirement_nodes()
 
-    # Create indexes 
+    # Create indexes for faster querying
     neo4jConnector().create_indexes('Issue', 'number')
     neo4jConnector().create_indexes('PullRequest', 'number')
     neo4jConnector().create_indexes('Commit', 'number')
