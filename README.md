@@ -26,47 +26,9 @@ The project needs Python=3.10.0 to operate.
 You can download it by clicking [here](https://www.python.org/downloads/release/python-3100/).
 
 --------
-First create a virtual environment on Python using _venv_ library.
-
-```bash
-  python -m venv c:\path\to\myenv
-```
---------
-
-Activate the environment based on your operating system and the shell.
+It is recommended to use a virtual environment on Python using _venv_ library.
 
 -----
-
-for POSIX:
-
-- bash/zsh
-```bash
-source <venv>/bin/activate
-```
-
-- fish
-```bash
-source <venv>/bin/activate.fish
-```
-- csh/tcsh
-```bash
-source <venv>/bin/activate.csh
-```
-- PowerShell
-```bash
-<venv>/bin/Activate.ps1
-```
-for Windows:
-
-- cmd.exe
-```bash
-<venv>\Scripts\activate.bat
-```
-- PowerShell
-```bash
-<venv>\Scripts\Activate.ps1
-```
-------
 Clone the project using the following shell command.
 
 ```bash
@@ -90,6 +52,8 @@ Create a _.env_ file with the following content:
 GITHUB_USERNAME=<your github username>
 GITHUB_TOKEN=<your github token>
 NEO4J_PASSWORD="password"
+NEO4J_USERNAME ="neo4j"
+NEO4J_URI = "bolt://localhost:7687""
 ```
 You can find a file named _.env.example_ as a template in the root directory.
 
@@ -101,12 +65,22 @@ cd ./traceGraph
 Run _.main.py_ with two system arguments; 
 
 ```bash
-python ./main.py <repo_number> <search_method>
+python ./main.py <search_method> <options_>
 ```
+- <search_method> indicates the method used for searching traces.
 
-- <repo_number> indicates the number of github repositories on Bounswe 2022, setting it 2 will create traces for Learnify and 3 is for BUcademy.
+  -keyword:  Keyword extraction method for capturing traces.
 
-- <search_method> indicates the method used for searching traces, it could be either "keyword" or "word-vector".
+  -word-vector: Word-vector method for capturing traces.
+
+  -tf-idf vector: tf-idf vector method for capturing traces.
+- <options_> 
+
+  -rt:    requirement tree mode, 
+          includes parent requirements for keyword extraction, requires a file named 'requirements.txt' in the root directory of the repository
+          
+  -rg:    reset graph,
+          deletes the graph pickle to re-create the graph from scratch
 
 ---------
 
