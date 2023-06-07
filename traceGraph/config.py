@@ -59,7 +59,9 @@ class Config:
     search_method = 'keyword'
     parent_mode = False
     reset_graph = False
-    filter_threshold = 0.5
+    filter_threshold = 0.15
+
+    pretrained_model_path = r"C:\Users\KadirERSOY\gensim-data\word2vec-google-news-300\GoogleNews-vectors-negative300.bin"
 
     filter_nodes_before_date = '2022-06-01'
     

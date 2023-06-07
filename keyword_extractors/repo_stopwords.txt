@@ -5,3 +5,7 @@ user
 users
 page
 be able
+create
+delete
+update
+text

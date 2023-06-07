@@ -18,6 +18,8 @@ import numpy as np
 #sys.path.append('..')
 from keyword_extractor.custom_extractor import custom_extractor
 from config import Config
+from nltk.stem.wordnet import WordNetLemmatizer
+wnet_lemmatizer = WordNetLemmatizer()
 
 # Class representing graph nodes. Each node represents a software artifact (issue, pull request, requirement, commit).
 class Node:
@@ -29,16 +31,21 @@ class Node:
         self.average_word_vector = None # Average word vector representation of the node.
         self.tokens = None # Tokens of the node.
 
-    # Preprocesses and tokenizes the text of the node. To be used for the word embeddings.
+    # Preprocesses the text of the node.
     def preprocess_text(self):
-        self.text = self.text.rstrip('\n')
-        self.text = self.text.lower()
-        self.text = self.text.translate(str.maketrans('', '', string.punctuation))
-        self.text = self.text.translate(str.maketrans('', '', string.digits))
-        sw = stopwords.words('english')
-        tokens = word_tokenize(self.text)
-        self.tokens = [w for w in tokens if not w in sw]
+        text = self.text
+        text = text.lower()
+        text = text.rstrip('\n')
+        text = text.translate(str.maketrans('', '', string.digits))
+        sw = []
+        if Config().search_method != 'keyword':
+            text = text.translate(str.maketrans('', '', string.punctuation))
+            sw = stopwords.words('english')
 
+        tokens = word_tokenize(text)
+        self.tokens = [wnet_lemmatizer.lemmatize(word) for word in tokens if word not in sw]
+        text = ' '.join(self.tokens)
+    
     # Creates the word vector of the node.
     def create_vector(self, model):
         try:
@@ -50,8 +57,8 @@ class Node:
                 except KeyError:
                     #print(token, 'not in vocabulary')
                     total_missing_tokens += 1
-            # self.word_vector = model.wv[self.tokens]
-            self.vector = np.mean(word_vector, axis=0)
+            if len(word_vector) > 0:
+                self.vector = np.mean(word_vector, axis=0)
             return total_missing_tokens
         except Exception as e:
             print(e)

@@ -124,8 +124,10 @@ def build_commit_nodes():
         # commit['vector'] = document_embedding(commit['text']).tolist()
         # Convert the dates to neo4j Date objects
         commit['createdAt'] = Date.from_iso_format(commit['committedDate'][0:10])
-        commit['days_diff'] = (commit['createdAt'] - Date.from_iso_format(repo_creation_date[:10])).days
-        commit['weeks_diff'] = commit['days_diff'] // 7
+        commit['closedAt'] = Date.from_iso_format(commit['committedDate'][0:10])
+        commit['closed_week'] = None
+        if(commit['closedAt'] is not None):
+            commit['closed_week'] = (commit['closedAt'] - Date.from_iso_format(repo_creation_date[:10])).days // 7
 
     # Create neo4j nodes
     result = neo4jConnector().create_artifact_nodes(data['commits'], 'Commit')

@@ -1,9 +1,13 @@
+import string
 import sys, os
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from gensim.models import Word2Vec as w2v
 from gensim.models import KeyedVectors
 from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem.wordnet import WordNetLemmatizer
+wnet_lemmatizer = WordNetLemmatizer()
 sys.path.append('..')
 
 from keyword_extractor.custom_extractor import lemmatizer, remove_stopwords_from_text
@@ -33,12 +37,17 @@ class Graph:
         return f"Graph with {len(self.issue_nodes)} nodes."
 
     def create_model(self, modeltype):
+
+        total_tokens = 0
+
+        for node in self.nodes.values():
+            total_tokens += len(node.tokens)
+            
         if modeltype == 'tf-idf':
-            print('Creating tf-idf vectors...')
             corpus = {}
             for a in self.nodes.values():
                 corpus[a.number] = a.text
-            vectorizer = TfidfVectorizer(stop_words='english')
+            vectorizer = TfidfVectorizer(min_df=5)
             tfidf_vectors = vectorizer.fit_transform(corpus.values())
             self.tfidf_vectors = tfidf_vectors.toarray()
             index = 0
@@ -48,18 +57,9 @@ class Graph:
                 index += 1
 
         elif modeltype == 'word-vector':
-            texts = []
-            total_tokens = 0
 
-            # Get the tokens of each node for training the w2v model
-            for node in self.nodes.values():
-                node.preprocess_text()
-                texts.append(node.tokens)
-                total_tokens += len(node.tokens)
-
-
-            pretrainedpath = r"C:\Users\KadirERSOY\gensim-data\word2vec-google-news-300\GoogleNews-vectors-negative300.bin"
-            self.model = KeyedVectors.load_word2vec_format(pretrainedpath, binary=True) #load the model
+            # Get the pretrained model
+            self.model = KeyedVectors.load_word2vec_format(Config().pretrained_model_path, binary=True) #load the model
 
             # Create the word vectors for each node
             total_missing_tokens = 0
@@ -68,16 +68,12 @@ class Graph:
             print('Total missing tokens:', total_missing_tokens)
             print('Total tokens:', total_tokens)
 
-    # Lemmatize and remove stopwords from the artifact
-    def lemmatize_remove(self, artifact):
-        # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
-        artifact.text = lemmatizer(artifact.text)
-
     # Lemmatize and remove stopwords from each artifact in the graph
     def lemmatize_and_remove_stopwords(self):
         for artifact in self.artifact_nodes.values():
             # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
             artifact.text = lemmatizer(artifact.text)
+            # artifact.preprocess_text()
 
     def combine(self, tuple1, tuple2):
         try:
