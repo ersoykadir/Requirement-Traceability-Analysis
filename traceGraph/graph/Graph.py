@@ -38,6 +38,9 @@ class Graph:
 
     def create_model(self, modeltype):
 
+        if Config().experiment_mode:
+            return
+
         total_tokens = 0
 
         for node in self.nodes.values():

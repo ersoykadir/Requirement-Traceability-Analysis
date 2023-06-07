@@ -72,17 +72,18 @@ def trace():
     # Combine results
     req_to_issue, req_to_pr, req_to_commit = combine_results(graph)
 
-    # Recall and precision
-    # recall_and_precision(graph)
-
     # Connect to Neo4j and create traces
     start = time.time()
-    issue_traces = trace_dict_to_list(req_to_issue)
-    pr_traces = trace_dict_to_list(req_to_pr)
-    commit_traces = trace_dict_to_list(req_to_commit)
-    neo4jConnector().create_traces_v3(issue_traces, 'Issue')
-    neo4jConnector().create_traces_v3(pr_traces, 'PullRequest')
-    neo4jConnector().create_traces_v3(commit_traces, 'Commit')
-    neo4jConnector().link_commits_prs()
-    neo4jConnector().close()
+    if Config().experiment_mode:
+        # Recall and precision
+        recall_and_precision(graph)
+    else:
+        issue_traces = trace_dict_to_list(req_to_issue)
+        pr_traces = trace_dict_to_list(req_to_pr)
+        commit_traces = trace_dict_to_list(req_to_commit)
+        neo4jConnector().create_traces_v3(issue_traces, 'Issue')
+        neo4jConnector().create_traces_v3(pr_traces, 'PullRequest')
+        neo4jConnector().create_traces_v3(commit_traces, 'Commit')
+        neo4jConnector().link_commits_prs()
+        neo4jConnector().close()
     print("Time taken to connect neo4j and create traces: ", time.time() - start)
