@@ -15,7 +15,7 @@ from ground_truth import recall_and_precision
 from graph.Graph import Graph
 
 from config import Config
-from neo4j_util.neo4j_connection import neo4jConnector
+from trace_util.neo4j_connection import neo4jConnector
 
 def combine_results(graph):
     req_to_issue = {}

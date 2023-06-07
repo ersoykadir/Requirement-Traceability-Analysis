@@ -9,7 +9,7 @@ import json
 from neo4j.time import Date
 
 from artifacts.artifacts import get_repo_creation_date
-from neo4j_util.neo4j_connection import neo4jConnector
+from trace_util.neo4j_connection import neo4jConnector
 from config import Config
 
 repo_creation_date = None
