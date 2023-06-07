@@ -1,8 +1,7 @@
 
 # Requirement Traceability Tool
 
-This project creates a graph structure that contains software artifact nodes and their traces to each other. 
-
+This project creates a tool that identifies and visualizes the trace links for a software project given the requirements and software development repository.
 
 
 ## Used Technologies
@@ -84,7 +83,11 @@ python ./main.py <search_method> <options_>
 
 ---------
 
+We have a Config file which controls everything related to running configurations. You can filter threshold for vector-based methods or can change target repository from there to test the tool on other repositories. Beware that the tool needs the requirement specifications for the repository you provided. The two repositories with their requirements is available on the repo, which were also used for development of this tool.
+
 Navigate to http://localhost:7474/ to view results on neo4j.
+
+
 
 
   
