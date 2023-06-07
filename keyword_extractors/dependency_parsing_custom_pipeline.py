@@ -6,7 +6,7 @@ nlp = spacy.load("en_core_web_sm")
 
 def lemmatizer(text):
     tokens = nlp(text)
-    result = " ".join(token.lemma_ for token in tokens)
+    result = " ".join(token.lemma_.lower() for token in tokens)
     return result
 
 def most_frequent_words(req_file, stopwords_path):
