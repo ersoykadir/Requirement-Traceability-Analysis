@@ -70,14 +70,18 @@ class Graph:
 
     # Lemmatize and remove stopwords from each artifact in the graph
     def lemmatize_and_remove_stopwords(self):
-        for artifact in self.artifact_nodes.values():
+        nodes = self.artifact_nodes if Config().search_method == 'keyword' else self.nodes
+        for artifact in nodes.values():
             # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
-            artifact.text = lemmatizer(artifact.text)
-            # artifact.preprocess_text()
+            # artifact.text = lemmatizer(artifact.text)
+            artifact.preprocess_text()
 
     def combine(self, tuple1, tuple2):
         try:
-            tuple1[0] = tuple1[0] + tuple2[0]
+            if Config().search_method == 'keyword':
+                tuple1[0] = tuple1[0] + tuple2[0]
+            else:
+                tuple1[0] = max(tuple1[0], tuple2[0]) / 2 # For now, similarity equals to max similarity when both pr and commit has traces
             tuple1[1].extend(tuple2[1])
             tuple1[1] = list(set(tuple2[1]))
             return tuple1

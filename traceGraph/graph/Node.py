@@ -44,7 +44,7 @@ class Node:
 
         tokens = word_tokenize(text)
         self.tokens = [wnet_lemmatizer.lemmatize(word) for word in tokens if word not in sw]
-        text = ' '.join(self.tokens)
+        self.text = ' '.join(self.tokens)
     
     # Creates the word vector of the node.
     def create_vector(self, model):
