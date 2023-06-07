@@ -34,32 +34,37 @@ ground_truth = {
     }
 }
 import pandas as pd
+from config import Config
 def recall_and_precision(graph):
     global ground_truth
-
-    f = open("Recall_and_Precision.txt", 'a')
+    fname = "./results/Recall_and_Precision" + Config().search_method
+    if Config().search_method != "keyword":
+        fname += "_" + str(Config().filter_threshold)
     data = []
     for req_number in ground_truth.keys():
         req = graph.requirement_nodes[req_number]
-        f.write("Req Number: " + str(req_number) + "\n")
 
         actual = len(ground_truth[req_number]['issues']) + len(ground_truth[req_number]['prs'])
-        f.write("Actual # traces: " + str(actual) + "\n")
 
         total_captured = len(req.issue_traces) + len(req.pr_traces)
-        f.write("Total captured: " + str(total_captured) + "\n")
-
+        if total_captured == 0:
+            print("No traces captured for " + req_number)
         count = 0
         truth = ground_truth[req_number]['issues'] + ground_truth[req_number]['prs']
         for a in truth:
             if a in req.issue_traces.keys() or a in req.pr_traces.keys():
                 count += 1
                 
-        f.write("True Captured: " + str(count) + "\n")
-        f.write("Recall: " + str(count/actual) + "\n")
-        f.write("Precision: " + str(count/total_captured) + "\n\n")
-        data.append([req_number, actual, total_captured, count, count/actual, count/total_captured])
+        if actual == 0:
+            recall = 0
+        else:
+            recall = count/actual
+        if total_captured == 0:
+            precision = 0
+        else:
+            precision = count/total_captured
+
+        data.append([req_number, actual, total_captured, count, recall, precision])
     
-    f.close()
     df = pd.DataFrame(data, columns=['Requirement', 'Actual', 'Captured', 'True Captured', 'Recall', 'Precision'])
-    df.to_csv("Recall_and_Precision.csv", index=False)
+    df.to_csv(f'{fname}.csv', index=False)
