@@ -14,7 +14,7 @@ Config().experiment_mode = True
 def experiment():
     for search_method in search_methods:
         Config().search_method = search_method
-
+        Config().model_setup = False
         if search_method == 'keyword':
             Config().reset_graph = True
             Config().filter_threshold = 0

@@ -51,7 +51,7 @@ class Config:
 
 
     # Specify github repository
-    repo = 'bounswe/bounswe2022group2'
+    repo = 'bounswe/bounswe2022group3'
     repo_owner, repo_name = repo.split('/')
 
     # Tracing parameters
@@ -60,6 +60,7 @@ class Config:
     parent_mode = False
     reset_graph = False
     experiment_mode = False
+    model_setup = False
     filter_threshold = 0.65
 
     pretrained_model_path = r"C:\Users\KadirERSOY\gensim-data\word2vec-google-news-300\GoogleNews-vectors-negative300.bin"
