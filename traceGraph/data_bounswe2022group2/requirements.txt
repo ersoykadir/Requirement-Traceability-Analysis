@@ -51,7 +51,7 @@
 1.1.3.2.5.5. Event creators shall be able to cancel events that they have created.
 1.1.3.2.5.6. Created events should be visible on the learning space info page along with the date, duration, location and number of participants.
 1.1.3.2.5.7. The number of learners who will join the event will be visible on the event information.
-1.1.3.2.7.1. Participants of a learning space shall be able to create discussion posts.
+1.1.3.2.6.1. Participants of a learning space shall be able to create discussion posts.
 1.1.4.1. Participants shall deliver learning material in form of posts which contain text and images.
 1.1.4.2. Learning Space shall have the main page where users can see introduction, events, sections, notes, annotations.
 1.1.4.3. The creator of a learning space shall be able to add additional admins to the learning space.
