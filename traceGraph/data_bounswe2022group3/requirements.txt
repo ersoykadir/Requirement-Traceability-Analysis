@@ -2,16 +2,16 @@
 1.1.1.1.1. Users who are registered by providing their emails shall confirm their accounts via the link sent in the confirmation email.
 1.1.1.2. Users shall be able to register using their Google account.
 1.1.2.1. Users shall be able to log into their account using their email and password combination.
-1.1.2.2. Users shall be able to log into their account using their Google account (if they have previously completed 1.1.1.2.).
+1.1.2.2. Users shall be able to log into their account using their Google account.
 1.1.2.3. If a user enters their password wrong three times while logging in their password will be invalidated. They will receive a warning email containing a link to reset their password.
 1.1.2.4. Users shall be able to reset their password via email verification.
 1.1.3.1 Users shall be able to log out of their account.
 1.2.1. Users shall have their own profiles.
-1.2.2. Users shall be able to use the features of their profile page. (described in 2.1.2.)
-1.3.1. Users shall be able to block other users. (described in 3.3.6)
+1.2.2. Users shall be able to use the features of their profile page.
+1.3.1. Users shall be able to block other users.
 1.3.1.1 Blocked users shall not be able to view the blocking user’s profile, join to their learning spaces, and comment on discussion posts they have created.
-1.3.2. Users shall be able to follow other users. (described in 2.1.3)
-1.3.3. Users shall be able to use the discussion channel of the learning spaces they joined in. (described in 2.2.)
+1.3.2. Users shall be able to follow other users.
+1.3.3. Users shall be able to use the discussion channel of the learning spaces they joined in.
 1.3.3.1. Users shall be able to open a discussion post to ask questions.
 1.3.3.2. Users shall be able to make a comment to an existing discussion post.
 1.3.4. Users shall be able to use note taking features.
@@ -23,9 +23,9 @@
 1.3.4.4. Users shall be able to delete or edit their notes.
 1.3.4.5. Users shall be able to connect, annotate and tag notes.
 1.3.4.6. Users shall be able to share their notes with other users.
-1.3.5. Users shall be able to use the search engine (described in 2.5.)
-1.3.6. Users shall be able to use the annotation features. (described in 2.6.)
-1.3.6.1. User shall select a portion of the text to annotate.
+1.3.5. Users shall be able to use the search engine.
+1.3.6. Users shall be able to use the annotation features.
+1.3.6.1. User shall select a portion of the text for annotation.
 1.3.6.2. User should be able to turn on and off annotation visibility.
 1.3.7. Users shall be able to join to any learning space they want to.
 1.3.8. Users shall be able to open a learning space in any subject and they don't need to provide any document regarding their experience on the topic.
@@ -76,7 +76,7 @@
 2.1.2.8.3. The system shall categorize notes according to learning spaces that they were taken in.
 2.1.3.1. The system shall keep records of user profiles that are followed by the user.
 2.1.3.2. The system shall allow a follower of a user to see the following features of a profile: achievements, monitoring, interests, knowledge, bio ,notes ,annotations and activities.
-2.1.4.1. Users shall be able to change their privacy settings. A user shall have a public or a private profile. (described in 3.3.6.)
+2.1.4.1. Users shall be able to change their privacy settings. A user shall have a public or a private profile.
 2.2.1. The system shall provide an interface such that users can ask and answer questions.
 2.2.2. The system shall provide a discussion section for any type of user inside a learning space.
 2.2.2.1. The system should support replying, mentioning and threaded messages to create a comment.

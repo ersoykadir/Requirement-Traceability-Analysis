@@ -492,8 +492,6 @@ use
 used
 useful
 uses
-user
-users
 using
 usually
 uucp
