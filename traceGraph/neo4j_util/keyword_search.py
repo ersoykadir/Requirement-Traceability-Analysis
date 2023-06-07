@@ -5,7 +5,7 @@ from threading import Thread
 # Regular expressions to search for keywords in text.
 word_regex = r'\b{0}\b'
 verb_dobj_regex = r'\b{0}\s+((?:[\w,;:\'\"`\/]+\s+)*){1}\b'
-verb_pobj_regex = r'\b{0}\s+((?:[\w,;:\'\"`\/]+\s+)*){1}\s+((?:[\w,;:\'\"`\/]+\s+)*){2}\b'
+pobj_regex = r'\b{0}\s+((?:[\w,;:\'\"`\/]+\s+)*){1}\s+((?:[\w,;:\'\"`\/]+\s+)*){2}\b'
 noun_phrase_regex = r'\b{0}\s{1}\b'
 
 
@@ -47,7 +47,7 @@ def search_keyword_list(nodes, keyword_list):
         if len(keywords) == 2:
             regex = verb_dobj_regex.format(keywords[0], keywords[1])
         if len(keywords) == 3:
-            regex = verb_pobj_regex.format(keywords[0], keywords[1], keywords[2])
+            regex = pobj_regex.format(keywords[0], keywords[1], keywords[2])
         params = (nodes, regex, keyword, 1, found_nodes)
         q.put(params)
     for keyword in keyword_list['nouns']:
@@ -56,7 +56,10 @@ def search_keyword_list(nodes, keyword_list):
         q.put(params)
     for keyword in keyword_list['noun-objects']:
         keywords = keyword.split()
-        regex = noun_phrase_regex.format(keywords[0], keywords[1])
+        if len(keywords) == 2:
+            regex = noun_phrase_regex.format(keywords[0], keywords[1])
+        if len(keywords) == 3:
+            regex = pobj_regex.format(keywords[0], keywords[1], keywords[2])
         params = (nodes, regex, keyword, 1, found_nodes)
         q.put(params)
     q.put(None)
