@@ -12,6 +12,11 @@ def experiment():
         Config.search_method = search_method
         Config.parent_mode = parent_mode
         Config.reset_graph = reset_graph
+        if search_method == 'keyword':
+            Config.filter_threshold = 0
+            main()
+            print("Keyword search is done!")
+            continue
         for filter_threshold in filter_thresholds:
             Config.filter_threshold = filter_threshold
             main()
