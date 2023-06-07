@@ -66,6 +66,7 @@ def trace():
     find_traces(graph)
     print("Time taken to search for keywords: ", time.time() - start)
 
+    #if Config().search_method == 'keyword':
     graph.connect_prs_from_commits()
 
     # Combine results
