@@ -38,9 +38,6 @@ class Graph:
 
     def create_model(self, modeltype):
 
-        if Config().experiment_mode:
-            return
-
         total_tokens = 0
 
         for node in self.nodes.values():
@@ -56,6 +53,8 @@ class Graph:
             index = 0
             for c in corpus.keys():
                 a = self.nodes[c]
+                if a.node_type == 'requirement' and a.parent is not None and Config().parent_mode:
+                    a.vector = a.parent.vector + self.tfidf_vectors[index]
                 a.vector = self.tfidf_vectors[index]
                 index += 1
 

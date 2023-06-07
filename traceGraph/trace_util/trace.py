@@ -38,7 +38,7 @@ def trace_dict_to_list(trace_dict):
 
     return trace_list
 
-from neo4j_util.keyword_search import keyword_search
+from trace_util.keyword_search import keyword_search
 from .vector_trace import trace_w_vector
 
 def find_traces(graph):

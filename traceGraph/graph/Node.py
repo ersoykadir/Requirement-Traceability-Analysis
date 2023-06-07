@@ -51,6 +51,10 @@ class Node:
         try:
             word_vector = []
             total_missing_tokens = 0
+            tokens = self.tokens
+            if Config().parent_mode:
+                if self.node_type =='requirement' and self.parent is not None:
+                    tokens += self.parent.tokens
             for token in self.tokens:
                 try:
                     word_vector.append(model[token])

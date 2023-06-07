@@ -37,7 +37,8 @@ import pandas as pd
 from config import Config
 def recall_and_precision(graph):
     global ground_truth
-    fname = "./results/Recall_and_Precision" + Config().search_method
+    parent = 'req_tree' if Config().parent_mode else 'basic'
+    fname = "./results/Recall_and_Precision" + Config().search_method + "_" + parent
     if Config().search_method != "keyword":
         fname += "_" + str(Config().filter_threshold)
     data = []
