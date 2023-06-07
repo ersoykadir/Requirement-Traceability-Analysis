@@ -2,7 +2,7 @@
 # Requirement Traceability Tool
 
 This project creates a tool that identifies and visualizes the trace links for a software project given the requirements and software development repository.
-
+[A short video explanining the architecture and the tool.](https://www.youtube.com/watch?v=DhbpC6D7EeE)
 
 ## Used Technologies
 
