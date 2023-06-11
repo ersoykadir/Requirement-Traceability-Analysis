@@ -91,6 +91,20 @@ These studies have integrated relatively more modern technologies such as artifi
 \section{Method}
 \label{section:method}
 
+To employ the graph model for requirement traceability links, our tool acquire a Requirement Specification Document(RDS) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API and predefined schemas. This fetching operation yields a file containing information about Software Development Artifacts (SDA), and various properties associated with them, such as creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
+
+In the subsequent step, the file containing the information about SDAs and RDS are parsed to create graph nodes. At the completion of this operation, there are nodes representing each requirement and each SDA. The properties of the artifacts are stored as a property of the graph nodes. Later on, these nodes are saved into the graph database.
+
+Furthermore, we implement three optional methods to recover trace links. The first method involves a keyword extraction, where the significant keywords from requirement specification are extracted using a custom pipeline that implements NLP algorithms. These keywords serve as the basis for identifying trace links between SDAs and requirements. Keyword-matching is performed on the textual data of each SDA, to capture artifacts that include the keyword as a candidate trace. The second method utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, which creates a vector for each artifact, based on the importance of the terms in their textual data. By comparing the TF-IDF vectors, the potential trace links are identified. The third method employs word vectors for each artifact using a pre-trained model, and compare these vectors to identify traces, similar to the TF-IDF vector method. 
+
+After the identification of the trace links, the graph database is utilized to store the trace links, along with requirements and SDAs. The use of a graph database offers a scalable solution and facilitates easy retrieval of traceability data through queries. 
+
+Additionally, an interactive dashboard that visualizes the statistical information about the project and the requirements is developed. The dashboard includes various reports suitable for each kind of insight displayed, and facilitates a deeper understanding of the status and the complexity of the requirements, and provides information about the effort given to requirements during their lifetime.
+
+\textit{Control diagram will be inserted.}
+
+\textit{Identify trace link diagrams will be inserted.}
+
 %In this work, we aim to extract glossary information from models. To achieve this goal, we propose an NLP-powered system that analyzes multiple models for a collaborative project and extracts concepts from the natural language text in the models. We develop several heuristics to detect relationships between models by extracting similar terms for the same concepts. Fig. \ref{fig:pipeline} summarizes the inner workings of the glossary extraction system.
 
 %\begin{figure*}[htp]
