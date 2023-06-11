@@ -23,7 +23,7 @@
 
 \title{Title Comes Here }
 \author{
- \IEEEauthorblockN{Kadir Ersoy, Ecenur Sezer, Suzan Üsküdarlı, Fatma Başak Aydemir}
+ \IEEEauthorblockN{Kadir Ersoy, Ecenur Sezer, Suzan Üsküdarli, Fatma Başak Aydemir}
 \IEEEauthorblockA{
 Boğaziçi University\\
 Istanbul, Türkiye \\
@@ -34,33 +34,78 @@ Istanbul, Türkiye \\
 
 \maketitle
 \begin{abstract}
-
+    Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions, and to the ability to link requirements to other software artifacts through particular relationships. These traceability links enable stakeholders to monitor the development progress of requirements and assist system engineers in tracking the effort and workload associated with fulfilling those requirements. Traditional methods to recover traceability links necessitate significant human effort, making them unsuitable and inefficient, particularly as the project scale grows. In this work, we present a tool that establishes automated requirement traceability links between requirements written in natural language and software artifacts acquired from GitHub repositories. The tool implements three optional methods to trace the artifacts to the requirements, namely a keyword extraction pipeline, TF-IDF vector and word-vector. The captured traces are stored in a graph database and visualized. Additionally, an interactive dashboard featuring statistical data about the artifacts and their traces is implemented. By offering automated traceability and comprehensive visualization, this tool aims to enhance the management of requirements and to understand their quality in software development projects.
 \end{abstract}
 \begin{IEEEkeywords}
-
+Requirement traceability, NLP, Keyword extraction, Traceability graph
 \end{IEEEkeywords}
 
 \section{Introduction} \label{section:introduction}
 
 % Why glossaries are important
-%Glossaries are part of requirements documentation to ensure a common vocabulary and understanding of terms to facilitate collaboration and avoid ambiguity\cite{young2004requirements}. Ideally, a glossary is built as the requirements are documented; however, glossaries can be added to the project documentation after the other documents are completed due to the lack of time and resources~\cite{arora2016automated}.
+% Glossaries are part of requirements documentation to ensure a common vocabulary and understanding of terms to facilitate collaboration and avoid ambiguity\cite{young2004requirements}. Ideally, a glossary is built as the requirements are documented; however, glossaries can be added to the project documentation after the other documents are completed due to the lack of time and resources~\cite{arora2016automated}.
 
 % Models in RE
-%Models are also part of the software project documentation and various types of models are used to facilitate software engineering activities. For example, feature models present the hierarchy of the features of a software product~\cite{chen2005approach}. Goal models have been widely studied and extended in the literature to capture requirements as goals and the structural hierarchy among them~\cite{horkoff2019goal}. Alternatively, use case diagrams are used to capture actors and scenarios~\cite{some2006supporting}.
+
+% Models are also part of the software project documentation and various types of models are used to facilitate software engineering activities. For example, feature models present the hierarchy of the features of a software product~\cite{chen2005approach}. Goal models have been widely studied and extended in the literature to capture requirements as goals and the structural hierarchy among them~\cite{horkoff2019goal}. Alternatively, use case diagrams are used to capture actors and scenarios~\cite{some2006supporting}.
 
 % What do we propose
-%This paper proposes a technique that extracts glossary terms from a set of models and builds a glossary graph based on the relatedness of the terms by applying a natural language processing (NLP) pipeline. Similar to the approach of Aydemir and Dalpiaz~\cite{aydemir2020supporting}, our pipeline is independent of the modeling language structure. Thus, we provide a flexible architecture that does not require extensive changes when a new modeling language is added to the project. The pipeline matches the slightly different terms for the same concept by measuring the similarity of different noun phrases using sentence embeddings. We extract keywords using a deep language model and connect related terms to build a glossary graph.
+
+% This paper proposes a technique that extracts glossary terms from a set of models and builds a glossary graph based on the relatedness of the terms by applying a natural language processing (NLP) pipeline. Similar to the approach of Aydemir and Dalpiaz~\cite{aydemir2020supporting}, our pipeline is independent of the modeling language structure. Thus, we provide a flexible architecture that does not require extensive changes when a new modeling language is added to the project. The pipeline matches the slightly different terms for the same concept by measuring the similarity of different noun phrases using sentence embeddings. We extract keywords using a deep language model and connect related terms to build a glossary graph.
 
 % Large-scale software development processes consist of multiple aspects such as performance, security, and reliability. Multiple experts are required to generate a large-scale software system and satisfy the goals of different aspects. Hence, cooperation in such environments is crucial. Collaborative approaches are applied in every phase such as requirements modeling, implementation, and testing of a software development process due to the significant impact on the success of the software systems by providing a high-level overview of the system and substituting for detailed reports. Yet, cooperation is not adequate single-handed due to the need for abstraction during development. Models play an important role and are widely used in large-scale software development processes due to the high-level abstraction they provide. Therefore, collaborative modeling approaches become essential to form viable shared environments.
 
 % In a shared environment, modeling processes are complex due to the need for multiple models to represent different aspects of the project. Therefore, all of the stakeholders must have a common sense of understanding about the key concepts \cite{gemkow2018automatic}. This can be achieved via glossaries which provide domain-specific information about the terms in a single point of view. However, glossaries need to be continuously updated throughout the requirements elicitation process \cite{arora2016automated}. Due to the need for continuous effort, glossary creation is overlooked in most real-world projects. Although, glossaries are beneficial for stakeholders throughout the project timeline.
 
-%Our implementation includes a web-based collaborative modeling environment that supports BPMN\footnote{https://www.bpmn.org/} and iStar2.0~\cite{dalpiaz2016istar}. These two languages are selected based on the availability of open-source modeling editors. The modeling environment is connected to a web service that keeps track of the changes in the models and updates the glossary during the modeling process. Our source code is publicly available\footnote{https://github.com/goktugkose/Automated-Glossary-Extraction}.
+% Our implementation includes a web-based collaborative modeling environment that supports BPMN\footnote{https://www.bpmn.org/} and iStar2.0~\cite{dalpiaz2016istar}. These two languages are selected based on the availability of open-source modeling editors. The modeling environment is connected to a web service that keeps track of the changes in the models and updates the glossary during the modeling process. Our source code is publicly available\footnote{https://github.com/goktugkose/Automated-Glossary-Extraction}.
 
-%The remainder of the paper is structured as follows. Sec. \ref{section:problem} defines the problem. Sec. \ref{section:related_work} reviews the related work. Sec. \ref{section:method} focuses on the study design including modeling environment design, heuristics, NLP pipeline and method. Sec. \ref{section:evaluation} reports on the evaluation plan. Finally, Sec. \ref{section:conclusion} concludes the paper.
+% The remainder of the paper is structured as follows. Sec. \ref{section:problem} defines the problem. Sec. \ref{section:related_work} reviews the related work. Sec. \ref{section:method} focuses on the study design including modeling environment design, heuristics, NLP pipeline and method. Sec. \ref{section:evaluation} reports on the evaluation plan. Finally, Sec. \ref{section:conclusion} concludes the paper.
 
 \section{Problem and Motivation}
 \label{section:problem}
+
+
+\begin{itemize}
+    \item Requirements traceability definition
+    \item Why do we do it, examples
+    \begin{itemize}
+        \item It is too hard to do it manually
+        \begin{itemize}
+            \item Cost of integration: Need trace link recovery, 
+            \item Human effort: Do not force extra measures for traceability
+        \end{itemize}
+        \item Its role in project management
+        \begin{itemize}
+            \item Monitoring the progress: Status of the project
+            \item Effort assessment: How much effort went to which features
+            \item Detecting problems for specific features
+        \end{itemize}
+    \end{itemize}
+    \item showcasing trace data and other stats to user in a self-evident manner
+\end{itemize}
+% Requirements traceability, 
+%     - definition, 
+% Why do we do it, examples
+%     - It is too hard to do it manually
+%     - Its role in project management,
+%         - Monitoring the progress
+%             - Status of the project
+%             - What has been done 
+%         - Effort assessment
+%             - How much effort went to which features
+%         - Detecting problems for specific features
+%             - In the case of a problem, look for it in a localized manner 
+%             - can be done since we know what has done for which context
+%     - The use of requirements and req traceability is not common
+%         - Cost of integration
+%             - Need trace link recovery, 
+%         - Human effort
+%             - Do not force extra measures for traceability
+%     - To achieve wide-use of traceability
+%         - user friendly, 
+%             - showcasing trace data and other stats to user in a self-evident manner
+%         - minimal human effort, 
+
 
 %A glossary lists the terms for a given project. Building a glossary during the documentation of the main artifacts such as the requirements document requires additional time and effort. Glossaries may also be built after finalizing the documents, in that case, the project suffers from the lack of a common vocabulary during the documentation.
 
@@ -100,6 +145,23 @@ Istanbul, Türkiye \\
 \section{Method}
 \label{section:method}
 
+\begin{itemize}
+    \item Inputs-outputs
+    \item Workflow + diagrams
+    \item Heuristics:
+    \begin{itemize}
+        \item Keyword extraction, more detailed than poster
+        \item Vector-based methods, more detailed than poster
+    \end{itemize}
+    \item Implementation:
+    \item \begin{itemize}
+        \item Trace graph + visuals
+        \item Dashboard
+        \item (Using same example for trace finding and trace graph)
+    \end{itemize}
+\end{itemize}
+
+
 %In this work, we aim to extract glossary information from models. To achieve this goal, we propose an NLP-powered system that analyzes multiple models for a collaborative project and extracts concepts from the natural language text in the models. We develop several heuristics to detect relationships between models by extracting similar terms for the same concepts. Fig. \ref{fig:pipeline} summarizes the inner workings of the glossary extraction system.
 
 %\begin{figure*}[htp]
@@ -118,8 +180,8 @@ Istanbul, Türkiye \\
 
 %After generating the preprocessed model labels, our initial approach for capturing the information in the model labels is to extract nouns from the model labels. However, working only with nouns does not yield satisfactory results. Therefore, we decide to extract noun phrases from model labels using spaCy\footnote{https://spacy.io}. Even after extracting noun phrases from model labels, it is evident that preprocessed model labels are not representative enough and require more effort. To this end, we develop heuristics to perform better glossary extraction.
 
-\subsection{Heuristics}
-\label{sec:heuristics}
+% \subsection{Heuristics}
+% \label{sec:heuristics}
 
 %\textit{Heuristic 1 - Substring Match}. Our first heuristic depends on the substring matches that can be observed among noun phrases. This process can be briefly explained as clustering noun phrases with the subset of noun phrases that contain a particular noun phrase as a substring. For example, "item label" and "item label size" noun phrases will be clustered under the "item label" key because "item label size" denotes a property of "item label". By applying this heuristic, all of these noun phrases are clustered into a set and the shortest noun phrase will represent these noun phrases. This heuristic reduces the size of the initial set of noun phrases. The reduction in the size of the initial set of noun phrases also decreases the time and space complexity of further steps of processing.
 
@@ -157,8 +219,9 @@ Istanbul, Türkiye \\
 %    \label{fig:graph}
 %\end{figure}
 
-\subsection{Implementation}
-\label{sec:impl}
+% \subsection{Implementation}
+% \label{sec:impl}
+
 
 %We build a collaborative modeling environment by integrating two existing tools: \emph{i.} piStar \cite{pimentel2018pistar} for goal modeling and \emph{ii.} bpmn.io\footnote{https://bpmn.io} for business process modeling. We choose these two modeling environments because they are both open-source projects and the modeling languages they support are widely used for requirements engineering.
 
@@ -175,13 +238,28 @@ Istanbul, Türkiye \\
 \section{Evaluation Plan}
 \label{section:evaluation}
 
+\begin{itemize}
+    \item Ground truth 
+    \item Experiment setup
+    \item Results
+    \item Evaluation of results
+\end{itemize}
+
 %In this section, we share our planned experimental setup for evaluation. We hypothesize that (\textbf{H0}) our tool increases the efficiency of the requirements analyst for building a glossary of terms in terms of time. Therefore, we plan to evaluate our system with human experts. The experimental setup consists of two different scenarios to mitigate the effect of the learning curve. For the first run, participants will be asked to extract glossaries manually from a set of previously created models. Therefore, a gold standard set will be available for further investigation. For the second run, the participants will be asked to evaluate the automatically extracted glossaries in terms of completeness since glossaries will be automatically extracted with our method. After the second run, we will be able to gather qualitative feedback from the participants. To gather quantitative results, we will compare the automatically extracted glossaries with the gold standard set which was constructed by experts, to measure the performance of our system.
 
 \section{Conclusions}\label{section:conclusion}
 
+\begin{itemize}
+    \item Observations
+    \item Threads to validity
+    \item Future Work
+\end{itemize}
+
+
+
 %We present a shared collaborative modeling environment instrumented with an automated glossary extraction pipeline from model labels using state-of-the-art NLP techniques without any supervision. Our approach prevents stakeholders from spending effort on a challenging and time-consuming task of manual glossary extraction. We develop two heuristics that use pre-trained BERT models and one simple heuristic that depends on substring matching.
 
-\textit{Future Work}. %In this section, we share our plans for glossary extraction. First, we plan to conduct an experimental evaluation with human experts as we stated in Sect. \ref{section:evaluation}. Second, we plan to improve our glossary extraction heuristics' performance using human experts' feedbacks. Finally, we aim to extend our method for automated domain model extraction from model labels and employing our method as a complementary for existing systems to form a hybrid system.
+% \textit{Future Work}. %In this section, we share our plans for glossary extraction. First, we plan to conduct an experimental evaluation with human experts as we stated in Sect. \ref{section:evaluation}. Second, we plan to improve our glossary extraction heuristics' performance using human experts' feedbacks. Finally, we aim to extend our method for automated domain model extraction from model labels and employing our method as a complementary for existing systems to form a hybrid system.
 
 \bibliographystyle{IEEEtran}
 \bibliography{paper}
