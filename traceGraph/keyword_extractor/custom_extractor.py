@@ -132,4 +132,4 @@ def extract_keywords(file_name, stopwords_path, repo_stopwords_path):
         out.write("{}\n".format(keywords))
     file.close()
 
-extract_keywords("Requirements_group3.txt", "SmartStopword.txt", 'repo_stopwords.txt')
+# extract_keywords("Requirements_group2.txt", "SmartStopword.txt", 'repo_stopwords.txt')

@@ -15,3 +15,6 @@ __pycache__
 *data.json
 *.txt
 *.pkl
+*.csv
+*.gz
+*.bin
