@@ -34,10 +34,10 @@ Istanbul, Türkiye \\
 
 \maketitle
 \begin{abstract}
-
+    Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions, and to the ability to link requirements to other software artifacts through particular relationships. These traceability links enable stakeholders to monitor the development progress of requirements and assist system engineers in tracking the effort and workload associated with fulfilling those requirements. Traditional methods to recover traceability links necessitate significant human effort, making them unsuitable and inefficient, particularly as the project scale grows. In this work, we present a tool that establishes automated requirement traceability links between requirements written in natural language and software artifacts acquired from GitHub repositories. The tool implements three optional methods to trace the artifacts to the requirements, namely a keyword extraction pipeline, TF-IDF vector and word-vector. The captured traces are stored in a graph database and visualized. Additionally, an interactive dashboard featuring statistical data about the artifacts and their traces is implemented. By offering automated traceability and comprehensive visualization, this tool aims to enhance the management of requirements and to understand their quality in software development projects.
 \end{abstract}
 \begin{IEEEkeywords}
-
+Requirement traceability, NLP, Keyword extraction, Traceability graph
 \end{IEEEkeywords}
 
 \section{Introduction} \label{section:introduction}
@@ -49,6 +49,49 @@ The software artifacts and the identified trace links are stored in a graph data
 
 \section{Problem and Motivation}
 \label{section:problem}
+
+
+\begin{itemize}
+    \item Requirements traceability definition
+    \item Why do we do it, examples
+    \begin{itemize}
+        \item It is too hard to do it manually
+        \begin{itemize}
+            \item Cost of integration: Need trace link recovery, 
+            \item Human effort: Do not force extra measures for traceability
+        \end{itemize}
+        \item Its role in project management
+        \begin{itemize}
+            \item Monitoring the progress: Status of the project
+            \item Effort assessment: How much effort went to which features
+            \item Detecting problems for specific features
+        \end{itemize}
+    \end{itemize}
+    \item showcasing trace data and other stats to user in a self-evident manner
+\end{itemize}
+% Requirements traceability, 
+%     - definition, 
+% Why do we do it, examples
+%     - It is too hard to do it manually
+%     - Its role in project management,
+%         - Monitoring the progress
+%             - Status of the project
+%             - What has been done 
+%         - Effort assessment
+%             - How much effort went to which features
+%         - Detecting problems for specific features
+%             - In the case of a problem, look for it in a localized manner 
+%             - can be done since we know what has done for which context
+%     - The use of requirements and req traceability is not common
+%         - Cost of integration
+%             - Need trace link recovery, 
+%         - Human effort
+%             - Do not force extra measures for traceability
+%     - To achieve wide-use of traceability
+%         - user friendly, 
+%             - showcasing trace data and other stats to user in a self-evident manner
+%         - minimal human effort, 
+
 
 %A glossary lists the terms for a given project. Building a glossary during the documentation of the main artifacts such as the requirements document requires additional time and effort. Glossaries may also be built after finalizing the documents, in that case, the project suffers from the lack of a common vocabulary during the documentation.
 
@@ -90,6 +133,21 @@ These studies have integrated relatively more modern technologies such as artifi
 
 \section{Method}
 \label{section:method}
+\begin{itemize}
+    \item Inputs-outputs
+    \item Workflow + diagrams
+    \item Heuristics:
+    \begin{itemize}
+        \item Keyword extraction, more detailed than poster
+        \item Vector-based methods, more detailed than poster
+    \end{itemize}
+    \item Implementation:
+    \item \begin{itemize}
+        \item Trace graph + visuals
+        \item Dashboard
+        \item (Using same example for trace finding and trace graph)
+    \end{itemize}
+\end{itemize}
 
 To employ the graph model for requirement traceability links, our tool acquire a Requirement Specification Document(RDS) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API and predefined schemas. This fetching operation yields a file containing information about Software Development Artifacts (SDA), and various properties associated with them, such as creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
 
@@ -180,13 +238,26 @@ Additionally, an interactive dashboard that visualizes the statistical informati
 \section{Evaluation Plan}
 \label{section:evaluation}
 
+\begin{itemize}
+    \item Ground truth 
+    \item Experiment setup
+    \item Results
+    \item Evaluation of results
+\end{itemize}
 %In this section, we share our planned experimental setup for evaluation. We hypothesize that (\textbf{H0}) our tool increases the efficiency of the requirements analyst for building a glossary of terms in terms of time. Therefore, we plan to evaluate our system with human experts. The experimental setup consists of two different scenarios to mitigate the effect of the learning curve. For the first run, participants will be asked to extract glossaries manually from a set of previously created models. Therefore, a gold standard set will be available for further investigation. For the second run, the participants will be asked to evaluate the automatically extracted glossaries in terms of completeness since glossaries will be automatically extracted with our method. After the second run, we will be able to gather qualitative feedback from the participants. To gather quantitative results, we will compare the automatically extracted glossaries with the gold standard set which was constructed by experts, to measure the performance of our system.
-
 \section{Conclusions}\label{section:conclusion}
+
+\begin{itemize}
+    \item Observations
+    \item Threads to validity
+    \item Future Work
+\end{itemize}
+
+In this paper, we presented a tool that automates the traceability link recovery by identifying trace links between requirements written in natural language and software development artifacts(Issues, PRs, Commits) obtained from GitHub repositories. Our tool implements three optional methods to trace the artifacts from the requirements. These methods are namely keyword extraction, TF-IDF vector and word-vector. The software artifacts and the captured trace links are stored in a graph database and visualized. The traceability information is supported with an interactive dashboard, providing users with comprehensive statistical insights into the requirements during their lifetime.
 
 %We present a shared collaborative modeling environment instrumented with an automated glossary extraction pipeline from model labels using state-of-the-art NLP techniques without any supervision. Our approach prevents stakeholders from spending effort on a challenging and time-consuming task of manual glossary extraction. We develop two heuristics that use pre-trained BERT models and one simple heuristic that depends on substring matching.
 
-\textit{Future Work}. %In this section, we share our plans for glossary extraction. First, we plan to conduct an experimental evaluation with human experts as we stated in Sect. \ref{section:evaluation}. Second, we plan to improve our glossary extraction heuristics' performance using human experts' feedbacks. Finally, we aim to extend our method for automated domain model extraction from model labels and employing our method as a complementary for existing systems to form a hybrid system.
+ %In this section, we share our plans for glossary extraction. First, we plan to conduct an experimental evaluation with human experts as we stated in Sect. \ref{section:evaluation}. Second, we plan to improve our glossary extraction heuristics' performance using human experts' feedbacks. Finally, we aim to extend our method for automated domain model extraction from model labels and employing our method as a complementary for existing systems to form a hybrid system.
 
 \bibliographystyle{IEEEtran}
 \bibliography{paper}
