@@ -41,34 +41,35 @@ Requirement traceability, NLP, Keyword extraction, Traceability graph
 \end{IEEEkeywords}
 
 \section{Introduction} \label{section:introduction}
+
+% \begin{itemize}
+%     \item Requirements traceability definition
+%     \item Why do we do it, examples
+%     \begin{itemize}
+%         \item It is too hard to do it manually
+%         \begin{itemize}
+%             \item Cost of integration: Need trace link recovery, 
+%             \item Human effort: Do not force extra measures for traceability
+%         \end{itemize}
+%         \item Its role in project management
+%         \begin{itemize}
+%             \item Monitoring the progress: Status of the project
+%             \item Effort assessment: How much effort went to which features
+%             \item Detecting problems for specific features
+%         \end{itemize}
+%     \end{itemize}
+%     \item showcasing trace data and other stats to user in a self-evident manner
+% \end{itemize}
+
 Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions\cite{gotel-1994}, and to the ability to link requirements to other software artifacts through particular relationships. Requirement traceability is crucial in software development projects since it shows the progress done in implementing the requirements and assists engineers in observing the effort and workload associated with them. All these aspects of requirement traceability help teams to ensure the fulfillment of specified requirements, by linking them to other software artifacts. Given that, it is a critical obstacle that traditional methods of recovering traceability links require significant time and human effort, making them unsuitable for the task as the project scale grows. Moreover, the quality of these methods is not consistent, since it highly depends on the understanding of the requirement traceability of the human analysts' performing them. 
-In this paper, we present a tool implemented to automate the process of identifying trace links. Our tool establishes links from requirements that are written in natural language to the software development artifacts, mainly Issues, PRs, and Commits, that are fetched from GitHub repositories. By automatizing this process, our tool zeroes the reliance on human effort and provides efficient requirement traceability management.
+In this paper, we present a tool implemented to automate the process of identifying trace links. Our tool establishes links from requirements that are written in natural language to the software development artifacts, mainly Issues, PRs, and Commits, that are fetched from GitHub repositories. By automatizing this process, our tool aims to decrease the reliance on human effort and provides efficient requirement traceability management.
 
 For identifying the trace links, three optional methods are implemented in our tool. These methods are keyword extraction, which performs keyword matching to software development artifacts, and TF-IDF Vector - Word Vector methods, which basically perform vector-based similarity. Each of these methods offers distinct advantages that are highly dependent on the context of the projects.
 The software artifacts and the identified trace links are stored in a graph database and visualized in a graphical structure to enable efficient retrieval of traceability information. To improve the comprehension of the collected traceability data, our tool also features an interactive dashboard. This dashboard is equipped with valuable statistical insights about the lifetime of the project and the requirements. Along with the visualization of the traceability links and the offering of statistical data, we aim to improve the management of the requirements, ultimately leading to better-planned and programmed software projects.
 
-\section{Problem and Motivation}
-\label{section:problem}
+%\section{Problem and Motivation}
+%\label{section:problem}
 
-
-\begin{itemize}
-    \item Requirements traceability definition
-    \item Why do we do it, examples
-    \begin{itemize}
-        \item It is too hard to do it manually
-        \begin{itemize}
-            \item Cost of integration: Need trace link recovery, 
-            \item Human effort: Do not force extra measures for traceability
-        \end{itemize}
-        \item Its role in project management
-        \begin{itemize}
-            \item Monitoring the progress: Status of the project
-            \item Effort assessment: How much effort went to which features
-            \item Detecting problems for specific features
-        \end{itemize}
-    \end{itemize}
-    \item showcasing trace data and other stats to user in a self-evident manner
-\end{itemize}
 % Requirements traceability, 
 %     - definition, 
 % Why do we do it, examples
@@ -93,22 +94,6 @@ The software artifacts and the identified trace links are stored in a graph data
 %         - minimal human effort, 
 
 
-%A glossary lists the terms for a given project. Building a glossary during the documentation of the main artifacts such as the requirements document requires additional time and effort. Glossaries may also be built after finalizing the documents, in that case, the project suffers from the lack of a common vocabulary during the documentation.
-
-%Models are also used for the entire or partial documentation. For large-scale projects, multiple modelers with different expertise may work from different locations and time zones, therefore it is difficult to have synchronous communication among the modelers. Modelers from different backgrounds may use different terms for the same concepts and asynchronous communication makes it difficult to catch and fix this problem. Fig.~\ref{fig:twomodels} demonstrates the scenario of missing concepts among two models for a software system. The concepts \emph{item} and \emph{credit card} from the BPMN model, and concept \emph{item} from the iStar model can be extracted. Thus, the absence of the concept \emph{credit card} in the iStar model prevents the models from full coverage of the requirements of the system.
-
-%A glossary automatically updated during the modeling process can support the remote collaboration of the modelers. By consulting the glossary, the modelers can identify the terms used in the project and analyze the coverage of their models. Even in the non-collaborative scenario, automatically generating the glossary saves time and effort. With this motivation at hand, we propose a pipeline to extract the terms for a project from a set of models and link the related terms.
-
-
-
-% The increase in the percentage of software professionals working remotely due to the pandemic results in the need for support tools for remote collaboration.
-
-
-
-%Collaborative tasks support modelers to use their time and budget effectively \cite{stallinger2001system}. However, in such environments with remote work opportunities or involving modelers that participate from different locations even from different time zones to reduce the cost of the project, separate works of these different modelers may not represent all of the requirements of the system. To overcome this problem, physically gathering modelers that are working apart from each other can be an option, but it is a time-consuming and expensive effort that can lead to problems in software projects with strict deadlines and limited budgets. These distributed environments might be suffering from a lack of communication since modelers work apart from each other in different locations. Therefore, different models for different parts of the project might not cover all of the requirements of the system. Several problems such as difficulties during implementation, delay in the project timeline, or failure of the project might be faced due to a lack of missing concepts in models. Hence, models should provide full coverage of the requirements of the system. Fig. \ref{fig:twomodels} demonstrates the scenario of missing concepts among two models for a software system. The concepts \emph{item and credit card} from the BPMN model, and concept \emph{item} from the iStar model can be extracted. Thus, the absence of the concept \emph{credit card} in the iStar model prevents the models from full coverage of the requirements of the system.
-
-
-%To the best of our knowledge, there is no well-defined platform that extracts glossaries from various models. Our method does not require aligning the meta-models of the modeling languages so it enables easily adding different modeling languages to the project. To this end, our approach focuses on improving the effectiveness of collaborative modeling approaches in requirements engineering (RE) by designing an automated glossary extraction pipeline that uses natural language processing techniques to prevent stakeholders from spending recurring effort on constructing glossaries with requirements models. In this paper, we present (i) a Web-based modeling environment for both goal and business process models, (ii) an NLP pipeline for automatically extracting glossaries from the models that are constructed with NL using several heuristics, (iii) a graph representation of glossaries.
 \section{Related Work}
 \label{section:related_work}
 
@@ -116,74 +101,54 @@ There are several studies that focus on automatizing requirements traceability b
 
 These studies have integrated relatively more modern technologies such as artificial intelligence, machine learning, and information retrieval algorithms to automated trace links recovery and encouraged the researches to implement various approaches to minimize the effort and maximize the quality of requirement traceability.
 
-%This work is interrelated to several topics in software engineering. In this section, we discuss glossaries along with model-driven software development and requirements engineering practices as our potential application areas. Literature states that collaboration is a key concept for both requirements engineering and software engineering disciplines.
 
-%\emph{Glossary Extraction}. Arora et al. \cite{arora2016automated} state that glossaries increase the communication between stakeholders via providing accurate and understandable definitions about requirements. Even though a glossary is useful to avoid misinterpretations among stakeholders, it is rarely used for software requirements due to the effort needed for the creation \cite{berry2000contract}. To prevent stakeholders from spending superfluous effort on glossary extraction, several methods were proposed. Arora et al. \cite{arora2016automated} propose a method for automated extraction and clustering of glossary terms from requirements definitions. Dwarakanath et al. \cite{dwarakanath2013automatic} propose a method for glossary extraction that relies on the linguistic properties of requirements definitions. Gemkow et al. \cite{gemkow2018automatic} propose a method for glossary extraction from large-scale requirements by combining linguistic and statistical approaches.
-
-%\emph{Model-driven Development}. Various software engineering methodologies that involve model usage have been proposed and model-driven development is one of the approaches. The emergence of model-driven development (MDD) methods provides an opportunity to take advantage of models. Selic \cite{selic2003pragmatics} points out that model usage in software engineering is less frequent compared to other engineering disciplines and models are not used primarily even though software engineering has great potential to benefit from the models. Steffen et al. \cite{steffen2006model} propose the jABC framework that supports model-driven development processes by composing reusable building blocks into hierarchical graph structures. Cetinkaya et al. \cite{cetinkaya2011mdd4ms} propose the MDD4MS framework that applies model-driven simulation so that provides a model development life-cycle by automatically transforming the source models into destination models to generate final source code. Buchmann \cite{buchmann2012valkyrie} proposes the Valkyrie environment that supports code generation by refining UML diagrams into class diagrams to provide fully executable code. Besides the high-level abstraction that was provided by models, they also support process automation and automated code and test generation from models to increase productivity in development processes. Our work can be complementary to the existing MDD frameworks.
-
-% \emph{Collaboration in Software Engineering}. Collaboration is a key concept to encourage the stakeholders to opt for model-based approaches. Teruel et al. \cite{teruel2011csrml} define collaborative systems as systems that allow users to work cooperatively while performing tasks. Whitehead \cite{whitehead2007collaboration} states that coordinating many stakeholders' efforts is a prerequisite of the development of a large-scale software system. Collaboration in large-scale software development environments is provided by various tools to automate and facilitate the entire development process. Herbsleb \cite{herbsleb2007global} states that globally distributed development environments are negatively affected in terms of coordination and discusses the activities designed to provide coordination along with stakeholders. Lanubile et al. \cite{lanubile2010collaboration} state that collaboration tools let stakeholders work together even when stakeholders work apart from each other and provided a list of collaborative development tool categories as (i) version-control systems, (ii) trackers, (iii) build tools, (iv) modelers, (v) knowledge centers, (vi) communication tools and (vii) Web 2.0 applications. In our research, our main goal is to support collaboration in large-scale software development environments.
-
-% \emph{Collaborative Modeling}. In the requirements engineering domain, collaboration among users might become a challenging task since there are various modeling languages to be synchronized. Nicolaescu et al. \cite{nicolaescu2018near} propose an approach called SyncMeta which consists of a meta-model and provides a near-real-time shared collaborative modeling environment to support view-based modeling. Aydemir and Dalpiaz \cite{aydemir2020supporting} point out that models in collaborative environments may be inconsistent due to the usage of various independent models. They have proposed a technique that provides a suggestion service with several heuristics and an NLP pipeline to help the modelers while aligning different models and minimize the difficulties that modelers may encounter in such collaborative environments.
-
-% \emph{Requirements Engineering}.Nuseibeh and Easterbrook \cite{nuseibeh2000requirements} define requirements engineering (RE) as "a process that determines the stakeholders and their needs to measure the success of the system". Applying requirements engineering techniques in a software project is crucial since a great portion of the projects throughout history either have failed or exceeded the budget due to the lack of proper requirements definitions \cite{stallinger2001system}. Lindland et al. \cite{lindland1994understanding} state that a great portion of developers agreed that the quality of a product strongly depends on requirements specification accuracy as well as advanced early-stage development. Davis et al. \cite{davis2006effectiveness} prove that software requirements definitions affect the quality of the product significantly. Lamsweerde \cite{van2000requirements} points out the increasing importance of requirements engineering in software engineering since defining requirement properly is a challenging task. Dalpiaz et al. \cite{dalpiaz2018natural} state that natural language (NL) is widely used in RE due to the ease of understanding even by inexperienced stakeholders besides the ambiguity of NL. Ferrari and Esuli \cite{ferrari2019nlp} propose a method for detecting cross-domain ambiguities in RE by building domain-specific language models to approximate the potential ambiguities. Even though the model-based approaches are widely used in the development phases of projects, these approaches are not commonly and effectively used in the field of RE compared to the software engineering domain in general \cite{loniewski2010systematic}. Horkoff et al. \cite{horkoff2019goal} point out the recent interest in goal-oriented requirements engineering that provides a feasible approach to modeling and eliciting requirements. Moreira et al. \cite{araujo2002aspect} also propose a requirements-level solution for aspect-oriented models that increases the reusability and maintainability of models.
-
-%\emph{Model-driven requirements engineering.}
-%Models are widely used in RE to represent requirements since natural language (NL) is widely used in RE due to the ease of understanding \cite{dalpiaz2018natural, nuseibeh2000requirements}. Assar \cite{assar2014model} states that models are used to facilitate requirements for better information extraction from requirements. Horkoff et al. \cite{horkoff2019goal} surveys widely studied goal-oriented requirements engineering (GORE) for various RE tasks. Use cases are also used in early requirements engineering phases \cite{some2006supporting,lubke2008visualizing}.  Lübke and Schneider \cite{lubke2008visualizing} automatically generates BPMN models from use cases. Requirements models are the primary intended sources for our work.
 
 \section{Method}
 \label{section:method}
-\begin{itemize}
-    \item Inputs-outputs
-    \item Workflow + diagrams
-    \item Heuristics:
-    \begin{itemize}
-        \item Keyword extraction, more detailed than poster
-        \item Vector-based methods, more detailed than poster
-    \end{itemize}
-    \item Implementation:
-    \item \begin{itemize}
-        \item Trace graph + visuals
-        \item Dashboard
-        \item (Using same example for trace finding and trace graph)
-    \end{itemize}
-\end{itemize}
+% \begin{itemize}
+%     \item Inputs-outputs
+%     \item Workflow + diagrams
+%     \item Heuristics:
+%     \begin{itemize}
+%         \item Keyword extraction, more detailed than poster
+%         \item Vector-based methods, more detailed than poster
+%     \end{itemize}
+%     \item Implementation:
+%     \item \begin{itemize}
+%         \item Trace graph + visuals
+%         \item Dashboard
+%         \item (Using same example for trace finding and trace graph)
+%     \end{itemize}
+% \end{itemize}
 
-To employ the graph model for requirement traceability links, our tool acquire a Requirement Specification Document(RDS) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API and predefined schemas. This fetching operation yields a file containing information about Software Development Artifacts (SDA), and various properties associated with them, such as creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
+The tool expects a Requirement Specification Document(RSD) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API
+and the requirement statements are parsed from the given RSD. This operation yields files containing information about Software Development Artifacts (SDA) and requirements, with their associated properties, such as title, description, creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
 
 In the subsequent step, the file containing the information about SDAs and RDS are parsed to create graph nodes. At the completion of this operation, there are nodes representing each requirement and each SDA. The properties of the artifacts are stored as a property of the graph nodes. Later on, these nodes are saved into the graph database.
 
-Furthermore, we implement three optional methods to recover trace links. The first method involves a keyword extraction, where the significant keywords from requirement specification are extracted using a custom pipeline that implements NLP algorithms. These keywords serve as the basis for identifying trace links between SDAs and requirements. Keyword-matching is performed on the textual data of each SDA, to capture artifacts that include the keyword as a candidate trace. The second method utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, which creates a vector for each artifact, based on the importance of the terms in their textual data. By comparing the TF-IDF vectors, the potential trace links are identified. The third method employs word vectors for each artifact using a pre-trained model, and compare these vectors to identify traces, similar to the TF-IDF vector method. 
+Furthermore, the trace links for each requirement statement are identified. The tool has three different methods implemented for trace link recovery. The first method involves a keyword extraction, where the significant keywords from requirement specification are extracted using a custom pipeline that utilizes \textit{dependency parsing}. These keywords serve as the basis for identifying trace links between SDAs and requirements. Keyword-matching is performed on the textual data of each SDA, to capture artifacts that include the keyword as a candidate trace. The second method utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, which creates a vector for each artifact, based on the importance of the terms in their textual data. By comparing the TF-IDF vectors, the potential trace links are identified. The third method acquires word embeddings for each artifact text using a pre-trained model, creating a document vector by averaging the word embeddings, and compares these vectors to identify traces, similar to the TF-IDF vector method. 
 
 After the identification of the trace links, the graph database is utilized to store the trace links, along with requirements and SDAs. The use of a graph database offers a scalable solution and facilitates easy retrieval of traceability data through queries. 
 
 Additionally, an interactive dashboard that visualizes the statistical information about the project and the requirements is developed. The dashboard includes various reports suitable for each kind of insight displayed, and facilitates a deeper understanding of the status and the complexity of the requirements, and provides information about the effort given to requirements during their lifetime.
 
-\textit{Control diagram will be inserted.}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.45\linewidth]{figs/toolflow.png}
+    \caption{Control flow of the system.}
+    \label{fig:enter-label}
+\end{figure}
 
-\textit{Identify trace link diagrams will be inserted.}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figs/tracemethods.png}
+    \caption{Control flow of the trace methods.}
+    \label{fig:enter-label}
+\end{figure}
 
-%In this work, we aim to extract glossary information from models. To achieve this goal, we propose an NLP-powered system that analyzes multiple models for a collaborative project and extracts concepts from the natural language text in the models. We develop several heuristics to detect relationships between models by extracting similar terms for the same concepts. Fig. \ref{fig:pipeline} summarizes the inner workings of the glossary extraction system.
-
-%\begin{figure*}[htp]
-%\centering
-%\begin{minipage}[b]{\textwidth}
-%\begin{subfigure}[b]{\linewidth}
-%  \centering
-%  \includegraphics[width=0.8\linewidth]{figs/architecture.png}
-%\end{subfigure}
-%\end{minipage}
-%  \caption{Pipeline of inner workings of the system}
-%  \label{fig:pipeline}
-%\end{figure*}
-
-%First, the NLP pipeline parses the natural language text in the models which was extracted from the model files via a web service, and stores them in the database. Since modelers generate requirements models mainly with NL, the NLP pipeline takes the model labels as input and extracts the main concepts of the model labels as output. Model labels consist of unconstrained natural language text. Therefore, applying pre-processing steps supports better glossary extraction from model labels. NLP pipeline covers several preprocessing steps as (i) case-folding to normalize the model labels (ii) punctuation and stop words removal to discard unnecessary information and (iii) lemmatization to reduce inflectional forms of words (we chose lemmatization instead of stemming due to its dependence on vocabulary as well as morphological features of words.) by using Python native libraries along with NLTK\footnote{https://www.nltk.org} to reveal the concepts that have been modeled to construct a glossary extraction system.
-
-%After generating the preprocessed model labels, our initial approach for capturing the information in the model labels is to extract nouns from the model labels. However, working only with nouns does not yield satisfactory results. Therefore, we decide to extract noun phrases from model labels using spaCy\footnote{https://spacy.io}. Even after extracting noun phrases from model labels, it is evident that preprocessed model labels are not representative enough and require more effort. To this end, we develop heuristics to perform better glossary extraction.
 
 \subsection{Heuristics}
-\label{sec:heuristics}
-
+\label{sec:heuristics} 
 %\textit{Heuristic 1 - Substring Match}. Our first heuristic depends on the substring matches that can be observed among noun phrases. This process can be briefly explained as clustering noun phrases with the subset of noun phrases that contain a particular noun phrase as a substring. For example, "item label" and "item label size" noun phrases will be clustered under the "item label" key because "item label size" denotes a property of "item label". By applying this heuristic, all of these noun phrases are clustered into a set and the shortest noun phrase will represent these noun phrases. This heuristic reduces the size of the initial set of noun phrases. The reduction in the size of the initial set of noun phrases also decreases the time and space complexity of further steps of processing.
 
 %After applying the first heuristic, we manage to cluster some of the model labels. However, there are still independent model labels. Even though the models are generated by modeling experts, modelers with different backgrounds may use different words for the same concept. For example, "shipment options" and "shipping offers" will be matched as similar noun phrases because of the high level of relatedness between the two of the noun phrases. To increase coverage of the NLP pipeline, we benefit from BERT \cite{devlin2018bert} which is a state-of-the-art deep language model. Thus, glossary extraction from models is provided by measuring the similarity of different noun phrases to each other and detecting different noun phrases that refer to a similar meaning via pre-trained sentence embeddings.
@@ -223,6 +188,51 @@ Additionally, an interactive dashboard that visualizes the statistical informati
 \subsection{Implementation}
 \label{sec:impl}
 
+
+\emph{Dashboard}
+\\
+
+In order to reinforce the visualization of traceability data, our research includes the development of an interactive dashboard, which offers various reports that display statistical insights. Each of these reports was carefully selected to effectively visualize the corresponding data, hence they have user-friendly designs for enhanced comprehension. Moreover, many of these reports are interactive and they allow users to trace the specific requirements, thereby enabling a more customized exploration of the traceability information.
+The dashboard was implemented using Neodash technology, to provide full integrity with the traceability graph that is stored in the Neo4j database.
+
+Fig. 3 represents a screenshot taken from the dashboard. The first report featured in the screenshot is a stacked bar chart showing the number of created Issues(in green) and PRs(in brown) for the BUcademy application. It could be observed that the highest number of created artifacts were in week 3 and week 7. The next report is another stacked bar chart that represents the number of artifacts opened and closed per week. Both of these charts are providing information about the status of development in the project lifetime and they help to identify periods of high or low development intensity and let users observe the assessment of the overall project dynamics.
+The dashboard also provides static data regarding the number of open/closed issues, the number of open/merged PRs, and the average number of trace links per requirement. These statistics serve as a snapshot of the current state of the project.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/dashboard-barcharts.png}
+    \caption{Bar charts and static data on dashboard.}
+    \label{fig:dashboard}
+\end{figure}
+
+Fig. 4 continues with the line chart that illustrates the number of trace links for each requirement. By comparing the number of traces for each requirement, the report demonstrates the outliners, that could have relatively less or more traces. This comparison allows the users to observe the effort associated with each requirement since it displays the number of software development artifacts traced to them.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/linechart.png}
+    \caption{Line chart on dashboard.}
+    \label{fig:enter-label}
+\end{figure}
+
+Fig. 5 includes an example of the Sankey chart present in the dashboard that showcases the commonly traced artifacts between the chosen requirements while highlighting the strength of the trace links using the weight property. Thicker links represent a stronger relation from the requirement to the traced artifact. Thus, the chart represents the complementarity of the selected requirements.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/sankey.jpg}
+    \caption{Sankey chart on dashboard.}
+    \label{fig:enter-label}
+\end{figure}
+
+As displayed in Fig. 6, in addition to the generalized insights about the project status, various reports are implemented offering similar data for a specific requirement selected by the users. These include bar charts, similar to the earlier reports, tabular and graphical versions of the identified traces for the selected requirement. Overall, the current status and weekly effort given on a selected requirement are displayed in the last section of the dashboard.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/perreq.jpg}
+    \caption{Insights for the selected requirement on dashboard.}
+    \label{fig:enter-label}
+\end{figure}
+
+
 %We build a collaborative modeling environment by integrating two existing tools: \emph{i.} piStar \cite{pimentel2018pistar} for goal modeling and \emph{ii.} bpmn.io\footnote{https://bpmn.io} for business process modeling. We choose these two modeling environments because they are both open-source projects and the modeling languages they support are widely used for requirements engineering.
 
 %\begin{figure}[htp]
@@ -238,18 +248,18 @@ Additionally, an interactive dashboard that visualizes the statistical informati
 \section{Evaluation Plan}
 \label{section:evaluation}
 
-\begin{itemize}
-    \item Ground truth 
-    \item Experiment setup
-    \item Results
-    \item Evaluation of results
-\end{itemize}
+% \begin{itemize}
+%     \item Ground truth 
+%     \item Experiment setup
+%     \item Results
+%     \item Evaluation of results
+% \end{itemize}
 
 In this section, we present the evaluation methods we performed for our tool, focusing on the accuracy of the three implemented methods for identifying trace links: keyword extraction, TF-IDF vector and word vector.
 
-For this purpose, we designed an experiment based on a ground truth set. The information present on the set was obtained from BUcademy\cite{bounswe-bucademy} open-source project. This set consisted of five requirement specifications and software development artifacts that trace to them. These trace links were captured manually by our team. The ground truth set served as a reference to assess the accuracy of the automated methods. 
+For this purpose, we designed an experiment based on a ground truth set. The information present on the set was obtained from BUcademy\cite{bounswe-bucademy} open-source project. This set consisted of eight requirement statements and software development artifacts that trace to them. These trace links were captured manually by our team. The ground truth set served as a reference to assess the accuracy of the automated methods. 
 
-The evaluation metrics used in this experiment were recall and precision values. Recall value presents the ability of the method to identify actual trace links, while precision presents the amount of identified trace links that are actual. These values are calculated using the formulas below:
+The evaluation metrics used in this experiment were recall and precision values. Recall value presents the percentage of the real traces that are recovered, while precision presents the percentage of the recovered traces that are correct. These values are calculated using the formulas below:
 \\
 
 $Recall = \dfrac{True Positives}{True Positives + False Negatives}$
@@ -283,7 +293,7 @@ Keyword extraction & \textcolor{red}{0.865} & 0.212 \\
 
 0.05    & 1.0 & 0.043 & 0.839 & 0.121 \\
 0.15    & 1.0 & 0.043 & 0.573 & 0.256 \\
-0.25    & 1.0 & 0.043 & 0.244 & \textcolor{red}{0.430} \\
+0.25    & 1.0 & 0.043 & 0.244 & 0.430 \\
 0.35    & 1.0 & 0.043 & 0.095 & 0.392 \\
 0.45    & 0.965 & 0.071 & 0.025 & 0.125 \\
 0.55    & 0.865 & 0.100 & 0.013 & 0.121 \\
@@ -293,28 +303,33 @@ Keyword extraction & \textcolor{red}{0.865} & 0.212 \\
 \caption{Recall - Precision Values of Vector-based Methods}
 \end{table}
 
-Among the tested methods, the keyword extraction method yielded the best recall-precision pair. Conversely, the performance of the vector-based methods varied significantly by the defined threshold value. For the vector-based methods, the recall value was observed as 1 when the threshold value was relatively low, indicating that almost all of the SDAs have been identified as trace links. Naturally, the precision value dropped substantially. On the other hand, setting the threshold value too high caused the opposite effect, resulting in low recall and higher precision values. Notably, the word vector method achieved the highest precision value among the results when the threshold was set to 0.25. 
+Among the tested methods, the keyword extraction method yielded the best recall-precision pair. Conversely, the performance of the vector-based methods varied significantly by the defined threshold value. For the vector-based methods, the recall value was observed as close to 1 when the threshold value was relatively low, while the precision value dropped substantially, indicating that all the necessary traces are recovered but also almost all of the SDAs have been identified as candidate traces. On the other hand, setting the threshold value too high caused the opposite effect, resulting in low recall and higher precision values. 
+% Notably, the word vector method achieved the highest precision value among the results when the threshold was set to 0.25. 
 
 In conclusion, these results indicate that each method has strong aspects, and selecting the most suitable method highly depends on the specific project structure and requirements. 
 
 
-%In this section, we share our planned experimental setup for evaluation. We hypothesize that (\textbf{H0}) our tool increases the efficiency of the requirements analyst for building a glossary of terms in terms of time. Therefore, we plan to evaluate our system with human experts. The experimental setup consists of two different scenarios to mitigate the effect of the learning curve. For the first run, participants will be asked to extract glossaries manually from a set of previously created models. Therefore, a gold standard set will be available for further investigation. For the second run, the participants will be asked to evaluate the automatically extracted glossaries in terms of completeness since glossaries will be automatically extracted with our method. After the second run, we will be able to gather qualitative feedback from the participants. To gather quantitative results, we will compare the automatically extracted glossaries with the gold standard set which was constructed by experts, to measure the performance of our system.
+
 \section{Conclusions}\label{section:conclusion}
 
-\begin{itemize}
-    \item Observations
-    \item Threads to validity
-    \item Future Work
-\end{itemize}
+% \begin{itemize}
+%     \item Observations
+%     \item Threads to validity
+%     \item Future Work
+% \end{itemize}
 
 In this paper, we presented a tool that automates the traceability link recovery by identifying trace links between requirements written in natural language and software development artifacts(Issues, PRs, Commits) obtained from GitHub repositories. Through the implementation of three optional methods, namely keyword extraction, TF-IDF vector and word vector, we have demonstrated the capability of identifying traceability links of our tool. We have stored the traceability data we obtained in a graph database to visualize the trace links, and supported the data with an interactive dashboard, which provides users with comprehensive statistical insights.
 Our experiments on the evaluation of the tool have led us to observe that the quality and consistency of the requirement statements and the software development artifacts(SDA) significantly impact the effectiveness of the tool's capability of identifying trace links. Well-written requirement specifications that are self-explanatory and granulated lead to easier identification of its traces along with SDA which have textual data (e.g. title, description, comments) that is semantically related to the feature they implement. In this manner, our tool could be utilized for educational purposes, to assist in the improvement of writing requirement specifications.
 
-It is important to acknowledge the threats to the validity of our study. Firstly, the absence of a ground truth set that is established by analysts may introduce bias in our evaluation process. We have conducted our experiments on the student projects we have participated in and we are aware of the tool's architecture to identify trace links. Future work should involve validation with industry professionals and experiments designed with a wider range of projects to enhance the operating scale of our tool. 
+It is important to acknowledge the threats to the validity of our study. Firstly, the absence of a ground truth set that is established by analysts may introduce bias in our evaluation process. We have prepared the ground truth set and conducted our experiments on the student projects we have participated in. Thus, we do know the capabilities of our tool and the project that we experimented on. Future work should involve validation with industry professionals and experiments designed with a wider range of projects to enhance the operating scale of our tool. 
 
-Other several avenues for future work include providing trace links between different kinds of software artifacts, such as from Issues to PRs, to enable a deeper view of the development process. Additionally, we plan to integrate different types of requirement specifications, to accommodate diverse requirement specification document formats. Furthermore, we intend to develop a product that fetches software artifacts from various platforms such as GitLab and Jira, to improve the compatibility of the tool with different development environments that are mostly preferred within the industry. Finally, we would like to expand the variety of methods used in identifying trace links based on the needs of the users and improve the accuracy by increasing the recall and precision values obtained.
+Other several avenues for future work include providing trace links between different kinds of software artifacts, such as from Issues to PRs, to enable a deeper view of the development process. Additionally, we plan to integrate different types of requirement specifications, to accommodate diverse requirement specification document formats. Furthermore, we intend to develop a product that fetches software artifacts from various platforms such as GitLab and Jira, to improve the compatibility of the tool with different development environments that are mostly preferred within the industry. Finally, we would like to expand the variety of methods used in identifying trace links based on the needs of the users and improve the accuracy.
+% by increasing the recall and precision values obtained.
 
 In conclusion, our tool provides an automated solution for requirement traceability(RT) and enhances the management of software projects. By optimizing the time and effort required for RT and offering educational opportunities for project management, our tool contributes to the overall success of software development projects. With future development and evaluation, our study carries the potential to positively impact traceability practices.
+
+
+
 %We present a shared collaborative modeling environment instrumented with an automated glossary extraction pipeline from model labels using state-of-the-art NLP techniques without any supervision. Our approach prevents stakeholders from spending effort on a challenging and time-consuming task of manual glossary extraction. We develop two heuristics that use pre-trained BERT models and one simple heuristic that depends on substring matching.
 
  %In this section, we share our plans for glossary extraction. First, we plan to conduct an experimental evaluation with human experts as we stated in Sect. \ref{section:evaluation}. Second, we plan to improve our glossary extraction heuristics' performance using human experts' feedbacks. Finally, we aim to extend our method for automated domain model extraction from model labels and employing our method as a complementary for existing systems to form a hybrid system.
