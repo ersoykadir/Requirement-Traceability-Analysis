@@ -244,6 +244,60 @@ Additionally, an interactive dashboard that visualizes the statistical informati
     \item Results
     \item Evaluation of results
 \end{itemize}
+
+In this section, we present the evaluation methods we performed for our tool, focusing on the accuracy of the three implemented methods for identifying trace links: keyword extraction, TF-IDF vector and word vector.
+
+For this purpose, we designed an experiment based on a ground truth set. The information present on the set was obtained from BUcademy\cite{bounswe-bucademy} open-source project. This set consisted of five requirement specifications and software development artifacts that trace to them. These trace links were captured manually by our team. The ground truth set served as a reference to assess the accuracy of the automated methods. 
+
+The evaluation metrics used in this experiment were recall and precision values. Recall value presents the ability of the method to identify actual trace links, while precision presents the amount of identified trace links that are actual. These values are calculated using the formulas below:
+\\
+
+$Recall = \dfrac{True Positives}{True Positives + False Negatives}$
+\\
+
+$Precision = \dfrac{True Positives}{True Positives + False Positives}$
+\\
+
+In the experiment, true positives indicate the trace links that are identified by the method. False negatives indicate the trace links that are not identified(missed), and false positives indicate the identified trace links that are incorrect. The results of the keyword extraction method are presented in Table I, while the results of the vector based methods are presented in Table II.
+
+
+\begin{table}[htb]
+\centering
+\vspace{1ex}
+\begin{tabular}{l l l l}
+\textbf{Method} & \textbf{Recall} & \textbf{Precision}\\
+
+Keyword extraction & \textcolor{red}{0.865} & 0.212 \\
+
+\end{tabular}
+\caption{Recall - Precision Values of Keyword Extraction Method}
+\end{table}
+
+\begin{table}[htb]
+\centering
+\vspace{1ex}
+\begin{tabular}{l l l l l}
+
+\textbf  & \multicolumn{2}{c}{\textbf{Word-vector}} &  \multicolumn{2}{c}{\textbf{Tf-idf vector}}\\
+\textbf{Sim.Threshold   } & \textbf{Rec.} &\textbf{Prec.} &  \textbf{Rec.} &\textbf{Prec.}\\
+
+0.05    & 1.0 & 0.043 & 0.839 & 0.121 \\
+0.15    & 1.0 & 0.043 & 0.573 & 0.256 \\
+0.25    & 1.0 & 0.043 & 0.244 & \textcolor{red}{0.430} \\
+0.35    & 1.0 & 0.043 & 0.095 & 0.392 \\
+0.45    & 0.965 & 0.071 & 0.025 & 0.125 \\
+0.55    & 0.865 & 0.100 & 0.013 & 0.121 \\
+0.65    & 0.294 & 0.300 & 0 & 0 \\
+
+\end{tabular}
+\caption{Recall - Precision Values of Vector-based Methods}
+\end{table}
+
+Among the tested methods, the keyword extraction method yielded the best recall-precision pair. Conversely, the performance of the vector-based methods varied significantly by the defined threshold value. For the vector-based methods, the recall value was observed as 1 when the threshold value was relatively low, indicating that almost all of the SDAs have been identified as trace links. Naturally, the precision value dropped substantially. On the other hand, setting the threshold value too high caused the opposite effect, resulting in low recall and higher precision values. Notably, the word vector method achieved the highest precision value among the results when the threshold was set to 0.25. 
+
+In conclusion, these results indicate that each method has strong aspects, and selecting the most suitable method highly depends on the specific project structure and requirements. 
+
+
 %In this section, we share our planned experimental setup for evaluation. We hypothesize that (\textbf{H0}) our tool increases the efficiency of the requirements analyst for building a glossary of terms in terms of time. Therefore, we plan to evaluate our system with human experts. The experimental setup consists of two different scenarios to mitigate the effect of the learning curve. For the first run, participants will be asked to extract glossaries manually from a set of previously created models. Therefore, a gold standard set will be available for further investigation. For the second run, the participants will be asked to evaluate the automatically extracted glossaries in terms of completeness since glossaries will be automatically extracted with our method. After the second run, we will be able to gather qualitative feedback from the participants. To gather quantitative results, we will compare the automatically extracted glossaries with the gold standard set which was constructed by experts, to measure the performance of our system.
 \section{Conclusions}\label{section:conclusion}
 
