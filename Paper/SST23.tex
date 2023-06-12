@@ -195,55 +195,43 @@ Additionally, an interactive dashboard that visualizes the statistical informati
 In order to reinforce the visualization of traceability data, our research includes the development of an interactive dashboard, which offers various reports that display statistical insights. Each of these reports was carefully selected to effectively visualize the corresponding data, hence they have user-friendly designs for enhanced comprehension. Moreover, many of these reports are interactive and they allow users to trace the specific requirements, thereby enabling a more customized exploration of the traceability information.
 The dashboard was implemented using Neodash technology, to provide full integrity with the traceability graph that is stored in the Neo4j database.
 
-Fig. 3 represents a screenshot taken from the dashboard. The first report featured in the screenshot is a stacked bar chart showing the number of created Issues(in green) and PRs(in brown) for the BUcademy application. It could be observed that the highest number of created artifacts were in week 3 and week 7. The next report is another stacked bar chart that represents the number of artifacts opened and closed per week. Both of these charts are providing information about the status of development in the project lifetime and they help to identify periods of high or low development intensity and let users observe the assessment of the overall project dynamics.
+The first report featured in Fig. \ref{fig:barcharts} is a stacked bar chart showing the number of created Issues(in green) and PRs(in brown) for the BUcademy application. It could be observed that the highest number of created artifacts were in week 3 and week 7. The next report is another stacked bar chart that represents the number of artifacts opened and closed per week. Both of these charts are providing information about the status of development in the project lifetime and they help to identify periods of high or low development intensity and let users observe the assessment of the overall project dynamics.
+
 The dashboard also provides static data regarding the number of open/closed issues, the number of open/merged PRs, and the average number of trace links per requirement. These statistics serve as a snapshot of the current state of the project.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\linewidth]{figs/dashboard-barcharts.png}
     \caption{Bar charts and static data on dashboard.}
-    \label{fig:dashboard}
+    \label{fig:barcharts}
 \end{figure}
 
-Fig. 4 continues with the line chart that illustrates the number of trace links for each requirement. By comparing the number of traces for each requirement, the report demonstrates the outliners, that could have relatively less or more traces. This comparison allows the users to observe the effort associated with each requirement since it displays the number of software development artifacts traced to them.
+Fig. \ref{fig:linechart} continues with the line chart that illustrates the number of trace links for each requirement. By comparing the number of traces for each requirement, the report demonstrates the outliners, that could have relatively less or more traces. This comparison allows the users to observe the effort associated with each requirement since it displays the number of software development artifacts traced to them.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\linewidth]{figs/linechart.png}
     \caption{Line chart on dashboard.}
-    \label{fig:enter-label}
+    \label{fig:linechart}
 \end{figure}
 
-Fig. 5 includes an example of the Sankey chart present in the dashboard that showcases the commonly traced artifacts between the chosen requirements while highlighting the strength of the trace links using the weight property. Thicker links represent a stronger relation from the requirement to the traced artifact. Thus, the chart represents the complementarity of the selected requirements.
+Fig. \ref{fig:sankey} includes an example of the Sankey chart present in the dashboard that showcases the commonly traced artifacts between the chosen requirements while highlighting the strength of the trace links using the weight property. Thicker links represent a stronger relation from the requirement to the traced artifact. Thus, the chart represents the complementarity of the selected requirements.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\linewidth]{figs/sankey.jpg}
     \caption{Sankey chart on dashboard.}
-    \label{fig:enter-label}
+    \label{fig:sankey}
 \end{figure}
 
-As displayed in Fig. 6, in addition to the generalized insights about the project status, various reports are implemented offering similar data for a specific requirement selected by the users. These include bar charts, similar to the earlier reports, tabular and graphical versions of the identified traces for the selected requirement. Overall, the current status and weekly effort given on a selected requirement are displayed in the last section of the dashboard.
+As displayed in Fig. \ref{fig:perreq}, in addition to the generalized insights about the project status, various reports are implemented offering similar data for a specific requirement selected by the users. These include bar charts, similar to the earlier reports, tabular and graphical versions of the identified traces for the selected requirement. Overall, the current status and weekly effort given on a selected requirement are displayed in the last section of the dashboard.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\linewidth]{figs/perreq.jpg}
     \caption{Insights for the selected requirement on dashboard.}
-    \label{fig:enter-label}
+    \label{fig:perreq}
 \end{figure}
-
-
-%We build a collaborative modeling environment by integrating two existing tools: \emph{i.} piStar \cite{pimentel2018pistar} for goal modeling and \emph{ii.} bpmn.io\footnote{https://bpmn.io} for business process modeling. We choose these two modeling environments because they are both open-source projects and the modeling languages they support are widely used for requirements engineering.
-
-%\begin{figure}[htp]
-%\centering
-%  \includegraphics[width=\linewidth]{figs/arch.png}
-%  \caption{Architecture of the system}
-%  \label{fig:architecture}
-%\label{label-c}
-%\end{figure}
-
-%We use two different open-source modeling tools for goal and business process modeling to form a viable combined modeling environment. When the users complete their work on a model, they will commit the model to the system. This committed work is used to update existing glossaries via the glossary extraction module of the system. The communication channel between the user and the system is provided by a web service. This web service is responsible for keeping track of the model versions to demonstrate changes in glossary over time, storing the model file in the disk, extracting model labels from the XML and JSON outputs of the goal and business process models, and transferring the extracted information to the database for glossary extraction from the models. Fig. \ref{fig:architecture} demonstrates the architecture of our system.
 
 \section{Evaluation Plan}
 \label{section:evaluation}
