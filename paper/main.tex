@@ -11,6 +11,7 @@
 \usepackage{multicol}
 \usepackage{longtable}
 \usepackage{xargs}
+\usepackage{booktabs}
 %
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
@@ -31,11 +32,11 @@
 \usepackage{svg}
 %\usepackage[dvipsnames]{xcolor}
 \DeclareRobustCommand{\fba}[1]{ {\begingroup\sethlcolor{BurntOrange}\hl{(fba:) #1}\endgroup} }
-\DeclareRobustCommand{\sgk}[1]{ {\begingroup\sethlcolor{Yellow}\hl{(sgk:) #1}\endgroup} }
+
 \begin{document}
 
 
-\title{A Requirement Traceability Tool: No name yet}
+\title{Extracting Trace Links in Software Repositories}
 % \author{
 %  \IEEEauthorblockN{Kadir Ersoy, Ecenur Sezer, Suzan Üsküdarlı, Fatma Başak Aydemir}
 % \IEEEauthorblockA{

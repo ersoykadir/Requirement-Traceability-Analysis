@@ -26,24 +26,28 @@ In the experiment, true positives indicate the trace links that are identified b
 
 \begin{table}[htb]
 \centering
-\vspace{1ex}
-\begin{tabular}{l l l l}
-\textbf{Method} & \textbf{Recall} & \textbf{Precision}\\
+\caption{Performance of the Keyword Extraction Method}
+\label{tab:keyperf}
+\begin{tabular}{lll}
+  \toprule
+  Method & Recall & Precision\\
+  \midrule
 
-Keyword extraction & \textcolor{red}{0.865} & 0.212 \\
-
+Keyword extraction & {0.865} & 0.212 \\
+\bottomrule
 \end{tabular}
-\caption{Recall - Precision Values of Keyword Extraction Method}
 \end{table}
 
 \begin{table}[htb]
 \centering
-\vspace{1ex}
-\begin{tabular}{l l l l l}
-
-\textbf  & \multicolumn{2}{c}{\textbf{Word-vector}} &  \multicolumn{2}{c}{\textbf{Tf-idf vector}}\\
-\textbf{Sim.Threshold   } & \textbf{Rec.} &\textbf{Prec.} &  \textbf{Rec.} &\textbf{Prec.}\\
-
+\caption{Performance of the Vector-based Methods}
+\label{tab:vecperf}
+\begin{tabular}{lllll}
+\toprule
+  & \multicolumn{2}{c}{Word-vector} &  \multicolumn{2}{c}{Tf-idf vector} \\
+  \cmidrule{2-5}
+{Sim.Threshold   } & {Rec.} & {Prec.} &  {Rec.} & {Prec.}\\
+\midrule
 0.05    & 1.0 & 0.043 & 0.839 & 0.121 \\
 0.15    & 1.0 & 0.043 & 0.573 & 0.256 \\
 0.25    & 1.0 & 0.043 & 0.244 & 0.430 \\
@@ -51,9 +55,8 @@ Keyword extraction & \textcolor{red}{0.865} & 0.212 \\
 0.45    & 0.965 & 0.071 & 0.025 & 0.125 \\
 0.55    & 0.865 & 0.100 & 0.013 & 0.121 \\
 0.65    & 0.294 & 0.300 & 0 & 0 \\
-
+\bottomrule
 \end{tabular}
-\caption{Recall - Precision Values of Vector-based Methods}
 \end{table}
 
 Among the tested methods, the keyword extraction method yielded the best recall-precision pair. Conversely, the performance of the vector-based methods varied significantly by the defined threshold value. For the vector-based methods, the recall value was observed as close to 1 when the threshold value was relatively low, while the precision value dropped substantially, indicating that all the necessary traces are recovered but also almost all of the SDAs have been identified as candidate traces. On the other hand, setting the threshold value too high caused the opposite effect, resulting in low recall and higher precision values.
@@ -63,5 +66,5 @@ In conclusion, these results indicate that each method has strong aspects, and s
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "/main"
-%%% End
+%%% TeX-master: "../main"
+%%% End:

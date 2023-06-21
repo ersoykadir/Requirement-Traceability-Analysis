@@ -193,30 +193,56 @@ The construction of the trace graph requires parsing the requirement specificati
 Table \ref{tab:artifactfeatures} displays the properties of the different kinds of graph nodes encapsulates.
 
 
-\begin{table}[htb]
-\begin{adjustbox}{width=1\linewidth}
-\begin{tabular}{|l|c|c|c|c|c|c|}
-        \hline
- &                & Requirement & Issue & PR  & Commit &  \\\hline\hline
- & Id             &  \checkmark & \checkmark & \checkmark & \checkmark    &  \\\hline
- & Title          & -           & \checkmark   & \checkmark     &   -     &  \\\hline
- & Description    & \checkmark         & \checkmark   & \checkmark     & -       &  \\\hline
- & URL            & -           & \checkmark   & \checkmark     &  \checkmark       &  \\\hline
-  & Number           & \checkmark   & \checkmark  &  \checkmark  & \checkmark  &  \\\hline
-   & State           &  -           & \checkmark       &  \checkmark    & -     &  \\\hline
- & CreationDate   & -           & \checkmark   & \checkmark & -      &  \\\hline
- & CompletionDate & -           & \checkmark   & \checkmark     & \checkmark    &  \\\hline
-& Message        & -           & -   & - & \checkmark    &  \\\hline
- &  CommentCount         &  -           &  \checkmark      & \checkmark     &       - &  \\\hline
-  &  CommentList         & -            & \checkmark       & \checkmark     &      -  &  \\\hline
-   &   Parent         &   \checkmark           &  -     &  -   &  -      &  \\\hline
-    &   Oid          &    -         &  -     &   -  &  \checkmark       &  \\\hline
-     &  Text       &  \checkmark            &  \checkmark      &  \checkmark    & \checkmark        &  \\\hline
+% \begin{table}[htb]
+% \begin{adjustbox}{width=1\linewidth}
+% \begin{tabular}{|l|c|c|c|c|c|c|}
+%         \hline
+%  &                & Requirement & Issue & PR  & Commit &  \\\hline\hline
+%  & Id             &  \checkmark & \checkmark & \checkmark & \checkmark    &  \\\hline
+%  & Title          & -           & \checkmark   & \checkmark     &   -     &  \\\hline
+%  & Description    & \checkmark         & \checkmark   & \checkmark     & -       &  \\\hline
+%  & URL            & -           & \checkmark   & \checkmark     &  \checkmark       &  \\\hline
+%   & Number           & \checkmark   & \checkmark  &  \checkmark  & \checkmark  &  \\\hline
+%    & State           &  -           & \checkmark       &  \checkmark    & -     &  \\\hline
+%  & CreationDate   & -           & \checkmark   & \checkmark & -      &  \\\hline
+%  & CompletionDate & -           & \checkmark   & \checkmark     & \checkmark    &  \\\hline
+% & Message        & -           & -   & - & \checkmark    &  \\\hline
+%  &  CommentCount         &  -           &  \checkmark      & \checkmark     &       - &  \\\hline
+%   &  CommentList         & -            & \checkmark       & \checkmark     &      -  &  \\\hline
+%    &   Parent         &   \checkmark           &  -     &  -   &  -      &  \\\hline
+%     &   Oid          &    -         &  -     &   -  &  \checkmark       &  \\\hline
+%      &  Text       &  \checkmark            &  \checkmark      &  \checkmark    & \checkmark        &  \\\hline
 
-\end{tabular}
-\end{adjustbox}
-        \caption{\label{tab:artifactfeatures} The features of the artifacts utilized in identifying trace linking.}
-\end{table}
+% \end{tabular}
+% \end{adjustbox}
+%         \caption{\label{tab:artifactfeatures} The features of the artifacts utilized in identifying trace linking.}
+%       \end{table}
+
+      \begin{table}
+        \centering
+        \caption{Features used to extract trace links for each artifact}
+        \label{tab:artifactfeatures}
+        \begin{tabular}{lllll}
+          \toprule
+          & Requirement & Issue & PR & Commit \\
+          \midrule
+          ID &\checkmark &\checkmark&\checkmark&\checkmark\\
+          Title &-&\checkmark&\checkmark&-\\
+          Description &\checkmark&\checkmark&\checkmark&-\\
+          URL&-&\checkmark&\checkmark&\checkmark\\
+          Number&\checkmark&\checkmark&\checkmark&\checkmark\\
+          State&-&\checkmark&\checkmark&-\\
+          Creation Date&-&\checkmark&\checkmark&-\\
+          Completion Date&-&\checkmark&\checkmark&\checkmark\\
+          Message&-&-&-&\checkmark\\
+          Comment Count&-&\checkmark&\checkmark&-\\
+          Comment List&-&\checkmark&\checkmark&-\\
+          Parent&\checkmark&-&-&-\\
+          OID&-&-&-&\checkmark\\
+          Text&\checkmark&\checkmark&\checkmark&\checkmark\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
 
 The textual properties of the nodes are required for the vector-based and keyword extraction trace identification methods to operate. In addition, the properties enable the observation of the creation/closure times and the status of the artifacts. Moreover, it is possible to access  the GitHub page that they are acquired from with URL property. Overall, these properties provide valuable traceability data, which serve as a foundation for an interactive dashboard that provides project management and requirement lifecycle analysis.
 
@@ -314,3 +340,8 @@ As displayed in Fig. \ref{fig:perreq}, in addition to the generalized insights a
     \caption{Insights for the selected requirement on dashboard.}
     \label{fig:perreq}
 \end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
