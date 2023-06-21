@@ -1,7 +1,41 @@
 \section{Related Work}
 \label{section:related_work}
 
-There are several studies that focus on automatizing requirements traceability by implementing various techniques. Hayes et al. (2003)\cite{hayes-2003} have studied an approach that frames requirement traceability as an information retrieval(IR) problem. Their study aims to enhance recall and precision values of capturing traces. The IR methods they have implemented performed a significantly higher retrieval percentage, relative to the manual tracing. In a different study, Abdeen (2023)\cite{abdeen-2023} established a system that grips taxonomic trace links to link software development artifacts and requirements. In this approach, requirement artifacts are labeled with system-recommended labels based on their textual data. Bonner et al. (2023)\cite{bonner-2023} have developed a tool that performs Artificial Intelligence(AI) to identify trace links between requirements and model-based designs. They have integrated their tool into the Siemens toolchain for Application Lifecycle Management(ALM) and performed experiments on the traceability problem with the natural language requirements and system design models. Cleland-Huang et al. (2007)\cite{cleland-huang-2007} focused on nine best practices for implementing automated traceability. These practices include information retrieval methods, and they have significantly diminished the amount of effort given to produce a requirement trace matrix. Mills (2017)\cite{mills-2017} automated traceability link recovery(TLR) with machine learning algorithms and approached TLR as a binary classification problem.
+There are several studies that focus on automating trace link recovery that implement various techniques. The common objective among the studies is to find relation between software artifacts, by performing diverse methods with various input and output types.
 
-These studies have integrated relatively more modern technologies such as artificial intelligence, machine learning, and information retrieval algorithms to automated trace links recovery and encouraged the researches to implement various approaches to minimize the effort and maximize the quality of requirement traceability.
+\subsection{Information Retrieval}
 
+One of the popular approaches is to view trace link recovery as an information retrieval(IR) problem. Since the objective of IR, which is to find relevant documents in a document collection given a user query, is analogous to finding related software artifacts for a given requirement, it is very natural to approach the trace link recovery challenge as an information retrieval problem. More detailed information about IR can be found in\cite{IR}. Two of the widely adopted IR methods are vector-space model and probabilistic network model.
+
+% \textbf{Vector-space model}
+
+In vector-space model(VSM) method, each software artifact is represented by vectors. Thereby, the task of trace link recovery evolves into identifying vectors that are similar. Hayes et al.()\cite{hayes-2003} experimented with the vector-space model by examining three different version of it, a vanilla version, a version that incorporates technical terms and a version that uses a thesaurus for semantic association. They evaluated their methods on an open source NASA project, containing high level requirements with lower level requirement specifications. Provided in their evaluation, VSM almost always outperforms keyword-based methods and manual tracing in recall metric, but sometimes fails to do so in precision. They pointed out that even in the cases where VSM fails to outperform human analyst, it does perform faster. In a different study, Bonner et al. (2023)\cite{bonner-2023} have developed a tool that uses vector-space model to identify trace links between requirements and model-based designs. They have integrated their tool into the Siemens toolchain for Application Lifecycle Management(ALM).
+
+% \textbf{Probabilistic-network model}
+
+In probabilistic-network(PN) based model, a confidence score is calculated to represent the relations between artifacts. Cleland-Huang et al. (2007)\cite{cleland-huang-2007} developed a tool, utilizing a PN-base algorithm, to produce a list of candidate traces, sorted by confidence scores that represent the confidence on validity of each link. Then, a human anlayst is expected to accept the correct candidates and discard the false positives. Further, best practices for implementing automated traceability is discussed, pointing out the importance of having a traceability strategy and addressing challenges like terminology differences etc. 
+
+A limitation of these methods is that they produce a list of \textit{possible} trace links, so usually the results are not exact and a human analyst might be needed to filter the candidates.
+
+\subsection{Machine Learning - Classification}
+
+Another approach is to view trace link recovery as a binary classification problem where the aim is to classify each possible trace link as valid or not. In his study, Mills examined the performance of various machine learning algorithms on the task of trace link classification. He experimented on multiple datasets that contains different artifact types varying from requirements to use cases and test cases. Mills indicates that to achieve a fully automated traceability, minimizing False Positive Rate(FPR) is essential and evaluates the classifiers based on their FPR. The results shown that Random Forests is the most suitable classifier for this task. 
+
+In another study, van Oosten et al.(2023)\cite{VANOOSTEN2023107226} also made use of ML classifiers, to predict whether a trace link is valid or not. Leveraging ML classifiers, they developed a tool, called LCDTrace, that performs trace link recovery from MDD(Model Driven Development) models to JIRA issues.
+
+\subsection{Knowledge Organization}
+
+Knowledge organization allows relating, labeling and grouping of similar concepts so that their relation can be traced. Ontology and Taxonomy structures are used to organize and categorize knowledge. 
+
+Ontologies represent each concept as nodes and their relations as edges in a graph. In their study, Li and Cleland-Huang presented a method to incorporate general and domain-specific ontologies into the tracing process. They extract phrases from software artifacts and compute similarity "if a phrase found in the source artifact can be matched via concepts in the ontology to a different phrase in a target
+artifact"\cite{Ontology}.
+
+On the other hand, taxonomies have predefined categories that group concepts with similar context. In the domain of traceability, the objective becomes labeling the source and target artifacts with nodes from a taxonomy and associating the artifacts with similar labels.\cite{Taxonomy}. In labeling process, Abdeen(2023)\cite{abdeen-2023} created a vector of concepts for both artifacts and taxonomy nodes using Wikipedia Indices and produced a list of recommended taxonomy labels for each artifact using vector similarity.
+
+% \subsection{Spreading Activation}
+In a similar manner, semantic relation graphs are also used for relating concepts. Schlutter et al.(2020)\cite{Spreading-Activation} developed a trace link recovery approach that uses semantic relation graphs and spreading activation method. They have employed an NLP pipeline to extract information from requirement specifications, creating a semantic relation graph and used spreading activation to search for relations from requirements to target artifacts.  
+
+\subsection{Feature Extraction}
+In addition to automated trace link recovery studies, Gallego et al.(2023)\cite{Marf2023TransFeatExAN} have developed a tool that uses a fairly similar NLP feature extraction pipeline to ours. Their tool identifies and extracts potential features for mobile applications, using application related text documents such as descriptions, changelogs and user reviews. They have implemented a custom NLP pipeline, utilizing Natural Language Processing(NLP) techniques like POS tagging and dependency parsing, to extract noun-phrases that can potentially be mobile application features.\\
+
+These studies have integrated relatively more modern technologies such as information retrieval, machine learning, knowledge organization and NLP to automate trace link recovery and encouraged the researches to implement various approaches to minimize the effort and maximize the quality of requirement traceability.
