@@ -18,7 +18,7 @@
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.45\linewidth]{figs/toolflow.png}
+    \includegraphics[width=0.65\linewidth]{figs/toolflow.png}
     \caption{Control flow of the system.}
     \label{fig:sys-flow}
 \end{figure}
@@ -36,7 +36,7 @@ Additionally, an interactive dashboard that visualizes the statistical informati
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.6\linewidth]{figs/tracemethods.png}
+    \includegraphics[width=0.9\linewidth]{figs/tracemethods.png}
     \caption{Control flow of the trace methods.}
     \label{fig:trace-methods}
 \end{figure}
@@ -180,98 +180,41 @@ The last step of the vector-based methods is to check the cosine similarity of t
 \subsection{Trace Graph}
 \label{sec:tgraph}
 
-The construction of the trace graph requires parsing the requirement specifications and the remaining software development artifacts(Issues, PRs, Commits) to create graph nodes, and executing several methods to identify trace links between them. The final step of this process is to store the nodes and the links in a Neo4j Graph Database to utilize the visualization techniques the Neo4j environment provides.
-
-The graph nodes encapsulate following properties of the corresponding artifacts:
-
-
-\todo{Suzan: something like this}
+The construction of the trace graph requires parsing the requirement specifications and the software development artifacts(Issues, PRs, Commits) to create graph nodes, and executing several methods to identify trace links between them. The graph nodes have various properties associated with them to store detailed information about the artifact that they represent. 
+Table \ref{tab:artifactfeatures} displays the properties of the different kinds of graph nodes encapsulates.
 
 \begin{table}[tbh]
 \begin{tabular}{|l|c|c|c|c|c|c|}
         \hline
  &                & Requirement & Issue & PR  & Commit &  \\\hline\hline
  & Id             &  \checkmark & \checkmark & \checkmark & \checkmark    &  \\\hline
- & Title          & -           & \checkmark   &     &        &  \\\hline
- & Description    & \checkmark         & \checkmark   &     &        &  \\\hline
- & URL            & -           & \checkmark   &     &        &  \\\hline
+ & Title          & -           & \checkmark   & \checkmark     &   -     &  \\\hline
+ & Description    & \checkmark         & \checkmark   & \checkmark     & -       &  \\\hline
+ & URL            & -           & \checkmark   & \checkmark     &  \checkmark       &  \\\hline
+  & Number           & \checkmark   & \checkmark  &  \checkmark  & \checkmark  &  \\\hline
+   & State           &  -           & \checkmark       &  \checkmark    & -     &  \\\hline
  & CreationDate   & -           & \checkmark   & \checkmark & -      &  \\\hline
- & CompletionDate & -           & \checkmark   &     & \checkmark    &  \\\hline
-& Message        & -           & \checkmark   & \checkmark & \checkmark    &  \\\hline
- &                &             &       &     &        &  \\\hline
+ & CompletionDate & -           & \checkmark   & \checkmark     & \checkmark    &  \\\hline
+& Message        & -           & -   & - & \checkmark    &  \\\hline
+ &  CommentCount         &  -           &  \checkmark      & \checkmark     &       - &  \\\hline
+  &  CommentList         & -            & \checkmark       & \checkmark     &      -  &  \\\hline
+   &   Parent         &   \checkmark           &  -     &  -   &  -      &  \\\hline
+    &   Oid          &    -         &  -     &   -  &  \checkmark       &  \\\hline
+     &  Text       &  \checkmark            &  \checkmark      &  \checkmark    & \checkmark        &  \\\hline
+ 
 \end{tabular}
         \caption{\label{tab:artifactfeatures} The features of the artifacts utilized in identifying trace linking.}
 \end{table}
 
-\begin{multicols}{2}
-
-PR:
-\begin{itemize}
-\item Title
-\item Body
-\item URL
-\item closedAt
-\item createdAt
-\item createdWeek
-\item number
-\item commentList
-\item commentCount
-\item commitCount
-\item State
-\item Text
-\end{itemize}
-
-\columnbreak
-
-Issue:
-\begin{itemize}
-\item Title
-\item Body
-\item URL
-\item closedAt
-\item createdAt
-\item createdWeek
-\item Number
-\item commentList
-\item commentCount
-\item State
-\item Text\\
-\end{itemize}
-
-\end{multicols}
-
-\begin{multicols}{2}    
-
-Commit:
-\begin{itemize}
-\item URL
-\item closedAt
-\item createdAt
-\item createdWeek
-\item number
-\item committedDate
-\item oid
-\item Message
-\item Text
-\end{itemize}
-
-\columnbreak
-
-Requirement:
-\begin{itemize}
-\item Parent
-\item Number
-\item Description
-\item Text
-\end{itemize}
 
 
+The textual properties of the nodes are required for the vector-based and keyword extraction trace identification methods to operate. In addition, the properties enable the observation of the creation/closure times and the status of the artifacts. Moreover, it is possible to access  the GitHub page that they are acquired from with URL property. Overall, these properties provide valuable traceability data, which serve as a foundation for an interactive dashboard that provides project management and requirement lifecycle analysis.
 
-\end{multicols}
+ Along with the artifact nodes, two types of relationships are in use to show the relationship between the artifacts, namely \textit{tracesTo} and \textit{relatedCommit}. The \textit{tracesTo} relationship represents an identified trace link and could be present between a requirement node and a software development artifact node. On the other hand, \textit{relatedCommit} relationship detonates a Commit associated with a PR, hence it could be present between a PR node and a Commit node. 
 
-The textual properties of the nodes are required for the trace identification methods to operate. In addition, the properties enable the observation of the creation/closure times, the status of the artifacts, and the access to the GitHub page they are acquired from by the URL property. Overall, these properties provide valuable traceability data, which serve as a foundation for an interactive dashboard that provides project management and requirement lifecycle analysis.
+The concluding phase of the construction of the trace graph involves storing the graph nodes and the identified trace links in the Neo4j graph database. While there exist various graph database technologies suitable for this task, Neo4j stands out due to its advanced visualization capabilities. 
 
-Fig. \ref{fig:tracegraph} illustrates a segment of the trace graph for a specific requirement and displays the associated trace links.
+Fig. \ref{fig:rawtracegraph} illustrates a segment of the trace graph obtained from the Neo4j graph database for a specific requirement and displays the associated trace links and related commits.
 
 \begin{figure}[htb]
     \centering
@@ -280,8 +223,8 @@ Fig. \ref{fig:tracegraph} illustrates a segment of the trace graph for a specifi
     \label{fig:rawtracegraph}
 \end{figure}
 
-
-In Fig. \ref{fig:rawtracegraph} the trace links are organized along a time axis based on the creation date of the related software development artifacts. In this manner, the figure effectively demonstrates the lifetime of the requirement. A significant observation is that the first Pull Request related to the requirement was created in week 8, while the issues concerning the planning of the requirement were created in early stages of the development.
+The trace graph serves as an effective visualization of the software development artifacts (SDA) that are traced to the requirement. Moreover, it has the potential to display the lifetime of the requirement when the traced SDA are organized chronologically.
+In Fig. \ref{fig:tracegraph} the related SDA are arranged along a time axis based on their \textit{creationDate} property in order to represent notable information about the stages of implementation. For example, it is observed in the figure that the first Pull Request related to the requirement was created in week 8, while the issues concerning the planning of the requirement were created in the early stages of the development.
 
 
 \begin{figure}[htb]
