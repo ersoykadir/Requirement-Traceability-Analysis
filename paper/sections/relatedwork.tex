@@ -1,5 +1,5 @@
 \section{Related Work}
-\label{section:related_work}
+\label{sec:relwork}
 
 There are several studies that focus on automating trace link recovery that implement various techniques. The common objective among the studies is to find relation between software artifacts, by performing diverse methods with various input and output types.
 
@@ -13,19 +13,19 @@ In vector-space model(VSM) method, each software artifact is represented by vect
 
 % \textbf{Probabilistic-network model}
 
-In probabilistic-network(PN) based model, a confidence score is calculated to represent the relations between artifacts. Cleland-Huang et al. (2007)\cite{cleland-huang-2007} developed a tool, utilizing a PN-base algorithm, to produce a list of candidate traces, sorted by confidence scores that represent the confidence on validity of each link. Then, a human anlayst is expected to accept the correct candidates and discard the false positives. Further, best practices for implementing automated traceability is discussed, pointing out the importance of having a traceability strategy and addressing challenges like terminology differences etc. 
+In probabilistic-network(PN) based model, a confidence score is calculated to represent the relations between artifacts. Cleland-Huang et al. (2007)\cite{cleland-huang-2007} developed a tool, utilizing a PN-base algorithm, to produce a list of candidate traces, sorted by confidence scores that represent the confidence on validity of each link. Then, a human anlayst is expected to accept the correct candidates and discard the false positives. Further, best practices for implementing automated traceability is discussed, pointing out the importance of having a traceability strategy and addressing challenges like terminology differences etc.
 
 A limitation of these methods is that they produce a list of \textit{possible} trace links, so usually the results are not exact and a human analyst might be needed to filter the candidates.
 
 \subsection{Machine Learning - Classification}
 
-Another approach is to view trace link recovery as a binary classification problem where the aim is to classify each possible trace link as valid or not. In his study, Mills examined the performance of various machine learning algorithms on the task of trace link classification. He experimented on multiple datasets that contains different artifact types varying from requirements to use cases and test cases. Mills indicates that to achieve a fully automated traceability, minimizing False Positive Rate(FPR) is essential and evaluates the classifiers based on their FPR. The results shown that Random Forests is the most suitable classifier for this task. 
+Another approach is to view trace link recovery as a binary classification problem where the aim is to classify each possible trace link as valid or not. In his study, Mills examined the performance of various machine learning algorithms on the task of trace link classification. He experimented on multiple datasets that contains different artifact types varying from requirements to use cases and test cases. Mills indicates that to achieve a fully automated traceability, minimizing False Positive Rate(FPR) is essential and evaluates the classifiers based on their FPR. The results shown that Random Forests is the most suitable classifier for this task.
 
 In another study, van Oosten et al.(2023)\cite{VANOOSTEN2023107226} also made use of ML classifiers, to predict whether a trace link is valid or not. Leveraging ML classifiers, they developed a tool, called LCDTrace, that performs trace link recovery from MDD(Model Driven Development) models to JIRA issues.
 
 \subsection{Knowledge Organization}
 
-Knowledge organization allows relating, labeling and grouping of similar concepts so that their relation can be traced. Ontology and Taxonomy structures are used to organize and categorize knowledge. 
+Knowledge organization allows relating, labeling and grouping of similar concepts so that their relation can be traced. Ontology and Taxonomy structures are used to organize and categorize knowledge.
 
 Ontologies represent each concept as nodes and their relations as edges in a graph. In their study, Li and Cleland-Huang presented a method to incorporate general and domain-specific ontologies into the tracing process. They extract phrases from software artifacts and compute similarity "if a phrase found in the source artifact can be matched via concepts in the ontology to a different phrase in a target
 artifact"\cite{Ontology}.
@@ -33,7 +33,7 @@ artifact"\cite{Ontology}.
 On the other hand, taxonomies have predefined categories that group concepts with similar context. In the domain of traceability, the objective becomes labeling the source and target artifacts with nodes from a taxonomy and associating the artifacts with similar labels.\cite{Taxonomy}. In labeling process, Abdeen(2023)\cite{abdeen-2023} created a vector of concepts for both artifacts and taxonomy nodes using Wikipedia Indices and produced a list of recommended taxonomy labels for each artifact using vector similarity.
 
 % \subsection{Spreading Activation}
-In a similar manner, semantic relation graphs are also used for relating concepts. Schlutter et al.(2020)\cite{Spreading-Activation} developed a trace link recovery approach that uses semantic relation graphs and spreading activation method. They have employed an NLP pipeline to extract information from requirement specifications, creating a semantic relation graph and used spreading activation to search for relations from requirements to target artifacts.  
+In a similar manner, semantic relation graphs are also used for relating concepts. Schlutter et al.(2020)\cite{Spreading-Activation} developed a trace link recovery approach that uses semantic relation graphs and spreading activation method. They have employed an NLP pipeline to extract information from requirement specifications, creating a semantic relation graph and used spreading activation to search for relations from requirements to target artifacts.
 
 \subsection{Feature Extraction}
 In addition to automated trace link recovery studies, Gallego et al.(2023)\cite{Marf2023TransFeatExAN} have developed a tool that uses a fairly similar NLP feature extraction pipeline to ours. Their tool identifies and extracts potential features for mobile applications, using application related text documents such as descriptions, changelogs and user reviews. They have implemented a custom NLP pipeline, utilizing Natural Language Processing(NLP) techniques like POS tagging and dependency parsing, to extract noun-phrases that can potentially be mobile application features.\\

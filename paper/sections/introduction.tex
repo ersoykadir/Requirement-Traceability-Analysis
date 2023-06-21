@@ -1,4 +1,5 @@
-\section{Introduction} \label{section:introduction}
+\section{Introduction}
+\label{sec:intro}
 
 % \begin{itemize}
 %     \item Requirements traceability definition
@@ -6,7 +7,7 @@
 %     \begin{itemize}
 %         \item It is too hard to do it manually
 %         \begin{itemize}
-%             \item Cost of integration: Need trace link recovery, 
+%             \item Cost of integration: Need trace link recovery,
 %             \item Human effort: Do not force extra measures for traceability
 %         \end{itemize}
 %         \item Its role in project management
@@ -19,34 +20,36 @@
 %     \item showcasing trace data and other stats to user in a self-evident manner
 % \end{itemize}
 
-Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions\cite{gotel-1994}, and to the ability to link requirements to other software artifacts through particular relationships. Requirement traceability is crucial in software development projects since it shows the progress done in implementing the requirements and assists engineers in observing the effort and workload associated with them. All these aspects of requirement traceability help teams to ensure the fulfillment of specified requirements, by linking them to other software artifacts. Given that, it is a critical obstacle that traditional methods of recovering traceability links require significant time and human effort, making them unsuitable for the task as the project scale grows. Moreover, the quality of these methods is not consistent, since it highly depends on the understanding of the requirement traceability of the human analysts' performing them. 
+Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions~\cite{gotel-1994}, and to the ability to link requirements to other software artifacts through particular relationships. Requirement traceability is crucial in software development projects since it shows the progress done in implementing the requirements and assists engineers in observing the effort and workload associated with them. All these aspects of requirement traceability help teams to ensure the fulfillment of specified requirements, by linking them to other software artifacts. Given that, it is a critical obstacle that traditional methods of recovering traceability links require significant time and human effort, making them unsuitable for the task as the project scale grows. Moreover, the quality of these methods is not consistent, since it highly depends on the understanding of the requirement traceability of the human analysts' performing them.
 In this paper, we present a tool implemented to automate the process of identifying trace links. Our tool establishes links from requirements that are written in natural language to the software development artifacts, mainly Issues, PRs, and Commits, that are fetched from GitHub repositories. By automatizing this process, our tool aims to decrease the reliance on human effort and provides efficient requirement traceability management.
 
 For identifying the trace links, three optional methods are implemented in our tool. These methods are keyword extraction, which performs keyword matching to software development artifacts, and TF-IDF Vector - Word Vector methods, which basically perform vector-based similarity. Each of these methods offers distinct advantages that are highly dependent on the context of the projects.
 The software artifacts and the identified trace links are stored in a graph database and visualized in a graphical structure to enable efficient retrieval of traceability information. To improve the comprehension of the collected traceability data, our tool also features an interactive dashboard. This dashboard is equipped with valuable statistical insights about the lifetime of the project and the requirements. Along with the visualization of the traceability links and the offering of statistical data, we aim to improve the management of the requirements, ultimately leading to better-planned and programmed software projects.
 
+The rest of the paper is structured as follows. Sec.~\ref{sec:relwork} presents the related work from the literature. Sec.~\ref{sec:approach} details our approach for identifying trace links. Our evaluation plan is described in Sec.~\ref{sec:eval}. Sec.~\ref{sec:discuss} discusses our findings. Finally, Sec.~\ref{sec:conc} concludes the paper and lays out the future work.
+
 %\section{Problem and Motivation}
 %\label{section:problem}
 
-% Requirements traceability, 
-%     - definition, 
+% Requirements traceability,
+%     - definition,
 % Why do we do it, examples
 %     - It is too hard to do it manually
 %     - Its role in project management,
 %         - Monitoring the progress
 %             - Status of the project
-%             - What has been done 
+%             - What has been done
 %         - Effort assessment
 %             - How much effort went to which features
 %         - Detecting problems for specific features
-%             - In the case of a problem, look for it in a localized manner 
+%             - In the case of a problem, look for it in a localized manner
 %             - can be done since we know what has done for which context
 %     - The use of requirements and req traceability is not common
 %         - Cost of integration
-%             - Need trace link recovery, 
+%             - Need trace link recovery,
 %         - Human effort
 %             - Do not force extra measures for traceability
 %     - To achieve wide-use of traceability
-%         - user friendly, 
+%         - user friendly,
 %             - showcasing trace data and other stats to user in a self-evident manner
-%         - minimal human effort, 
+%         - minimal human effort,
