@@ -31,8 +31,9 @@ class Graph:
         self.artifact_nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes
         self.model = None
 
-        # self.lemmatize_and_remove_stopwords()
-        # self.save_graph()
+        self.lemmatize_and_remove_stopwords()
+        self.create_model(Config().search_method)
+        self.save_graph()
 
     # Save the graph to a pickle file
     def save_graph(self):	
@@ -42,34 +43,36 @@ class Graph:
     # Create the vector model for the graph
     def create_model(self, modeltype):
         
-        if Config().model_setup and Config().experiment_mode:
-            # Experiment mode is on and model is already setup
-            return
+        # if Config().model_setup and Config().experiment_mode:
+        #     # Experiment mode is on and model is already setup
+        #     return
+        
+        print('Creating model...')
 
         total_tokens = 0
         # for node in self.nodes.values():
         #     total_tokens += len(node.tokens)
-            
+        # print('Total tokens:', total_tokens)    
+        
         if modeltype == 'tf-idf':
             # Prepare the corpus
             corpus = {}
             for a in self.nodes.values():
                 corpus[a.number] = a.text
             # Create the tf-idf vectors
-            vectorizer = TfidfVectorizer(min_df=2)
+            vectorizer = TfidfVectorizer(min_df=2)#min_df=2
             tfidf_vectors = vectorizer.fit_transform(corpus.values())
             self.tfidf_vectors = tfidf_vectors.toarray()
             index = 0
+            print(tfidf_vectors.shape)
             for c in corpus.keys():
                 a = self.nodes[c]
-                if a.node_type == 'requirement' and a.parent is not None and Config().parent_mode:
-                    # If parent mode is on, combine the artifact vector with the parent vector
-                    a.vector = a.parent.vector + self.tfidf_vectors[index]
-                else:
-                    a.vector = self.tfidf_vectors[index]
+                # if a.node_type == 'requirement' and a.parent is not None and Config().parent_mode:
+                #     # If parent mode is on, combine the artifact vector with the parent vector
+                #     print("here")
+                #     a.vector = a.parent.vector + self.tfidf_vectors[index]
+                a.vector = self.tfidf_vectors[index]
                 index += 1
-            Config().model_setup = True
-
         elif modeltype == 'word-vector':
             # Get the pretrained model
             self.model = KeyedVectors.load_word2vec_format(Config().pretrained_model_path, binary=True) #load the model
@@ -80,8 +83,6 @@ class Graph:
                 total_missing_tokens += node.create_vector(self.model)
             print('Total missing tokens:', total_missing_tokens)
             print('Total tokens:', total_tokens)
-            Config().model_setup = True
-        
         elif modeltype == 'llm-vector':
             # Get the embeddings for each node
             if not os.path.exists(f"data_{Config().repo_name}/embeddings.json"):
@@ -94,6 +95,8 @@ class Graph:
                 number = e['number']
                 number = int(number) if number.isdigit() else number
                 self.nodes[number].vector = e['embedding']
+        # self.save_graph()
+        # Config().model_setup = True
 
     # Lemmatize and remove stopwords from each artifact in the graph
     def lemmatize_and_remove_stopwords(self):

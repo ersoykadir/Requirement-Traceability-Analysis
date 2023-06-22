@@ -1,7 +1,7 @@
 import json
 import openai
-
-openai.api_key = ""
+import os
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 max_tokens = 8191
 tokens_per_request = 40000
@@ -75,7 +75,8 @@ def get_embeddings_for_nodes(graph):
     for node in graph.nodes.values():
         print("Node {}".format(node.number) )
         # dict = {'number': node.number, 'node_type': node.node_type, 'embedding': None}
-        text = preprocess_text(node.text)
+        # text = preprocess_text(node.text)
+        text = node.text
         node_tokens = num_tokens_from_string(text, "cl100k_base")
         if node_tokens > max_tokens:
             print("Node {} has # tokens: {}".format(node.number, node_tokens))
