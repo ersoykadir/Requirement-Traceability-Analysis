@@ -1,3 +1,4 @@
+import json
 import string
 import sys, os
 import pickle
@@ -14,6 +15,7 @@ from keyword_extractor.custom_extractor import lemmatizer, remove_stopwords_from
 from .node_parser import build_issue_nodes, build_pr_nodes, build_commit_nodes, build_requirement_nodes
 
 from config import Config
+from trace_util.llm_vectors import get_embeddings_for_nodes
 
 """
     Class representing the graph of software artifacts.
@@ -29,8 +31,8 @@ class Graph:
         self.artifact_nodes = self.issue_nodes | self.pr_nodes | self.commit_nodes
         self.model = None
 
-        self.lemmatize_and_remove_stopwords()
-        self.save_graph()
+        # self.lemmatize_and_remove_stopwords()
+        # self.save_graph()
 
     # Save the graph to a pickle file
     def save_graph(self):	
@@ -45,8 +47,8 @@ class Graph:
             return
 
         total_tokens = 0
-        for node in self.nodes.values():
-            total_tokens += len(node.tokens)
+        # for node in self.nodes.values():
+        #     total_tokens += len(node.tokens)
             
         if modeltype == 'tf-idf':
             # Prepare the corpus
@@ -79,14 +81,27 @@ class Graph:
             print('Total missing tokens:', total_missing_tokens)
             print('Total tokens:', total_tokens)
             Config().model_setup = True
+        
+        elif modeltype == 'llm-vector':
+            # Get the embeddings for each node
+            if not os.path.exists(f"data_{Config().repo_name}/embeddings.json"):
+                get_embeddings_for_nodes(self)
+            f = open(f"data_{Config().repo_name}/embeddings.json", "r")
+            embeddings = json.loads(f.read())
+            f.close()
+            embeddings = embeddings['embeddings']
+            for e in embeddings:
+                number = e['number']
+                number = int(number) if number.isdigit() else number
+                self.nodes[number].vector = e['embedding']
 
     # Lemmatize and remove stopwords from each artifact in the graph
     def lemmatize_and_remove_stopwords(self):
         nodes = self.artifact_nodes if Config().search_method == 'keyword' else self.nodes
         for artifact in nodes.values():
             # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
-            artifact.text = lemmatizer(artifact.text)
-            # artifact.preprocess_text()
+            # artifact.text = lemmatizer(artifact.text)
+            artifact.preprocess_text()
 
     # Combine two trace tuples
     def combine(self, tuple1, tuple2):
@@ -95,7 +110,7 @@ class Graph:
                 tuple1[0] = tuple1[0] + tuple2[0]
             else:
                 # For now, similarity equals to max similarity when pr and commit traces are combined
-                tuple1[0] = max(tuple1[0], tuple2[0])
+                tuple1[0] = (tuple1[0] + tuple2[0]) / 2
             tuple1[1].extend(tuple2[1])
             tuple1[1] = list(set(tuple2[1]))
             return tuple1

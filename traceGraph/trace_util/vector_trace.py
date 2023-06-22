@@ -3,12 +3,12 @@ from config import Config
 import math, operator
 
 def cosine_similarity(v1, v2):
-    if Config().search_method == 'tf-idf':
+    if Config().search_method == 'tf-idf' or Config().search_method == 'llm-vector':
         return np.dot(v1, v2)
     return np.dot(v1, v2)/(np.linalg.norm(v1)*np.linalg.norm(v2))
 
 def normalize(word_vec):
-    if Config().search_method == 'tf-idf':
+    if Config().search_method == 'tf-idf' or Config().search_method == 'llm-vector':
         return word_vec
     norm=np.linalg.norm(word_vec)
     if norm == 0: 
@@ -27,7 +27,7 @@ def find_similar_nodes(node_number, trace_nodes, graph):
         b_vector = normalize(b_vector)
         similarity = cosine_similarity(a_vector, b_vector)
         if similarity > 1:
-            raise Exception("Similarity cannot be greater than 1")
+            raise Exception("Similarity cannot be greater than 1", similarity, node_number, node.number)
         if similarity > threshold:
             filtered[node.number] = [similarity, [Config().search_method]]
     return filtered

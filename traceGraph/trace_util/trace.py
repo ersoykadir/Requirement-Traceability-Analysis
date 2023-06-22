@@ -59,6 +59,9 @@ def find_traces(graph):
     elif Config().search_method == 'word-vector':
         graph.create_model('word-vector')
         trace_w_vector(graph)
+    elif Config().search_method == 'llm-vector':
+        graph.create_model('llm-vector')
+        trace_w_vector(graph)
 
 import pickle
 """
