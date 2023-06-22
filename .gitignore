@@ -79,3 +79,4 @@ acs-*.bib
 paper/.DS_Store
 paper/sections/.DS_Store
 *.el
+.DS_Store
