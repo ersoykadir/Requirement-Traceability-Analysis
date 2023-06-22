@@ -1,7 +1,7 @@
 import json
 import openai
 
-openai.api_key = "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"
+openai.api_key = ""
 
 max_tokens = 8191
 tokens_per_request = 40000
