@@ -8,6 +8,10 @@
 \usepackage[bottom]{footmisc}
 \usepackage{cite}
 \usepackage{graphicx}
+\usepackage{algorithm,algorithmicx,algpseudocode}
+\usepackage{dcolumn}
+\usepackage{listings}
+
 \usepackage{url}
 \usepackage{multicol}
 \usepackage{longtable}
@@ -26,7 +30,8 @@
 
 \usepackage{multirow}
 \usepackage{subcaption}
-\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{float}
+%\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 
 \usepackage{soul}
 \usepackage{adjustbox}
@@ -36,6 +41,13 @@
 \DeclareRobustCommand{\fba}[1]{ {\begingroup\sethlcolor{BurntOrange}\hl{(fba:) #1}\endgroup} }
 
 \newcommand{\etal}{\emph{et al}.}
+
+\usepackage[super]{nth} 
+\usepackage[framemethod=tikz]{mdframed}
+
+\input{new-envs}
+\input{commands}
+
 \begin{document}
 
 

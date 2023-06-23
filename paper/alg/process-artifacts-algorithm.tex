@@ -1,0 +1,50 @@
+\setphaserulewidth{0.4pt}
+
+\begin{breakablealgorithm}
+%\caption{Topic extraction from microposts}
+\label{alg:process-software-artifacts}
+\begin{algorithmic}[1]
+\State Input: $P$ \Comment{micropost set} 
+\State Output: $T$ : OWLDocument \Comment{semantic topics}
+\State $\textit{unlinkedSpots} \leftarrow []$ \Comment{unlinked spots}
+\State $\textit{elements} \leftarrow []$ \Comment{candidate elements}
+\State $\textit{types} \leftarrow []$ \Comment{types of elements}
+\State $le \leftarrow []$ \Comment{linked entities}
+\State $G$, $G'$ : \texttt{graph} \Comment{initial and pruned graphs}
+%\State $T$ : \textbf{Topic} \Comment{semantic topics}
+\State $\textit{gt}$ : $\{\}$ \Comment{set of sub-graphs} 
+\State $\textit{sTopic}$ : \texttt{OWL} \Comment{sbounti\ topic} 
+\phase{Candidate element}
+%\LineComment{identify candidate elements}
+\For{\textbf{each} $p$ \textbf{in} $P$ } \label{algl:a}
+%\State $\textit{elements}[p] \leftarrow \{\}$ $link-entities(p,\dbp)$
+\State $\textit{elements}[p] \leftarrow$ entities($p$) $\cup$ temporalExpressions($p$) 
+\State $\textit{unlinkedSpots}[p] \leftarrow$ unlinkedSpots($p$) 
+\EndFor \label{algl:b}
+\phase{Improve entities}
+%\LineComment{improve linked entities with collective information}
+\For{\textbf{each} $p$ \textbf{in} P} \label{algl:c}
+%\State $\textit{le}[p] \leftarrow \{\}$ \Comment{initialize the linked entities of post p as a set}
+\State $\textit{le}[p] \leftarrow$ reLink($\textit{elements}[p],\textit{elements}$) 
+\LineComment{Add the newly linked entities}
+\State $\textit{le}[p] \leftarrow \textit{le}[p] \cup$ linkSpots($\textit{unlinkedSpots}[p]\textit{,elements,unlinkedSpots}$)
+\EndFor \label{algl:d}
+\phase{Topic identification}
+%\LineComment{Identify topics}
+\State $G \leftarrow $  relate($le$) \label{algl:e} \Comment{construct co-occurrence graph} 
+\State $G' \leftarrow $  prune($G,\tau_{e}$) \Comment{prune the graph using $\tau_e$} \label{algl:f}
+\LineComment{identify the type of each element}
+\For{\textbf{each} $v$ \textbf{in} $G'$} \label{algl:g}
+\State $types[v] \leftarrow $  getType($v,P,\tau_{loc}$)\Comment{determine the type of element ($v$)}
+\EndFor \label{algl:h}
+\State $gt \leftarrow $  identifyTopics($G'$) \Comment{related sub-graphs of  G} \label{algl:i}
+\State $\textit{observationInterval} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getObservationInterval($P$)\Comment{timestamps of the earliest and latest posts} \label{algl:m}
+\phase{Topic representation}
+%\LineComment{represent  topics according to  topico}
+\For{\textbf{each} $topic$ \textbf{in} $gt$} \label{algl:j}
+\State $\mathit{sTopic} \leftarrow $  sem-topic($topic,types,\textit{observationInterval}$)\Comment{represent as sbounti\ topic}
+\State $T$.add($\mathit{sTopic}$) \Comment{Add to topics for collection P}
+\EndFor \label{algl:k}
+\\ \Return $T$
+\end{algorithmic}
+\end{breakablealgorithm}
