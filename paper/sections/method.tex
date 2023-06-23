@@ -127,7 +127,7 @@ This section details our approach for discovering trace links in a software repo
         \label{fig:tfidfvec}
       \end{figure}
 
-      \paragraph{Word Vectors} To generate word vectors for each artifact we use a pre-trained word embeddings model \fba{which one?}. We gather the word vector for each word within an artifact from the model and to build a vector for each requirement and software development artifact we average the word vectors contained in their textual attributes. To extract trace links for a requirement using TF-IDF and word vectors, we calculate the cosine similarity metric of the requirement's vector with the vectors of other artifacts. The artifacts that have similarity above the decided threshold are recorded as candidate traces \fba{how do we move from candidate to actual? explain or remove the word candidate}. Fig.~\ref{fig:wordvec} presents this method.
+      \paragraph{Word Vectors} To generate word vectors for each artifact we use a pre-trained word embeddings model \fba{which one?}. We gather the word vector for each word within an artifact from the model and to build a vector for each requirement and software development artifact we average the word vectors contained in their textual attributes. To extract trace links for a requirement using TF-IDF and word vectors, we calculate the cosine similarity metric of the requirement's vector with the vectors of other artifacts. The artifacts that have similarities above the decided threshold are recorded as identified traces. Fig.~\ref{fig:wordvec} presents this method.
 
        \begin{figure}[htb]
         \centering
