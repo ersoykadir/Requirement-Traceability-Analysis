@@ -1,4 +1,4 @@
-\section{Evaluation Plan}
+\section{Evaluation}
 \label{sec:eval}
 
 % \begin{itemize}
@@ -8,26 +8,30 @@
 %     \item Evaluation of results
 % \end{itemize}
 
-In this section, we present the evaluation methods we performed for our tool, focusing on the accuracy of the three implemented methods for identifying trace links: keyword extraction, TF-IDF vector and word vector.
+This section describes how we evaluated our approach, which focuses on the accuracy of the method utilized in extracting the trace links, namely keyword extraction, TF-IDF vectors and word vectors.
 
-For this purpose, we designed an experiment based on a ground truth set. This set consisted of eight requirement statements and software development artifacts that trace to them. These trace links were captured manually by our team. The ground truth set served as a reference to assess the accuracy of the automated methods.
+For this purpose, we selected a set of requirements and thir associated software development artifactsto serve as a ground truth. 
+The trace links were manually traced  by our team. 
+\todo{Have we put the selected requirements and traces somewhere? If not let's put it in our repo. }
 
-The evaluation metrics used in this experiment were recall and precision values. Recall value presents the percentage of the real traces that are recovered, while precision presents the percentage of the recovered traces that are correct. These values are calculated using the formulas below:
-\\
+The performance of our approach is evaluated using the recall and precision metrics, which inform us about the  percentage of the  traces that were successfully recovered and  the percentage of the traces that are correctly recovered using the following formulas:
+
 
 $Recall = \dfrac{True Positives}{True Positives + False Negatives}$
-\\
+
 
 $Precision = \dfrac{True Positives}{True Positives + False Positives}$
-\\
 
-In the experiment, true positives indicate the trace links that are identified by the method. False negatives indicate the trace links that are not identified(missed), and false positives indicate the identified trace links that are incorrect. The results of the keyword extraction method are presented in Table I, while the results of the vector based methods are presented in Table II.
+
+%In the experiment, true positives indicate the trace links that are identified by the method. 
+%False negatives indicate the trace links that are not identified(missed), and false positives indicate the identified trace %links that are incorrect. 
+Table~\ref{tab:keyperf} presents the results of the keyword extraction method and 
+  Table~\ref{tab:vecperf} shows the results of the vector based methods.
 
 
 \begin{table}[htb]
 \centering
-\caption{Performance of the Keyword Extraction Method}
-\label{tab:keyperf}
+\caption{\label{tab:keyperf}Performance of the Keyword Extraction Method}
 \begin{tabular}{lll}
   \toprule
   Method & Recall & Precision\\
@@ -40,8 +44,7 @@ Keyword extraction & {0.865} & 0.212 \\
 
 \begin{table}[htb]
 \centering
-\caption{Performance of the Vector-based Methods}
-\label{tab:vecperf}
+\caption{\label{tab:vecperf}Performance of the Vector-based Methods}
 \begin{tabular}{lllll}
 \toprule
   & \multicolumn{2}{c}{Word-vector} &  \multicolumn{2}{c}{Tf-idf vector} \\
@@ -59,10 +62,14 @@ Keyword extraction & {0.865} & 0.212 \\
 \end{tabular}
 \end{table}
 
-Among the tested methods, the keyword extraction method yielded the best recall-precision pair. Conversely, the performance of the vector-based methods varied significantly by the defined threshold value. For the vector-based methods, the recall value was observed as close to 1 when the threshold value was relatively low, while the precision value dropped substantially, indicating that all the necessary traces are recovered but also almost all of the SDAs have been identified as candidate traces. On the other hand, setting the threshold value too high caused the opposite effect, resulting in low recall and higher precision values.
+Among these mehtods,  the keyword extraction method yielded the best recall-precision pair.
+The performance of the vector-based methods  significantly varies according to the threshold value. 
+The recall values  approach 1 with low  threshold values which also yield significantly low precision values.
+ This indicates that the desired traces are recovered, but also that,  almost all of the SDAs have been identified as candidate traces. 
+ On the other hand, high threshold values result in the  opposite,yielding low recall and higher precision values.
 % Notably, the word vector method achieved the highest precision value among the results when the threshold was set to 0.25.
 
-In conclusion, these results indicate that each method has strong aspects, and selecting the most suitable method highly depends on the specific project structure and requirements.
+In conclusion, these results indicate that each method its strengths, and selecting the most suitable among them is dependent  on the specific project structure and requirements. \todo{I don't find this convinging argument. What kinds of structured would we prefer which methods for? Like what structure? It may depend more on how the project team documents its work as the traces are captured from the articulation of the team members and their code conventions (variable names, commenting etc.)}
 
 %%% Local Variables:
 %%% mode: latex
