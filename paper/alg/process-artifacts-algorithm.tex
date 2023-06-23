@@ -4,47 +4,140 @@
 %\caption{Topic extraction from microposts}
 \label{alg:process-software-artifacts}
 \begin{algorithmic}[1]
-\State Input: $P$ \Comment{micropost set} 
-\State Output: $T$ : OWLDocument \Comment{semantic topics}
-\State $\textit{unlinkedSpots} \leftarrow []$ \Comment{unlinked spots}
-\State $\textit{elements} \leftarrow []$ \Comment{candidate elements}
-\State $\textit{types} \leftarrow []$ \Comment{types of elements}
-\State $le \leftarrow []$ \Comment{linked entities}
-\State $G$, $G'$ : \texttt{graph} \Comment{initial and pruned graphs}
-%\State $T$ : \textbf{Topic} \Comment{semantic topics}
-\State $\textit{gt}$ : $\{\}$ \Comment{set of sub-graphs} 
-\State $\textit{sTopic}$ : \texttt{OWL} \Comment{sbounti\ topic} 
-\phase{Candidate element}
-%\LineComment{identify candidate elements}
-\For{\textbf{each} $p$ \textbf{in} $P$ } \label{algl:a}
-%\State $\textit{elements}[p] \leftarrow \{\}$ $link-entities(p,\dbp)$
-\State $\textit{elements}[p] \leftarrow$ entities($p$) $\cup$ temporalExpressions($p$) 
-\State $\textit{unlinkedSpots}[p] \leftarrow$ unlinkedSpots($p$) 
-\EndFor \label{algl:b}
-\phase{Improve entities}
-%\LineComment{improve linked entities with collective information}
-\For{\textbf{each} $p$ \textbf{in} P} \label{algl:c}
-%\State $\textit{le}[p] \leftarrow \{\}$ \Comment{initialize the linked entities of post p as a set}
-\State $\textit{le}[p] \leftarrow$ reLink($\textit{elements}[p],\textit{elements}$) 
-\LineComment{Add the newly linked entities}
-\State $\textit{le}[p] \leftarrow \textit{le}[p] \cup$ linkSpots($\textit{unlinkedSpots}[p]\textit{,elements,unlinkedSpots}$)
-\EndFor \label{algl:d}
-\phase{Topic identification}
-%\LineComment{Identify topics}
-\State $G \leftarrow $  relate($le$) \label{algl:e} \Comment{construct co-occurrence graph} 
-\State $G' \leftarrow $  prune($G,\tau_{e}$) \Comment{prune the graph using $\tau_e$} \label{algl:f}
-\LineComment{identify the type of each element}
-\For{\textbf{each} $v$ \textbf{in} $G'$} \label{algl:g}
-\State $types[v] \leftarrow $  getType($v,P,\tau_{loc}$)\Comment{determine the type of element ($v$)}
-\EndFor \label{algl:h}
-\State $gt \leftarrow $  identifyTopics($G'$) \Comment{related sub-graphs of  G} \label{algl:i}
-\State $\textit{observationInterval} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getObservationInterval($P$)\Comment{timestamps of the earliest and latest posts} \label{algl:m}
-\phase{Topic representation}
-%\LineComment{represent  topics according to  topico}
-\For{\textbf{each} $topic$ \textbf{in} $gt$} \label{algl:j}
-\State $\mathit{sTopic} \leftarrow $  sem-topic($topic,types,\textit{observationInterval}$)\Comment{represent as sbounti\ topic}
-\State $T$.add($\mathit{sTopic}$) \Comment{Add to topics for collection P}
-\EndFor \label{algl:k}
-\\ \Return $T$
+\State Input: $RSD$ \Comment{Requirement Specification Document}
+\State Input: $GRU$ \Comment{Github Repository URL} 
+\State Input: $M$ \Comment{Trace Extraction Method} 
+\State Input: $TH$ \Comment{Threshold for Vector-Based Methods} 
+\State Output: $TG$ : \texttt{graph} \Comment{Trace Graph}
+% \State $\textit{IP}$ \Comment{issues properties}
+% \State $\textit{PP}$ \Comment{pull request properties}
+% \State $\textit{CP}$ \Comment{commit properties}
+% \State $\textit{elements} \leftarrow []$ \Comment{candidate elements}
+% \State $\textit{types} \leftarrow []$ \Comment{types of elements}
+% \State $le \leftarrow []$ \Comment{linked entities}
+% \State $G$, $G'$ : \texttt{graph} \Comment{initial and pruned graphs}
+% %\State $T$ : \textbf{Topic} \Comment{semantic topics}
+% \State $\textit{gt}$ : $\{\}$ \Comment{set of sub-graphs} 
+% \State $\textit{sTopic}$ : \texttt{OWL} \Comment{sbounti\ topic} 
+\phase{Fetch Software Artifacts}
+% \LineComment{Request from Github graphQL API}
+\State $\textit{issueList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getIssues($GRU$)\label{algl:m}
+\State $\textit{prList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getPRs($GRU$)\label{algl:m}
+\State $\textit{commitList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getCommits($GRU$)\label{algl:m}
+% \LineComment{Parse directly from given Requirement Specification Document}
+\State $\textit{reqList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getRequirements($RSD$)\label{algl:m}
+
+% \State $\textit{Issues_json} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getIssues($RU,IP$)\label{algl:f}
+% \State $\textit{PullRequest_json} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getPRs($RU,IP$)\label{algl:f}
+% \State $\textit{Commits_json} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getCommits($RU,IP$)\label{algl:f}
+% \State $\textit{Requirements_json} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getRequirements($RS$)\label{algl:f}
+
+% \phase{Pre-process Input}
+% % \LineComment{A text field for each artifact is constituted}
+% % \LineComment{Date fields converted to neo4j compatible type}
+% % \LineComment{CreatedWeek and ClosedWeek fields for each artifact}
+% % \State $\textit{issueNodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parseIssues($issueList$)\label{algl:m}
+% % \State $\textit{prsNodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parsePRs($prList$)\label{algl:m}
+% % \State $\textit{commitNodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parseCommits($commitList$)\label{algl:m}
+% % \State $\textit{reqNodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parseRequirements($reqList$)\label{algl:m}
+% \State $\textit{sdaList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueNodes+prNodes+commitNodes+reqNodes$\label{algl:m}
+
+% \For{\textbf{each} $i$ \textbf{in} issueList} \label{algl:c}
+% \State i.text = i.title+i.description+i.comments
+% \State lemmatize(i.text)
+% \EndFor \label{algl:c}
+
+% \State $\textit{issue_nodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parseIssues($RU$,$IP$)
+% \State $\textit{PR_nodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parsePRs($RU$,$IP$)
+% \State $\textit{commit_nodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parseCommits($RU$,$IP$)
+% \State $\textit{req_nodes} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} parseRequirements($RU$,$IP$)
+
+
+% \LineComment{Text field for each artifact is created}
+% \For{\textbf{each} $i$ \textbf{in} Issues} \label{algl:a}
+% \State $\textit{i.text} \leftarrow$ i.title+t.description+i.comments 
+% \EndFor \label{algl:a}
+% \For{\textbf{each} $p$ \textbf{in} PullRequests} \label{algl:b}
+% \State $\textit{p.text} \leftarrow$ p.title+p.description+p.comments
+% \EndFor \label{algl:b}
+% \For{\textbf{each} $c$ \textbf{in} Commits} \label{algl:c}
+% \State $\textit{c.text} \leftarrow$ c.message
+% \EndFor \label{algl:c}
+
+\phase{Create Graph with Artifacts}
+
+% \State neo4jConnector($issue_nodes$)\Comment{}
+
+\State $\textit{sdaList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueList+prList+commitList$\label{algl:m}
+% \State $\textit{TG} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueNodes+prNodes+commitNodes+reqNodes$\label{algl:m}
+\State $TG \leftarrow$  \texttt{graph} 
+
+\For{\textbf{each} $a$ \textbf{in} sdaList} \label{algl:c}
+\State $TG$.addNode(a)
+\EndFor \label{algl:c}
+
+\For{\textbf{each} $r$ \textbf{in} reqList} \label{algl:c}
+\State $TG$.addNode(r)
+\EndFor \label{algl:c}
+
+% \State $G \leftarrow $  relate($le$) \label{algl:e} \Comment{construct co-occurrence graph} 
+% \State $G' \leftarrow $  prune($G,\tau_{e}$) \Comment{prune the graph using $\tau_e$} \label{algl:f}
+% \LineComment{identify the type of each element}
+% \For{\textbf{each} $v$ \textbf{in} $G'$} \label{algl:g}
+% \State $types[v] \leftarrow $  getType($v,P,\tau_{loc}$)\Comment{determine the type of element ($v$)}
+% \EndFor \label{algl:h}
+% \State $gt \leftarrow $  identifyTopics($G'$) \Comment{related sub-graphs of  G} \label{algl:i}
+% \State $\textit{observationInterval} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getObservationInterval($P$)\Comment{timestamps of the earliest and latest posts} \label{algl:m}
+
+\phase{Extract Trace Links}
+
+\State preprocess($reqList$, $method$)
+\State preprocess($sdaList$, $method$)
+\For{\textbf{each} $r$ \textbf{in} reqList} \label{algl:c}
+\For{\textbf{each} $a$ \textbf{in} sdaList} \label{algl:c}
+\If{isEdge($r$,$a$,$M$)}
+\State $TG$.addEdge(r,a)
+\EndIf
+\EndFor \label{algl:c}
+\EndFor \label{algl:c}
+
+% \If{ $M$ \textbf{equals} \textit{keyword}}
+
+% \EndIf \label{algl:k}
+% \If{ $M$ \textbf{equals} \textit{tf-idf}}
+% \EndIf \label{algl:k}
+% \If{ $M$ \textbf{equals} \textit{word-vector}}
+% \EndIf \label{algl:k}
+% \For{\textbf{each} $topic$ \textbf{in} $gt$} \label{algl:j}
+% \State $\mathit{sTopic} \leftarrow $  sem-topic($topic,types,\textit{observationInterval}$)\Comment{represent as sbounti\ topic}
+% \State $T$.add($\mathit{sTopic}$) \Comment{Add to topics for collection P}
+% \EndFor \label{algl:k}
+\Return $TG$
 \end{algorithmic}
 \end{breakablealgorithm}
+
+\emph{getIssues-getPRs-getCommits(req, sda, method)}
+
+These functions make API calls to Github API, requesting software artifacts for the input repository, using properties mentioned in Table \ref{tab:artifactfeatures}. Each function returns a list of issues/prs/commits with desired properties, respectively.
+
+% \emph{$TG.addNode(nodeProperties)$}
+
+% Adds a node with given properties to the $TG$(graph).
+
+\textbf{$preprocess(list, method)$}
+
+A list of software artifacts with their properties is expected. Text property of each artifact in the list is lemmatized. 
+Also, stopwords are removed from the text properties, if the method is vector-based, 
+
+
+\emph{isEdge(req, sda, method)}
+
+isEdge function determines whether there is a trace link between a given a requirement and a software development artifact.
+\begin{itemize}
+    \item If the method is keyword extraction, keywords of the requirement is extracted. Then sda.text is checked if it contains any of the requirement keywords. An edge is created if sda contains a keyword.
+    \item If the method is vector-based(tf-idf or word-embedding), a vector for both req and sda is created, using their text property. Then, the similarity between the vectors are calculated. An edge is created if similarity value is above the threshold.
+\end{itemize}
+
+% \emph{$TG$.addEdge(node1, node2)}
+
+% Adds an edge between the node1 and node2.\\
