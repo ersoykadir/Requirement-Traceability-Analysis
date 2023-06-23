@@ -16,32 +16,99 @@
 %     \end{itemize}
 % \end{itemize}
 
-This section details our approach for discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extract trace links between requirements and the software issues, commits, pull requests by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Fig.~\ref{fig:sys-flow} presents the main steps of our approach.
+This section details our approach for discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extract trace links between requirements and the software issues, commits, pull requests (PRs) by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Fig.~\ref{fig:sys-flow} presents the main steps of our approach.
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.65\linewidth]{figs/approach.png}
-    \caption{Control flow of the system.}
+    \caption{Steps of our approach}
     \label{fig:sys-flow}
-\end{figure}
+  \end{figure}
 
-The tool expects a Requirement Specification Document(RSD) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API
-and the requirement statements are parsed from the given RSD. This operation yields files containing information about Software Development Artifacts (SDA) and requirements, with their associated properties, such as title, description, creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
+  The first two steps, \textsf{S1} and \textsf{S2}, concerns processing the two inputs of our approach, a software repository and natural language requirements, respectively. \textsf{S1} fetches issues, pull requests, and commits from a repository whose URL is given. Our prototype expects a Github repository, however our approach is general and can be applied to other repositories where the aforementioned development artifacts are present. Table~\ref{tab:artifactfeatures} presents the attributes of these artifacts that are used in our approach. Our prototype expects a text file containing requirements. It do not enforce a specific for requirements and is able to process the requirements that written in a hierarchical structure, which is a common practice.
 
-In the subsequent step, the file containing the information about SDAs and RDS are parsed to create graph nodes. At the completion of this operation, there are nodes representing each requirement and each SDA. The properties of the artifacts are stored as a property of the graph nodes. Later on, these nodes are saved into the graph database.
+        \begin{table}
+        \centering
+        \caption{Attributes of software development artifacts used in our approach}
+        \label{tab:artifactfeatures}
+        \begin{tabular}{lllll}
+          \toprule
+          & Requirement & Issue & PR & Commit \\
+          \midrule
+          ID &\checkmark &\checkmark&\checkmark&\checkmark\\
+          Title &-&\checkmark&\checkmark&-\\
+          Description &\checkmark&\checkmark&\checkmark&-\\
+          URL&-&\checkmark&\checkmark&\checkmark\\
+          Number&\checkmark&\checkmark&\checkmark&\checkmark\\
+          State&-&\checkmark&\checkmark&-\\
+          Creation Date&-&\checkmark&\checkmark&-\\
+          Completion Date&-&\checkmark&\checkmark&\checkmark\\
+          Message&-&-&-&\checkmark\\
+          Comment Count&-&\checkmark&\checkmark&-\\
+          Comment List&-&\checkmark&\checkmark&-\\
+          Parent&\checkmark&-&-&-\\
+          OID&-&-&-&\checkmark\\
+          Text&\checkmark&\checkmark&\checkmark&\checkmark\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
 
-Furthermore, the trace links for each requirement statement are identified. The tool has three different methods implemented for trace link recovery as displayed in Figure \ref{fig:trace-methods}. The first method involves a keyword extraction, where the significant keywords from requirement specification are extracted using a custom pipeline that utilizes \textit{dependency parsing}. These keywords serve as the basis for identifying trace links between SDAs and requirements. Keyword-matching is performed on the textual data of each SDA, to capture artifacts that include the keyword as a candidate trace. The second method utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, which creates a vector for each artifact, based on the importance of the terms in their textual data. By comparing the TF-IDF vectors, the potential trace links are identified. The third method acquires word embeddings for each artifact text using a pre-trained model, creating a document vector by averaging the word embeddings, and compares these vectors to identify traces, similar to the TF-IDF vector method.
+%The tool expects a Requirement Specification Document(RSD) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API and the requirement statements are parsed from the given RSD. This operation yields files containing information about Software Development Artifacts (SDA) and requirements, with their associated properties, such as title, description, creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
 
-After the identification of the trace links, the graph database is utilized to store the trace links, along with requirements and SDAs. The use of a graph database offers a scalable solution and facilitates easy retrieval of traceability data through queries. More importantly, the graphical structure of the software artifacts and the requirements provides a comprehensive visualization of the trace links.
+      In \textsf{S3}, we create corresponding nodes in our graph database for each requirement, issue, pull request, and commit. We use the attributes presented in Table~\ref{tab:artifactfeatures} as attributes of the corresponding nodes. Our protoype implements the graph database using Neo4j\footnote{https://neo4j.com}.
 
-Additionally, an interactive dashboard that visualizes the statistical information about the project and the requirements is developed. The dashboard includes various reports suitable for each kind of insight displayed, and facilitates a deeper understanding of the status and the complexity of the requirements, and provides information about the effort given to requirements during their lifetime.
+      \textsf{S4} is the step where we extract trace links. We implement and evaluate three methods to extract trace links. The first method identifies important keywords in requirements and development artifacts and links a requirement with artifacts that share keywords with it. The other two methods are based on vector representations. We create term frequency- inverse document frequency (TF-IDF) vectors and word vectors from a pre-trained model and link a requirement with artifacts whose vectors are similar to its vector. Below we detail these three methods %Fig.~\ref{fig:trace-methods} summarizes these three methods to extract trace links.
 
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figs/tracemethods.png}
-    \caption{Control flow of the trace methods.}
-    \label{fig:trace-methods}
-\end{figure}
+      % \begin{figure}[htb]
+      %   \centering
+      %   \includegraphics[width=0.9\linewidth]{figs/tracemethods.png}
+      %   \caption{Control flow of the trace methods.}
+      %   \label{fig:trace-methods}
+      % \end{figure}
+
+      \paragraph{Keyword Matching}
+
+      \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.99\linewidth]{figs/keywordmatching.png}
+        \caption{Steps of trace link extraction based on keyword matching}
+        \label{fig:keymatch}
+      \end{figure}
+
+      \paragraph{TF-IDF Vectors} We first build a corpus consisting of all words in the requirements and the software development artifacts. We remove the stop words from this corpus. We calculate the TF-IDF values and construct a TF-IDF vector for each requirement and artifact. We then link the requirements with artifacts that have a similarity score more than a threshold. In Sec.~\ref{sec:eval} we experiment with this threshold. Fig.~\ref{fig:tfidfvec} presents the steps for this method.
+
+
+
+      \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.99\linewidth]{figs/tfidfvector2.png}
+        \caption{Steps of trace link extraction based on TF-IDF vectors}
+        \label{fig:tfidfvec}
+      \end{figure}
+
+      \paragraph{Word Vectors}
+       \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.99\linewidth]{figs/wordvector.png}
+        \caption{Steps of trace link extraction based on word vectors}
+        \label{fig:wordvec}
+      \end{figure}
+
+
+
+
+
+
+
+      %In the subsequent step, the file containing the information about SDAs and RDS are parsed to create graph nodes. At the completion of this operation, there are nodes representing each requirement and each SDA. The properties of the artifacts are stored as a property of the graph nodes. Later on, these nodes are saved into the graph database.
+
+%Furthermore, the trace links for each requirement statement are identified. The tool has three different methods implemented for trace link recovery as displayed in Figure \ref{fig:trace-methods}. The first method involves a keyword extraction, where the significant keywords from requirement specification are extracted using a custom pipeline that utilizes \textit{dependency parsing}. These keywords serve as the basis for identifying trace links between SDAs and requirements. Keyword-matching is performed on the textual data of each SDA, to capture artifacts that include the keyword as a candidate trace. The second method utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, which creates a vector for each artifact, based on the importance of the terms in their textual data. By comparing the TF-IDF vectors, the potential trace links are identified. The third method acquires word embeddings for each artifact text using a pre-trained model, creating a document vector by averaging the word embeddings, and compares these vectors to identify traces, similar to the TF-IDF vector method.
+
+%After the identification of the trace links, the graph database is utilized to store the trace links, along with requirements and SDAs. The use of a graph database offers a scalable solution and facilitates easy retrieval of traceability data through queries. More importantly, the graphical structure of the software artifacts and the requirements provides a comprehensive visualization of the trace links.
+
+%Additionally, an interactive dashboard that visualizes the statistical information about the project and the requirements is developed. The dashboard includes various reports suitable for each kind of insight displayed, and facilitates a deeper understanding of the status and the complexity of the requirements, and provides information about the effort given to requirements during their lifetime.
+
+
 
 \subsection{Heuristics}
 \label{sec:heuristics}
@@ -220,31 +287,7 @@ Table \ref{tab:artifactfeatures} displays the properties of the different kinds 
 %         \caption{\label{tab:artifactfeatures} The features of the artifacts utilized in identifying trace linking.}
 %       \end{table}
 
-      \begin{table}
-        \centering
-        \caption{Features used to extract trace links for each artifact}
-        \label{tab:artifactfeatures}
-        \begin{tabular}{lllll}
-          \toprule
-          & Requirement & Issue & PR & Commit \\
-          \midrule
-          ID &\checkmark &\checkmark&\checkmark&\checkmark\\
-          Title &-&\checkmark&\checkmark&-\\
-          Description &\checkmark&\checkmark&\checkmark&-\\
-          URL&-&\checkmark&\checkmark&\checkmark\\
-          Number&\checkmark&\checkmark&\checkmark&\checkmark\\
-          State&-&\checkmark&\checkmark&-\\
-          Creation Date&-&\checkmark&\checkmark&-\\
-          Completion Date&-&\checkmark&\checkmark&\checkmark\\
-          Message&-&-&-&\checkmark\\
-          Comment Count&-&\checkmark&\checkmark&-\\
-          Comment List&-&\checkmark&\checkmark&-\\
-          Parent&\checkmark&-&-&-\\
-          OID&-&-&-&\checkmark\\
-          Text&\checkmark&\checkmark&\checkmark&\checkmark\\
-          \bottomrule
-        \end{tabular}
-      \end{table}
+
 
 The textual properties of the nodes are required for the vector-based and keyword extraction trace identification methods to operate. In addition, the properties enable the observation of the creation/closure times and the status of the artifacts. Moreover, it is possible to access  the GitHub page that they are acquired from with URL property. Overall, these properties provide valuable traceability data, which serve as a foundation for an interactive dashboard that provides project management and requirement lifecycle analysis.
 
