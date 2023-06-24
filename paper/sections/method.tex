@@ -1,20 +1,5 @@
 \section{Method}
 \label{sec:approach}
-% \begin{itemize}
-%     \item Inputs-outputs
-%     \item Workflow + diagrams
-%     \item Heuristics:
-%     \begin{itemize}
-%         \item Keyword extraction, more detailed than poster
-%         \item Vector-based methods, more detailed than poster
-%     \end{itemize}
-%     \item Implementation:
-%     \item \begin{itemize}
-%         \item Trace graph + visuals
-%         \item Dashboard
-%         \item (Using same example for trace finding and trace graph)
-%     \end{itemize}
-% \end{itemize}
 
 This section details our approach for discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extract trace links between requirements and the software issues, commits, pull requests (PRs) by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Fig.~\ref{fig:sys-flow} presents the main steps of our approach. We publicly share the implementation of our approach in our replication package\footnote{https://zenodo.org/record/8076509}
 
@@ -57,11 +42,25 @@ This section details our approach for discovering trace links in a software repo
 
 %The tool expects a Requirement Specification Document(RSD) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API and the requirement statements are parsed from the given RSD. This operation yields files containing information about Software Development Artifacts (SDA) and requirements, with their associated properties, such as title, description, creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
 
-      In \textsf{S3}, we create corresponding nodes in our graph database for each requirement, issue, pull request, and commit. We use the attributes presented in Table~\ref{tab:artifactfeatures} as attributes of the corresponding nodes. Our protoype implements the graph database using Neo4j\footnote{https://neo4j.com}.
+ In \textsf{S3} nodes are created for each of the requirements, issues, pull requests, and commits. 
+The features  in Table~\ref{tab:artifactfeatures} are added as the node attributes. 
+ Our prototype uses Neo4j\footnote{https://neo4j.com} as a graph database.
 
-      \textsf{S4} is the step where we link requirements and artifacts in our graph database. There are two types of relationships to capture the relationship between the artifacts, namely \emph{tracesTo} and \emph{relatedCommit}. The  \emph{tracesTo} relationship represents an identified trace link and could be present between a requirement node and a software development artifact node. The \emph{relatedCommit} relationship detonates a commit associated with a pull request, hence it could be present between a PR node and a commit node.
+      \textsf{S4}  links the requirements to artifacts by creating edges between their associated nodes . 
+      Two types of relationships are captured between the artifacts, namely \emph{tracesTo} and \emph{relatedCommit}. 
+      The  \emph{tracesTo} relationship represents a trace link between a requirement node and a software development artifact node. 
+      The \emph{relatedCommit} is a relation between commit and a pull request nodes. 
+      This relation captures provides insight about how the commits are organized by the team. 
+      In practice requirements can trace directly to commits or via pull requests (as seen in Figure˜\ref{fig:rawtracegraph}).
 
-      We implement and evaluate three methods to extract trace links that lead to \emph{tracesTo} relations in our graph database. The first method identifies important keywords in requirements and development artifacts and links a requirement with artifacts that share keywords with it. The other two methods are based on vector representations. We create term frequency- inverse document frequency (TF-IDF) vectors and word vectors from a pre-trained model and link a requirement with artifacts whose vectors are similar to its vector. Below we detail these three methods %Fig.~\ref{fig:trace-methods} summarizes these three methods to extract trace links.
+      We implement and evaluate three methods to extract trace links, which are represented with the \emph{tracesTo} relation. 
+ The first method extracts keywords from the requirements and development artifacts and links the requirements to the artifacts that share keywords. 
+ The other methods are based on the \textit{term frequency-inverse document frequency} (TF-IDF) vectors and \textit{word vectors} obtained from a pre-trained model.
+For these methods, requirements are linked to the artifacts with similar vectors. 
+      The overview of the processing of software artifacts to extract the trace links is shown in Algorithm~\ref{alg:process-software-artifacts}.
+            \input{alg/process-artifacts-algorithm.tex}
+
+ The following details these methods %Fig.~\ref{fig:trace-methods} summarizes these three methods to extract trace links.
 
       % \begin{figure}[htb]
       %   \centering
@@ -70,9 +69,6 @@ This section details our approach for discovering trace links in a software repo
       %   \label{fig:trace-methods}
       % \end{figure}
 
-      The processing of software artifacts to extract the trace links is shown in Algorithm~\ref{alg:process-software-artifacts}.
-
-      \input{alg/process-artifacts-algorithm.tex}
       \paragraph{Keyword Matching} To identify the most relevant keyword we combine the output of several NLP tasks that are listed below. We identify the keywords from the requirements as our trace link direction is from requirements to the software development artifacts.
       \begin{itemize}
       \item Tokenization: We first split the natural language text of requirements.
@@ -97,7 +93,7 @@ This section details our approach for discovering trace links in a software repo
 \begin{figure*}[htbp]
     \centering
     \includegraphics[width=1\linewidth]{figs/displacy.png}
-    \caption{Dependency tree for an example requirement statement.}
+    \caption{The dependency tree of a requirement.}
     \label{fig:deptree}
   \end{figure*}
 
@@ -106,11 +102,11 @@ This section details our approach for discovering trace links in a software repo
   \begin{figure}[htb]
     \centering
     \includegraphics[width=.96\linewidth]{figs/keywords.png}
-    \caption{Results of keyword extraction on an example requirement specification.}
+    \caption{Keyword extraction from a requirement.}
     \label{fig:keywords}
   \end{figure}
 
-  After identifying the relevant keywords of requirements, we match them with the textual attributes of the software development artifacts in the repository. Whe create a trace link when an artifact has at least one matching keyword. We record the link in our graph database by creating an \emph{tracesTo} betweed the requirement node and the artifact node.
+  After identifying the relevant keywords of requirements, we match them with the textual attributes of the software development artifacts in the repository. Whe create a trace link when an artifact has at least one matching keyword. We record the link in our graph database by creating an \emph{tracesTo} between the requirement node and the artifact node.
 
   \paragraph{TF-IDF Vectors} We first build a corpus consisting of all words in the requirements and the software development artifacts. We remove the stop words from this corpus. We calculate the TF-IDF values using Equations \ref{eq:tf}, \ref{eq:idf}, and \ref{eq:tfidf} and construct a TF-IDF vector for each requirement and artifact. We then link the requirements with artifacts that have a similarity score more than a threshold. In Sec.~\ref{sec:eval} we experiment with this threshold. Fig.~\ref{fig:tfidfvec} presents the steps for this method.
 
@@ -123,7 +119,7 @@ This section details our approach for discovering trace links in a software repo
       \begin{figure}[htb]
         \centering
         \includegraphics[width=0.99\linewidth]{figs/tfidfvector2.png}
-        \caption{Steps of trace link extraction based on TF-IDF vectors}
+        \caption{Steps for extracting trace links based on TF-IDF vectors}
         \label{fig:tfidfvec}
       \end{figure}
 
@@ -138,191 +134,10 @@ This section details our approach for discovering trace links in a software repo
 
 
 
-
-
-
-
-      %In the subsequent step, the file containing the information about SDAs and RDS are parsed to create graph nodes. At the completion of this operation, there are nodes representing each requirement and each SDA. The properties of the artifacts are stored as a property of the graph nodes. Later on, these nodes are saved into the graph database.
-
-%Furthermore, the trace links for each requirement statement are identified. The tool has three different methods implemented for trace link recovery as displayed in Figure \ref{fig:trace-methods}. The first method involves a keyword extraction, where the significant keywords from requirement specification are extracted using a custom pipeline that utilizes \textit{dependency parsing}. These keywords serve as the basis for identifying trace links between SDAs and requirements. Keyword-matching is performed on the textual data of each SDA, to capture artifacts that include the keyword as a candidate trace. The second method utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm, which creates a vector for each artifact, based on the importance of the terms in their textual data. By comparing the TF-IDF vectors, the potential trace links are identified. The third method acquires word embeddings for each artifact text using a pre-trained model, creating a document vector by averaging the word embeddings, and compares these vectors to identify traces, similar to the TF-IDF vector method.
-
-%After the identification of the trace links, the graph database is utilized to store the trace links, along with requirements and SDAs. The use of a graph database offers a scalable solution and facilitates easy retrieval of traceability data through queries. More importantly, the graphical structure of the software artifacts and the requirements provides a comprehensive visualization of the trace links.
-
-%Additionally, an interactive dashboard that visualizes the statistical information about the project and the requirements is developed. The dashboard includes various reports suitable for each kind of insight displayed, and facilitates a deeper understanding of the status and the complexity of the requirements, and provides information about the effort given to requirements during their lifetime.
-
-
-
-% \subsection{Heuristics}
-% \label{sec:heuristics}
-
-% \textbf{1 - Keyword Extraction}
-
-% To implement the keyword extraction method, a heuristic approach is taken, that includes several steps to extract the most relevant keywords from requirement statements. The steps of the process are as following:
-
-
-
-% \begin{itemize}
-%     \item Tokenization and Part-of-Speech(POS) Tagging:
-%         \begin{itemize}
-%             \item Part-of-speech(POS) tagging is a process to assign a grammatical tag to each word to specify its syntactic role within a sentence. In this step, each word of the requirement statement is tokenized and the POS tagging is applied.
-%             \item By this process, each word of the requirement statement is categorized as nouns, verbs, adverbs, adjectives, etc.
-%         \end{itemize}
-
-
-%     \item Selecting Nouns and Verbs:
-%         \begin{itemize}
-%             \item Tokens that have \textit{noun} or \textit{verb} tag are extracted for further processing.
-%         \end{itemize}
-%     \item Dependency Parsing:
-%         \begin{itemize}
-%             \item Dependency parsing is the process of analyzing the dependency between the words of a sentence to discover the grammatical structure. In this step, a Dependency Parsing Tree of the requirement specification, which consists of dependency links is built.
-%             \item These links indicate the syntactic relationship between the words of a text.
-%             \item Figure \ref{fig:deptree} shows the POS tagging and the dependency tree of an example requirement statement. All of the words have grammatical categorization and syntactic dependency links in a tree structure.
-%         \end{itemize}
-
-%     \item Selecting Noun-Object and Verb-Object pairs:
-%         \begin{itemize}
-%             \item The dependency links of nouns and verbs created in previous steps are analyzed to capture direct objects that are linked to nouns/verbs.
-%             \item Nouns, verbs, and their corresponding objects are stored as "keywords" with labels \textit{noun-object} or \textit{verb-object}, based on the token tag.
-%         \end{itemize}
-%     \item Selecting Prepositions and Conjunctions:
-%         \begin{itemize}
-%             \item There are indirect objects linked to nouns and verbs using prepositions(e.g. on, at, it) and conjunctions(e.g. and, or). Further analysis is applied to noun and verb tokens to capture indirect objects and build phrases.
-%         \end{itemize}
-%     \item Removal of English Stopwords:
-%         \begin{itemize}
-%             \item English stopwords, such as articles, pronouns, and common conjunctions, are removed from the tokens.
-%             \item This process helps to reduce noise that could arise when keyword matching is applied to software development artifacts.
-%         \end{itemize}
-%     \item Optional: Removal of Project Specific Words from Requirement Specification Documents
-%         \begin{itemize}
-%             \item Words that are frequently used in the SDAs and requirement statements, which usually are not considered as english stopwords, are also removed.
-%             \item However, this step is considered optional and user is expected to provide such words.
-%         \end{itemize}
-% \end{itemize}
-
-% By employing this approach, the keyword extraction method effectively captures the significant keywords from requirement specifications and prepares a base for identifying trace links. Figure \ref{fig:keywords} shows the results of the method on an example requirement specification with the keywords extracted with their labels.
-
-
-% The last step of the method is to perform keyword matching using regex statements among the textual properties of SDA(title, description, comments, etc.), and record the artifacts that have a match with at least one keyword as trace links.\\
-
-% Initially, part of speech(PoS) tagging and dependency parsing is applied to the requirement statement(RS). This process reveals the grammatical tags of each word and their relation with each other. Then, the verbs and nouns of the RS are inspected.
-% \begin{itemize}
-%     \item Verbs and their related objects extracted as verb-object keywords.
-%     \item Nouns and their compounds extracted as noun-phrase keywords.
-%     \item Extra verb-object pairs extracted by inspecting conjunction links. In structures like \textit{"verb - object1 and object2"}(i.e. update username and password) verb usually has a link to the object1 and objects have conjunction link in between. Verb-object2 is extracted with this process.
-%     \item Raw verbs that does not have any of these relations extracted directly.
-%     \item Raw nouns are extracted directly in any case.
-% \end{itemize}
-
-% Further, these keywords are searched among the SDAs using regular expression matching and the SDAs that have matching keywords are recorded as candidate traces. (Should i include regular expressions themselves here)
-
-% \textbf{2 - Vector based methods}\\
-
-% \textit{TF-IDF vectors}
-
-% To generate tf-idf vectors for each artifact(SDAs and requirements):
-
-% \begin{itemize}
-%     \item A corpus is established by words consisted in all SDAs and requirements, except the english stopwords.
-%     \item Tf-idf value of each word in the corpus is calculated. (Figure \ref{fig:tfidf})
-%     \item A vector for each artifact is created by the tf-idf values of words contained in their text.
-% \end{itemize}
-
-
-% \begin{figure}[htb]
-%     \centering
-%     \includegraphics[width=0.75\linewidth]{figs/tfidf.png}
-%     \caption{TF-IDF equations.}
-%     \label{fig:tfidf}
-% \end{figure}
-
-
-%\textit{Word vectors}
-
-
-
-%\textit{Heuristic 1 - Substring Match}. Our first heuristic depends on the substring matches that can be observed among noun phrases. This process can be briefly explained as clustering noun phrases with the subset of noun phrases that contain a particular noun phrase as a substring. For example, "item label" and "item label size" noun phrases will be clustered under the "item label" key because "item label size" denotes a property of "item label". By applying this heuristic, all of these noun phrases are clustered into a set and the shortest noun phrase will represent these noun phrases. This heuristic reduces the size of the initial set of noun phrases. The reduction in the size of the initial set of noun phrases also decreases the time and space complexity of further steps of processing.
-
-%After applying the first heuristic, we manage to cluster some of the model labels. However, there are still independent model labels. Even though the models are generated by modeling experts, modelers with different backgrounds may use different words for the same concept. For example, "shipment options" and "shipping offers" will be matched as similar noun phrases because of the high level of relatedness between the two of the noun phrases. To increase coverage of the NLP pipeline, we benefit from BERT \cite{devlin2018bert} which is a state-of-the-art deep language model. Thus, glossary extraction from models is provided by measuring the similarity of different noun phrases to each other and detecting different noun phrases that refer to a similar meaning via pre-trained sentence embeddings.
-
-%First, noun phrases are encoded using sentence transformers which are provided by Hugging Face\footnote{https://huggingface.co} and are designed to be used with a pre-trained model. There is a variety of pre-trained sentence embedding models available for sentence embedding. We choose \textit{paraphrase-mpnet-base-v2} due to its high performance on STSbenchmark test. This sentence encoding process yields vectors that have 768 dimensions for each noun phrase. To extract similar noun phrases, pairwise cosine similarities are calculated between each noun phrase, and the symmetrical similarity matrix is obtained.
-
-
-
-
-%\begin{algorithm}[htp]
-%\SetAlgoLined
-%\SetKwInOut{input}{Input}
-%\SetKwInOut{output}{Output}
-%\input{parent term P and term T}
-%\output{parent term}
-%parent = P\;
-%term\_string = T + parent\;
-%keywords = extracted keyword and probability pairs from term\_string using KEYBERT\\
-%\uIf{length of keywords $>$ 1}{
-%set most probable keyword as parent\\
-%}
-%\textbf{return} parent\;
-% \caption{Heuristic 3}
-%\end{algorithm}
-
-%\textit{Heuristic 3 - Keyword Extraction}. Keyword extraction methods are mostly used for extracting the most representative n-grams from the texts. In this heuristic, lemmatized versions of both key and value are collected for each pair and concatenated into a single string. (Line 2) KeyBERT is tuned to extract unigrams from that concatenated string. (Line 3) If there exists a smaller common unit of representation for a key-value pair, both key and value are clustered under that new representation. (Lines 4 - 5)
-
-%After applying these steps, all noun phrases extracted from the models are stored in a dictionary for reporting and visualized using an undirected graph for better understanding. Fig \ref{fig:graph} shows a sample representation extracted glossaries. Blue vertices denote matching model labels with concepts and red vertices (self-links) denote the mismatched model labels.
-
-%\begin{figure}[htp]
-%    \centering
-%    \includegraphics[width=0.9\linewidth]{figs/graph.png}
-%    \caption{Sample graph representation of extracted terms}
-%    \label{fig:graph}
-%\end{figure}
-
-%\subsection{Trace Graph}
-%\label{sec:tgraph}
-
-% The construction of the trace graph requires parsing the requirement specifications and the software development artifacts(Issues, PRs, Commits) to create graph nodes, and executing several methods to identify trace links between them. The graph nodes have various properties associated with them to store detailed information about the artifact that they represent.
-% Table \ref{tab:artifactfeatures} displays the properties of the different kinds of graph nodes encapsulates.
-
-
-% \begin{table}[htb]
-% \begin{adjustbox}{width=1\linewidth}
-% \begin{tabular}{|l|c|c|c|c|c|c|}
-%         \hline
-%  &                & Requirement & Issue & PR  & Commit &  \\\hline\hline
-%  & Id             &  \checkmark & \checkmark & \checkmark & \checkmark    &  \\\hline
-%  & Title          & -           & \checkmark   & \checkmark     &   -     &  \\\hline
-%  & Description    & \checkmark         & \checkmark   & \checkmark     & -       &  \\\hline
-%  & URL            & -           & \checkmark   & \checkmark     &  \checkmark       &  \\\hline
-%   & Number           & \checkmark   & \checkmark  &  \checkmark  & \checkmark  &  \\\hline
-%    & State           &  -           & \checkmark       &  \checkmark    & -     &  \\\hline
-%  & CreationDate   & -           & \checkmark   & \checkmark & -      &  \\\hline
-%  & CompletionDate & -           & \checkmark   & \checkmark     & \checkmark    &  \\\hline
-% & Message        & -           & -   & - & \checkmark    &  \\\hline
-%  &  CommentCount         &  -           &  \checkmark      & \checkmark     &       - &  \\\hline
-%   &  CommentList         & -            & \checkmark       & \checkmark     &      -  &  \\\hline
-%    &   Parent         &   \checkmark           &  -     &  -   &  -      &  \\\hline
-%     &   Oid          &    -         &  -     &   -  &  \checkmark       &  \\\hline
-%      &  Text       &  \checkmark            &  \checkmark      &  \checkmark    & \checkmark        &  \\\hline
-
-% \end{tabular}
-% \end{adjustbox}
-%         \caption{\label{tab:artifactfeatures} The features of the artifacts utilized in identifying trace linking.}
-%       \end{table}
-
-
-
-% The textual properties of the nodes are required for the vector-based and keyword extraction trace identification methods to operate. In addition, the properties enable the observation of the creation/closure times and the status of the artifacts. Moreover, it is possible to access  the GitHub page that they are acquired from with URL property. Overall, these properties provide valuable traceability data, which serve as a foundation for an interactive dashboard that provides project management and requirement lifecycle analysis.
-
-%  Along with the artifact nodes, two types of relationships are in use to show the relationship between the artifacts, namely \textit{tracesTo} and \textit{relatedCommit}. The \textit{tracesTo} relationship represents an identified trace link and could be present between a requirement node and a software development artifact node. On the other hand, \textit{relatedCommit} relationship detonates a Commit associated with a PR, hence it could be present between a PR node and a Commit node.
-
-% To store the highly interlinked software artifacts the graph database Neo4j was chosen.
-% In addition to its ease of use, the query interface with effective visualizations was beneficial during the analysis phase of this work.
-
 \begin{figure}[htb]
     \centering
     \includegraphics[width=1\linewidth]{figs/rawTraceGraph.png}
-    \caption{A segment of the trace graph.}
+    \caption{A segment of a trace graph.}
     \label{fig:rawtracegraph}
   \end{figure}
 
@@ -331,7 +146,7 @@ This section details our approach for discovering trace links in a software repo
 \begin{figure}[htb]
     \centering
     \includegraphics[width=.99\linewidth]{figs/traceGraph.png}
-    \caption{Trace graph on a time axis.}
+    \caption{A segment of a trace graph on a time axis.}
     \label{fig:tracegraph}
 \end{figure}
 
@@ -365,7 +180,8 @@ The trace graph itself serves as an effective visualization of the software deve
 
 
 
-Finally, \textsf{S5} aims at creating an effective visualization of software development artifacts based on the trace links. We report several types pf information extracted from the repository to support software development project management. We use Neodash that is integrated to our Neo4j grah database that we keep our trace graph to build an interactive dashboard.
+Finally, \textsf{S5} provides a visualization where the user can browse the software development artifacts based on the trace links. 
+We report several types pf information extracted from the repository to support software development project management. We use Neodash that is integrated to our Neo4j graph database that we keep our trace graph to build an interactive dashboard.
 
 Our dashboard presents three groups of  statistics of the software repository.  The number of created issues and pull requests per week  are visualized in a stacked bar chart to check the project progress over time. Similarly, the number of created and closed issues per week are visualized in another stacked bar chart. The dashboard also provides static data regarding the number of open/closed issues, the number of open/merged PRs, and the average number of trace links per requirement. These statistics serve as a snapshot of the current state of the project. Fig.~\ref{fig:barcharts} demonstrates an example view from our dashboard regarding these visualizations.
 
