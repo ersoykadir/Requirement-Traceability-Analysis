@@ -62,10 +62,13 @@
 
 The \textit{getIssues, getPRs, getCommits} functions take a project repository  ($GRU$) and make API calls to the GitHub API\footnote{\url{https://docs.github.com/en/graphql}} to fetch a list of issues, PRs, and commits respectively. 
 It fetches the properties shown in Table \ref{tab:artifactfeatures} for these software software artifacts. 
-
 The \textit{$preprocess(list, method)$}  function takes  a list of software artifacts and a method for trace link creation. 
 It lemmatizes the text property of each artifact in the list. 
 If the method is vector-based then it also removes the stopwords. 
+Thereafter, the trace links are determined according to desired method.
+In the keyword based method shared keywords between the requirements and software artifacts are sought. In vector based methods the requirements and artifacts are vectorized and their similarities are compared. When similarities exceed a given threshold edges are formed.
+In our experiments we utilize TF-IDF and word vectors.
+
 
 % The $sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
 % If  $method$ is `vector-based' (tf-idf or word-embedding) vectors are created for  $req$ and $sda$  using their text property. 
