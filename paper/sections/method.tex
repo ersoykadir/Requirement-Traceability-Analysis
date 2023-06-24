@@ -201,11 +201,10 @@ Fig.~\ref{fig:barcharts} shows the dashboard with for a repository.
 
 % The dashboard also provides static data regarding the number of open/closed issues, the number of open/merged PRs, and the average number of trace links per requirement. These statistics serve as a snapshot of the current state of the project.
 
-\improvement{Fix caption of Figure 8: Information about software artifacts. The first bar chart shows the weekly issues (red) and pull requests (brown) created. The second barchart .... On the right, the total number of .... }
 \begin{figure}[hbt]
     \centering
     \includegraphics[width=.9\linewidth]{figs/dashboard-barcharts.png}
-    \caption{The total and weekly number of artifacts. }
+    \caption{Information about the software artifacts of a project. The first bar chart shows the weekly issues (red) and pull requests (brown) created. The second bar chart shows opened and closed artifacts per week.  On the right, the total number of currently active issues and PRs and completed tasks (issues and PRs). }
     \label{fig:barcharts}
 \end{figure}
 
@@ -222,9 +221,9 @@ since it displays the number of software development artifacts traced to them.
     \label{fig:linechart}
 \end{figure}
 
-The dashboard shows weighted relations between requirements and software artifacts with  a sankey diagram as shown in Figure~\ref{fig:sankey}. % includes an example of the Sankey chart present in the dashboard that showcases the commonly traced artifacts between the chosen requirements while highlighting the strength of the trace links using the weight property.
+The dashboard shows a comparative  view of two requirements with their weighted relations to software artifacts using  a sankey diagram (Figure~\ref{fig:sankey}). % includes an example of the Sankey chart present in the dashboard that showcases the commonly traced artifacts between the chosen requirements while highlighting the strength of the trace links using the weight property.
 Here, thicker lines represent a stronger relations from the requirements to their traced artifacts. 
-Thus, one can see relations among requirements via their related to artifacts.
+Thus, one can see how requirements are related via their associated software artifacts.
 
 \begin{figure}[htb]
     \centering
