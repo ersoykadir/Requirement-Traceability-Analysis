@@ -68,16 +68,21 @@ The first two authors who are familiar with the project but not involved in the 
  \end{tabular}
 \end{table}
 
-Based on the F1-scores, TF-IDF vector based method has the best F1 score followed by the keyword matching method on this repository.
+Based on the F1-scores, TF-IDF vector based method has the best F1 score followed by the keyword matching method on this repository followed by keyword matching method. The performance of the vector-based methods  significantly varies according to the threshold value. Setting a low thresholds links requirements with many artifacts yet few of these links are actually valid.
 
-Among these mehtods,  the keyword extraction method yielded the best recall-precision pair.
-The performance of the vector-based methods  significantly varies according to the threshold value.
-The recall values  approach 1 with low  threshold values which also yield significantly low precision values.
- This indicates that the desired traces are recovered, but also that,  almost all of the SDAs have been identified as candidate traces.
- On the other hand, high threshold values result in the  opposite,yielding low recall and higher precision values.
+
+%The recall values  approach 1 with low  threshold values which also yield significantly low precision values.
+% This indicates that the desired traces are recovered, but also that,  almost all of the SDAs have been identified as candidate traces.
+% On the other hand, high threshold values result in the  opposite,yielding low recall and higher precision values.
 % Notably, the word vector method achieved the highest precision value among the results when the threshold was set to 0.25.
 
-In conclusion, these results indicate that each method its strengths, and selecting the most suitable among them is dependent  on the specific project structure and requirements. \todo{I don't find this convinging argument. What kinds of structured would we prefer which methods for? Like what structure? It may depend more on how the project team documents its work as the traces are captured from the articulation of the team members and their code conventions (variable names, commenting etc.)}
+% In conclusion, these results indicate that each method its strengths, and selecting the most suitable among them is dependent  on the specific project structure and requirements. \todo{I don't find this convinging argument. What kinds of structured would we prefer which methods for? Like what structure? It may depend more on how the project team documents its work as the traces are captured from the articulation of the team members and their code conventions (variable names, commenting etc.)}
+
+We do not reach any conclusions based on our preliminary evaluation. This evaluation demonstrates that our approach is applicable for tracing requirements in a software repository but we refrain ourselves to be conclusive on the performance of the methods. In the near future we plan two additional evaluation studies.
+
+The first study concerns the evaluating our approach again in educational setting where we analyze the repositories of student groups, report on perceived usefulness and usability of our dashboard study any correlations with the statistics reported by our dashboard and the performance of the groups in the course.
+
+The second study is a case study with an industry partner where we ask for the ground truth from the experts from the industry and report the performance of different methods to extract trace links as well as perceiived usefulness and usability of our dashboard in comparison to trace matrix, which is widely used in the industry for tracing requirements.
 
 %%% Local Variables:
 %%% mode: latex
