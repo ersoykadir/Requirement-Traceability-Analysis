@@ -45,11 +45,11 @@
 
 \phase{Preprocess Artifacts for Trace Extraction}
 
-\State lemmatize($reqList$, $method$)
-\State lemmatize($sdaList$, $method$)
+\State $reqList \leftarrow$ lemmatize($reqList$)
+\State $sdaList \leftarrow$ lemmatize($sdaList$)
 \If{$method=$ "vector-based"}
-\State removeStopwords($reqList$, $method$)
-\State removeStopwords($sdaList$, $method$)
+\State $reqList \leftarrow$ removeStopwords($reqList$)
+\State $sdaList \leftarrow$ removeStopwords($sdaList$)
 \EndIf
 
 \phase{Extract Trace Links}
@@ -101,15 +101,5 @@
 
 The \textit{getIssues, getPRs, getCommits} functions take a project repository  ($GRU$) and make API calls to the GitHub API\footnote{\url{https://docs.github.com/en/graphql}} to fetch a list of issues, PRs, and commits respectively. 
 It fetches the properties shown in Table \ref{tab:artifactfeatures} for these software software artifacts. 
-The \textit{$preprocess(list, method)$}  function takes  a list of software artifacts and a method for trace link creation. 
-It lemmatizes the text property of each artifact in the list. 
-If the method is vector-based then it also removes the stopwords. 
-Thereafter, the trace links are determined according to desired method.
-In the keyword based method shared keywords between the requirements and software artifacts are sought. In vector based methods the requirements and artifacts are vectorized and their similarities are compared. When similarities exceed a given threshold edges are formed.
-For vector-based methods we utilize TF-IDF and word vectors.
-
-
-% The $sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
-% If  $method$ is `vector-based' (tf-idf or word-embedding) vectors are created for  $req$ and $sda$  using their text property. 
-% Then, the similarity between the vectors are calculated. 
-% An edge is created if similarity value is above a predefined threshold.
+During preprocessing phase, requirements and software artifacts are lemmatized and english stopwords are removed for vector-based methods. 
+Thereafter, the trace links are determined according to desired method.In the keyword based method shared keywords between the requirements and software artifacts are sought. In vector based methods the requirements and artifacts are vectorized and their similarities are compared. When similarities exceed a given threshold edges are formed. For vector-based methods we utilize TF-IDF and word vectors.

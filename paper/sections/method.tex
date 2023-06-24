@@ -58,16 +58,22 @@ For these methods, requirements are linked to the artifacts with similar vectors
             \input{alg/process-artifacts-algorithm.tex}
  The following details the trace extraction methods referred to in the algorithm. 
 
-      \paragraph{Keyword Matching} To identify the most relevant keyword we combine the output of several NLP tasks that are listed below. We identify the keywords from the requirements as our trace link direction is from requirements to the software development artifacts.
+      \paragraph{Keyword Case} To identify the most relevant keywords of the requirements, the following NLP methods are utilized:  
+      % We identify the keywords from the requirements as our trace link direction is from requirements to the software development artifacts.
       \begin{itemize}
-      \item \textit{Tokenization}: We first split the natural language text of requirements.
-      \item  \textit{Part-of-Speech Tagging}: We categorize each word to its correct morphosyntactic category by assigning part-of-speech (POS) tags. We focus on nouns, noun phrases, and verbs in our work to identify relevant keywords.
+      \item \textit{Tokenization}: Each requirement is tokenized to obtain its words.
+      \item  \textit{Part-of-Speech Tagging}: Each word is categorized according to its part-of-speech (POS) tags. 
+      This work specifically focuses on nouns and verbs when identifying relevant keywords. 
 
-      \item  \textit{Dependency parsing}: We build the dependency trees of sentences to analyze the dependencies between the words of a sentence as shown in Fig.~\ref{fig:deptree}. In this tree structure, we focus on objects and create pairs of verbs and their objects called \emph{verb-objects}, and nouns and their objects called \emph{noun-objects}. We also analyze the indirect objects and conjunctions of the sentences to build these pairs.
+      \item  \textit{Dependency parsing}: The dependency trees of the requirement sentences are obtained using spacy\footnote{https://spacy.io/api/dependencyparser} .
+      Figure~\ref{fig:deptree} shows a dependency tree for a requirement.
+      The verbs and nouns that are related to objects via the direct object and the object of preposition relations are used to create \emph{verb-object} and \emph{noun-object} pairs.
+      The remaining verbs and nouns are also captured.
+      All of these are used to find the artifacts that are relevant to the requirements.
 
-      \item  \textit{Stopword removal}: We remove the English stopwords from the pairs we create.
+      \item  \textit{Stopword removal}: English stopwords are used to remove the singleton nouns and verbs which are not distinguishing.
 
-      \item  \textit{Project stopwords removal}: Optionally, we allow the user to select her own stopwords for the project that may not create meaningful links such as the word event for an event management system. In such a project, the word event may create noise for it is likely to be used many requirements and development artifacts.
+      \item  \textit{Project stopwords removal}: Users are allowed to provide project-specific stopwords. 
       \end{itemize}
 
 \begin{figure*}[htbp]
@@ -77,7 +83,8 @@ For these methods, requirements are linked to the artifacts with similar vectors
     \label{fig:deptree}
   \end{figure*}
 
-  Using these NLP tasks we identify the significant keywords from requirement specifications and prepare a base for identifying trace links. Fig.\ref{fig:keywords} presents the results of the method on an example requirement with the keywords extracted and their labels.
+  Using these NLP tasks we identify the significant keywords from requirement specifications and prepare a base for identifying trace links. 
+  Figure~\ref{fig:keywords} shows the extracted keywords for a given requirement.
 
   \begin{figure}[H]
     \centering
@@ -86,9 +93,15 @@ For these methods, requirements are linked to the artifacts with similar vectors
     \label{fig:keywords}
   \end{figure}
 
-  After identifying the relevant keywords of requirements, we match them with the textual attributes of the software development artifacts in the repository. We create a trace link when an artifact has at least one matching keyword. We record the link in our graph database by creating an \emph{tracesTo} between the requirement node and the artifact node.
+  The extracted keywords are matched against the textual attributes of the software artifacts to determine the trace links.
+  These traces are stored in a graph database with the relation type \emph{tracesTo}.
 
-  \paragraph{TF-IDF Vectors} We first build a corpus consisting of all words in the requirements and the textual properties of software development artifacts. Before processing, we remove the stop words from this corpus. Later on, we calculate the TF-IDF values of each word using Equations \ref{eq:tf}, \ref{eq:idf}, and \ref{eq:tfidf} and construct a TF-IDF vector for each requirement and artifact based on the words they include. We then link the requirements with artifacts that have vectors which has a similarity score higher than a threshold. In Sec.~\ref{sec:eval} we experiment with various threshold values. Figure~\ref{fig:tfidfvec} presents the steps for this method.
+  \paragraph{TF-IDF Vectors} Initially, a set of all the words in the requirements and the software development artifacts is created. 
+  Stopwords are removed from this set, from which
+  % TF-IDF values are computed using the  
+  TF-IDF vectors are created for each requirement and artifact using equations \ref{eq:tf}, \ref{eq:idf}, and \ref{eq:tfidf}. 
+  The requirements are linked with artifacts that have a similarity score above a given threshold (see Section~\ref{sec:eval}).
+  Figure~\ref{fig:tfidfvec} presents the steps for this method.
 
   \begin{align}
     TF(t,d) &= \frac{\text{frequency of t in d}}{\text{total number of terms in d}} \label{eq:tf} \\
@@ -103,11 +116,14 @@ For these methods, requirements are linked to the artifacts with similar vectors
         \label{fig:tfidfvec}
       \end{figure}
 
-      \paragraph{Word Vectors} To generate word vectors for each artifact we use a pre-trained word embeddings model (word2vec-google-news-300). 
-      We gather the word vector for each word within an artifact from the model and to build a vector for each requirement and software development artifact we average the word vectors contained in their textual attributes. 
-      To extract trace links for a requirement using TF-IDF and word vectors, we calculate the cosine similarity metric of the requirement's vector with the vectors of other artifacts. 
-      The artifacts that have similarities above the decided threshold are recorded as identified traces. 
-      Figure~\ref{fig:wordvec} presents this method.
+      \paragraph{Word Vectors} To generate a vector for each artifact, we use a pre-trained word embeddings model (word2vec-google-news-300 \footnote{url{https://huggingface.co/fse/word2vec-google-news-300}}). 
+      We represent requirements as the average of their word vectors. 
+
+      Just like in TF-IDF method, cosine similarity is used to link requirements to artifacts.
+      The artifacts that have similarities above a predefined threshold are considered to be linked. 
+      % To extract trace links for a requirement using TF-IDF and word vectors, 
+      % we calculate the cosine similarity metric of the requirement's vector with the vectors of other artifacts. 
+      Figure~\ref{fig:wordvec} presents the steps of the word vector method.
 
        \begin{figure}[htb]
         \centering
@@ -125,7 +141,9 @@ For these methods, requirements are linked to the artifacts with similar vectors
     \label{fig:rawtracegraph}
   \end{figure}
 
-  We add the \emph{tracesTo} relations to our trace graph based on the extracted trace links. We also add the \emph{relatedCommit} relations between the pull request (PR) nodes and the commit nodes based on the structure of the software repository we analyze. Fig. \ref{fig:rawtracegraph} illustrates a segment of the trace graph obtained from the Neo4j graph database for a specific requirement and displays the associated trace links and related commits.
+  The obtained trace links are added to the trace graph with the \emph{tracesTo} edge type. 
+  The relations between pull requests and commit nodes are stored with the \emph{relatedCommit} edge type.
+  Figure~\ref{fig:rawtracegraph} illustrates a segment of a trace graph of a requirement.
 
 \begin{figure}[htb]
     \centering
@@ -136,6 +154,34 @@ For these methods, requirements are linked to the artifacts with similar vectors
 
 The trace graph itself serves as an effective visualization of the software development artifacts (SDA) that are traced from a requirement. Moreover, it has the potential to display the lifetime of the requirement when the traced SDA are organized chronologically. In Fig. \ref{fig:tracegraph} the related SDA are arranged along a time axis based on their \textit{creationDate} property in order to represent notable information about the stages of implementation. 
 For example, it is observed in the figure that the first Pull Request related to the requirement was created in week 8, while the issues concerning the planning of the requirement were created in the early stages of the development. Such visualization is useful during the development phase as well as a retrospective analysis of the software project.
+
+
+
+
+% - The requirement to be examined is the root.
+% - The requirement is connected to its related SDAs with \textit{tracesTo} links.
+% - Pull request nodes have related commit nodes connected with \textit{relatedCommit} link.
+
+% Who looks at trace?\\
+% Trace graph can help a project manager or a developer
+% Why?\\
+% What can be found?
+
+
+% A project manager looking at the trace graph can identify:
+
+% \begin{itemize}
+%     \item The planning phase of this requirement goes back to week 1
+%     \item The implementation of this feature started at week 8
+%     \item This requirement took around 13 weeks of work??
+%     \item ...
+% \end{itemize}
+
+% \pagebreak
+
+% Or in the case of a problem or a bug related to annotation, for example, a developer can view the trace of the requirement about annotation, localizing the search for the problem. Lets say the problem is about updating annotations. Looking at the trace graph, an educated guess can be made, with the information about the problem, to look at a specific pull request. For example, in our case user can view \textit{"Create annotation model"} and \textit{"... add update and delete annotation endpoints..."} nodes. Both nodes can be further observed by using the url property, reaching the github page and examining the code related to them.
+
+
 
 Finally, \textsf{S5} provides a visualization where the user can browse the software development artifacts based on the trace links. 
 We report several types of information extracted from the repository to support software development project management. 
