@@ -1,7 +1,7 @@
 \section{Method}
 \label{sec:approach}
 
-This section details our approach for discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extract trace links between requirements and the software issues, commits, pull requests (PRs) by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Figure~\ref{fig:sys-flow} presents the main steps of our approach. We publicly share the implementation of our approach in our replication package\footnote{https://zenodo.org/record/8076982}
+This section details our approach to discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extracts trace links between requirements and the software issues, commits, and pull requests (PRs) by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Figure~\ref{fig:sys-flow} presents the main steps of our approach. We publicly share the implementation of our approach in our replication package\footnote{https://zenodo.org/record/8076982}
 
 \begin{figure}[htb]
     \centering
@@ -10,8 +10,8 @@ This section details our approach for discovering trace links in a software repo
     \label{fig:sys-flow}
   \end{figure}
 
-  The first two steps, \textsf{S1} and \textsf{S2}, concerns processing the two inputs of our approach, a software repository and natural language requirements, respectively. \textsf{S1} fetches issues, pull requests, and commits from a repository whose URL is given. Our prototype expects a Github repository, however our approach is general and can be applied to other repositories where the aforementioned development artifacts are present. %Table~\ref{tab:artifactfeatures} presents the attributes of these artifacts that are used in our approach.
-  Our prototype expects a text file containing requirements. It do not enforce a specific for requirements and is able to process the requirements that written in a hierarchical structure, which is a common practice.
+  The first two steps, \textsf{S1} and \textsf{S2}, concern processing the two inputs of our approach, a software repository and natural language requirements, respectively. \textsf{S1} fetches issues, pull requests, and commits from a repository whose URL is given. Our prototype expects a GitHub repository, however, our approach is general and can be applied to other repositories where the aforementioned development artifacts are present. %Table~\ref{tab:artifactfeatures} presents the attributes of these artifacts that are used in our approach.
+  Our prototype expects a text file containing requirements. It does not enforce specific requirements and is able to process the requirements that are written in a hierarchical structure, which is a common practice.
 
           \begin{table}
         \centering
@@ -39,19 +39,16 @@ This section details our approach for discovering trace links in a software repo
         \end{tabular}
       \end{table}
 
-
-%The tool expects a Requirement Specification Document(RSD) in the form of a text file written in natural language, along with a URL to the GitHub repository of the software project. The software development artifacts, namely Issues, PRs and Commits are fetched from the repository leveraging the GitHub API and the requirement statements are parsed from the given RSD. This operation yields files containing information about Software Development Artifacts (SDA) and requirements, with their associated properties, such as title, description, creation and closure dates, status, and URLs. These artifacts serve as the data source for establishing trace links.
-
  In \textsf{S3} nodes are created for each of the requirements, issues, pull requests, and commits. 
 The features  in Table~\ref{tab:artifactfeatures} are added as the node attributes. 
  Our prototype uses Neo4j\footnote{https://neo4j.com} as a graph database.
 
-      \textsf{S4}  links the requirements to artifacts by creating edges between their associated nodes . 
+      \textsf{S4}  links the requirements to artifacts by creating edges between their associated nodes. 
       Two types of relationships are captured between the artifacts, namely \emph{tracesTo} and \emph{relatedCommit}. 
       The  \emph{tracesTo} relationship represents a trace link between a requirement node and a software development artifact node. 
-      The \emph{relatedCommit} is a relation between commit and a pull request nodes. 
-      This relation captures provides insight about how the commits are organized by the team. 
-      In practice requirements can trace directly to commits or via pull requests (as seen in Figure˜\ref{fig:rawtracegraph}).
+      The \emph{relatedCommit} is a relation between a commit and a pull request node. 
+      This relation captures provides insight into how the commits are organized by the team. 
+      In practice, requirements can trace directly to commits or via pull requests (as seen in Figure˜\ref{fig:rawtracegraph}).
 
       We implement and evaluate three methods to extract trace links, which are represented with the \emph{tracesTo} relation. 
  The first method extracts keywords from the requirements and development artifacts and links the requirements to the artifacts that share keywords. 
@@ -59,14 +56,7 @@ The features  in Table~\ref{tab:artifactfeatures} are added as the node attribut
 For these methods, requirements are linked to the artifacts with similar vectors. 
       The overview of the processing of software artifacts to extract the trace links is shown in Algorithm~\ref{alg:process-software-artifacts}.
             \input{alg/process-artifacts-algorithm.tex}
- The following details the trace extraction methods referred to in the algorithm. %Fig.~\ref{fig:trace-methods} summarizes these three methods to extract trace links.
-
-      % \begin{figure}[htb]
-      %   \centering
-      %   \includegraphics[width=0.9\linewidth]{figs/tracemethods.png}
-      %   \caption{Control flow of the trace methods.}
-      %   \label{fig:trace-methods}
-      % \end{figure}
+ The following details the trace extraction methods referred to in the algorithm. 
 
       \paragraph{Keyword Matching} To identify the most relevant keyword we combine the output of several NLP tasks that are listed below. We identify the keywords from the requirements as our trace link direction is from requirements to the software development artifacts.
       \begin{itemize}
@@ -79,13 +69,6 @@ For these methods, requirements are linked to the artifacts with similar vectors
 
       \item  \textit{Project stopwords removal}: Optionally, we allow the user to select her own stopwords for the project that may not create meaningful links such as the word event for an event management system. In such a project, the word event may create noise for it is likely to be used many requirements and development artifacts.
       \end{itemize}
-
-      % \begin{figure}[htb]
-      %   \centering
-      %   \includegraphics[width=0.99\linewidth]{figs/keywordmatching.png}
-      %   \caption{Steps of trace link extraction based on keyword matching}
-      %   \label{fig:keymatch}
-      % \end{figure}
 
 \begin{figure*}[htbp]
     \centering
@@ -103,7 +86,7 @@ For these methods, requirements are linked to the artifacts with similar vectors
     \label{fig:keywords}
   \end{figure}
 
-  After identifying the relevant keywords of requirements, we match them with the textual attributes of the software development artifacts in the repository. Whe create a trace link when an artifact has at least one matching keyword. We record the link in our graph database by creating an \emph{tracesTo} between the requirement node and the artifact node.
+  After identifying the relevant keywords of requirements, we match them with the textual attributes of the software development artifacts in the repository. We create a trace link when an artifact has at least one matching keyword. We record the link in our graph database by creating an \emph{tracesTo} between the requirement node and the artifact node.
 
   \paragraph{TF-IDF Vectors} We first build a corpus consisting of all words in the requirements and the textual properties of software development artifacts. Before processing, we remove the stop words from this corpus. Later on, we calculate the TF-IDF values of each word using Equations \ref{eq:tf}, \ref{eq:idf}, and \ref{eq:tfidf} and construct a TF-IDF vector for each requirement and artifact based on the words they include. We then link the requirements with artifacts that have vectors which has a similarity score higher than a threshold. In Sec.~\ref{sec:eval} we experiment with various threshold values. Figure~\ref{fig:tfidfvec} presents the steps for this method.
 
@@ -115,7 +98,7 @@ For these methods, requirements are linked to the artifacts with similar vectors
 
       \begin{figure}[H]
         \centering
-        \includegraphics[width=0.99\linewidth]{figs/tfidfvector2.png}
+        \includegraphics[width=0.95\linewidth]{figs/tfidfvector2.png}
         \caption{Steps for extracting trace links based on TF-IDF vectors}
         \label{fig:tfidfvec}
       \end{figure}
@@ -154,64 +137,29 @@ For these methods, requirements are linked to the artifacts with similar vectors
 The trace graph itself serves as an effective visualization of the software development artifacts (SDA) that are traced from a requirement. Moreover, it has the potential to display the lifetime of the requirement when the traced SDA are organized chronologically. In Fig. \ref{fig:tracegraph} the related SDA are arranged along a time axis based on their \textit{creationDate} property in order to represent notable information about the stages of implementation. 
 For example, it is observed in the figure that the first Pull Request related to the requirement was created in week 8, while the issues concerning the planning of the requirement were created in the early stages of the development. Such visualization is useful during the development phase as well as a retrospective analysis of the software project.
 
-
-
-
-% - The requirement to be examined is the root.
-% - The requirement is connected to its related SDAs with \textit{tracesTo} links.
-% - Pull request nodes have related commit nodes connected with \textit{relatedCommit} link.
-
-% Who looks at trace?\\
-% Trace graph can help a project manager or a developer
-% Why?\\
-% What can be found?
-
-
-% A project manager looking at the trace graph can identify:
-
-% \begin{itemize}
-%     \item The planning phase of this requirement goes back to week 1
-%     \item The implementation of this feature started at week 8
-%     \item This requirement took around 13 weeks of work??
-%     \item ...
-% \end{itemize}
-
-% \pagebreak
-
-% Or in the case of a problem or a bug related to annotation, for example, a developer can view the trace of the requirement about annotation, localizing the search for the problem. Lets say the problem is about updating annotations. Looking at the trace graph, an educated guess can be made, with the information about the problem, to look at a specific pull request. For example, in our case user can view \textit{"Create annotation model"} and \textit{"... add update and delete annotation endpoints..."} nodes. Both nodes can be further observed by using the url property, reaching the github page and examining the code related to them.
-
-
-
 Finally, \textsf{S5} provides a visualization where the user can browse the software development artifacts based on the trace links. 
-We report several types pf information extracted from the repository to support software development project management. 
-Neodash\footnote{\url{https://neo4j.com/labs/neodash/}} is integrated to our Neo4j graph database to provide an interactive dashboard to explore the trace graph.
+We report several types of information extracted from the repository to support software development project management. 
+Neodash\footnote{\url{https://neo4j.com/labs/neodash/}} is integrated into our Neo4j graph database to provide an interactive dashboard to explore the trace graph.
 
-The dashboard presents information about a software repository and enable the exploration based on trace links.
+The dashboard presents information about a software repository and enables exploration based on trace links.
 First, an overview of the software artifacts for a software repository.  
-The number of issues and pull requests are visualized in a stacked bar chart per week to view the project progress over time. 
-Similarly, the number of  issues closed per week are visualized with stacked bar chart. 
+The number of issues and pull requests is visualized in a stacked bar chart per week to view the project's progress over time. 
+Similarly, the number of  issues closed per week is visualized with a stacked bar chart. 
 The dashboard also shows the total number of open/closed issues, open/merged PRs, and the average number of trace links per requirement. 
 These statistics serve as a snapshot of the current state of the project. 
-Fig.~\ref{fig:barcharts} shows the dashboard with for a repository.
-
-
-%In order to reinforce the visualization of traceability data, our research includes the development of an interactive dashboard, which offers various reports that display statistical insights. Each of these reports was carefully selected to effectively visualize the corresponding data, hence they have user-friendly designs for enhanced comprehension. Moreover, many of these reports are interactive and they allow users to trace the specific requirements, thereby enabling a more customized exploration of the traceability information. The dashboard was implemented using Neodash technology, to provide full integrity with the traceability graph that is stored in the Neo4j database.
-
-% The first report featured in Fig. \ref{fig:barcharts} is a stacked bar chart showing the number of created Issues(in green) and PRs(in brown). It could be observed that the highest number of created artifacts were in week 3 and week 7. The next report is another stacked bar chart that represents the number of artifacts opened and closed per week. Both of these charts are providing information about the status of development in the project lifetime and they help to identify periods of high or low development intensity and let users observe the assessment of the overall project dynamics.
-
-% The dashboard also provides static data regarding the number of open/closed issues, the number of open/merged PRs, and the average number of trace links per requirement. These statistics serve as a snapshot of the current state of the project.
+Fig.~\ref{fig:barcharts} shows the dashboard for a repository.
 
 \begin{figure}[hbt]
     \centering
     \includegraphics[width=.9\linewidth]{figs/dashboard-barcharts.png}
-    \caption{Information about the software artifacts of a project. The first bar chart shows the weekly issues and pull requests created. The second bar chart shows opened and closed artifacts per week.  On the right, the total number of currently active issues and PRs and completed tasks (issues and PRs). }
+    \caption{Information about the software artifacts of a project. The first bar chart shows the weekly issues and pull requests created. The second bar chart shows opened and closed artifacts per week.  On the right, is the total number of currently active issues and PRs and completed tasks (issues and PRs). }
     \label{fig:barcharts}
 \end{figure}
 
 The dashboard displays the trace links for a requirement over the course of the project on a weekly basis to track the progress of a requirement.
 It is presented using a line chart as shown in Figure~\ref{fig:linechart}. 
-The project manager can visualize the data of a single requirement or compare the progress of multiple requirements. %By comparing the number of traces for each requirement, the report demonstrates the outliners, that could have relatively less or more traces.
-This comparison allows the users to observe the effort associated with each requirement.%
+The project manager can visualize the data of a single requirement or compare the progress of multiple requirements. 
+This comparison allows the users to observe the effort associated with each requirement
 since it displays the number of software development artifacts traced to them.
 
 \begin{figure}[htb]
@@ -221,8 +169,8 @@ since it displays the number of software development artifacts traced to them.
     \label{fig:linechart}
 \end{figure}
 
-The dashboard shows a comparative  view of two requirements with their weighted relations to software artifacts using  a sankey diagram (Figure~\ref{fig:sankey}). % includes an example of the Sankey chart present in the dashboard that showcases the commonly traced artifacts between the chosen requirements while highlighting the strength of the trace links using the weight property.
-Here, thicker lines represent a stronger relations from the requirements to their traced artifacts. 
+The dashboard shows a comparative  view of two requirements with their weighted relations to software artifacts using  a Sankey diagram (Figure~\ref{fig:sankey}).
+Here, thicker lines represent a stronger relation between the requirements to their traced artifacts. 
 Thus, one can see how requirements are related via their associated software artifacts.
 
 \begin{figure}[htb]
@@ -243,7 +191,3 @@ Their  current status and weekly activities are displayed in the last section of
     \label{fig:perreq}
 \end{figure}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../main"
-%%% End:
