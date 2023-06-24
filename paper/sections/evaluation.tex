@@ -1,39 +1,11 @@
 \section{Evaluation}
 \label{sec:eval}
 
-% \begin{itemize}
-%     \item Ground truth
-%     \item Experiment setup
-%     \item Results
-%     \item Evaluation of results
-% \end{itemize}
-
-% This section describes how we evaluated our approach, which focuses on the accuracy of the method utilized in extracting the trace links, namely keyword extraction, TF-IDF vectors and word vectors.
-
 This section presents the results of our preliminary evaluation and detailed evaluation plan for the future.
 
-We evaluate our approach on a public Github repository of a group of computer engineering students for their software engineering course\footnote{Link Anonymized.%https://github.com/bounswe/bounswe2022group2
-}. The repository includes the project of an online learning platform. The requirements of the project is also in the repository written in a mixed format where some requirements are written as short phrases to describe a functionality where others as full shall statements. The requirements are structured hierarchically where a parent requirement is further refined into other requirement items.
+We evaluate our approach on a public GitHub repository of a group of computer engineering students for their software engineering course\footnote{Link Anonymized.}. The repository includes the project of an online learning platform. The requirements of the project are also in the repository written in a mixed format where some requirements are written as short phrases to describe a functionality whereas others as full shall statements. The requirements are structured hierarchically where a parent requirement is further refined into other requirement items.
 
 The first two authors who are familiar with the project but not involved in the project manually extracted the trace links to serve as the ground truth. Below we report the performance of our keyword matching method in Table~\ref{tab:keyperf} and vector-based methods with various similarity thresholds in Table~\ref{tab:vecperf}.
-
-%For this purpose, we selected a set of requirements and thir associated software development artifactsto serve as a ground truth.
-%The trace links were manually traced  by our team. \todo{Have we put the selected requirements and traces somewhere? If not let's put it in our repo. }
-
-%The performance of our approach is evaluated using the recall and precision metrics, which inform us about the  percentage of the  traces that were successfully recovered and  the percentage of the traces that are correctly recovered using the following formulas:
-
-
-%$Recall = \dfrac{True Positives}{True Positives + False Negatives}$
-
-
-%$Precision = \dfrac{True Positives}{True Positives + False Positives}$
-
-
-%In the experiment, true positives indicate the trace links that are identified by the method.
-%False negatives indicate the trace links that are not identified(missed), and false positives indicate the identified trace %links that are incorrect.
-%Table~\ref{tab:keyperf} presents the results of the keyword extraction method and
-%Table~\ref{tab:vecperf} shows the results of the vector based methods.
-
 
 \begin{table}[htb]
 \centering
@@ -68,23 +40,10 @@ The first two authors who are familiar with the project but not involved in the 
  \end{tabular}
 \end{table}
 
-Based on the F1-scores, TF-IDF vector based method has the best F1 score followed by the keyword matching method on this repository followed by keyword matching method. The performance of the vector-based methods  significantly varies according to the threshold value. Setting a low thresholds links requirements with many artifacts yet few of these links are actually valid.
+Based on the F1 scores, the TF-IDF vector-based method has the best F1 score followed by the keyword-matching method on this repository followed by keyword matching method. The performance of the vector-based methods  significantly varies according to the threshold value. Setting a low threshold links requirements with many artifacts yet few of these links are actually valid.
 
+We do not reach any conclusions based on our preliminary evaluation. This evaluation demonstrates that our approach is applicable for tracing requirements in a software repository but we refrain to be conclusive on the performance of the methods. In the near future, we plan two additional evaluation studies.
 
-%The recall values  approach 1 with low  threshold values which also yield significantly low precision values.
-% This indicates that the desired traces are recovered, but also that,  almost all of the SDAs have been identified as candidate traces.
-% On the other hand, high threshold values result in the  opposite,yielding low recall and higher precision values.
-% Notably, the word vector method achieved the highest precision value among the results when the threshold was set to 0.25.
+The first study concerns evaluating our approach again in an educational setting where we analyze the repositories of student groups, report on the perceived usefulness and usability of our dashboard, and study any correlations between the statistics reported by our dashboard and the performance of the groups in the course.
 
-% In conclusion, these results indicate that each method its strengths, and selecting the most suitable among them is dependent  on the specific project structure and requirements. \todo{I don't find this convinging argument. What kinds of structured would we prefer which methods for? Like what structure? It may depend more on how the project team documents its work as the traces are captured from the articulation of the team members and their code conventions (variable names, commenting etc.)}
-
-We do not reach any conclusions based on our preliminary evaluation. This evaluation demonstrates that our approach is applicable for tracing requirements in a software repository but we refrain ourselves to be conclusive on the performance of the methods. In the near future we plan two additional evaluation studies.
-
-The first study concerns evaluating our approach again in educational setting where we analyze the repositories of student groups, report on perceived usefulness and usability of our dashboard, study any correlations with the statistics reported by our dashboard and the performance of the groups in the course.
-
-The second study is a case study with an industry partner where we ask for the ground truth from the experts from the industry and report the performance of different methods to extract trace links as well as perceived usefulness and usability of our dashboard in comparison to trace matrix, which is widely used in the industry for tracing requirements.
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../main"
-%%% End:
+The second study is a case study with an industry partner where we ask for the ground truth from the experts from the industry and report the performance of different methods to extract trace links as well as the perceived usefulness and usability of our dashboard in comparison to trace matrix, which is widely used in the industry for tracing requirements.
