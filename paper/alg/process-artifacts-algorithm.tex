@@ -7,7 +7,7 @@
 \State Input: $RSD$ \Comment{Requirement Specification Document}
 \State Input: $GRU$ \Comment{Github Repository URL} 
 \State Input: $M$ \Comment{Trace Extraction Method} 
-\State Input: $TH$ \Comment{Threshold for Vector-Based Methods} 
+\State Input: $\tau_{e}$ \Comment{Threshold for Vector-Based Methods} 
 \State Output: $TG$ : \texttt{graph} \Comment{Trace Graph}
 \phase{Fetch Software Artifacts}
 % \LineComment{Request from Github graphQL API}
@@ -37,13 +37,23 @@
 
 \State preprocess($reqList$, $method$)
 \State preprocess($sdaList$, $method$)
-\For{\textbf{each} $r$ \textbf{in} reqList} \label{algl:c}
-\For{\textbf{each} $a$ \textbf{in} sdaList} \label{algl:c}
-\If{isEdge($r$,$a$,$M$)}
+\For{\textbf{each} $r$ \textbf{in} reqList}
+\For{\textbf{each} $a$ \textbf{in} sdaList}
+\If{$method=$ "keyword"}
+\State $keywords \leftarrow$ extract(r)
+\If{$a.text$ contains any $kw$ in $keywords$}
 \State $TG$.addEdge(r,a)
 \EndIf
-\EndFor \label{algl:c}
-\EndFor \label{algl:c}
+\EndIf
+\If{$method=$ "vector-based"}
+\State r-v $\leftarrow$ createVector($r.text$)
+\State a-v $\leftarrow$ createVector($a.text$)
+\If{sim(r-v, a-v)  $\geq$ $\tau_{e}$}
+\State $TG$.addEdge(r,a)
+\EndIf
+\EndIf
+\EndFor
+\EndFor
 
 \Return $TG$
 \end{algorithmic}
@@ -57,7 +67,7 @@ The \textit{$preprocess(list, method)$}  function takes  a list of software arti
 It lemmatizes the text property of each artifact in the list. 
 If the method is vector-based then it also removes the stopwords. 
 
-The $sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
-If  $method$ is `vector-based' (tf-idf or word-embedding) vectors are created for  $req$ and $sda$  using their text property. 
-Then, the similarity between the vectors are calculated. 
-An edge is created if similarity value is above a predefined threshold.
+% The $sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
+% If  $method$ is `vector-based' (tf-idf or word-embedding) vectors are created for  $req$ and $sda$  using their text property. 
+% Then, the similarity between the vectors are calculated. 
+% An edge is created if similarity value is above a predefined threshold.
