@@ -96,7 +96,7 @@ For these methods, requirements are linked to the artifacts with similar vectors
 
   Using these NLP tasks we identify the significant keywords from requirement specifications and prepare a base for identifying trace links. Fig.\ref{fig:keywords} presents the results of the method on an example requirement with the keywords extracted and their labels.
 
-  \begin{figure}[htb]
+  \begin{figure}[H]
     \centering
     \includegraphics[width=.96\linewidth]{figs/keywords.png}
     \caption{Keyword extraction from a requirement.}
@@ -105,7 +105,7 @@ For these methods, requirements are linked to the artifacts with similar vectors
 
   After identifying the relevant keywords of requirements, we match them with the textual attributes of the software development artifacts in the repository. Whe create a trace link when an artifact has at least one matching keyword. We record the link in our graph database by creating an \emph{tracesTo} between the requirement node and the artifact node.
 
-  \paragraph{TF-IDF Vectors} We first build a corpus consisting of all words in the requirements and the software development artifacts. We remove the stop words from this corpus. We calculate the TF-IDF values using Equations \ref{eq:tf}, \ref{eq:idf}, and \ref{eq:tfidf} and construct a TF-IDF vector for each requirement and artifact. We then link the requirements with artifacts that have a similarity score more than a threshold. In Sec.~\ref{sec:eval} we experiment with this threshold. Figure~\ref{fig:tfidfvec} presents the steps for this method.
+  \paragraph{TF-IDF Vectors} We first build a corpus consisting of all words in the requirements and the textual properties of software development artifacts. Before processing, we remove the stop words from this corpus. Later on, we calculate the TF-IDF values of each word using Equations \ref{eq:tf}, \ref{eq:idf}, and \ref{eq:tfidf} and construct a TF-IDF vector for each requirement and artifact based on the words they include. We then link the requirements with artifacts that have vectors which has a similarity score higher than a threshold. In Sec.~\ref{sec:eval} we experiment with various threshold values. Figure~\ref{fig:tfidfvec} presents the steps for this method.
 
   \begin{align}
     TF(t,d) &= \frac{\text{frequency of t in d}}{\text{total number of terms in d}} \label{eq:tf} \\
@@ -113,7 +113,7 @@ For these methods, requirements are linked to the artifacts with similar vectors
     TF\text{-}IDF(t,d) &= TF(t,d)*IDF(t) \label{eq:tfidf}
   \end{align}
 
-      \begin{figure}[htb]
+      \begin{figure}[H]
         \centering
         \includegraphics[width=0.99\linewidth]{figs/tfidfvector2.png}
         \caption{Steps for extracting trace links based on TF-IDF vectors}
