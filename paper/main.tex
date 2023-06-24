@@ -41,7 +41,7 @@
 \begin{document}
 
 
-\title{Extracting Trace Links in Software Repositories}
+\title{Visualizing Software Repositories through Rewuirements Trace Links}
 % \author{
 %  \IEEEauthorblockN{Kadir Ersoy, Ecenur Sezer, Suzan Üsküdarlı, Fatma Başak Aydemir}
 % \IEEEauthorblockA{
@@ -59,18 +59,26 @@
 \maketitle
 \begin{abstract}
   % context
- Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions, and to the ability to link requirements to other software artifacts through particular relationships.
-  % Motivation
-These traceability links enable stakeholders to monitor the development progress of requirements and assist system engineers in tracking the effort and workload associated with fulfilling those requirements.
+  Tracking the status of the requirements throughout the software development cycle is essential to the success of software development projects.
+  % context
+ %Requirements traceability refers to the capability of following the life of a requirement in both forwards and backward directions, and to the ability to link requirements to other software artifacts through particular relationships.
+ % Motivation
+  Requirements trace links relate requirements with other software development artifacts which indicates the progress on their related requirements. Manually identifying these trace links, and  understanding and aggregating them as an indicator of the requirement progress is a saunting task.
+  %These traceability links enable stakeholders to monitor the development progress of requirements and assist system engineers in tracking the effort and workload associated with fulfilling those requirements.
   % Approach
-Traditional methods to recover traceability links necessitate significant human effort, making them unsuitable and inefficient, particularly as the project scale grows.
+  % Traditional methods to recover traceability links necessitate significant human effort, making them unsuitable and inefficient, particularly as the project scale grows.
+  % Approach
+  This paper implements and evaluates trace links from requirements to issues, pull requests, and commits using keyword matching, TF-IDF vectors and word vectors. Extracted links are used to create interactive visualization of the repository in a dashboard for retrospective and real-time analysis.
   % Results
-In this work, we present a tool that establishes automated requirement traceability links between requirements written in natural language and software artifacts acquired from GitHub repositories. The tool implements three optional methods to trace the artifacts to the requirements, namely a keyword extraction pipeline, TF-IDF vector and word-vector. The captured traces are stored in a graph database and visualized. Additionally, an interactive dashboard featuring statistical data about the artifacts and their traces is implemented. By offering automated traceability and comprehensive visualization, this tool aims to enhance the management of requirements and to understand their quality in software development projects.
+  Our preliminary evaluation suggests that word vector method outperforms the other methods.
+  % Contribution
+  Our main contribution is the interactive dashboard that utilizes trace links to visualize a software repository to support project management and analysis. We also lay out details for our future evaluation plan. Our replication package contains the code and the evaluation data.
+%In this work, we present a tool that establishes automated requirement traceability links between requirements written in natural language and software artifacts acquired from GitHub repositories. The tool implements three optional methods to trace the artifacts to the requirements, namely a keyword extraction pipeline, TF-IDF vector and word-vector. The captured traces are stored in a graph database and visualized. Additionally, an interactive dashboard featuring statistical data about the artifacts and their traces is implemented. By offering automated traceability and comprehensive visualization, this tool aims to enhance the management of requirements and to understand their quality in software development projects.
   %Contribution
 
 \end{abstract}
 \begin{IEEEkeywords}
-requirements traceability, natural language processing,  keyword extraction, trace graph, software management
+  software management, repository visualization, requirements traceability, trace graph
 \end{IEEEkeywords}
 
 
