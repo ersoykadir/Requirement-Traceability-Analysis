@@ -57,7 +57,7 @@ The \textit{$preprocess(list, method)$}  function takes  a list of software arti
 It lemmatizes the text property of each artifact in the list. 
 If the method is vector-based then it also removes the stopwords. 
 
-The ${sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
+The $sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
 If  $method$ is `vector-based' (tf-idf or word-embedding) vectors are created for  $req$ and $sda$  using their text property. 
 Then, the similarity between the vectors are calculated. 
 An edge is created if similarity value is above a predefined threshold.
