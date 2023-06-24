@@ -16,7 +16,7 @@
 %     \end{itemize}
 % \end{itemize}
 
-This section details our approach for discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extract trace links between requirements and the software issues, commits, pull requests (PRs) by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Fig.~\ref{fig:sys-flow} presents the main steps of our approach.
+This section details our approach for discovering trace links in a software repository. Our approach takes a software repository and requirements as input and extract trace links between requirements and the software issues, commits, pull requests (PRs) by analyzing the textual fields of these artifacts. Our prototype tool visualizes the trace links and other information on the repository. Fig.~\ref{fig:sys-flow} presents the main steps of our approach. We publicly share the implementation of our approach in our replication package\footnote{https://zenodo.org/record/8076509}
 
 \begin{figure}[htb]
     \centering
@@ -127,7 +127,7 @@ This section details our approach for discovering trace links in a software repo
         \label{fig:tfidfvec}
       \end{figure}
 
-      \paragraph{Word Vectors} To generate word vectors for each artifact we use a pre-trained word embeddings model \fba{which one?}. We gather the word vector for each word within an artifact from the model and to build a vector for each requirement and software development artifact we average the word vectors contained in their textual attributes. To extract trace links for a requirement using TF-IDF and word vectors, we calculate the cosine similarity metric of the requirement's vector with the vectors of other artifacts. The artifacts that have similarities above the decided threshold are recorded as identified traces. Fig.~\ref{fig:wordvec} presents this method.
+      \paragraph{Word Vectors} To generate word vectors for each artifact we use a pre-trained word embeddings model \fba{word2vec-google-news-300}. We gather the word vector for each word within an artifact from the model and to build a vector for each requirement and software development artifact we average the word vectors contained in their textual attributes. To extract trace links for a requirement using TF-IDF and word vectors, we calculate the cosine similarity metric of the requirement's vector with the vectors of other artifacts. The artifacts that have similarities above the decided threshold are recorded as identified traces. Fig.~\ref{fig:wordvec} presents this method.
 
        \begin{figure}[htb]
         \centering
