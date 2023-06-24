@@ -23,25 +23,25 @@
 \State Output: $TG$ : \texttt{graph} \Comment{Trace Graph}
 \phase{Fetch Software Artifacts}
 % \LineComment{Request from Github graphQL API}
-\State $\textit{issueList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getIssues($GRU$)\label{algl:m}
-\State $\textit{prList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getPRs($GRU$)\label{algl:m}
-\State $\textit{commitList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getCommits($GRU$)\label{algl:m}
+\State $\textit{issueList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getIssues($GRU$)
+\State $\textit{prList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getPRs($GRU$)
+\State $\textit{commitList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getCommits($GRU$)
 % \LineComment{Parse directly from given Requirement Specification Document}
-\State $\textit{reqList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getRequirements($RSD$)\label{algl:m}
+\State $\textit{reqList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} getRequirements($RSD$)
 
 \phase{Create Graph with Artifacts}
 
-\State $\textit{sdaList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueList+prList+commitList$\label{algl:m}
+\State $\textit{sdaList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueList+prList+commitList$
 % \State $\textit{TG} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueNodes+prNodes+commitNodes+reqNodes$\label{algl:m}
 \State $TG \leftarrow$  \texttt{graph} 
 
-\For{\textbf{each} $a$ \textbf{in} sdaList} \label{algl:c}
+\For{\textbf{each} $a$ \textbf{in} sdaList}
 \State $TG$.addNode(a)
-\EndFor \label{algl:c}
+\EndFor
 
-\For{\textbf{each} $r$ \textbf{in} reqList} \label{algl:c}
+\For{\textbf{each} $r$ \textbf{in} reqList}
 \State $TG$.addNode(r)
-\EndFor \label{algl:c}
+\EndFor
 
 \phase{Preprocess Artifacts for Trace Extraction}
 
