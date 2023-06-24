@@ -28,13 +28,13 @@
 %Software development is a complex process where numerous artifacts are produced as the software requirements are designed, implemented, and tested. These artifacts, such as commits, issues, and pull requests, are related to one or more requirements and indicate the progress of the project. We need to trace the requirements through these artifact, aggregate and visualize the results to understand the current status of the project. However, due to their sheer volume and dynamic nature, attempting to manually track and link these artifacts to specific software requirements and understanding the status of the project can be a daunting task. Automated approaches provide a more efficient software requirements traceability.
 
 %
-The success of a software development project is determined by whether the requirements are satisfied or not. Project managers need to check the progress throughout the development cycle to ensure the timely delivery of requirements. Software development is a complex process where numerous artifacts are produced. These artifacts, such as commits, issues, and pull requests, are related to one or more requirements and traceability of requirements~\cite{gotel-1994} to these artifacts indicate the progress of the project. However, due to their sheer volume and dynamic nature, attempting to manually track and link these artifacts to specific software requirements and understanding the status of the project can be a daunting task.
+The success of a software development project is determined by whether the requirements are satisfied or not. Project managers need to check the progress throughout the development cycle to ensure the timely delivery of requirements. Software development is a complex process where numerous artifacts are produced. These artifacts, such as commits, issues, and pull requests, are related to one or more requirements and traceability of requirements~\cite{gotel-1994} to these artifacts indicates the progress of the project. However, due to their sheer volume and dynamic nature, attempting to manually track and link these artifacts to specific software requirements and understanding the status of the project can be a daunting task.
 
 %
 Emerging automated approaches are used to provide more efficient software requirements traceability \cite{cleland-huang-2007,mills-2017,VANOOSTEN2023107226,bonner-2023,deen-2023}. Natural language processing(NLP) techniques, together with information retrieval and machine learning methods increase the time efficiency of the task of requirements tracing~\cite{cleland-huang-2007}.
 
 %
-This paper aims at visualizing software development repositories to support real-time and retropective analysis of software development pojects based on the trace links between requirements and other software development artifacts. We implement a dashboard aggregating several visual and statistical data of the project and specific requirement progress through the trace links. We analyze a given software repository and extract directed trace links from requirements to issues, pull requests, and commits using the textual attributes of these software development artifacts such as summary and message. We implement and evaluate three methods to extract trace links: \emph{i.} keyword matching, \emph{ii.} TF-IDF vectors, \emph{iii.} word vectors. We store the artifacts together with their attributes and the trace links among them in a graph database and use this database to visualize the repository for software management.
+This paper aims at visualizing software development repositories to support real-time and retrospective analysis of software development projects based on the trace links between requirements and other software development artifacts. We implement a dashboard aggregating several visual and statistical data of the project and specific requirement progress through the trace links. We analyze a given software repository and extract directed trace links from requirements to issues, pull requests, and commits using the textual attributes of these software development artifacts such as summary and message. We implement and evaluate three methods to extract trace links: \emph{i.} keyword matching, \emph{ii.} TF-IDF vectors, \emph{iii.} word vectors. We store the artifacts together with their attributes and the trace links among them in a graph database and use this database to visualize the repository for software management.
 
 The main contribution of this paper is the dashboard designed to support software development management. The dashboard presents data visualizations of repository statistics, requirements trace links, and their temporal distribution to support real-time and retrospective analysis of software repositories. We publicly share our implementation and evaluation data in our replication package.
 
@@ -58,34 +58,5 @@ The main contribution of this paper is the dashboard designed to support softwar
 %For identifying the trace links, three optional methods are implemented in our tool. These methods are keyword extraction, which performs keyword matching to software development artifacts, and TF-IDF Vector - Word Vector methods, which basically perform vector-based similarity. Each of these methods offers distinct advantages that are highly dependent on the context of the projects.
 %The software artifacts and the identified trace links are stored in a graph database and visualized in a graphical structure to enable efficient retrieval of traceability information. To improve the comprehension of the collected traceability data, our tool also features an interactive dashboard. This dashboard is equipped with valuable statistical insights about the lifetime of the project and the requirements. Along with the visualization of the traceability links and the offering of statistical data, we aim to improve the management of the requirements, ultimately leading to better-planned and programmed software projects.
 
-The rest of the paper is structured as follows. Sec.~\ref{sec:relwork} presents the related work from the literature. Sec.~\ref{sec:approach} details our approach for identifying trace links and selected information visualization for our dashboard. Our preliminary evaluation, and future evaluation plans are described in Sec.~\ref{sec:eval}. Sec.~\ref{sec:discuss} discusses our observations, limitations of our work and threats to validity. Finally, Sec.~\ref{sec:conc} concludes the paper and lays out the future work.
+The rest of the paper is structured as follows. Sec.~\ref{sec:relwork} presents the related work from the literature. Sec.~\ref{sec:approach} details our approach for identifying trace links and selected information visualization for our dashboard. Our preliminary evaluation and future evaluation plans are described in Sec.~\ref{sec:eval}. Sec.~\ref{sec:discuss} discusses our observations, limitations of our work, and threats to validity. Finally, Sec.~\ref{sec:conc} concludes the paper and lays out future work.
 
-%\section{Problem and Motivation}
-%\label{section:problem}
-
-% Requirements traceability,
-%     - definition,
-% Why do we do it, examples
-%     - It is too hard to do it manually
-%     - Its role in project management,
-%         - Monitoring the progress
-%             - Status of the project
-%             - What has been done
-%         - Effort assessment
-%             - How much effort went to which features
-%         - Detecting problems for specific features
-%             - In the case of a problem, look for it in a localized manner
-%             - can be done since we know what has done for which context
-%     - The use of requirements and req traceability is not common
-%         - Cost of integration
-%             - Need trace link recovery,
-%         - Human effort
-%             - Do not force extra measures for traceability
-%     - To achieve wide-use of traceability
-%         - user friendly,
-%             - showcasing trace data and other stats to user in a self-evident manner
-%         - minimal human effort,
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../main"
-%%% End:
