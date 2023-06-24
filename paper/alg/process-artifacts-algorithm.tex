@@ -67,7 +67,7 @@ It lemmatizes the text property of each artifact in the list.
 If the method is vector-based then it also removes the stopwords. 
 Thereafter, the trace links are determined according to desired method.
 In the keyword based method shared keywords between the requirements and software artifacts are sought. In vector based methods the requirements and artifacts are vectorized and their similarities are compared. When similarities exceed a given threshold edges are formed.
-In our experiments we utilize TF-IDF and word vectors.
+For vector-based methods we utilize TF-IDF and word vectors.
 
 
 % The $sEdge(req, sda, method)$  function determines whether a trace link exists between a given a requirement ($req$) and a software development artifact ($sda$) based on a trace link $method$. If  $method$ is `keyword extraction', the keywords are extracted from $req$ and $sda$ and an edge is created if they share keywords.
