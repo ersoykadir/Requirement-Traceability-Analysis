@@ -43,10 +43,16 @@
 \State $TG$.addNode(r)
 \EndFor \label{algl:c}
 
-\phase{Extract Trace Links}
+\phase{Preprocess Artifacts for Trace Extraction}
 
-\State preprocess($reqList$, $method$)
-\State preprocess($sdaList$, $method$)
+\State lemmatize($reqList$, $method$)
+\State lemmatize($sdaList$, $method$)
+\If{$method=$ "vector-based"}
+\State removeStopwords($reqList$, $method$)
+\State removeStopwords($sdaList$, $method$)
+\EndIf
+
+\phase{Extract Trace Links}
 \For{\textbf{each} $r$ \textbf{in} reqList}
 \For{\textbf{each} $a$ \textbf{in} sdaList}
 % \If{$method=$ "keyword"}
