@@ -12,57 +12,63 @@
 
 This section presents the results of our preliminary evaluation and detailed evaluation plan for the future.
 
-For this purpose, we selected a set of requirements and thir associated software development artifactsto serve as a ground truth.
-The trace links were manually traced  by our team.
-\todo{Have we put the selected requirements and traces somewhere? If not let's put it in our repo. }
+We evaluate our approach on a public Github repository of a group of computer engineering students for their software engineering course\footnote{Link Anonymized.%https://github.com/bounswe/bounswe2022group2
+}. The repository includes the project of an online learning platform. The requirements of the project is also in the repository written in a mixed format where some requirements are written as short phareses to describe a functionality where others as full shall statements. The requirements are structured hierarchically where a parent requirement is further refined into other requirement items.
 
-The performance of our approach is evaluated using the recall and precision metrics, which inform us about the  percentage of the  traces that were successfully recovered and  the percentage of the traces that are correctly recovered using the following formulas:
+The first two authors who are familiar with the project but not involved in the project manually extracted the trace links to serve as the ground truth. Below we report the performance of our keyword matching method in Table~\ref{tab:keyperf} and vector-based methods with various similarity thresholds in Table~\ref{tab:vecperf}.
+
+%For this purpose, we selected a set of requirements and thir associated software development artifactsto serve as a ground truth.
+%The trace links were manually traced  by our team. \todo{Have we put the selected requirements and traces somewhere? If not let's put it in our repo. }
+
+%The performance of our approach is evaluated using the recall and precision metrics, which inform us about the  percentage of the  traces that were successfully recovered and  the percentage of the traces that are correctly recovered using the following formulas:
 
 
-$Recall = \dfrac{True Positives}{True Positives + False Negatives}$
+%$Recall = \dfrac{True Positives}{True Positives + False Negatives}$
 
 
-$Precision = \dfrac{True Positives}{True Positives + False Positives}$
+%$Precision = \dfrac{True Positives}{True Positives + False Positives}$
 
 
 %In the experiment, true positives indicate the trace links that are identified by the method.
 %False negatives indicate the trace links that are not identified(missed), and false positives indicate the identified trace %links that are incorrect.
-Table~\ref{tab:keyperf} presents the results of the keyword extraction method and
-  Table~\ref{tab:vecperf} shows the results of the vector based methods.
+%Table~\ref{tab:keyperf} presents the results of the keyword extraction method and
+%Table~\ref{tab:vecperf} shows the results of the vector based methods.
 
 
 \begin{table}[htb]
 \centering
-\caption{\label{tab:keyperf}Performance of the Keyword Extraction Method}
-\begin{tabular}{lll}
+\caption{\label{tab:keyperf}Performance of the Keyword Matching Method}
+\begin{tabular}{llll}
   \toprule
-  Method & Recall & Precision\\
-  \midrule
-
-Keyword extraction & {0.865} & 0.212 \\
-\bottomrule
+  Method & Recall & Precision & F1 Score \\ \midrule
+  Keyword extraction & {0.865} & 0.212 & 0.340 \\
+  \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{table}[htb]
 \centering
-\caption{\label{tab:vecperf}Performance of the Vector-based Methods}
-\begin{tabular}{lllll}
-\toprule
-  & \multicolumn{2}{c}{Word-vector} &  \multicolumn{2}{c}{Tf-idf vector} \\
-  \cmidrule{2-5}
-{Sim.Threshold   } & {Rec.} & {Prec.} &  {Rec.} & {Prec.}\\
-\midrule
-0.05    & 1.0 & 0.043 & 0.839 & 0.121 \\
-0.15    & 1.0 & 0.043 & 0.573 & 0.256 \\
-0.25    & 1.0 & 0.043 & 0.244 & 0.430 \\
-0.35    & 1.0 & 0.043 & 0.095 & 0.392 \\
-0.45    & 0.965 & 0.071 & 0.025 & 0.125 \\
-0.55    & 0.865 & 0.100 & 0.013 & 0.121 \\
-0.65    & 0.294 & 0.300 & 0 & 0 \\
-\bottomrule
-\end{tabular}
+\caption{Performance of the Vector-based Methods}
+\label{tab:vecperf}
+\begin{tabular}{lllllll}
+   \toprule
+    \multirow{2}{*}{\shortstack[l]{Similarity \\ Threshold}}
+  & \multicolumn{3}{c}{Word-vector} &  \multicolumn{3}{c}{TF-IDF vector} \\
+   \cmidrule{2-7}
+                                                          & {Rec.} & {Prec.} & F1 &  {Rec.} & {Prec.} & F1\\
+   \midrule
+  0.05 & 1 & 0.043 & 0.082 & 0.839 & 0.121 & 0.211 \\
+  0.15 & 1 & 0.043 & 0.082 & 0.573 & 0.256 & 0.354 \\
+  0.25 & 1 & 0.043 & 0.082 & 0.244 & 0.43 & 0.311 \\
+  0.35 & 1 & 0.043 & 0.082 & 0.095 & 0.392 & 0.153 \\
+  0.45 & 0.965 & 0.071 & 0.132 & 0.025 & 0.125 & 0.042 \\
+  0.55 & 0.865 & 0.1 & 0.179 & 0.013 & 0.121 & 0.023 \\
+  0.65 & 0.294 & 0.3 & 0.297 & 0 & 0 & -- \\
+   \bottomrule
+ \end{tabular}
 \end{table}
+
+Based on the F1-scores, TF-IDF vector based method has the best F1 score followed by the keyword matching method on this repository.
 
 Among these mehtods,  the keyword extraction method yielded the best recall-precision pair.
 The performance of the vector-based methods  significantly varies according to the threshold value.
