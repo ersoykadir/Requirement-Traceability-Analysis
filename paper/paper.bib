@@ -1,83 +1,87 @@
-@article{gotel-1994,
-	author = {Gotel, Olly and Finkelstein, C.W.},
-	journal = {International Conference on Requirements Engineering},
-	month = {4},
-	title = {{An analysis of the requirements traceability problem}},
-	year = {1994}}
+@inproceedings{gotel-1994,
+	title={An analysis of the requirements traceability problem},
+  	author={Gotel, Orlena CZ and Finkelstein, CW},
+  	booktitle={Proceedings of {IEEE} international conference on requirements engineering},
+  	pages={94--101},
+ 	 year={1994}
+}
 
 @article{cleland-huang-2007,
 	author = {Cleland-Huang, Jane and Settimi, Raffaella and Romanova, Elena V. and Berenbach, Brian and Clark, Simon M.},
-	journal = {IEEE Computer},
+	journal = {{IEEE} Computer},
 	month = {6},
 	number = {6},
 	pages = {27--35},
-	publisher = {IEEE Computer Society},
-	title = {{Best Practices for Automated Traceability}},
+	publisher = {{IEEE} Computer Society},
+	title = {Best Practices for Automated Traceability},
 	volume = {40},
 	year = {2007}
 }
-@article{mills-2017,
-	author = {Mills, Chris},
-	journal = {Foundations of Software Engineering},
-	month = {8},
-	title = {{Automating traceability link recovery through classification}},
-	year = {2017}
-}
-@article{hayes-2003,
-	author = {Hayes, Jane Huffman and Dekhtyar, Alex and Osborne, J. P.},
-	journal = {IEEE International Conference on Requirements Engineering},
-	month = {9},
-	title = {{Improving requirements tracing via information retrieval}},
-	year = {2003}
+
+@inproceedings{cleland-huang-2010,
+  title={A machine learning approach for tracing regulatory codes to product specific requirements},
+  author={Cleland-Huang, Jane and Czauderna, Adam and Gibiec, Marek and Emenecker, John},
+  booktitle={Proceedings of the 32nd ACM/IEEE International Conference on Software Engineering-Volume 1},
+  pages={155--164},
+  year={2010}
 }
 
-@article{bonner-2023,
+
+
+@inproceedings{mills-2017,
+  title={Automating traceability link recovery through classification},
+  author={Mills, Chris},
+  booktitle={Proceedings of the 2017 11th Joint Meeting on Foundations of Software Engineering},
+  pages={1068--1070},
+  year={2017}
+}
+
+@inproceedings{hayes-2003,
+  author={Hayes, J.H. and Dekhtyar, A. and Osborne, J.},
+  booktitle={Proceedings. 11th IEEE International Requirements Engineering Conference, 2003}, 
+  title={Improving requirements tracing via information retrieval}, 
+  year={2003},
+  pages={138-147},
+}
+
+@inproceedings{bonner-2023,
 	author = {Bonner, Maria and Zeller, Marc and Schulz, Gabor and Beyer, Dagmar and Olteanu, Mihaela},
-	journal = {International Conference on Requirements Engineering: Foundation for Software Quality},
+	booktitle = {Joint Proceedings of {REFSQ}-2023 Workshops, Doctoral Symposium, Posters \& Tools Track, andJournal Early Feedback Track. Co-located with {REFSQ} 2023},
 	month = {4},
-	title = {{Automated Traceability between Requirements and Model-Based Design}},
+	title = {Automated Traceability between Requirements and Model-Based Design},
+	day = 17,
 	year = {2023}
 }
 
-@article{abdeen-2023,
-	author = {Abdeen, Waleed},
-	journal = {International Conference on Requirements Engineering: Foundation for Software Quality},
-	month = {4},
-	title = {{Taxonomic Trace Links Recommender: Context Aware Hierarchical Classification}},
-	year = {2023},
+@inproceedings{abdeen-2023,
+  title={Taxonomic Trace Links Recommender: Context Aware Hierarchical Classification},
+  author={Abdeen, Waleed},
+  booktitle={Joint of REFSQ-2023 Workshops, Doctoral Symposium, Posters and Tools Track and Journal Early Feedback, REFSQ-JP 2023, Barcelona, 17 April 2023 through 20 April 2023},
+  volume={3378},
+  year={2023},
+  organization={CEUR-WS}
 }
 
 @article{VANOOSTEN2023107226,
-title = {On the effectiveness of automated tracing from model changes to project issues},
-journal = {Information and Software Technology},
-volume = {160},
-pages = {107226},
-year = {2023},
-issn = {0950-5849},
-author = {Wouter {van Oosten} and Randell Rasiman and Fabiano Dalpiaz and Toine Hurkmans},
-keywords = {Requirement Traceability, Trace link recovery, Model-driven development, Low-code development, Machine learning},
-abstract = {Context:
-Requirements Traceability (RT) is concerned with monitoring and documenting the lifecycle of requirements. Although researchers have proposed several automated tracing tools, trace link establishment and maintenance are still prevalently manual activities.
-Objective:
-In order to foster the adoption of automated tracing tools, we study their empirical effectiveness in the context of model-driven development (MDD). We focus on trace link recovery (TLR) from (i) SVN revisions of MDD models to (ii) JIRA issues that represent requirements and bugs.
-Method:
-Based on the state-of-the-art in automated TLR, we propose the LCDTrace tool that uses 131 features to train a machine learning classifier. Some of these features use specific information for MDD contexts. We conduct three experiments on ten datasets from seven MDD projects. First, we evaluate the effectiveness of three ML algorithms and four rebalancing strategies using all 131 features, and we derive two optimal combinations for trace link recommendation and for trace maintenance. Second, we investigate whether the MDD-specific features convey higher performance than a version of LCDTrace that excludes those features. Third, we employ automated feature selection and study whether we can reduce the number of features while keeping similar performance, thereby boosting time and energy efficiency.
-Results:
-In our experiments, the gradient boosting models outperform those based on random forests. The best combinations for trace recommendation and maintenance achieve an F2-score of 61% and F0.5-score of 67%, respectively. While MDD-specific features do not provide additional value, automated feature selection succeeds at reducing feature numerosity without compromising performance.
-Conclusion:
-We provide insights on the effectiveness of state-of-the-art TLR techniques in MDD. Our findings are a baseline for devising and experimenting with alternative TLR approaches.}
-}
+ title={On the effectiveness of automated tracing from model changes to project issues},
+  author={van Oosten, Wouter and Rasiman, Randell and Dalpiaz, Fabiano and Hurkmans, Toine},
+  journal={Information and Software Technology},
+  volume={160},
+  pages={107226},
+  year={2023},
+  publisher={Elsevier}
+  }
 
 @inproceedings{Marf2023TransFeatExAN,
-  title={TransFeatEx: a NLP pipeline for feature extraction},
+  title={{TransFeatEx}: a {NLP} pipeline for feature extraction},
   author={Agust{\'i} G{\'a}llego Marf{\`a} and Quim Motger and Xavier Franch and Jordi Marco},
-  booktitle={REFSQ Workshops},
+  booktitle={Joint Proceedings of {REFSQ}-2023 Workshops, Doctoral Symposium, Posters \& Tools Track, andJournal Early Feedback Track. Co-located with {REFSQ} 2023},
   year={2023}
 }
 
-@INPROCEEDINGS{Spreading-Activation,
+@inproceedings{Spreading-Activation,
   author={Schlutter, Aaron and Vogelsang, Andreas},
-  booktitle={2020 IEEE 28th International Requirements Engineering Conference (RE)}, 
+  booktitle={{2020 IEEE 28th International Requirements Engineering Conference (RE)}}, 
   title={Trace Link Recovery using Semantic Relation Graphs and Spreading Activation}, 
   year={2020},
   volume={},
@@ -85,9 +89,9 @@ We provide insights on the effectiveness of state-of-the-art TLR techniques in M
   pages={20-31},
  }
 
-@INPROCEEDINGS{Ontology,
+@inproceedings{Ontology,
   author={Li, Yonghua and Cleland-Huang, Jane},
-  booktitle={2013 7th International Workshop on Traceability in Emerging Forms of Software Engineering (TEFSE)}, 
+  booktitle={{2013 7th International Workshop on Traceability in Emerging Forms of Software Engineering (TEFSE)}}, 
   title={Ontology-based trace retrieval}, 
   year={2013},
   volume={},
@@ -95,18 +99,18 @@ We provide insights on the effectiveness of state-of-the-art TLR techniques in M
   pages={30-36},
  }
 
-@article{IR,
+@book{IR,
 author = {Baeza-Yates, Ricardo and Ribeiro-neto, Berthier and Mills, Don and Bonn, Ontario and Juan, San and Mexico, Milan and Taipei, City and Wesley, Addison and Limited, Longman},
-year = {1999},
-month = {07},
-pages = {},
+  volume={463},
+  year={1999},
+  publisher={{ACM} press {New York}},
 title = {Modern Information Retrieval}
 }
 
-@INPROCEEDINGS{Taxonomy,
+@inproceedings{Taxonomy,
   author={Unterkalmsteiner, Michael},
   booktitle={2020 IEEE Seventh International Workshop on Artificial Intelligence for Requirements Engineering (AIRE)}, 
-  title={TT-RecS: The Taxonomic Trace Recommender System}, 
+  title={{TT-RecS: The Taxonomic Trace Recommender System}}, 
   year={2020},
   volume={},
   number={},
@@ -114,29 +118,35 @@ title = {Modern Information Retrieval}
 }
 
 @article{capobianco-2013,
-author = {Capobianco, Giovanni and De Lucia, Andrea and Oliveto, Rocco and Panichella Annibale and Panichella, Sebastiano},
-year = {2013},
-month = {07},
-pages = {},
-title = {Improving IR‐based traceability recovery via noun‐based indexing of software artifacts}}
+  author={Capobianco, Giovanni and Lucia, Andrea De and Oliveto, Rocco and Panichella, Annibale and Panichella, Sebastiano},
+  journal={Journal of Software: Evolution and Process},
+  volume={25},
+  number={7},
+  pages={743--762},
+  year={2013},
+  publisher={Wiley Online Library},
+title = {Improving {IR}‐based traceability recovery via noun‐based indexing of software artifacts}
+}
 
 @inproceedings{knethen-2003,
 author = {Knethen, A. and Grund, M.},
 year = {2003},
 month = {10},
 pages = {246- 255},
-title = {QuaTrace: A Tool Environment for (Semi-) Automatic Impact Analysis Based on Traces},
+  title={{QuaTrace}: a tool environment for (semi-) automatic impact analysis based on traces}, 
 isbn = {0-7695-1905-9},
-journal = {IEEE International Conference on Software Maintenance, ICSM}
+ booktitle={{International Conference on Software Maintenance, 2003. ICSM 2003. Proceedings.}}, 
 }
 
-@inproceedings{zisman-2003,
-author = {Zisman, Andrea and Spanoudakis, George and Pérez-Miñana, Elena and Krause, Paul},
-year = {2003},
-month = {01},
-pages = {448-455},
-title = {Tracing Software Requirements Artefacts},
-volume = {1}
+@article{zisman-2003, 
+  title={Rule-based generation of requirements traceability relations},
+  author={Spanoudakis, George and Zisman, Andrea and P{\'e}rez-Minana, Elena and Krause, Paul},
+  journal={Journal of systems and software},
+  volume={72},
+  number={2},
+  pages={105--127},
+  year={2004},
+  publisher={Elsevier}
 }
 
 @inproceedings{fasano-2005,
@@ -144,9 +154,8 @@ author = {Lucia, A. and Fasano, Fausto and Oliveto, Rocco and Tortora, Genoveffa
 year = {2005},
 month = {04},
 pages = {32- 41},
-title = {ADAMS re-trace: A traceability recovery tool},
-isbn = {0-7695-2304-8},
-journal = {Proceedings of the European Conference on Software Maintenance and Reengineering, CSMR}
+title = {{ADAMS re-trace: A Traceability Recovery Tool}},
+booktitle = {Proceedings of the European Conference on Software Maintenance and Reengineering, CSMR}
 }
 
 @inproceedings{cleland-2010,
@@ -154,27 +163,27 @@ author = {Cleland-Huang, Jane and Czauderna, Adam and Gibiec, Marek and Emenecke
 year = {2010},
 month = {05},
 pages = {155-164},
-title = {A machine learning approach for tracing regulatory codes to product specific requirements},
-volume = {1},
-journal = {Proceedings - International Conference on Software Engineering}
+title = {{A machine learning approach for tracing regulatory codes to product specific requirements}},
+booktitle={Proceedings of the 32nd ACM/IEEE International Conference on Software Engineering-Volume 1},}
+
+@inproceedings{mills-2018,
+  title={Automatic traceability maintenance via machine learning classification},
+  author={Mills, Chris and Escobar-Avila, Javier and Haiduc, Sonia},
+  booktitle={2018 IEEE International Conference on Software Maintenance and Evolution (ICSME)},
+  pages={369--380},
+  year={2018},
+  organization={{IEEE}}
 }
 
-@article{mills-2018,
-author = {Mills, Chris and Escobar-Avila, Javier and Haiduc, Sonia},
-year = {2018},
-month = {07},
-pages = {},
-title = {Automatic Traceability Maintenance via Machine Learning Classification}
-}
-
-@INPROCEEDINGS{jane-2012,
+@inproceedings{jane-2012,
   author={Mirakhorli, Mehdi and Shin, Yonghee and Cleland-Huang, Jane and Cinar, Murat},
   booktitle={2012 34th International Conference on Software Engineering (ICSE)}, 
   title={A tactic-centric approach for automating traceability of quality concerns}, 
   year={2012},
   volume={},
   number={},
-  pages={639-649}}
+  pages={639-649}
+  }
 
 @inproceedings{marcus-2003,
 author = {Marcus, Andrian and Maletic, J.I.},
@@ -183,7 +192,7 @@ month = {06},
 pages = {125- 135},
 title = {Recovering documentation-to-source-code traceability links using latent semantic indexing},
 isbn = {0-7695-1877-X},
-journal = {Proceedings - International Conference on Software Engineering}
+booktitle = {Proceedings - International Conference on Software Engineering}
 }
 
 @inproceedings{kato-2013,
@@ -192,23 +201,26 @@ year = {2013},
 month = {08},
 pages = {121-130},
 title = {Recovering traceability links between requirements and source code in the same series of software products},
-journal = {ACM International Conference Proceeding Series}
-} 
+  booktitle={Proceedings of the 17th International Software Product Line Conference}
+  }
 
 @article{hayes-2005,
 author = {Yadla, Suresh and Hayes, Jane and Dekhtyar, Alex},
 year = {2005},
 month = {09},
-pages = {116-124},
+pages = {116--124},
 title = {Tracing Requirements to Defect Reports: An Application of Information Retrieval Techniques},
 volume = {1},
-journal = {ISSE}
+journal = {Innovations in Systems and Software Engineering}
 }
 
 @article{deen-2023,
 author = {Al-Msie'Deen, Ra'Fat},
 year = {2023},
 month = {05},
-pages = {},
-title = {Requirements Traceability: Recovering and Visualizing Traceability Links Between Requirements and Source Code of Object-oriented Software Systems}
+pages = {1--17},
+  journal={International Journal of Computing and Digital Systems},
+title = {Requirements Traceability: Recovering and Visualizing Traceability Links Between Requirements and Source Code of Object-oriented Software Systems},
+  publisher={{University of Bahrain}}
+
 }
