@@ -1,5 +1,4 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 Graph and node classes for the traceability graph. 
@@ -138,7 +137,6 @@ class Requirement(Node):
             print("Extracting keywords for requirement", self.number)	
             keyword_dict = custom_extractor(self.text, '../keyword_extractors/SmartStopword.txt', '../keyword_extractors/repo_stopwords.txt')	
             if self.parent is not None and Config().parent_mode:	
-                # parent_keywords = custom_extractor(self.parent.text, '../keyword_extractors/SmartStopword.txt')	
                 parent_keywords = self.parent.keyword_dict	
                 for key_type in keyword_dict:	
                     keyword_dict[key_type] = list(set(keyword_dict[key_type] + parent_keywords[key_type]))	

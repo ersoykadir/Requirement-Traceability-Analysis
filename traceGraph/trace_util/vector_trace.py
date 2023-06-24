@@ -1,6 +1,5 @@
 import numpy as np
 from config import Config
-import math, operator
 
 def cosine_similarity(v1, v2):
     if Config().search_method == 'tf-idf' or Config().search_method == 'llm-vector':

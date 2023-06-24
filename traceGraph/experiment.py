@@ -1,4 +1,3 @@
-from main import main
 from trace_util.trace import trace
 from graph.Graph import Graph
 from config import Config
@@ -16,8 +15,6 @@ Config().experiment_mode = True
 def experiment():
     for search_method in search_methods:
         Config().search_method = search_method
-        # At the beginning of each search method, delete the graph pickle to re-create the graph from scratch
-        # os.remove(f'./data_{Config().repo_name}/graph.pkl')
         graph = Graph()
         if search_method == 'keyword':
             Config().filter_threshold = 0
@@ -59,15 +56,12 @@ def average_recall_and_precision():
             precision_avg = "{:.3f}".format(df['Precision'].mean())
             if 'keyword' in res:
                 print(f'{result}: recall: {recall_avg}, precision: {precision_avg}')
-                keyword_res.append([recall_avg, precision_avg])
+                keyword_res = [recall_avg, precision_avg]
                 continue
             method, _, filter_threshold = res.split('_')
             filter_threshold = float(filter_threshold)
             res_dict[filter_threshold][method] = [recall_avg, precision_avg]
-            # recall_std = df['Recall'].std()
-            # precision_std = df['Precision'].std()
             print(f'{result}: recall: {recall_avg}, precision: {precision_avg}')
-            # print(f'{result}: recall std: {recall_std}, precision std: {precision_std}')
 
     result_table(res_dict, keyword_res)
 

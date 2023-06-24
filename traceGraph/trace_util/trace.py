@@ -1,15 +1,11 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 Creates traces from requirements to other artifacts using a custom keyword extractor and regex matching.
 Writes traces to neo4j database.
 """
 
-import sys, os, re, time
-from dotenv import load_dotenv
-load_dotenv()
-#sys.path.append('..')
+import os, time
 
 from ground_truth import recall_and_precision
 from graph.Graph import Graph

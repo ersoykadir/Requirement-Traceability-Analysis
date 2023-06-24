@@ -1,5 +1,4 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 Reads artifact data from json files and creates neo4j nodes.

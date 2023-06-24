@@ -51,7 +51,7 @@ class Config:
 
 
     # Specify github repository
-    repo = 'bounswe/bounswe2018group9'
+    repo = os.environ.get('GITHUB_REPO')
     repo_owner, repo_name = repo.split('/')
 
     # Tracing parameters
@@ -63,9 +63,9 @@ class Config:
     model_setup = False
     filter_threshold = 0.79
 
-    pretrained_model_path = r"C:\Users\KadirERSOY\gensim-data\word2vec-google-news-300\GoogleNews-vectors-negative300.bin"
+    pretrained_model_path = os.environ.get('PRETRAINED_MODEL_PATH')
 
-    filter_nodes_before_date = '2018-06-01'
+    filter_nodes_before_date = os.environ.get('FILTER_BEFORE')
     
 
     def __new__(cls):

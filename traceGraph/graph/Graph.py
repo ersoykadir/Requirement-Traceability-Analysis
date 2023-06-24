@@ -1,12 +1,8 @@
 import json
-import string
 import sys, os
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
-from gensim.models import Word2Vec as w2v
 from gensim.models import KeyedVectors
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 from nltk.stem.wordnet import WordNetLemmatizer
 wnet_lemmatizer = WordNetLemmatizer()
 sys.path.append('..')
@@ -42,11 +38,7 @@ class Graph:
 
     # Create the vector model for the graph
     def create_model(self, modeltype):
-        
-        # if Config().model_setup and Config().experiment_mode:
-        #     # Experiment mode is on and model is already setup
-        #     return
-        
+             
         print('Creating model...')
 
         total_tokens = 0
@@ -103,8 +95,10 @@ class Graph:
         nodes = self.artifact_nodes if Config().search_method == 'keyword' else self.nodes
         for artifact in nodes.values():
             # artifact.text = remove_stopwords_from_text(artifact.text, "../keyword_extractors/SmartStopword.txt")
-            # artifact.text = lemmatizer(artifact.text)
-            artifact.preprocess_text()
+            if Config().search_method == 'keyword':
+                artifact.text = lemmatizer(artifact.text)
+            else:
+                artifact.preprocess_text()
 
     # Combine two trace tuples
     def combine(self, tuple1, tuple2):

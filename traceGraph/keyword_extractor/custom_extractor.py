@@ -1,7 +1,6 @@
 import spacy
 import re
 from collections import Counter
-import time
 nlp = spacy.load("en_core_web_sm")
 
 def lemmatizer(text):
@@ -43,8 +42,6 @@ def noun_analysis(token, token_dict):
         if child.tag_[0:2] == "NN":
             if child.dep_ == "nmod" or child.dep_ == "amod":
                 token_dict["noun-objects"].append(f"""{child.lemma_.lower()} {token.lemma_.lower()}""")
-                # if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_.lower())
-                # if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_.lower())
                 flag = True
             elif child.dep_ == "compound":
                 compounds.append(child.lemma_.lower())
@@ -98,13 +95,8 @@ def custom_extractor(line, stopwords_path, repo_stopwords_path):
     req_statement = ' '.join(result)
     doc = nlp(req_statement)
 
-    #dep_file.write("{}\n".format(line))
-
     #Filters the nouns and verbs from token list for analysis.
     tokens = filter(lambda token: token.tag_[0:2] == 'VB' or token.tag_[0:2] == "NN" , doc)
-    
-    # #removes English stopwords from token list.
-    # tokens = remove_stopwords(tokens, stopwords_path)
     
     for token in tokens:
         if token.tag_[0:2] == 'VB':

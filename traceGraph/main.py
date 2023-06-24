@@ -1,5 +1,4 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 How to run:     python ./main.py <search_method> <options>

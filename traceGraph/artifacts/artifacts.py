@@ -1,5 +1,4 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 Acquires software artifacts(issue, pr, commmit, requirement) and writes them to json files.

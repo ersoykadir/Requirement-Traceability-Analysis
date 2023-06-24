@@ -1,5 +1,4 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 Node parser for the util graph.

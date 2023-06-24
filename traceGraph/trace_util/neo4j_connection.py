@@ -7,7 +7,6 @@ import os
 from config import Config
 
 class neo4jConnector:
-    # Having single neo4j connection might be worse, must test!!!
     def __new__(cls):
         if not hasattr(cls, 'instance'):
             cls.instance = object.__new__(cls)
@@ -25,7 +24,6 @@ class neo4jConnector:
 
     @staticmethod
     def tx(tx, query, params):        
-        # print(query, params)
         try:
             if params is not None:
                 result = tx.run(query, params)
@@ -42,7 +40,6 @@ class neo4jConnector:
             with self.driver.session() as session:
                 result = session.execute_write(self.tx, query, params)
         except Exception as e:
-            # print(query, params)
             raise e
 
     def create_issue_from_json(self, json_file):
