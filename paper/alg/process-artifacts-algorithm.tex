@@ -31,17 +31,6 @@
 
 \phase{Create Graph with Artifacts}
 
-  \Switch{$s$}
-    \Case{$a$}
-      \Assert{0}
-    \EndCase
-    \Case{$b$}
-      \Assert{1}
-    \EndCase
-  \EndSwitch
-
-% \State neo4jConnector($issue_nodes$)\Comment{}
-
 \State $\textit{sdaList} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueList+prList+commitList$\label{algl:m}
 % \State $\textit{TG} \hspace{-0.1cm} \leftarrow$  \hspace{-0.2cm} $issueNodes+prNodes+commitNodes+reqNodes$\label{algl:m}
 \State $TG \leftarrow$  \texttt{graph} 
@@ -60,19 +49,42 @@
 \State preprocess($sdaList$, $method$)
 \For{\textbf{each} $r$ \textbf{in} reqList}
 \For{\textbf{each} $a$ \textbf{in} sdaList}
-\If{$method=$ "keyword"}
-\State $keywords \leftarrow$ extract(r)
-\If{$a.text$ contains any $kw$ in $keywords$}
-\State $TG$.addEdge(r,a)
-\EndIf
-\EndIf
-\If{$method=$ "vector-based"}
-\State r-v $\leftarrow$ createVector($r.text$)
-\State a-v $\leftarrow$ createVector($a.text$)
-\If{sim(r-v, a-v)  $\geq$ $\tau_{e}$}
-\State $TG$.addEdge(r,a)
-\EndIf
-\EndIf
+% \If{$method=$ "keyword"}
+% \State $keywords \leftarrow$ extract(r)
+% \If{$a.text$ contains any $kw$ in $keywords$}
+% \State $TG$.addEdge(r,a)
+% \EndIf
+% \EndIf
+% \If{$method=$ "vector-based"}
+% \State r-v $\leftarrow$ createVector($r.text$)
+% \State a-v $\leftarrow$ createVector($a.text$)
+% \If{sim(r-v, a-v)  $\geq$ $\tau_{e}$}
+% \State $TG$.addEdge(r,a)
+% \EndIf
+% \EndIf
+
+\Switch{$method$}
+\Case{keyword}
+    \State $keywords \leftarrow$ extractKeywords(r)
+    \If{contains($a.text, keywords$)}
+        \State $TG$.addEdge(r,a)
+    \EndIf
+\EndCase
+\Case{tf-idf}
+    \State r-v $\leftarrow$ createTfidfVector($r.text$)
+    \State a-v $\leftarrow$ createTfidfVector($a.text$)
+    \If{sim(r-v, a-v)  $\geq$ $\tau_{e}$}
+      \State $TG$.addEdge(r,a)
+    \EndIf
+\EndCase
+\Case{word-vector}
+    \State r-v $\leftarrow$ createWordVector($r.text$)
+    \State a-v $\leftarrow$ createWordVector($a.text$)
+    \If{sim(r-v, a-v)  $\geq$ $\tau_{e}$}
+        \State $TG$.addEdge(r,a)
+    \EndIf
+\EndCase
+\EndSwitch
 \EndFor
 \EndFor
 
