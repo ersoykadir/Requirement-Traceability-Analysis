@@ -17,6 +17,8 @@ from trace_util.trace import trace
 from trace_util.neo4j_connection import neo4jConnector
 
 from config import Config
+from dotenv import load_dotenv
+load_dotenv()
 
 def main():
     

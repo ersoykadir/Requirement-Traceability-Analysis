@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+# Description: This file is used to run the experiment for the paper.
 from trace_util.trace import trace
 from graph.Graph import Graph
 from config import Config
