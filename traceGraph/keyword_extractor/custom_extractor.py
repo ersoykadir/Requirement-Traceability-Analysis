@@ -1,7 +1,6 @@
 import spacy
 import re
 from collections import Counter
-import time
 nlp = spacy.load("en_core_web_sm")
 
 def lemmatizer(text):
@@ -25,12 +24,12 @@ def most_frequent_words(req_file, stopwords_path):
 def verb_analysis(token, token_dict):
     flag = False
     for child in token.children:
-        if child.dep_ == "acomp" or child.dep_ == "dobj" or child.dep_ == "comp" or child.dep_ == "prt":
+        if child.tag_[0:2] == "NN" and (child.dep_ == "acomp" or child.dep_ == "dobj" or child.dep_ == "comp" or child.dep_ == "prt"):
             token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()}""")
             flag = True
         if child.dep_ == 'prep':
             for sub_child in child.children:
-                if sub_child.dep_ == "pobj":
+                if sub_child.tag_[0:2] == "NN" and sub_child.dep_ == "pobj":
                     token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
                     token_dict["verb-objects"].append(f"""{token.lemma_.lower()} {sub_child.lemma_.lower()}""")
                     flag = True
@@ -39,35 +38,27 @@ def verb_analysis(token, token_dict):
 def noun_analysis(token, token_dict):
     flag = False
     compounds = []
-    # if token.dep_ == "compound" :
-    #     return True
-    # if token.dep_ == "conj" and (token.head.dep_ == "dobj" or token.head.dep_ == "pobj"):
-    #     return True
-    # if token.dep_ == "dobj" or token.dep_ == "pobj":
-    #     return True
     for child in token.children:
-        if child.dep_ == "nmod" or child.dep_ == "amod":
-            token_dict["noun-objects"].append(f"""{child.lemma_.lower()} {token.lemma_.lower()}""")
-            # if child.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(child.lemma_.lower())
-            # if token.lemma_ not in token_dict["nouns"]: token_dict["nouns"].append(token.lemma_.lower())
-            flag = True
-        if child.dep_ == "compound":
-            compounds.append(child.lemma_.lower())
-            flag = True
-        if child.dep_ == 'prep':
-            for sub_child in child.children:
-                if sub_child.dep_ == "pobj":
-                    token_dict["noun-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
-                    if token.dep_ == "dobj":
-                        token_dict["verb-objects"].append(f"""{token.head.lemma_.lower()} {sub_child.lemma_.lower()}""")
-                    flag = True
-        if child.dep_ == 'conj':
-            if token.dep_ == 'dobj':
-                token_dict["verb-objects"].append(f"""{token.head.lemma_.lower()} {child.lemma_.lower()}""")
+        if child.tag_[0:2] == "NN":
+            if child.dep_ == "nmod" or child.dep_ == "amod":
+                token_dict["noun-objects"].append(f"""{child.lemma_.lower()} {token.lemma_.lower()}""")
                 flag = True
-            if token.dep_ == 'pobj':
-                token_dict["verb-objects"].append(f"""{token.head.head.lemma_.lower()} {child.lemma_.lower()}""")
-                flag = True     
+            elif child.dep_ == "compound":
+                compounds.append(child.lemma_.lower())
+                flag = True
+            elif child.dep_ == 'conj':
+                if token.dep_ == 'dobj':
+                    token_dict["verb-objects"].append(f"""{token.head.lemma_.lower()} {child.lemma_.lower()}""")
+                    flag = True
+                if token.dep_ == 'pobj':
+                    token_dict["verb-objects"].append(f"""{token.head.head.lemma_.lower()} {child.lemma_.lower()}""")
+                    flag = True    
+        else:
+            if child.dep_ == 'prep':
+                for sub_child in child.children:
+                    if sub_child.tag_[0:2] == "NN" and sub_child.dep_ == "pobj":
+                        token_dict["noun-objects"].append(f"""{token.lemma_.lower()} {child.lemma_.lower()} {sub_child.lemma_.lower()}""")
+                        flag = True
     if len(compounds) > 0:
         token_dict["noun-objects"].append(f"""{" ".join(compounds)} {token.lemma_.lower()}""")
         if token.head.tag_[0:2] == "VB" and token.dep_ == "dobj":
@@ -104,13 +95,8 @@ def custom_extractor(line, stopwords_path, repo_stopwords_path):
     req_statement = ' '.join(result)
     doc = nlp(req_statement)
 
-    #dep_file.write("{}\n".format(line))
-
     #Filters the nouns and verbs from token list for analysis.
     tokens = filter(lambda token: token.tag_[0:2] == 'VB' or token.tag_[0:2] == "NN" , doc)
-    
-    # #removes English stopwords from token list.
-    # tokens = remove_stopwords(tokens, stopwords_path)
     
     for token in tokens:
         if token.tag_[0:2] == 'VB':
@@ -132,4 +118,4 @@ def extract_keywords(file_name, stopwords_path, repo_stopwords_path):
         out.write("{}\n".format(keywords))
     file.close()
 
-# extract_keywords("Requirements_group2.txt", "SmartStopword.txt", 'repo_stopwords.txt')
+# extract_keywords("new_reqs.txt", "SmartStopword.txt", 'repo_stopwords.txt')

@@ -1,15 +1,11 @@
 """
-Kadir Ersoy - Ecenur Sezer
 Requirements Traceability Tool
 
 Creates traces from requirements to other artifacts using a custom keyword extractor and regex matching.
 Writes traces to neo4j database.
 """
 
-import sys, os, re, time
-from dotenv import load_dotenv
-load_dotenv()
-#sys.path.append('..')
+import os, time
 
 from ground_truth import recall_and_precision
 from graph.Graph import Graph
@@ -54,26 +50,32 @@ def find_traces(graph):
     if Config().search_method == 'keyword':
         keyword_search(graph)
     elif Config().search_method == 'tf-idf':
-        graph.create_model('tf-idf')
+        # graph.create_model('tf-idf')
         trace_w_vector(graph)
     elif Config().search_method == 'word-vector':
-        graph.create_model('word-vector')
+        # graph.create_model('word-vector')
+        trace_w_vector(graph)
+    elif Config().search_method == 'llm-vector':
+        # graph.create_model('llm-vector')
         trace_w_vector(graph)
 
 import pickle
 """
     Create traces from requirements to other artifacts and write to neo4j database.
 """
-def trace():
+def trace(graph=None):
     # Create graph for easy access to nodes
     # If graph is already created, load it from pickle
     # TODO: This graph can be loaded from neo4j database instead of pickle or json
     start = time.time()
-    if os.path.exists(f"data_{Config().repo_name}/graph.pkl") and not Config().reset_graph:
-        graph = pickle.load(open(f"data_{Config().repo_name}/graph.pkl", "rb"))
+    if Config().experiment_mode and graph is not None:
+        print("Graph is already created.")
     else:
-        graph = Graph()
-    print("Time taken to create graph: ", time.time() - start)
+        if os.path.exists(f"data_{Config().repo_name}/graph.pkl") and not Config().reset_graph:
+            graph = pickle.load(open(f"data_{Config().repo_name}/graph.pkl", "rb"))
+        else:
+            graph = Graph()
+        print("Time taken to create graph: ", time.time() - start)
 
     # Find artifacts that have matching keywords for each requirement
     start = time.time()

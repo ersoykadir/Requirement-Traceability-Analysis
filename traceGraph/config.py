@@ -51,11 +51,11 @@ class Config:
 
 
     # Specify github repository
-    repo = 'bounswe/bounswe2022group3'
+    repo = os.environ.get('GITHUB_REPO')
     repo_owner, repo_name = repo.split('/')
 
     # Tracing parameters
-    possible_search_methods = ['keyword', 'tf-idf', 'word-vector']
+    possible_search_methods = ['keyword', 'tf-idf', 'word-vector', 'llm-vector']
     search_method = 'keyword'
     parent_mode = False
     reset_graph = False
@@ -63,9 +63,9 @@ class Config:
     model_setup = False
     filter_threshold = 0.65
 
-    pretrained_model_path = r"C:\Users\KadirERSOY\gensim-data\word2vec-google-news-300\GoogleNews-vectors-negative300.bin"
+    pretrained_model_path = os.environ.get('PRETRAINED_MODEL_PATH')
 
-    filter_nodes_before_date = '2022-06-01'
+    filter_nodes_before_date = os.environ.get('FILTER_BEFORE')
     
 
     def __new__(cls):

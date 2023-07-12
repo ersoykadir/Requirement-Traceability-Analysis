@@ -1,14 +1,13 @@
 import numpy as np
 from config import Config
-import math, operator
 
 def cosine_similarity(v1, v2):
-    if Config().search_method == 'tf-idf':
+    if Config().search_method == 'tf-idf' or Config().search_method == 'llm-vector':
         return np.dot(v1, v2)
     return np.dot(v1, v2)/(np.linalg.norm(v1)*np.linalg.norm(v2))
 
 def normalize(word_vec):
-    if Config().search_method == 'tf-idf':
+    if Config().search_method == 'tf-idf' or Config().search_method == 'llm-vector':
         return word_vec
     norm=np.linalg.norm(word_vec)
     if norm == 0: 

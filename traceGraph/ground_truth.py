@@ -33,12 +33,44 @@ ground_truth = {
         'prs': []
     }
 }
+
+# ground_truth = {
+#     '1.1.3.3.3':{
+#         'issues': [408, 320, 286, 276, 275, 231],
+#         'prs': [349, 319]
+#     },
+#     '1.1.4.2':{
+#         'issues': [424, 410, 289, 268, 171],
+#         'prs': [447, 446, 226, 208,181]
+#     },
+#     '1.1.6.2.1':{
+#         'issues': [270],
+#         'prs': [300]
+#     },
+#     '1.1.6.4.1':{
+#         'issues': [386, 323, 296, 279],
+#         'prs': [403, 398, 322]
+#     },
+#     '1.1.6.5.1':{
+#         'issues': [145, 146, 147, 150, 209, 245, 293, 304, 373, 381, 382, 385, 431],
+#         'prs': [421, 415, 396]
+#     },
+#     '1.1.7.1':{
+#         'issues': [441, 413, 394, 393, 360, 339, 271, 154],
+#         'prs': [389, 395]
+#     }
+# }
+
+import os
 import pandas as pd
 from config import Config
 def recall_and_precision(graph):
     global ground_truth
     parent = 'req_tree' if Config().parent_mode else 'basic'
-    fname = "./results/Recall_and_Precision" + Config().search_method + "_" + parent
+    path = f"./results/{Config().repo_name}/"
+    if os.path.exists(path) == False:
+        os.mkdir(path)
+    fname = path + Config().search_method + "_" + parent
     if Config().search_method != "keyword":
         fname += "_" + str(Config().filter_threshold)
     data = []
