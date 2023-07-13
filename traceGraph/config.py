@@ -2,13 +2,22 @@ import os
 import sys
 
 # Provide a how to run error message 
-how_to_run = f"\nHow to Run:   python main.py <search_method> <options> \n"
-options_description = f"""Options:  -rt, -rg
+how_to_run = f"""
+How to Run:   python main.py <git_repo> <search_method> <options> 
+
+git_repo:   repo_owner/repo_name
+            e.g. ersoykadir/Requirement-Traceability-Analysis
+
+search_method:  keyword (trace recovery via keyword search),
+                tf-idf, 
+                word-vector, 
+                llm-vector(word embeddings taken from openai)
+options:  -rt, -rg
 -rt:    requirement tree mode, 
         includes parent requirements for keyword extraction, requires a file named 'requirements.txt' in the root directory of the repository
 -rg:    reset graph,
         deletes the graph pickle to re-create the graph from scratch
-"""
+\n"""
 how_to_run += options_description
     
 def get_mode():
@@ -16,7 +25,7 @@ def get_mode():
     try:
         parent_mode = False
         reset_graph = False
-        for i in range(2, len(sys.argv)):
+        for i in range(3, len(sys.argv)):
             if sys.argv[i] == "-rt":
                 parent_mode = True
             elif sys.argv[i] == "-rg":
@@ -31,7 +40,7 @@ def get_mode():
 def get_search_method(possible_search_methods):
     global how_to_run
     try:
-        search_method = sys.argv[1]
+        search_method = sys.argv[2]
         if search_method not in possible_search_methods: 
             raise Exception()
         return search_method
@@ -51,8 +60,13 @@ class Config:
 
 
     # Specify github repository
-    repo = os.environ.get('GITHUB_REPO')
-    repo_owner, repo_name = repo.split('/')
+    # repo = os.environ.get('GITHUB_REPO')
+    try:
+        repo = sys.argv[1]
+        repo_owner, repo_name = repo.split('/')
+    except:
+        print("Please enter a valid github repo!    repo_owner/repo_name", str(e) + "\n")
+        raise ValueError(how_to_run) from None
 
     # Tracing parameters
     possible_search_methods = ['keyword', 'tf-idf', 'word-vector', 'llm-vector']
@@ -66,7 +80,8 @@ class Config:
     pretrained_model_path = os.environ.get('PRETRAINED_MODEL_PATH')
 
     filter_nodes_before_date = os.environ.get('FILTER_BEFORE')
-    
+    if len(filter_nodes_before_date) == 0:
+        
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):
