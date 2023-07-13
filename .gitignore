@@ -13,7 +13,7 @@ pip-selfcheck.json
 .env
 __pycache__
 *data.json
-*.txt
+
 *.pkl
 *.csv
 *.gz
