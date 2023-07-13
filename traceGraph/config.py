@@ -18,7 +18,6 @@ options:  -rt, -rg
 -rg:    reset graph,
         deletes the graph pickle to re-create the graph from scratch
 \n"""
-how_to_run += options_description
     
 def get_mode():
     global how_to_run
@@ -64,7 +63,7 @@ class Config:
     try:
         repo = sys.argv[1]
         repo_owner, repo_name = repo.split('/')
-    except:
+    except Exception as e:
         print("Please enter a valid github repo!    repo_owner/repo_name", str(e) + "\n")
         raise ValueError(how_to_run) from None
 
@@ -80,8 +79,6 @@ class Config:
     pretrained_model_path = os.environ.get('PRETRAINED_MODEL_PATH')
 
     filter_nodes_before_date = os.environ.get('FILTER_BEFORE')
-    if len(filter_nodes_before_date) == 0:
-        
 
     def __new__(cls):
         if not hasattr(cls, 'instance'):
