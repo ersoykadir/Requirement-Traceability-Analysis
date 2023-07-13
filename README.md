@@ -20,42 +20,76 @@ This project creates a tool that identifies and visualizes the trace links for a
   
 ## How to Run
 
+<!---
 The project needs Python=3.10.0 to operate. 
-
 You can download it by clicking [here](https://www.python.org/downloads/release/python-3100/).
+-->
 
---------
+### Prepare virtual environment
+
 It is recommended to use a virtual environment on Python using _venv_ library.
 
------
 Clone the project using the following shell command.
 
 ```bash
   git clone https://github.com/ersoykadir/Requirement-Traceability-Analysis.git
 ```
 
+Create a virtual environment,
+```bash
+  python -m venv /path_to_your_venv
+```
+and activate it.
+<div style="text-align: center; display: grid; grid-template-columns: 1fr 1fr">
+  <div>
+  For Linux:
+
+  ```bash
+    . path_to_your_venv/bin/activate
+  ```
+  </div>
+  <div>
+  For Windows:
+
+  ```bash
+    path_to_your_venv\Scripts\activate
+  ```
+  </div>
+</div>
+
 Navigate to the root directory of the project and install the required dependencies.
 
 ```bash
+  cd ./Requirement-Traceability-Analysis
   pip install -r requirements.txt
 ```
 
-Navigate to the root directory of the project and run Docker to activate Neo4j server.
-
-```bash
-  docker-compose up -d
-```
 Create a _.env_ file with the following content:
  
 ```bash
-GITHUB_USERNAME=<your github username>
-GITHUB_TOKEN=<your github token>
-NEO4J_PASSWORD="password"
-NEO4J_USERNAME ="neo4j"
-NEO4J_URI = "bolt://localhost:7687""
+GITHUB_USERNAME= < your github username >
+GITHUB_TOKEN= < your github token >
+NEO4J_PASSWORD= password
+NEO4J_USERNAME= neo4j
+NEO4J_URI= bolt://localhost:7687
+OPENAI_API_KEY= < your openai token >
+PREDEFINED_MODEL_PATH= < path to your pre-trained word-vectors >
+FILTER_BEFORE= < OPTIONAL, provide to filter out software artifacts before a certain date >
 ```
 You can find a file named _.env.example_ as a template in the root directory.
 
+-----
+### Prepare Neo4j server
+
+A neo4j server is required to use our dashboard. We provide a docker compose file, assuming docker is installed, to fasten installation process. At the root directory of the project, run
+```bash
+  docker compose up -d
+```
+
+Alternative to dockerized version, [Neo4j Desktop](https://neo4j.com/download/) can also be used. Just don't forget to add [apoc](https://neo4j.com/labs/apoc/4.4/installation/) plugin.
+
+-----
+### Run the tool
 Navigate to the traceGraph directory under the root.
 ```bash
 cd ./traceGraph
@@ -64,34 +98,36 @@ cd ./traceGraph
 Run _.main.py_ with two system arguments; 
 
 ```bash
-python ./main.py <search_method> <options_>
+python ./main.py <git_repo> <search_method> <options>
 ```
+
+- <git_repo>  repo_owner/repo_name 
+  - e.g. ersoykadir/Requirement-Traceability-Analysis
+
 - <search_method> indicates the method used for searching traces.
+  - keyword:  Keyword extraction method for capturing traces.
+  - tf-idf vector: tf-idf vector method for capturing traces.
+  - word-vector: Word-vector method for capturing traces, requires a pre-trained model.
+  - llm-vector: Word-vector embeddings taken from openai.
 
-  -keyword:  Keyword extraction method for capturing traces.
+- <options_> run options
 
-  -word-vector: Word-vector method for capturing traces.
-
-  -tf-idf vector: tf-idf vector method for capturing traces.
-- <options_> 
-
-  -rt:    requirement tree mode, 
-          includes parent requirements for keyword extraction, requires a file named 'requirements.txt' in the root directory of the repository
+  - rt:    requirement tree mode,
+    - includes parent requirements for keyword extraction, requires a file named 'requirements.txt' in the root directory of the repository
           
-  -rg:    reset graph,
-          deletes the graph pickle to re-create the graph from scratch
+  - rg:    reset graph, 
+    - deletes the graph pickle to re-create the graph from scratch
 
 ---------
 
-We have a Config file which controls everything related to running configurations. You can filter threshold for vector-based methods or can change target repository from there to test the tool on other repositories. Beware that the tool needs the requirement specifications for the repository you provided. The two repositories with their requirements is available on the repo, which were also used for development of this tool.
-
-Navigate to http://localhost:7474/ to view results on neo4j.
+We have a Config file which controls everything related to running configurations. Beware that the tool needs the requirement specifications for the repository you provided. The two repositories with their requirements is available on the repo, which were also used for development of this tool.
 
 
-
+Navigate to http://neodash.graphapp.io/ to view the dashboard.
+Navigate to http://localhost:7474/ to view graph database.
 
   
-## Examples for Neo4j
+## Example queries for Neo4j graph database
 
 The following query returns the traces for a specific requirement number.
 
