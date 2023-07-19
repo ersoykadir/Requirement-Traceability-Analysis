@@ -1,0 +1,450 @@
+{
+  "title": "Requirement Traceability Tool",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {
+      "neodash_tracesto_keywords": "",
+      "neodash_tracesto_keywords_display": "",
+      "neodash_requirement_number": "1.3.12",
+      "neodash_requirement_number_display": "1.3.12",
+      "neodash_limit": "30",
+      "undefined": "1.1.1.1.1",
+      "undefined_display": "1.1.1.1.1",
+      "neodash_requirement_number_1": "1.2.1",
+      "neodash_requirement_number_1_display": "1.2.1",
+      "neodash_requirement_number_2": "1.1.2.1",
+      "neodash_requirement_number_2_display": "1.1.2.1",
+      "neodash_requirement_text_1": "Users shall be able to create notes.\n",
+      "neodash_requirement_text_1_display": "Users shall be able to create notes.\n",
+      "neodash_requirement_text_2": "Users shall be able to delete or edit their notes.\n",
+      "neodash_requirement_text_2_display": "Users shall be able to delete or edit their notes.\n",
+      "neodash_chart_limit": "30",
+      "neodash_graph_limit": "50",
+      "neodash_requirement_text": "Users shall be able to create notes.\n",
+      "neodash_requirement_text_display": "Users shall be able to create notes.\n"
+    },
+    "downloadImageEnabled": true
+  },
+  "pages": [
+    {
+      "title": "Dashboard",
+      "reports": [
+        {
+          "title": "Opened Issues and Pull Requests per week",
+          "query": "call{\n  match(p:PullRequest)\n  return p as node\n  union all\n  MATCH (i:Issue)\n  return i as node\n}\nwith node, max(node.created_week) as r\nRETURN \n  node.created_week as index,\n  labels(node)[0] as key,\n  count(node) as value,\n  range(0,r) as range\nORDER BY index\n",
+          "width": 4,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "bar",
+          "selection": {
+            "index": "index",
+            "value": "value",
+            "key": "key"
+          },
+          "settings": {
+            "groupMode": "stacked",
+            "colors": "nivo",
+            "layout": "vertical",
+            "barValues": false,
+            "showOptionalSelections": true,
+            "legend": true,
+            "backgroundColor": "#ffffff",
+            "downloadImageEnabled": true,
+            "styleRules": [
+              {
+                "field": "key",
+                "condition": "=",
+                "value": "PullRequest",
+                "customization": "bar color",
+                "customizationValue": "#836f51"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Trace Graph",
+          "query": "call{\n    match x=(r:Requirement)-[t:tracesTo]->(p:PullRequest)-[]->(c:Commit)\n    where r.text = $neodash_requirement_text\n    return  x\n}return x limit toInteger($neodash_graph_limit)/2\nunion all\ncall{\n    MATCH x=(r:Requirement)-[t:tracesTo]->(a)\n    where r.text = $neodash_requirement_text\n    return x\n}\nRETURN x limit toInteger($neodash_graph_limit)/2\n",
+          "width": 9,
+          "height": 3,
+          "x": 0,
+          "y": 12,
+          "type": "graph",
+          "selection": {
+            "Requirement": "(label)",
+            "PullRequest": "number",
+            "Commit": "(label)",
+            "Issue": "title"
+          },
+          "settings": {
+            "fullscreenEnabled": true
+          }
+        },
+        {
+          "title": "Traces",
+          "query": "\nMATCH p=(t)-[r:tracesTo]->(a) \nwhere t.text = $neodash_requirement_text\nRETURN a as Artifact, a.number as Number, r.weight as Weight, r.keywords as Keywords, a.url as URL\norder by Weight desc\n\n",
+          "width": 7,
+          "height": 2,
+          "x": 0,
+          "y": 10,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "compact": false,
+            "columnWidths": "[1,1,1,2,4]"
+          }
+        },
+        {
+          "title": "Opened issues per week for selected requirement",
+          "query": "call{\nMATCH p=(r1)-[t1:tracesTo]->(a1:Issue)\nwhere r1.text = $neodash_requirement_text\nreturn a1 as node\nunion all\nMATCH k=(r2)-[t2:tracesTo]->(a2:PullRequest)\nwhere r2.text = $neodash_requirement_text\nreturn a2 as node\n}\nwith node\nRETURN \n  node.created_week-31 as index,\n  labels(node)[0] as key,\n  count(node) as value\nORDER BY index\n\n",
+          "width": 5,
+          "height": 2,
+          "x": 7,
+          "y": 10,
+          "type": "bar",
+          "selection": {
+            "index": "index",
+            "value": "value",
+            "key": "key"
+          },
+          "settings": {
+            "colors": "pastel2",
+            "showOptionalSelections": true,
+            "styleRules": [
+              {
+                "field": "key",
+                "condition": "=",
+                "value": "PullRequest",
+                "customization": "bar color",
+                "customizationValue": "#997332"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Select a Requirement",
+          "query": "MATCH (n:`Requirement`) \nWHERE toLower(toString(n.`text`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`text` as value,  n.`text` as display ORDER BY size(toString(value)) ASC LIMIT 5",
+          "width": 8,
+          "height": 1,
+          "x": 0,
+          "y": 9,
+          "type": "select",
+          "selection": {},
+          "settings": {
+            "type": "Node Property",
+            "entityType": "Requirement",
+            "propertyType": "text",
+            "propertyTypeDisplay": "text",
+            "parameterName": "neodash_requirement_text"
+          }
+        },
+        {
+          "title": "Selected Requirement Number",
+          "query": "\nmatch(n:Requirement)\nwhere n.text = $neodash_requirement_text\nreturn n.number\n\n",
+          "width": 4,
+          "height": 1,
+          "x": 8,
+          "y": 9,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "verticalAlign": "middle"
+          }
+        },
+        {
+          "title": "Limit for trace chart/graph",
+          "query": "MATCH (n:`Requirement`) \nWHERE toLower(toString(n.`number`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`number` as value,  n.`number` as display ORDER BY size(toString(value)) ASC LIMIT 5",
+          "width": 4,
+          "height": 1,
+          "x": 8,
+          "y": 8,
+          "type": "select",
+          "selection": {},
+          "settings": {
+            "type": "Free Text",
+            "entityType": "chart_limit",
+            "helperText": "Number of traces to show.",
+            "parameterName": "neodash_chart_limit"
+          }
+        },
+        {
+          "title": "Active Issues",
+          "query": "MATCH (n:Issue) \nwhere n.state=\"OPEN\"\nRETURN count(n)\n\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 8,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Closed Issues",
+          "query": "MATCH (n:Issue) \nwhere n.state=\"CLOSED\"\nRETURN count(n)\n\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 10,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Active PRs",
+          "query": "MATCH (n:PullRequest) \nwhere n.state=\"OPEN\"\nRETURN count(n)\n\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 8,
+          "y": 1,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Merged PRs",
+          "query": "MATCH (n:PullRequest) \nwhere n.state=\"MERGED\"\nRETURN count(n)\n\n\n\n\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 10,
+          "y": 1,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Created/Closed artifacts per week",
+          "query": "call{\n  match(p:PullRequest)\n  return p as nodes\n  union all\n  MATCH (i:Issue)\n  return i as nodes\n}\ncall{\n  with nodes\n  unwind nodes as node\n\n  call apoc.create.vNodes(\n    ['Artifact'], \n    [{number:node.number,       \n    week:node.created_week,\n    st: \"created\"}])\n    yield node as n1\n\n  call apoc.create.vNodes(\n    ['Artifact'], \n    [{number:node.number,       \n    week:node.closed_week,\n    st: \"closed\"}])\n    yield node as n2\n\n  return [n1, n2] as n\n}unwind n as node\nRETURN \n  apoc.any.property(node, 'week') as index,\n  apoc.any.property(node, 'st') as key,\n  count(node) as value\nORDER BY index\n",
+          "width": 4,
+          "height": 2,
+          "x": 4,
+          "y": 0,
+          "type": "bar",
+          "selection": {
+            "index": "index",
+            "value": "value",
+            "key": "key"
+          },
+          "settings": {
+            "groupMode": "stacked",
+            "colors": "set1",
+            "layout": "vertical",
+            "barValues": false,
+            "showOptionalSelections": true,
+            "legend": true,
+            "backgroundColor": "#ffffff",
+            "styleRules": [
+              {
+                "field": "key",
+                "condition": "=",
+                "value": "closed",
+                "customization": "bar color",
+                "customizationValue": "#ff6666"
+              },
+              {
+                "field": "key",
+                "condition": "=",
+                "value": "created",
+                "customization": "bar color",
+                "customizationValue": "#66ff66"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Total Number of Artifacts",
+          "query": "\nmatch (c:Requirement)\nwith count(c) as Requirement\nmatch (b:Issue)\nwith count(b) as Issue,Requirement\nmatch (d:PullRequest)\nwith count(d) as PullRequest, Issue,Requirement\nmatch (a:Commit)\nwith count(a) as Commit,Issue,PullRequest,Requirement\nreturn  Requirement,Issue, PullRequest, Commit\n\n",
+          "width": 12,
+          "height": 1,
+          "x": 0,
+          "y": 4,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "compact": true
+          }
+        },
+        {
+          "title": "Average # Traces",
+          "query": "\n\nMATCH p=()-[j:tracesTo]->()\nwith count(p) as k\nmatch (c:Requirement)\nwith count(c) as l,k\nRETURN k/l\n",
+          "width": 2,
+          "height": 1,
+          "x": 10,
+          "y": 3,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Closed PRs",
+          "query": "\nMATCH (n:PullRequest) \nwhere n.state=\"CLOSED\"\nRETURN count(n)\n\n\n\n\n\n\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 10,
+          "y": 2,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Trace Chart (Ordered by Artifact creation date)",
+          "query": "\nMATCH p=(r)-[t:tracesTo]->(a)\nwhere r.text = $neodash_requirement_text_1  or r.text = $neodash_requirement_text_2\nRETURN\n  p, a.createdAt\norder by a.createdAt\nlimit toInteger($neodash_chart_limit)\n",
+          "width": 8,
+          "height": 4,
+          "x": 0,
+          "y": 5,
+          "type": "sankey",
+          "selection": {
+            "Requirement": "text",
+            "Issue": "title",
+            "PullRequest": "title"
+          },
+          "settings": {
+            "labelProperty": "weight",
+            "downloadImageEnabled": true
+          }
+        },
+        {
+          "title": "Requirement 1",
+          "query": "MATCH (n:`Requirement`) \nWHERE toLower(toString(n.`text`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`text` as value,  n.`text` as display ORDER BY size(toString(value)) ASC LIMIT 5",
+          "width": 4,
+          "height": 1,
+          "x": 8,
+          "y": 5,
+          "type": "select",
+          "selection": {},
+          "settings": {
+            "type": "Node Property",
+            "entityType": "Requirement",
+            "propertyType": "text",
+            "propertyTypeDisplay": "text",
+            "parameterName": "neodash_requirement_text_1",
+            "id": "1",
+            "defaultValue": "Users shall be able to change their password.",
+            "helperText": "Please type to search requirement description."
+          }
+        },
+        {
+          "title": "Requirement 2",
+          "query": "MATCH (n:`Requirement`) \nWHERE toLower(toString(n.`text`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`text` as value,  n.`text` as display ORDER BY size(toString(value)) ASC LIMIT 5",
+          "width": 4,
+          "height": 1,
+          "x": 8,
+          "y": 6,
+          "type": "select",
+          "selection": {},
+          "settings": {
+            "type": "Node Property",
+            "entityType": "Requirement",
+            "id": "2",
+            "propertyType": "text",
+            "propertyTypeDisplay": "text",
+            "parameterName": "neodash_requirement_text_2",
+            "helperText": "Please type to search requirement description.",
+            "defaultValue": "Users shall be able to log into their account using their email and password combination."
+          }
+        },
+        {
+          "title": "Requirement 1",
+          "query": "\nmatch(n:Requirement)\nwhere n.text = $neodash_requirement_text_1\nreturn n.number\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 8,
+          "y": 7,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Requirement 2",
+          "query": "\n\nmatch(n:Requirement)\nwhere n.text = $neodash_requirement_text_2\nreturn n.number\n\n\n\n",
+          "width": 2,
+          "height": 1,
+          "x": 10,
+          "y": 7,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Node Limit",
+          "query": "MATCH (n:`Requirement`) \nWHERE toLower(toString(n.`number`)) CONTAINS toLower($input) \nRETURN DISTINCT n.`number` as value,  n.`number` as display ORDER BY size(toString(value)) ASC LIMIT 5",
+          "width": 3,
+          "height": 1,
+          "x": 9,
+          "y": 12,
+          "type": "select",
+          "selection": {},
+          "settings": {
+            "type": "Free Text",
+            "helperText": "Number of nodes to show in graph.",
+            "entityType": "graph_limit",
+            "parameterName": "neodash_graph_limit"
+          }
+        },
+        {
+          "title": "Number Of Trace Links",
+          "query": "\nMATCH p=(r)-[j:tracesTo]->(a)\nwhere r.text=$neodash_requirement_text\nreturn count(p) as k\n",
+          "width": 3,
+          "height": 1,
+          "x": 9,
+          "y": 13,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "type": "Node Property"
+          }
+        },
+        {
+          "title": "Number of Related Commit Links",
+          "query": "match x=(r:Requirement)-[t:tracesTo]->(p:PullRequest)-[rc]->(c:Commit)\nwhere r.text = $neodash_requirement_text\nreturn  count(rc)",
+          "width": 3,
+          "height": 1,
+          "x": 9,
+          "y": 14,
+          "type": "value",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "title": "Number of Traces per Requirement",
+          "query": "MATCH p=(r)-[t:tracesTo]->() RETURN r.number as index, count(t) as value",
+          "width": 10,
+          "height": 2,
+          "x": 0,
+          "y": 2,
+          "type": "line",
+          "selection": {
+            "x": "index",
+            "value": [
+              "value"
+            ]
+          },
+          "settings": {
+            "curve": "cardinal",
+            "type": "line",
+            "layout": "vertical",
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true,
+            "xScale": "point",
+            "xTickRotationAngle": 90,
+            "marginBottom": 70,
+            "pointSize": 4,
+            "colors": "category10",
+            "showGrid": true,
+            "marginLeft": 60,
+            "downloadImageEnabled": true
+          }
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {
+    "actions": true,
+    "styling": true,
+    "advanced-charts": true
+  }
+}
