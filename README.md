@@ -73,10 +73,11 @@ NEO4J_PASSWORD= password
 NEO4J_USERNAME= neo4j
 NEO4J_URI= bolt://localhost:7687
 OPENAI_API_KEY= < your openai token >
-PREDEFINED_MODEL_PATH= < path to your pre-trained word-vectors >
+PREDEFINED_MODEL_PATH= < path to your pre-trained word-vector model >
 FILTER_BEFORE= < OPTIONAL, provide to filter out software artifacts before a certain date >
 ```
-You can find a file named _.env.example_ as a template in the root directory.
+You can find a file named _.env.example_ as a template in the root directory. We have chosen neo4j/password as default credentials. Please don't change neo4j credential defaults, since they are also used while creating the neo4j docker, or update the docker-compose file as well.
+OpenAI key token utilized for acquiring word embeddings from openai's text-embedding-ada-002 model. Also any pre-trained word-vectors can be used, providing its path. We have utilized word2vec's [GoogleNews-vectors-negative300](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?resourcekey=0-wjGZdNAUop6WykTtMip30g).
 
 -----
 ### Prepare Neo4j server
@@ -95,7 +96,7 @@ Navigate to the traceGraph directory under the root.
 cd ./traceGraph
 ```
 
-Run _.main.py_ with two system arguments; 
+Run _.main.py_ with three system arguments; 
 
 ```bash
 python ./main.py <git_repo> <search_method> <options>
@@ -122,8 +123,9 @@ python ./main.py <git_repo> <search_method> <options>
 
 We have a Config file which controls everything related to running configurations. Beware that the tool needs the requirement specifications for the repository you provided. The two repositories with their requirements is available on the repo, which were also used for development of this tool.
 
+### Dashboard
 
-Navigate to http://neodash.graphapp.io/ to view the dashboard.
+Navigate to http://neodash.graphapp.io/ to view the dashboard. From the menu, navigate to `new dashboard`. Provide the default neo4j credentials mentioned above. From left menu bar, navigate to `load`. Proceed to `Select from Neo4j` option on the opening page and select our pre-uploaded dashboard template. The dashboard must be ready for use. In the case that dashboard template doesn't show up, `Select from File` option can always be used and the dashboard template can be taken from our [repository](https://github.com/ersoykadir/Requirement-Traceability-Analysis/blob/main/dashboard-template.json). 
 Navigate to http://localhost:7474/ to view graph database.
 
   
