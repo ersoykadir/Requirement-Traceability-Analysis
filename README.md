@@ -73,7 +73,7 @@ NEO4J_PASSWORD= password
 NEO4J_USERNAME= neo4j
 NEO4J_URI= bolt://localhost:7687
 OPENAI_API_KEY= < your openai token >
-PREDEFINED_MODEL_PATH= < path to your pre-trained word-vector model >
+PRETRAINED_MODEL_PATH= < path to your pre-trained word-vector model >
 FILTER_BEFORE= < OPTIONAL, provide to filter out software artifacts before a certain date >
 ```
 You can find a file named _.env.example_ as a template in the root directory. We have chosen neo4j/password as default credentials. Please don't change neo4j credential defaults, since they are also used while creating the neo4j docker, or update the docker-compose file as well.
