@@ -8,7 +8,7 @@ This file contains github graphql query templates for each artifact type.
 from string import Template
 
 REQ_queryTemplate = Template("""{
-    repository(owner:"bounswe", name:"bounswe2022group2") {
+    repository(owner:"$owner", name:"$name") {
         createdAt
     }
 }
