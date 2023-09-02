@@ -96,6 +96,17 @@ Navigate to the traceGraph directory under the root.
 ```bash
 cd ./traceGraph
 ```
+---
+BEWARE! If you want to use a repository apart from our example repositories, please provide the requirements.txt
+
+Open a repository named data_reponame and create requirements.txt
+```
+cd data_reponame
+touch requirements.txt
+```
+Then you can copy your projects requirements into it.
+
+---
 
 Run _.main.py_ with three system arguments; 
 
