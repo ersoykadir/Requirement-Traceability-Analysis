@@ -20,10 +20,8 @@ This project creates a tool that identifies and visualizes the trace links for a
   
 ## How to Run
 
-<!---
-The project needs Python=3.10.0 to operate. 
+The project needs Python=3.10 to operate. 
 You can download it by clicking [here](https://www.python.org/downloads/release/python-3100/).
--->
 
 ### Prepare virtual environment
 
