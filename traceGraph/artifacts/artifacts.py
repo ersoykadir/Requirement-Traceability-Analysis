@@ -20,7 +20,8 @@ def get_data_from_api(body):
     url = 'https://api.github.com/graphql'
     r = requests.post(url = url, json = {"query":body}, auth=(Config().github_username, Config().github_token))
     data = r.json()
-    #print(data)
+    if r.status_code != 200:
+        raise Exception(f"Error getting data from github: {data['message']}")
     return data
 
 # Gets a page of issues and returns them with the hasNextPage and endCursor values.
