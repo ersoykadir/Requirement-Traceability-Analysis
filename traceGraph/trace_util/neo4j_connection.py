@@ -25,7 +25,6 @@ class neo4jConnector:
 
     @staticmethod
     def tx(tx, query, params):        
-        # print(query, params)
         try:
             if params is not None:
                 result = tx.run(query, params)
@@ -128,9 +127,6 @@ class neo4jConnector:
             SET t.keywords = art_key_pair[1][1]
             RETURN *
         ''').format(label=label)
-        
-        f = open("query.txt", "w", encoding="utf-8")
-        f.write(str(traces))
-        f.close()
+
         params = {'traces': traces}
         self.execute_query(query, params)
