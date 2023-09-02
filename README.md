@@ -63,7 +63,10 @@ Navigate to the root directory of the project and install the required dependenc
   cd ./Requirement-Traceability-Analysis
   pip install -r requirements.txt
 ```
-
+Navigate to the traceGraph directory:
+```bash
+cd traceGraph
+```
 Create a _.env_ file with the following content:
  
 ```bash
@@ -76,7 +79,7 @@ OPENAI_API_KEY= < your openai token >
 PRETRAINED_MODEL_PATH= < path to your pre-trained word-vector model >
 FILTER_BEFORE= < OPTIONAL, provide to filter out software artifacts before a certain date >
 ```
-You can find a file named _.env.example_ as a template in the root directory. We have chosen neo4j/password as default credentials. Please don't change neo4j credential defaults, since they are also used while creating the neo4j docker, or update the docker-compose file as well.
+You can find a file named _.env.example_ as a template in the traceGraph directory. We have chosen neo4j/password as default credentials. Please don't change neo4j credential defaults, since they are also used while creating the neo4j docker, or update the docker-compose file as well.
 OpenAI key token utilized for acquiring word embeddings from openai's text-embedding-ada-002 model. Also any pre-trained word-vectors can be used, providing its path. We have utilized word2vec's [GoogleNews-vectors-negative300](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?resourcekey=0-wjGZdNAUop6WykTtMip30g).
 
 -----
