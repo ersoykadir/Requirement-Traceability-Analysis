@@ -136,7 +136,7 @@ class Requirement(Node):
     def extract_keywords(self):	
         try:	
             print("Extracting keywords for requirement", self.number)	
-            keyword_dict = custom_extractor(self.text, '../keyword_extractors/SmartStopword.txt', '../keyword_extractors/repo_stopwords.txt')	
+            keyword_dict = custom_extractor(self.text, './keyword_extractor/SmartStopword.txt', './keyword_extractor/repo_stopwords.txt')	
             if self.parent is not None and Config().parent_mode:	
                 # parent_keywords = custom_extractor(self.parent.text, '../keyword_extractors/SmartStopword.txt')	
                 parent_keywords = self.parent.keyword_dict	
